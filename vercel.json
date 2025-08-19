@@ -1,6 +1,13 @@
 {
   "routes": [
+    { "src": "/", "dest": "/index.html#home" },
+    { "src": "/about", "dest": "/index.html#about" },
+    { "src": "/service", "dest": "/index.html#services" },
+    { "src": "/contact", "dest": "/index.html#contact" },
+    { "src": "/products", "dest": "/index.html#products" },
     { "src": "/blog", "dest": "/blog.html" },
-    { "src": "/about", "dest": "/about.html" }
+    { "src": "/cart", "dest": "/pages/main/cart.html"},
+    { "src": "/signin", "dest": "./pages/authentification/login.html"}
+
   ]
 }
