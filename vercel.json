@@ -13,6 +13,6 @@
     { "src": "/reset-password", "dest": "/pages/authentification/reset.html"},
     { "src": "/quote", "dest": "/pages/main/quote.html"},
     { "src": "/payement", "dest": "/pages/main/payement.html"},
-    { "src": "/.*", "dest": "/pages/errors/404.html"}
+    { "src": "/404", "dest": "/pages/errors/404.html"}
   ]
 }
