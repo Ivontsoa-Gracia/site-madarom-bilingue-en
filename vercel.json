@@ -12,7 +12,7 @@
     { "src": "/signup", "dest": "/pages/authentification/signup.html"},
     { "src": "/reset-password", "dest": "/pages/authentification/reset.html"},
     { "src": "/quote", "dest": "/pages/main/quote.html"},
-    { "src": "/payement", "dest": "/pages/main/payement.html"},
+    { "src": "/payement", "dest": "/pages/main/payement.html"}
 
   ],
   "error": {
