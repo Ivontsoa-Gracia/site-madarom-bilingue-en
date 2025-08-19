@@ -333,3 +333,22 @@ window.addEventListener('scroll', () => {
       });
     }
   });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const path = window.location.pathname;
+  
+    // Map des URLs → id de section
+    const sections = {
+      "/": "home",
+      "/about": "about",
+      "/service": "services",
+      "/contact": "contact",
+      "/products": "products"
+    };
+  
+    const sectionId = sections[path];
+    if (sectionId) {
+      const el = document.getElementById(sectionId);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
+  });
