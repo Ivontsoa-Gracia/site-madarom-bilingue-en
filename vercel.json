@@ -12,12 +12,13 @@
     { "src": "/signup", "dest": "/pages/authentification/signup.html"},
     { "src": "/reset-password", "dest": "/pages/authentification/reset.html"},
     { "src": "/quote", "dest": "/pages/main/quote.html"},
-    { "src": "/payement", "dest": "/pages/main/payement.html"},
-
-    { "src": "/404", "dest": "/pages/error/404.html"},
-    { "src": "/500", "dest": "/pages/error/500.html"},
-    { "src": "/401", "dest": "/pages/error/401.html"},
-    { "src": "/403", "dest": "/pages/error/403.html"}
-
-  ]
+    { "src": "/payement", "dest": "/pages/main/payement.html"}
+    
+  ],
+  "error": {
+    "401": "/pages/errors/401.html",
+    "403": "/pages/errors/403.html",
+    "404": "/pages/errors/404.html",
+    "500": "/pages/errors/500.html"
+  }
 }
