@@ -1,6 +1,10 @@
 {
   "routes": [
     { "src": "/", "dest": "/index.html" },
+    { "src": "/about", "dest": "/index.html#about" },
+    { "src": "/service", "dest": "/index.html#services" },
+    { "src": "/contact", "dest": "/index.html#contact" },
+    { "src": "/products", "dest": "/index.html#products" },
     { "src": "/blog", "dest": "/blog.html" },
     { "src": "/blog-details", "dest": "/blogDetails.html"},
     { "src": "/cart", "dest": "/pages/main/cart.html"},
@@ -8,7 +12,12 @@
     { "src": "/signup", "dest": "/pages/authentification/signup.html"},
     { "src": "/reset-password", "dest": "/pages/authentification/reset.html"},
     { "src": "/quote", "dest": "/pages/main/quote.html"},
-    { "src": "/payement", "dest": "/pages/main/payement.html"}
+    { "src": "/payement", "dest": "/pages/main/payement.html"},
+
+    { "src": "/404", "dest": "/pages/error/404.html"},
+    { "src": "/500", "dest": "/pages/error/500.html"},
+    { "src": "/401", "dest": "/pages/error/401.html"},
+    { "src": "/403", "dest": "/pages/error/403.html"}
 
   ]
 }
