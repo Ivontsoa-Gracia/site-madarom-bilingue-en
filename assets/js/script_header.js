@@ -350,9 +350,10 @@ window.addEventListener('scroll', () => {
     if (sectionId) {
       const el = document.getElementById(sectionId);
       if (el) el.scrollIntoView({ behavior: "smooth" });
-    } else {
-      // Redirection vers la page 404
-      window.location.href = "/404";
-    }
+    } 
+    // else {
+    //   // Redirection vers la page 404
+    //   window.location.href = "/404";
+    // }
   });
   
