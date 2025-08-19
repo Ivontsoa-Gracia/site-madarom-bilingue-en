@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Inscription - Madarom</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/css/authentification.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-md">
+        <div class="items-center text-center mb-6">
+            <h1 class="logo-font text-2xl text-[#56b6a8]">Mad'<span class="text-[#bc1414]">arom</span></h1>
+        </div>
+
+        <div class="bg-white rounded-lg p-8 sm:p-10 shadow">
+            <form id="signupForm" novalidate>
+                <!-- Étape 1 -->
+                <div id="step1">
+                    <div class="input-container">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 input-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+                        </svg>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            required
+                            class="input-field"
+                            placeholder="Email"
+                            autocomplete="email"
+                        />
+                    </div>
+                    <p id="emailError" class="text-red-500 text-xs mb-4 hidden">Veuillez entrer un email valide.</p>
+
+                    <div class="input-container">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 input-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            required
+                            class="input-field"
+                            placeholder="Mot de passe"
+                            autocomplete="new-password"
+                        />
+                        <button type="button" class="toggle-password" aria-label="Afficher / Cacher mot de passe" tabindex="-1">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+
+                    <ul class="text-xs text-gray-500 mb-4" id="passwordChecklist">
+                        <li id="length" class="flex items-center gap-2">
+                            <i class="fas fa-check icon text-red-500"></i>
+                            Minimum 8 caractères
+                        </li>
+                        <li id="uppercase" class="flex items-center gap-2">
+                            <i class="fas fa-check icon text-red-500"></i>
+                            Une lettre majuscule
+                        </li>
+                        <li id="special" class="flex items-center gap-2">
+                            <i class="fas fa-check icon text-red-500"></i>
+                            Un chiffre et un caractère spécial
+                        </li>
+                    </ul>
+
+                    <button type="button" id="nextBtn" class="btn-primary rounded-full">Suivant</button>
+                </div>
+
+                <!-- Étape 2 -->
+                <div id="step2" class="hidden">
+                    <div class="input-container">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 input-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            required
+                            class="input-field"
+                            placeholder="Confirmer mot de passe"
+                            autocomplete="new-password"
+                        />
+                        <button type="button" class="toggle-password" aria-label="Afficher / Cacher mot de passe" tabindex="-1">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                    <p id="confirmError" class="text-red-500 text-xs mb-4 hidden">Les mots de passe ne correspondent pas.</p>
+
+                    <button type="submit" class="btn-primary rounded-full">S’inscrire</button>
+                </div>
+            </form>
+
+            <div class="mt-8 text-center">
+                <p class="text-gray-500">
+                    Déjà un compte ?
+                    <a href="./login.html" class="text-[#56b6a8] font-medium">Se connecter</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL_REG = 'http://127.0.0.1:8000/api/register';
+    
+        const email = document.getElementById("email");
+        const password = document.getElementById("password");
+        const confirmPassword = document.getElementById("confirmPassword");
+        const emailError = document.getElementById("emailError");
+        const confirmError = document.getElementById("confirmError");
+    
+        const checklist = {
+            length: document.getElementById("length"),
+            uppercase: document.getElementById("uppercase"),
+            special: document.getElementById("special"),
+        };
+    
+        const step1 = document.getElementById("step1");
+        const step2 = document.getElementById("step2");
+        const nextBtn = document.getElementById("nextBtn");
+        const form = document.getElementById("signupForm");
+    
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+        function updateIcon(item, valid) {
+            const icon = item.querySelector(".icon");
+            icon.classList.remove("text-green-500", "text-red-500");
+            icon.classList.add(valid ? "text-green-500" : "text-red-500");
+        }
+    
+        function validatePasswordChecklist() {
+            const value = password.value;
+            updateIcon(checklist.length, value.length >= 8);
+            updateIcon(checklist.uppercase, /[A-Z]/.test(value));
+            updateIcon(checklist.special, /[\d\W]/.test(value));
+        }
+    
+        function checkPasswordMatch() {
+            if (confirmPassword.value !== "" && password.value !== confirmPassword.value) {
+                confirmError.classList.remove("hidden");
+                return false;
+            } else {
+                confirmError.classList.add("hidden");
+                return true;
+            }
+        }
+    
+        // Toggle password visibility (pour tous les boutons)
+        document.querySelectorAll(".toggle-password").forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const input = btn.previousElementSibling;
+                if (input.type === "password") {
+                    input.type = "text";
+                    btn.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
+                } else {
+                    input.type = "password";
+                    btn.innerHTML = '<i class="fa-solid fa-eye"></i>';
+                }
+            });
+        });
+    
+        password.addEventListener("input", validatePasswordChecklist);
+    
+        nextBtn.addEventListener("click", () => {
+            let valid = true;
+    
+            if (!emailRegex.test(email.value)) {
+                emailError.classList.remove("hidden");
+                valid = false;
+            } else {
+                emailError.classList.add("hidden");
+            }
+    
+            const strongPassword =
+                password.value.length >= 8 &&
+                /[A-Z]/.test(password.value) &&
+                /[\d\W]/.test(password.value);
+    
+            if (!strongPassword) valid = false;
+    
+            if (valid) {
+                step1.classList.add("hidden");
+                step2.classList.remove("hidden");
+            }
+        });
+    
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+    
+            if (!checkPasswordMatch()) return;
+    
+            const btn = form.querySelector("button[type=submit]");
+            btn.disabled = true;
+            btn.innerHTML = "Inscription...";
+    
+            const nameFromEmail = email.value.split("@")[0];
+    
+            const payload = {
+                name: nameFromEmail,
+                email: email.value.trim(),
+                password: password.value,
+                password_confirmation: confirmPassword.value,
+            };
+    
+            try {
+                const response = await fetch(API_URL_REG, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                    },
+                    body: JSON.stringify(payload),
+                });
+    
+                const data = await response.json();
+
+                btn.disabled = false;
+                btn.innerHTML = "S’inscrire";
+    
+                if (!response.ok) {
+                    if (data.errors) {
+                        if (data.errors.email) {
+                            emailError.textContent = data.errors.email[0];
+                            emailError.classList.remove("hidden");
+                        }
+                        if (data.errors.password) {
+                            confirmError.textContent = data.errors.password[0];
+                            confirmError.classList.remove("hidden");
+                        }
+                    } else {
+                        alert(data.message || "Erreur lors de l'inscription.");
+                    }
+                    return;
+                }
+    
+                // Stockage de l'utilisateur dans localStorage
+                // Suppose que l'API renvoie les infos utilisateur dans data.user
+                // sinon adapte selon ta réponse API
+                if (data.user) {
+                    localStorage.setItem("token", data.token);
+                } else {
+                    alert(data.message || "Identifiants incorrects.");
+                }
+    
+                alert("Inscription réussie !");
+                form.reset();
+                step2.classList.add("hidden");
+                step1.classList.remove("hidden");
+    
+                // Redirection vers index.html
+                window.location.href = "../../index.html";
+    
+            } catch (error) {
+                console.error(error);
+                alert("Erreur de connexion.");
+                btn.disabled = false;
+                btn.innerHTML = "S’inscrire";
+            }
+        });
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Réinitialisation du mot de passe - Madarom</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+  <link rel="stylesheet" href="../../assets/css/authentification.css" />
+
+
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-md">
+        <div class="items-center text-center mb-6">
+            <h1 class="logo-font text-2xl text-[#56b6a8]">Mad'<span class="text-[#bc1414]">arom</span></h1>
+            <p class="text-gray-500 mt-2 text-xs">
+                Réinitialisez votre mot de passe en entrant votre nouvel identifiant.
+              </p>
+        </div>
+
+    <div class="bg-white rounded-lg p-8 sm:p-10 shadow">
+
+        <form id="resetForm" novalidate>
+        <!-- Nouveau mot de passe -->
+        <div class="input-container">
+            <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 input-icon"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            >
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+            />
+            </svg>
+            <input
+            type="password"
+            id="newPassword"
+            name="newPassword"
+            required
+            class="input-field"
+            placeholder="Nouveau mot de passe"
+            autocomplete="new-password"
+            />
+            <button
+            type="button"
+            class="toggle-password"
+            aria-label="Afficher / Cacher mot de passe"
+            tabindex="-1"
+            >
+            <i class="fa-solid fa-eye"></i>
+            </button>
+        </div>
+
+        <ul class="text-xs text-gray-500 mb-4" id="passwordChecklist">
+            <li id="length" class="flex items-center gap-2">
+            <i class="fas fa-check icon text-red-500"></i>
+            Minimum 8 caractères
+            </li>
+            <li id="uppercase" class="flex items-center gap-2">
+            <i class="fas fa-check icon text-red-500"></i>
+            Une lettre majuscule
+            </li>
+            <li id="special" class="flex items-center gap-2">
+            <i class="fas fa-check icon text-red-500"></i>
+            Un chiffre et un caractère spécial
+            </li>
+        </ul>
+
+        <!-- Confirmation nouveau mot de passe -->
+        <div class="input-container">
+            <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 input-icon"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            >
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+            />
+            </svg>
+            <input
+            type="password"
+            id="confirmNewPassword"
+            name="confirmNewPassword"
+            required
+            class="input-field"
+            placeholder="Confirmer nouveau mot de passe"
+            autocomplete="new-password"
+            />
+            <button
+            type="button"
+            class="toggle-password"
+            aria-label="Afficher / Cacher mot de passe"
+            tabindex="-1"
+            >
+            <i class="fa-solid fa-eye"></i>
+            </button>
+        </div>
+        <p id="confirmError" class="text-red-500 text-xs mb-4 hidden">
+            Les mots de passe ne correspondent pas.
+        </p>
+
+        <button type="submit" class="btn-primary rounded-full">Réinitialiser</button>
+        </form>
+
+        <div class="mt-8 text-center">
+        <p class="text-gray-500">
+            Retour à la
+            <a href="./login.html" class="text-[#56b6a8] font-medium">connexion</a>
+        </p>
+        </div>
+    </div>
+  </div>
+
+  <script>
+    const newPassword = document.getElementById("newPassword");
+    const confirmNewPassword = document.getElementById("confirmNewPassword");
+    const confirmError = document.getElementById("confirmError");
+
+    const checklist = {
+      length: document.getElementById("length"),
+      uppercase: document.getElementById("uppercase"),
+      special: document.getElementById("special"),
+    };
+
+    function updateIcon(item, valid) {
+      const icon = item.querySelector(".icon");
+      icon.classList.remove("text-green-500", "text-red-500");
+      icon.classList.add(valid ? "text-green-500" : "text-red-500");
+    }
+
+    function validatePasswordChecklist() {
+      const value = newPassword.value;
+      updateIcon(checklist.length, value.length >= 8);
+      updateIcon(checklist.uppercase, /[A-Z]/.test(value));
+      updateIcon(checklist.special, /[\d\W]/.test(value));
+      checkPasswordMatch();
+    }
+
+    function checkPasswordMatch() {
+      if (
+        confirmNewPassword.value !== "" &&
+        newPassword.value !== confirmNewPassword.value
+      ) {
+        confirmError.classList.remove("hidden");
+        return false;
+      } else {
+        confirmError.classList.add("hidden");
+        return true;
+      }
+    }
+
+    // Toggle password visibility
+    document.querySelectorAll(".toggle-password").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const input = btn.previousElementSibling;
+        if (input.type === "password") {
+          input.type = "text";
+          btn.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
+        } else {
+          input.type = "password";
+          btn.innerHTML = '<i class="fa-solid fa-eye"></i>';
+        }
+      });
+    });
+
+    newPassword.addEventListener("input", validatePasswordChecklist);
+    confirmNewPassword.addEventListener("input", checkPasswordMatch);
+
+    document.getElementById("resetForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      if (!checkPasswordMatch()) return;
+
+      const strongPassword =
+        newPassword.value.length >= 8 &&
+        /[A-Z]/.test(newPassword.value) &&
+        /[\d\W]/.test(newPassword.value);
+
+      if (!strongPassword) {
+        alert(
+          "Le mot de passe doit contenir au moins 8 caractères, une majuscule, un chiffre et un caractère spécial."
+        );
+        return;
+      }
+
+      const btn = e.target.querySelector("button[type=submit]");
+      btn.disabled = true;
+      btn.innerHTML = "Réinitialisation en cours...";
+
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.innerHTML = "Réinitialiser";
+        alert("Mot de passe réinitialisé avec succès !");
+        // Optionnel : rediriger vers login après reset réussi
+        window.location.href = "./login.html";
+      }, 1500);
+    });
+  </script>
+</body>
+</html>

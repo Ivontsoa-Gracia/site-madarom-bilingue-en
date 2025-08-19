@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="flex">
+
+  <!-- Sidebar placeholder -->
+  <div id="sidebar-placeholder"></div>
+
+  <!-- Main Content -->
+  <!-- Main Content -->
+  <main class="ml-64 w-full min-h-screen bg-gray-50">
+    <div id="main-content" class="p-6">
+      <h1 class="text-2xl font-bold mb-4 text-gray-800">Welcome, Admin!</h1>
+      <p class="text-gray-600">Select an item from the sidebar to get started.</p>
+    </div>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const links = document.querySelectorAll('.menu-link');
+      const content = document.getElementById('main-content');
+
+      links.forEach(link => {
+        link.addEventListener('click', () => {
+          const page = link.getAttribute('data-page');
+
+          // Highlight active menu item
+          links.forEach(l => l.classList.remove('bg-[#393E46]'));
+          link.classList.add('bg-[#393E46]');
+
+          // Load content dynamically
+          fetch(page)
+            .then(res => {
+              if (!res.ok) throw new Error(`Cannot load ${page}`);
+              return res.text();
+            })
+            .then(html => {
+              content.innerHTML = html;
+            })
+            .catch(err => {
+              content.innerHTML = `<div class="text-red-500">Error loading content.</div>`;
+              console.error(err);
+            });
+        });
+      });
+    });
+    // Load sidebar.html into the #sidebar-placeholder div
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch("sidebar.html")
+        .then(response => {
+          if (!response.ok) throw new Error("Failed to load sidebar");
+          return response.text();
+        })
+        .then(html => {
+          document.getElementById("sidebar-placeholder").innerHTML = html;
+        })
+        .catch(error => {
+          console.error("Error loading sidebar:", error);
+        });
+    });
+  </script>
+</body>
+</html>
