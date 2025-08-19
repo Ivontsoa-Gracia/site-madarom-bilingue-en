@@ -7,7 +7,7 @@
     { "src": "/products", "dest": "/index.html#products" },
     { "src": "/blog", "dest": "/blog.html" },
     { "src": "/cart", "dest": "/pages/main/cart.html"},
-    { "src": "/signin", "dest": "./pages/authentification/login.html"}
+    { "src": "/signin", "dest": "/pages/authentification/login.html"}
 
   ]
 }
