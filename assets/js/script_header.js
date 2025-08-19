@@ -356,4 +356,11 @@ window.addEventListener('scroll', () => {
     //   window.location.href = "/404";
     // }
   });
+
+  const API_LANG = 'http://127.0.0.1:8000/api/lang';
+
+  async function setLang() {
+
+  }
+
   
