@@ -47,10 +47,10 @@ const articles = [
       container.innerHTML += `
         <article
           class="cursor-pointer bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-row group mx-auto"
-          onclick="window.location.href='./blogDetails.html?id=${item.id}'"
+          onclick="window.location.href='/blog-details?id=${item.id}'"
           role="button"
           tabindex="0"
-          onkeydown="if(event.key==='Enter'){window.location.href='./blogDetails.html?id=${item.id}'}"
+          onkeydown="if(event.key==='Enter'){window.location.href='/blog-details?id=${item.id}'}"
         >
           <!-- Right: Image -->
           <div class="w-72 shrink-0 relative overflow-hidden rounded-r-2xl">
