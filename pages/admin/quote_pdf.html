@@ -64,8 +64,10 @@
         type="time" 
         id="delivery-hour" 
         placeholder="Optional hour"
+        value="00:00"
         class="border rounded px-3 py-2 w-full max-w-xs mb-4" 
       />
+    
 
       <button 
         id="validate-btn" 
@@ -169,16 +171,24 @@
         });
 
         const data = await res.json();
-        if (!res.ok) throw new Error(data.message || "Validation error");
+
+        if (!res.ok) {
+          // Affiche le message d'erreur retourné par le serveur
+          statusMsg.textContent = `❌ ${data.error || data.message || "Validation error"}`;
+          statusMsg.className = "text-red-500 text-sm text-center mt-2";
+          return;
+        }
 
         statusMsg.textContent = "✔️ Request successfully validated!";
         statusMsg.className = "text-green-600 text-sm text-center mt-2";
+
       } catch (err) {
         console.error(err);
         statusMsg.textContent = "❌ Error while validating.";
         statusMsg.className = "text-red-500 text-sm text-center mt-2";
       }
     });
+
 
 
     if (ref && token) loadQuoteData(ref);
