@@ -380,4 +380,3 @@ window.addEventListener('scroll', () => {
         });
     });
   });
-  
