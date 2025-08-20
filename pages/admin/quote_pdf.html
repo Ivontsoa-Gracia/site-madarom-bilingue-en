@@ -174,7 +174,7 @@
 
         if (!res.ok) {
           // Affiche le message d'erreur retourné par le serveur
-          statusMsg.textContent = `❌ ${data.error || data.message || "Validation error"}`;
+          statusMsg.textContent = `${data.details || data.error || "Validation error"}`;
           statusMsg.className = "text-red-500 text-sm text-center mt-2";
           return;
         }
