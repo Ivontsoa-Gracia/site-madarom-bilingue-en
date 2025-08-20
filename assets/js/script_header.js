@@ -350,5 +350,34 @@ window.addEventListener('scroll', () => {
     if (sectionId) {
       const el = document.getElementById(sectionId);
       if (el) el.scrollIntoView({ behavior: "smooth" });
-    }
+    } 
+    // else {
+      // Redirection vers la page 404
+      // window.location.href = "/404";
+    // }
   });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const langBtns = document.querySelectorAll('langDropdownMenu button');
+    const selectedLangDesktop = document.getElementById('selected-lang');
+    const selectedLangMobile = document.getElementById('selected-lang-mobile');
+
+    let lang = localStorage.getItem('lang') || 'en';
+    selectedLangDesktop.textContent = lang.toUpperCase();
+    selectedLangMobile.textContent = lang.toUpperCase();
+
+    langBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const newLang = btn.dataset.lang;
+            localStorage.setItem('lang', newLang);
+            selectedLangDesktop.textContent = newLang.toUpperCase();
+            selectedLangMobile.textContent = newLang.toUpperCase();
+            if (newLang === 'fr') {
+                window.location.href = '/fr/';
+              } else if (newLang === 'en') {
+                window.location.href = '/en/';
+              }
+        });
+    });
+  });
+  
