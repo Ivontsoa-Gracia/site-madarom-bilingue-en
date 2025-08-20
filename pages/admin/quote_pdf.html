@@ -147,7 +147,6 @@
       const days = document.getElementById("delivery-days").value;
       const hour = document.getElementById("delivery-hour").value || null;
       const statusMsg = document.getElementById("status-message");
-      const notes = "Quote has been validated";
 
       if (!days) {
         statusMsg.textContent = "Please enter the estimated delivery days.";
@@ -164,9 +163,8 @@
           },
           body: JSON.stringify({
             quote_request_id: ref,
-            notes: notes,
-            estimated_delivery_days: days,
-            estimated_delivery_hour: hour 
+            days: parseInt(days, 10),
+            hours: hour ? parseInt(hour, 10) : 0
           })
         });
 
