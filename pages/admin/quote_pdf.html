@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Validation de devis</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="/assets/css/quote.css">
 </head>
 <body class=" p-6 text-gray-800">
   <div class="max-w-3xl mx-auto bg-white p-6">
@@ -152,51 +151,45 @@
       const statusMsg = document.getElementById("status-message");
 
       if (!days) {
-          statusMsg.textContent = "Please enter the estimated delivery days.";
-          statusMsg.className = "text-red-500 text-sm text-center mt-2";
-          return;
+        statusMsg.textContent = "Please enter the estimated delivery days.";
+        statusMsg.className = "text-red-500 text-sm text-center mt-2";
+        return;
       }
-
-      // Popup de confirmation
-      const confirmAction = confirm("Do you really want to confirm this quote?");
-      if (!confirmAction) return;
-
-      // Afficher l'animation d'attente
-      statusMsg.innerHTML = `<span class="loader"></span> Validating quote...`;
-      statusMsg.className = "text-blue-500 text-sm text-center mt-2";
 
       try {
-          const res = await fetch(`http://127.0.0.1:8000/api/quote/validate`, {
-              method: "POST",
-              headers: {
-                  Authorization: `Bearer ${token}`,
-                  "Content-Type": "application/json"
-              },
-              body: JSON.stringify({
-                  quote_request_id: ref,
-                  days: parseInt(days, 10),
-                  hours: hour ? parseInt(hour, 10) : 0
-              })
-          });
+        const res = await fetch(`http://127.0.0.1:8000/api/quote/validate`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            quote_request_id: ref,
+            days: parseInt(days, 10),
+            hours: hour ? parseInt(hour, 10) : 0
+          })
+        });
 
-          const data = await res.json();
+        const data = await res.json();
 
-          if (!res.ok) {
-              statusMsg.textContent = `${data.details || data.error || "Validation error"}`;
-              statusMsg.className = "text-red-500 text-sm text-center mt-2";
-              return;
-          }
+        if (!res.ok) {
+          // Affiche le message d'erreur retourné par le serveur
+          statusMsg.textContent = `❌ ${data.details || data.erroe || "Validation error"}`;
+          statusMsg.className = "text-red-500 text-sm text-center mt-2";
+          return;
+        }
 
-          // Succès
-          statusMsg.textContent = "✔️ Quote validated successfully!";
-          statusMsg.className = "text-green-600 text-sm text-center mt-2";
+        statusMsg.textContent = "✔️ Request successfully validated!";
+        statusMsg.className = "text-green-600 text-sm text-center mt-2";
 
       } catch (err) {
-          console.error(err);
-          statusMsg.textContent = "❌ Error while validating.";
-          statusMsg.className = "text-red-500 text-sm text-center mt-2";
+        console.error(err);
+        statusMsg.textContent = "❌ Error while validating.";
+        statusMsg.className = "text-red-500 text-sm text-center mt-2";
       }
     });
+
+
 
     if (ref && token) loadQuoteData(ref);
     else alert("Aucun ID de devis ou token manquant.");
