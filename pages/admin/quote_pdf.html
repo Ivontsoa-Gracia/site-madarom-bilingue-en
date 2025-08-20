@@ -208,7 +208,7 @@
           return;
         }
 
-        modalStatus.textContent = "✔️ Quote validated successfully!";
+        modalStatus.textContent =  `${data.message || "Quote validated successfully!"}`;
         modalStatus.className = "text-green-600 text-sm text-center mt-2";
 
         // cache modal après succès

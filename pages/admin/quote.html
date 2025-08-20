@@ -138,24 +138,40 @@
 
     async function fetchQuotes() {
       const token = localStorage.getItem("token");
-      if (!token) return alert("No token found. Please log in.");
+      if (!token) {
+        alert("No token found. Please log in.");
+        return;
+      }
 
       try {
         const res = await fetch("http://127.0.0.1:8000/api/quote", {
+          method: "GET",
           headers: {
             "Authorization": `Bearer ${token}`,
             "Content-Type": "application/json"
           }
         });
-        if (!res.ok) throw new Error("Fetch failed");
+
+        // Vérifie si la réponse contient une erreur côté serveur
+        if (!res.ok) {
+          const errorData = await res.json().catch(() => ({}));
+          const message = errorData.message || errorData.error || "Fetch failed";
+          throw new Error(message);
+        }
+
         const data = await res.json();
-        allQuotes = data;
+        console.log("Les devis:", data);
+
+        // Filtrer uniquement les devis pending
+        allQuotes = data.filter(quote => quote.status?.toLowerCase() === "pending");
+
         applyFilters();
       } catch (err) {
-        console.error(err);
-        alert("Error fetching quotes.");
+        console.error("Error fetching quotes:", err);
+        alert(`Error fetching quotes: ${err.message}`);
       }
     }
+
 
     function viewQuote(id) {
       if (!id) return;
