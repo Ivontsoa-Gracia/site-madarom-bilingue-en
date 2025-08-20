@@ -10,17 +10,17 @@
   <div class="max-w-3xl mx-auto bg-white p-6">
 
     <div class="mb-4" id="client">
-      <h3 class="font-semibold mb-1">Client :</h3>
-      <p class="text-sm" id="client-name">Nom</p>
+      <h3 class="font-semibold mb-1">Customer :</h3>
+      <p class="text-sm" id="client-name">Name</p>
       <p class="text-sm" id="client-email">Email</p>
     </div>
 
     <table class="w-full text-sm border-t border-b mb-4">
       <thead>
         <tr class="bg-gray-100 text-left">
-          <th class="py-2 px-2">Produit</th>
-          <th class="py-2 px-2 text-center">Quantité</th>
-          <th class="py-2 px-2 text-right">Prix unitaire</th>
+          <th class="py-2 px-2">Product</th>
+          <th class="py-2 px-2 text-center">Quantity</th>
+          <th class="py-2 px-2 text-right">Unit price</th>
           <th class="py-2 px-2 text-right">Total</th>
         </tr>
       </thead>
@@ -30,7 +30,7 @@
     <div class="mt-4 flex justify-end">
       <table class="text-sm w-1/2">
         <tr>
-          <td class="text-right font-semibold">Sous-total :</td>
+          <td class="text-right font-semibold">Subtotal :</td>
           <td class="text-right" id="subtotal"></td>
         </tr>
         <!-- <tr>
@@ -46,13 +46,34 @@
 
     <!-- Validation form -->
     <div class="mt-8 border-t pt-4">
-      <label for="delivery-date" class="block mb-1 font-medium">Date estimée de livraison :</label>
-      <input type="number" id="delivery-date" class="border rounded px-3 py-2 w-full max-w-xs mb-4" />
+      <label for="delivery-days" class="block mb-1 font-medium">
+        Estimated Delivery Date:
+      </label>
 
-      <button id="validate-btn" class="bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700">
-        Valider la demande
+      <!-- Required input: number of days -->
+      <input 
+        type="number" 
+        id="delivery-days" 
+        placeholder="Number of days *" 
+        required
+        class="border rounded px-3 py-2 w-full max-w-xs mb-4" 
+      />
+
+      <!-- Optional input: hour -->
+      <input 
+        type="time" 
+        id="delivery-hour" 
+        placeholder="Optional hour"
+        class="border rounded px-3 py-2 w-full max-w-xs mb-4" 
+      />
+
+      <button 
+        id="validate-btn" 
+        class="bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700">
+        Confirm Request
       </button>
     </div>
+
 
     <!-- Message -->
     <p id="status-message" class="mt-4 text-sm text-center"></p>
@@ -123,39 +144,44 @@
     }
 
     document.getElementById("validate-btn").addEventListener("click", async () => {
-      const date = document.getElementById("delivery-date").value;
+      const days = document.getElementById("delivery-days").value;
+      const hour = document.getElementById("delivery-hour").value || null;
       const statusMsg = document.getElementById("status-message");
+      const notes = "Quote has been validated";
 
-      if (!date) {
-        statusMsg.textContent = "Veuillez indiquer une date de livraison estimée.";
+      if (!days) {
+        statusMsg.textContent = "Please enter the estimated delivery days.";
         statusMsg.className = "text-red-500 text-sm text-center mt-2";
         return;
       }
 
       try {
-        const res = await fetch(`http://127.0.0.1:8000/api/quote/valide`, {
+        const res = await fetch(`http://127.0.0.1:8000/api/quote/validate`, {
           method: "POST",
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            quote_id: ref,
-            estimated_delivery_date: date
+            quote_request_id: ref,
+            notes: notes,
+            estimated_delivery_days: days,
+            estimated_delivery_hour: hour 
           })
         });
 
         const data = await res.json();
-        if (!res.ok) throw new Error(data.message || "Erreur de validation");
+        if (!res.ok) throw new Error(data.message || "Validation error");
 
-        statusMsg.textContent = "✔️ Demande validée avec succès !";
+        statusMsg.textContent = "✔️ Request successfully validated!";
         statusMsg.className = "text-green-600 text-sm text-center mt-2";
       } catch (err) {
         console.error(err);
-        statusMsg.textContent = "❌ Erreur lors de la validation.";
+        statusMsg.textContent = "❌ Error while validating.";
         statusMsg.className = "text-red-500 text-sm text-center mt-2";
       }
     });
+
 
     if (ref && token) loadQuoteData(ref);
     else alert("Aucun ID de devis ou token manquant.");
