@@ -82,7 +82,7 @@ async function fetchUserQuotes() {
 
 async function viewQuote(id) {
   if (!id) return;
-  window.location.href = `quote_pdf.html?ref=${encodeURIComponent(id)}`;
+  window.location.href = `/show?ref=${encodeURIComponent(id)}`;
 
 }
 
