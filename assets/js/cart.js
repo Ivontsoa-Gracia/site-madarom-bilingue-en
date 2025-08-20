@@ -428,38 +428,3 @@ async function clearCart() {
   }, 1500);
 }
 
-document.getElementById("request-quote").addEventListener("click", async () => {
-  const token = localStorage.getItem("token");
-  if (!token) {
-    alert("Please log in to request a quote.");
-    return;
-  }
-
-  // Tu peux ajouter ici des notes optionnelles, par ex. un prompt ou un champ
-  // const notes = prompt("Add any notes for your quote request (optional):") || "";
-  const notes = "Quote request";
-
-  try {
-    const res = await fetch(`${api_url}/quote`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-      },
-      body: JSON.stringify({ notes })
-    });
-
-    if (res.ok) {
-      const data = await res.json();
-      alert("Quote request sent successfully!");
-      // Optionnel : rediriger, vider panier ou autre action
-    } else {
-      const errorData = await res.json();
-      alert("Error: " + (errorData.error || "Failed to send quote request"));
-    }
-  } catch (error) {
-    console.error("Network error:", error);
-    alert("Network error, please try again later.");
-  }
-});
-
