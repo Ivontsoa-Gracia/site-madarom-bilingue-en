@@ -151,7 +151,7 @@
 
         // Calculer la date de livraison
         let now = new Date();
-        let totalDays = quote.quote.days;
+        let totalDays = quote.quote.day;
         if (quote.hours) {
           totalDays += quote.quote.hours / 24; // convertir heures en jours
         }
