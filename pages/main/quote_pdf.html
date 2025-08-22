@@ -149,17 +149,18 @@
         document.getElementById("tva").textContent = formatPrice(tva);
         document.getElementById("total").textContent = formatPrice(ttc);
 
-        // Calculer la date de livraison
-        let now = new Date();
-        let totalDays = quote.quote.day;
-        if (quote.hours) {
-          totalDays += quote.quote.hours / 24; // convertir heures en jours
+        // Calculer le nombre total de jours
+        let totalDays = quote.quote.day || 0; // jours complets
+        if (quote.quote.hours) {
+          totalDays += quote.quote.hours / 24; // convertir les heures en fraction de jours
         }
-        let deliveryDate = new Date();
-        deliveryDate.setDate(deliveryDate.getDate() + totalDays);
+
+        // Arrondir si besoin
+        totalDays = Math.ceil(totalDays); // pour ne pas avoir de décimales
 
         document.getElementById("delivery-date").textContent =
-          deliveryDate.toLocaleDateString("fr-FR", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
+          `dans ${totalDays} jour${totalDays > 1 ? 's' : ''}`;
+
 
       } catch (error) {
         console.error("Erreur lors du chargement du devis :", error);
