@@ -97,14 +97,11 @@ async function orderQuote(id) {
 
   try {
     const response = await fetch(`http://127.0.0.1:8000/api/quote/order/${id}`, {
-      method: "POST", // ⚡ très important (sinon ça enverra un GET par défaut)
+      method: "POST",
       headers: {
         "Authorization": `Bearer ${token}`,
         "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        id: id
-      })
+      }
     });
 
     if (!response.ok) {
