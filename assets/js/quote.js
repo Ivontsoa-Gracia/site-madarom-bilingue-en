@@ -73,7 +73,6 @@ async function fetchUserQuotes() {
     }
 
     const data = await response.json();
-    console.log("voici les quotes:", data);
     allQuotes = data.filter(quote => quote.quote.status?.toLowerCase() === "pending");
     applyFilters();
   } catch (error) {
@@ -114,6 +113,8 @@ async function orderQuote(id) {
       return;
     }
     
+    allQuotes = data.filter(quote => quote.quote.status?.toLowerCase() === "pending");
+    applyFilters();
 
     console.log("Response:", data);
     alert(data.message || "Bon de commande généré avec succès !");
