@@ -68,21 +68,19 @@ async function fetchUserQuotes() {
     });
 
     if (!response.ok) {
-      // Essayer de récupérer le message d'erreur depuis l'API
-      const errorData = await response.json().catch(() => ({}));
-      const message = errorData.message || "Failed to fetch quotes.";
-      throw new Error(message);
+      throw new Error("Failed to fetch quotes.");
+      
     }
 
     const data = await response.json();
+    console.log("voici les quotes:", data);
     allQuotes = data;
     applyFilters();
   } catch (error) {
     console.error("Error:", error);
-    alert(`Error loading quotes: ${error.message}`);
+    alert("Error loading quotes.");
   }
 }
-
 
 async function viewQuote(id) {
   if (!id) return;
