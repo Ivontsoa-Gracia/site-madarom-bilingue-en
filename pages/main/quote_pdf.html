@@ -50,6 +50,11 @@
     <!-- Totaux -->
     <div class="mt-4 flex justify-end">
       <table class="text-sm w-1/2">
+        <!-- Livraison estimée -->
+        <div class="mb-4" id="delivery">
+          <p class="font-semibold">Produits seront prêts à livrer le : <span id="delivery-date"></span></p>
+        </div>
+
         <tr>
           <td class="text-right font-semibold">Sub-total :</td>
           <td class="text-right" id="subtotal">0 Ar</td>
@@ -143,6 +148,19 @@
         document.getElementById("subtotal").textContent = formatPrice(total);
         document.getElementById("tva").textContent = formatPrice(tva);
         document.getElementById("total").textContent = formatPrice(ttc);
+
+        // Calculer la date de livraison
+        let now = new Date();
+        let totalDays = quote.quote.day;
+        if (quote.hours) {
+          totalDays += quote.quote.hours / 24; // convertir heures en jours
+        }
+        let deliveryDate = new Date();
+        deliveryDate.setDate(deliveryDate.getDate() + totalDays);
+
+        document.getElementById("delivery-date").textContent =
+          deliveryDate.toLocaleDateString("fr-FR", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
+
       } catch (error) {
         console.error("Erreur lors du chargement du devis :", error);
         alert("Impossible de charger le devis.");

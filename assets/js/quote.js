@@ -114,10 +114,8 @@ async function orderQuote(id) {
     }
     
     allQuotes = data.filter(quote => quote.quote.status?.toLowerCase() === "pending");
-    applyFilters();
-
-    console.log("Response:", data);
-    alert(data.message || "Bon de commande généré avec succès !");
+    // console.log("Response:", data);
+    // alert(data.message || "Bon de commande généré avec succès !");
   } catch (error) {
     console.error("Error:", error);
     alert("Erreur réseau ou inattendue: " + error.message);
