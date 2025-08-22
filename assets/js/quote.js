@@ -104,23 +104,22 @@ async function orderQuote(id) {
       }
     });
 
+    const data = await response.json().catch(() => ({})); // pour éviter erreur si pas de JSON
+
     if (!response.ok) {
-      throw new Error("Failed to order quote.");
+      console.error("Backend error:", data);
+      alert(data.error || data.message || "Failed to order quote.");
+      return;
     }
 
-    const data = await response.json();
     console.log("Response:", data);
-
-    // Si tu veux mettre à jour la liste après création :
-    // allQuotes = data;
-    // applyFilters();
-
     alert(data.message || "Bon de commande généré avec succès !");
   } catch (error) {
     console.error("Error:", error);
-    alert("Error ordering quote.");
+    alert("Erreur réseau ou inattendue: " + error.message);
   }
 }
+
 
 
 function clearQuote(ref) {
