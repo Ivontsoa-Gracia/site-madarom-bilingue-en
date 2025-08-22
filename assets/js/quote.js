@@ -74,7 +74,7 @@ async function fetchUserQuotes() {
 
     const data = await response.json();
     console.log("voici les quotes:", data);
-    allQuotes = data;
+    allQuotes = data.filter(quote => quote.quote.status?.toLowerCase() === "pending");
     applyFilters();
   } catch (error) {
     console.error("Error:", error);
