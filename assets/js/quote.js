@@ -20,7 +20,7 @@ function renderQuotes(data) {
         <td class="px-6 py-4 text-sm">${quote.created_at.split('T')[0]}</td>
         <td class="px-6 py-4 text-sm space-x-2">
           <button onclick="viewQuote('${quote.id}')" class="bg-teal-600 hover:bg-teal-700 text-white px-3 py-1 rounded text-sm">View</button>
-          <button onclick="orderQuote('${quote.quote_number}')" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm">Order</button>
+          <button onclick="orderQuote('${quote.quote.id}')" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm">Order</button>
           <button onclick="clearQuote('${quote.quote_number}')" class="bg-orange-500 hover:bg-orange-600 text-white px-3 py-1 rounded text-sm">Clear</button>
         </td>
       </tr>
@@ -88,34 +88,43 @@ async function viewQuote(id) {
 
 }
 
-async function orderQuote(ref) {
+async function orderQuote(id) {
   const token = localStorage.getItem("token");
-
   if (!token) {
     alert("No token found. Please log in.");
     return;
   }
 
   try {
-    const response = await fetch("http://127.0.0.1:8000/api/quote/order", {
+    const response = await fetch(`http://127.0.0.1:8000/api/quote/order/${id}`, {
+      method: "POST", // ⚡ très important (sinon ça enverra un GET par défaut)
       headers: {
         "Authorization": `Bearer ${token}`,
         "Content-Type": "application/json"
-      }
+      },
+      body: JSON.stringify({
+        id: id
+      })
     });
 
     if (!response.ok) {
-      throw new Error("Failed to fetch quotes.");
+      throw new Error("Failed to order quote.");
     }
 
     const data = await response.json();
-    allQuotes = data;
-    applyFilters();
+    console.log("Response:", data);
+
+    // Si tu veux mettre à jour la liste après création :
+    // allQuotes = data;
+    // applyFilters();
+
+    alert(data.message || "Bon de commande généré avec succès !");
   } catch (error) {
     console.error("Error:", error);
-    alert("Error loading quotes.");
+    alert("Error ordering quote.");
   }
 }
+
 
 function clearQuote(ref) {
   alert(`Clearing quote: ${ref}`);
