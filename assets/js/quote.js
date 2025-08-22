@@ -68,6 +68,45 @@ async function fetchUserQuotes() {
     });
 
     if (!response.ok) {
+      // Essayer de récupérer le message d'erreur depuis l'API
+      const errorData = await response.json().catch(() => ({}));
+      const message = errorData.message || "Failed to fetch quotes.";
+      throw new Error(message);
+    }
+
+    const data = await response.json();
+    allQuotes = data;
+    applyFilters();
+  } catch (error) {
+    console.error("Error:", error);
+    alert(`Error loading quotes: ${error.message}`);
+  }
+}
+
+
+async function viewQuote(id) {
+  if (!id) return;
+  window.location.href = `/show?ref=${encodeURIComponent(id)}`;
+
+}
+
+async function orderQuote(ref) {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    alert("No token found. Please log in.");
+    return;
+  }
+
+  try {
+    const response = await fetch("http://127.0.0.1:8000/api/quote/order", {
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
+      }
+    });
+
+    if (!response.ok) {
       throw new Error("Failed to fetch quotes.");
     }
 
@@ -78,17 +117,6 @@ async function fetchUserQuotes() {
     console.error("Error:", error);
     alert("Error loading quotes.");
   }
-}
-
-async function viewQuote(id) {
-  if (!id) return;
-  window.location.href = `/show?ref=${encodeURIComponent(id)}`;
-
-}
-
-function orderQuote(ref) {
-  alert(`Ordering quote: ${ref}`);
-  // Ici tu peux ajouter la logique réelle pour passer la commande
 }
 
 function clearQuote(ref) {
