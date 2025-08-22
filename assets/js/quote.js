@@ -107,10 +107,13 @@ async function orderQuote(id) {
     const data = await response.json().catch(() => ({})); // pour éviter erreur si pas de JSON
 
     if (!response.ok) {
+      let data = {};
+      try { data = await response.json(); } catch (err) {}
       console.error("Backend error:", data);
-      alert(data.error || data.message || "Failed to order quote.");
+      alert(`Erreur ${response.status}: ${data.message || "Voir console pour détails"}`);
       return;
     }
+    
 
     console.log("Response:", data);
     alert(data.message || "Bon de commande généré avec succès !");
