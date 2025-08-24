@@ -1,6 +1,6 @@
 let allQuotes = [];
 let currentPage = 1;
-const itemsPerPage = 5;
+const itemsPerPage = 3;
 
 const tbody = document.getElementById('quotesBody');
 const filterDate = document.getElementById('filterDate');
