@@ -22,9 +22,9 @@ function renderQuotes(data) {
         <td class="px-6 py-4 text-sm capitalize">${quote.status}</td>
         <td class="px-6 py-4 text-sm">${quote.quote.created_at.split('T')[0]}</td>
         <td class="px-6 py-4 text-sm space-x-2">
-          <button onclick="viewQuote('${quote.id}')" class="bg-teal-600 hover:bg-teal-700 text-white px-3 py-1 rounded text-sm">View</button>
-          <button onclick="orderQuote('${quote.quote.id}')" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm">Order</button>
-          <button onclick="clearQuote('${quote.quote_number}')" class="bg-orange-500 hover:bg-orange-600 text-white px-3 py-1 rounded text-sm">Clear</button>
+          <button onclick="viewQuote('${quote.id}')" class="bg-teal-50 hover:bg-teal-50 text-white px-3 py-1 rounded text-sm"> <i class='bx bx-show'></i> View</button>
+          <button onclick="orderQuote('${quote.quote.id}')" class="btn-primary text-white px-3 py-1 rounded text-sm"> <i class='bx bx-cart'> Order</button>
+          <button onclick="clearQuote('${quote.quote_number}')" class="btn-default text-white px-3 py-1 rounded text-sm"> <i class='bx bx-trash'> Clear</button>
         </td>
       </tr>
     `;
