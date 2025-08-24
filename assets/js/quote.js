@@ -1,18 +1,25 @@
 let allQuotes = [];
+let currentPage = 1;
+const itemsPerPage = 5;
 
 const tbody = document.getElementById('quotesBody');
 const filterDate = document.getElementById('filterDate');
 const sortOrder = document.getElementById('sortOrder');
+const pagination = document.getElementById('pagination');
 
 function renderQuotes(data) {
   tbody.innerHTML = '';
   if (data.length === 0) {
     tbody.innerHTML = `<tr><td colspan="4" class="px-6 py-4 text-center text-gray-500">No quotes found.</td></tr>`;
+    pagination.innerHTML = '';
     return;
   }
 
-  data.forEach(quote => {
+  const start = (currentPage - 1) * itemsPerPage;
+  const end = start + itemsPerPage;
+  const paginated = data.slice(start, end);
 
+  paginated.forEach(quote => {
     let total = 0;
     quote.items.forEach(item => {
       total += item.price_snapshot * item.quantity;
@@ -26,13 +33,8 @@ function renderQuotes(data) {
           </div>
           ${quote.quote_number || 'N/A'}
         </td>
-        <td class="px-6 py-4 text-sm">
-          ${formatPrice(total)}
-        </td>
-        <td class="px-6 py-4 text-sm">
-          ${quote.quote.created_at.split('T')[0]}
-        </td>
-      
+        <td class="px-6 py-4 text-sm">${formatPrice(total)}</td>
+        <td class="px-6 py-4 text-sm">${quote.quote.created_at.split('T')[0]}</td>
         <td class="px-6 py-4 text-sm flex gap-2">
           <button onclick="viewQuote('${quote.id}')" class="btn-default text-[#333333] px-3 py-1 rounded text-sm flex items-center gap-1">
             <i class="bx bx-show"></i> View
@@ -45,9 +47,32 @@ function renderQuotes(data) {
           </button>
         </td>
       </tr>
-  
     `;
   });
+
+  renderPagination(data.length);
+}
+
+function renderPagination(totalItems) {
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  pagination.innerHTML = '';
+
+  if (totalPages <= 1) return;
+
+  for (let i = 1; i <= totalPages; i++) {
+    const btn = document.createElement('button');
+    btn.innerText = i;
+    btn.className = `px-3 py-1 rounded ${
+      i === currentPage 
+        ? 'bg-teal-600 text-white' 
+        : 'bg-gray-200 hover:bg-gray-300 text-gray-700'
+    }`;
+    btn.onclick = () => {
+      currentPage = i;
+      applyFilters();
+    };
+    pagination.appendChild(btn);
+  }
 }
 
 function applyFilters() {
@@ -84,10 +109,7 @@ async function fetchUserQuotes() {
       }
     });
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch quotes.");
-      
-    }
+    if (!response.ok) throw new Error("Failed to fetch quotes.");
 
     const data = await response.json();
     allQuotes = data.filter(quote => quote.quote.status?.toLowerCase() === "pending");
@@ -97,6 +119,20 @@ async function fetchUserQuotes() {
     alert("Error loading quotes.");
   }
 }
+
+filterDate.addEventListener('input', applyFilters);
+sortOrder.addEventListener('change', applyFilters);
+fetchUserQuotes();
+
+function formatPrice(val) {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(val);
+}
+
 
 async function viewQuote(id) {
   if (!id) return;
@@ -136,25 +172,6 @@ async function orderQuote(id) {
   }
 }
 
-
-  
 function clearQuote(ref) {
   alert(`Clearing quote: ${ref}`);
-  // Ici tu peux ajouter la logique réelle pour supprimer ou archiver le devis
-}
-
-// Event listeners
-filterDate.addEventListener('input', applyFilters);
-sortOrder.addEventListener('change', applyFilters);
-
-// Initial load
-fetchUserQuotes();
-
-function formatPrice(val) {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  }).format(val);
 }
