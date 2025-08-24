@@ -7,27 +7,29 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
-<body class="bg-gradient-to-br from-gray-50 to-gray-100 p-6 text-gray-800 font-sans">
+<body class="bg-white p-6 text-gray-800 font-sans">
 
   <!-- Header actions -->
   <div class="flex justify-between items-center max-w-4xl mx-auto mb-6">
-    <button onclick="window.history.back()" class="flex items-center gap-2 text-gray-600 hover:text-teal-600 transition">
-      <i class='bx bx-arrow-back text-xl'></i>
-      <span>Back</span>
-    </button>
+    <a href="/quote">
+      <button class="flex items-center gap-2 text-gray-600 hover:text-teal-600 transition">
+        <i class='bx bx-arrow-back text-xl'></i>
+        <span>Back</span>
+      </button>
+    </a>
     <button onclick="generatePDF()" class="flex items-center gap-2 bg-teal-600 text-white px-4 py-2 rounded-full shadow hover:bg-teal-700 transition">
       <i class='bx bx-download text-xl'></i>
       <span>Download PDF</span>
     </button>
   </div>
 
-  <div id="devis" class="max-w-4xl mx-auto bg-white shadow-xl rounded-2xl p-8 border border-gray-100">
+  <div id="devis" class="max-w-4xl mx-auto bg-white p-8 border border-gray-100">
     
     <!-- Header -->
     <div class="flex justify-between items-center border-b pb-6 mb-6">
       <div class="flex flex-col gap-2">
         <img src="../../assets/img/logo.jpg" alt="Mad'arom logo" class="w-32 h-auto mb-2">
-        <h1 class="text-3xl font-extrabold text-teal-600 tracking-wide">QUOTE</h1>
+        <h1 class="text-3xl font-extrabold text-[#333333] tracking-wide">QUOTE</h1>
         <p class="text-sm text-gray-500" id="quote-number">#QTE-XXXXXX</p>
       </div>
       <div class="text-right">
@@ -39,17 +41,17 @@
     </div>
 
     <!-- Client -->
-    <div class="mb-6 bg-gray-50 p-4 rounded-lg border">
+    <div class="mb-6 bg-gray-50 p-4 border">
       <h3 class="font-semibold mb-2 text-gray-700">Customer details</h3>
       <p class="text-sm" id="client-name">Name</p>
       <p class="text-sm text-gray-500" id="client-email">Email</p>
     </div>
 
     <!-- Items table -->
-    <div class="overflow-x-auto rounded-lg border border-gray-200">
+    <div class="overflow-x-auto border border-gray-200">
       <table class="w-full text-sm">
         <thead>
-          <tr class="bg-teal-600 text-white text-left">
+          <tr class="bg-gray-50 text-white text-left">
             <th class="py-3 px-4">Product</th>
             <th class="py-3 px-4 text-center">Quantity</th>
             <th class="py-3 px-4 text-right">Unit Price</th>
@@ -64,10 +66,7 @@
 
     <!-- Totals -->
     <div class="mt-6 flex justify-end">
-      <div class="w-full md:w-1/2 bg-gray-50 p-4 rounded-lg border space-y-2">
-        <div id="delivery" class="pb-3 border-b">
-          <p class="font-semibold text-gray-700"><span id="delivery-date"></span></p>
-        </div>
+      <div class="w-full md:w-1/2 bg-gray-50 p-4 border space-y-2">
         <div class="flex justify-between">
           <span class="font-medium">Sub-total:</span>
           <span id="subtotal">0 USD</span>
@@ -76,7 +75,7 @@
           <span class="font-medium">VAT (20%):</span>
           <span id="tva">0 USD</span>
         </div>
-        <div class="flex justify-between text-lg font-bold text-teal-600">
+        <div class="flex justify-between text-lg font-bold text-[#333333]">
           <span>Total incl. VAT:</span>
           <span id="total">0 USD</span>
         </div>
@@ -84,7 +83,7 @@
     </div>
 
     <!-- Footer -->
-    <div class="mt-8 text-xs text-gray-500 text-center">
+    <div class="mt-8 text-xs text-gray-500 text-left">
       <p>This quote is valid for 15 days from the date of issue.</p>
       <p class="mt-1">Thank you for your trust!</p>
     </div>
@@ -153,8 +152,6 @@
               <td class="py-2 px-2 text-center">${item.quantity}</td>
               <td class="py-2 px-2 text-right">${formatPrice(item.price_snapshot)}</td>
               <td class="py-2 px-2 text-right">${formatPrice(sub)}</td>
-              <td class="py-2 px-2 text-right">${quote.quote.day}</td>
-              <td class="py-2 px-2 text-right">${quote.quote.hours}</td>
             </tr>`;
         });
 
@@ -163,58 +160,6 @@
         document.getElementById("subtotal").textContent = formatPrice(total);
         document.getElementById("tva").textContent = formatPrice(tva);
         document.getElementById("total").textContent = formatPrice(ttc);
-
-        let createdAt = new Date(quote.quote.created_at);
-        let totalDays = 0;
-        let totalHours = 0;
-
-        if (quote.quote.day && quote.quote.day > 0) {
-          totalDays = quote.quote.day;
-        } else if (quote.quote.hours && quote.quote.hours > 0) {
-          totalHours = quote.quote.hours;
-
-          if (totalHours >= 24) {
-            totalDays += Math.floor(totalHours / 24);
-            totalHours = totalHours % 24;
-          }
-        }
-
-        let deliveryDate = new Date(createdAt);
-        if (totalDays > 0) {
-          deliveryDate.setDate(deliveryDate.getDate() + totalDays);
-        }
-        if (totalHours > 0) {
-          deliveryDate.setHours(deliveryDate.getHours() + totalHours);
-        }
-
-        let today = new Date();
-        let diffTime = deliveryDate - today;
-
-        if (diffTime <= 0) {
-          document.getElementById("delivery-date").textContent =
-            "Les produits sont livrés aujourd'hui ou déjà livrés";
-        } else {
-          let diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-          let diffHours = Math.floor(
-            (diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-          );
-
-          let message = "Les produits seront livrés dans ";
-          if (diffDays > 0) message += `${diffDays} jour${diffDays > 1 ? "s" : ""}`;
-          if (diffDays > 0 && diffHours > 0) message += " et ";
-          if (diffHours > 0) message += `${diffHours} heure${diffHours > 1 ? "s" : ""}`;
-
-          let formattedDate = deliveryDate.toLocaleDateString("fr-FR", {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric"
-          });
-
-          message += ` (le ${formattedDate})`;
-
-          document.getElementById("delivery-date").textContent = message;
-        }
 
 
       } catch (error) {
