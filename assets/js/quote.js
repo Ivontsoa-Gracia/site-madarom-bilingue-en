@@ -48,7 +48,7 @@ function renderQuotes(data) {
               <i class="bx bx-cart"></i> Order
             </button>
             <!-- Bouton droite -->
-            <button onclick="clearQuote('${quote.quote_number}')"
+            <button onclick="clearQuote('${quote.quote.id}')"
               class="btn-default px-3 py-1 text-sm flex items-center gap-1 rounded-r-full border-l">
               <i class="bx bx-trash"></i> Clear
             </button>
