@@ -15,10 +15,10 @@ function renderQuotes(data) {
   data.forEach(quote => {
     tbody.innerHTML += `
       <tr class="hover:bg-gray-50">
-        <td class="px-6 py-4 text-sm flex items-center gap-2">
-          <i class="fas fa-file-pdf text-gray-200 bg-gray-50"></i>
-          ${quote.quote_number || 'N/A'}
+        <td class="px-6 py-6 rounded-full text-xl flex items-center gap-2 bg-gray-100">
+          <i class="fas fa-file-pdf text-gray-200"></i>
         </td>
+        <td class="px-6 py-4 text-sm flex items-center gap-2">${quote.quote_number || 'N/A'}</td>
         <td class="px-6 py-4 text-sm">${quote.quote.created_at.split('T')[0]}</td>
         <td class="px-6 py-4 text-sm space-x-2">
           <button onclick="viewQuote('${quote.id}')" class="btn-default text-[#333333] px-3 py-1 rounded text-sm">
