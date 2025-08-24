@@ -308,7 +308,6 @@ window.addEventListener('scroll', () => {
         throw new Error(`Erreur serveur ${response.status}`);
       }
   
-      // Suppression du token uniquement si logout OK
       localStorage.removeItem("token");
   
       alert("Déconnecté avec succès !");
@@ -320,7 +319,6 @@ window.addEventListener('scroll', () => {
     }
   }
   
-  // Toggle filtre mobile + tablette (taille < lg = 1024px)
   document.addEventListener('DOMContentLoaded', () => {
     const toggleBtn = document.getElementById('toggle-filters-btn');
     const filterPanel = document.getElementById('filter-panel');
@@ -337,7 +335,6 @@ window.addEventListener('scroll', () => {
   document.addEventListener("DOMContentLoaded", () => {
     const path = window.location.pathname;
   
-    // Map des URLs → id de section
     const sections = {
       "/": "home",
       "/about": "about",
@@ -351,10 +348,6 @@ window.addEventListener('scroll', () => {
       const el = document.getElementById(sectionId);
       if (el) el.scrollIntoView({ behavior: "smooth" });
     } 
-    // else {
-      // Redirection vers la page 404
-      // window.location.href = "/404";
-    // }
   });
 
   document.addEventListener('DOMContentLoaded', () => {
