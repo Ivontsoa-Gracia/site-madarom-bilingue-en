@@ -34,7 +34,7 @@ function renderQuotes(data) {
           ${quote.quote.reference || 'N/A'}
         </td>
         <td class="px-6 py-4 text-lg font-semibold">${formatPrice(total)}</td>
-        <td class="px-6 py-4 text-sm">${quote.quote.created_at.split('T')[0]}</td>
+        <td class="px-6 py-4 text-sm">${quote.quote.updated_at.split('T')[0]}</td>
         <td class="px-6 py-4 text-sm">
           <div class="inline-flex rounded-full overflow-hidden shadow-sm">
             <!-- Bouton gauche -->

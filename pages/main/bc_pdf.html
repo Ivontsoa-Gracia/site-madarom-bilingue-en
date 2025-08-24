@@ -140,7 +140,7 @@
 
         console.log(quote);
 
-        document.getElementById("order-date").textContent = `N° ${quote.quote.updated_at}`;
+        document.getElementById("order-date").textContent = `N° ${quote.quote.updated_at.split('T')[0]}`;
         document.getElementById("quote-number").textContent = `N° ${quote.quote.reference}`;
         document.getElementById("client-name").textContent = quote.user.name;
         document.getElementById("client-email").textContent = quote.user.email;
@@ -198,7 +198,7 @@
           day: "numeric"
         });
 
-        deliveryMessage += ` (on ${formattedDate})`;
+        deliveryMessage += ` , on ${formattedDate}`;
 
         document.getElementById("delivery-date").textContent = deliveryMessage;
 
