@@ -10,6 +10,51 @@
   <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 <body class="bg-gray-50 text-gray-800 p-6">
+  <header class="w-full bg-[#fcffff] py-4 px-4 md:px-6 shadow-sm">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+  
+      <!-- Center: Purchase Steps -->
+      <div class="overflow-x-auto">
+        <div class="flex items-center gap-3 md:gap-6 text-primary text-xs md:text-sm font-medium min-w-max">
+          
+          <div class="flex items-center gap-1 whitespace-nowrap">
+            <i class="fas fa-shopping-cart text-base md:text-lg text-red"></i>
+            <span>Cart</span>
+          </div>
+          <div class="w-6 h-0.5 bg-[#AB1A17] mx-1 hidden md:block"></div>
+  
+          <div class="flex items-center gap-1 whitespace-nowrap">
+            <i class="fas fa-file-invoice text-base md:text-lg text-red"></i>
+            <span>Quote</span>
+          </div>
+          <div class="w-6 h-0.5 bg-[#AB1A17] mx-1 hidden md:block"></div>
+  
+          <div class="flex items-center gap-1 whitespace-nowrap">
+            <i class="fas fa-file-contract text-base md:text-lg text-red"></i>
+            <span>Purchase Order</span>
+          </div>
+          <div class="w-6 h-0.5 bg-[#AB1A17] mx-1 hidden md:block"></div>
+  
+          <div class="flex items-center gap-1 whitespace-nowrap">
+            <i class="fas fa-credit-card text-base md:text-lg text-red"></i>
+            <span>Payment</span>
+          </div>
+          <div class="w-6 h-0.5 bg-[#AB1A17] mx-1 hidden md:block"></div>
+  
+          <div class="flex items-center gap-1 whitespace-nowrap">
+            <i class="fas fa-truck text-base md:text-lg text-red"></i>
+            <span>Delivery</span>
+          </div>
+        </div>
+      </div>
+  
+      <div class="flex items-center gap-3 text-sm justify-end">
+        <a href="/cart" class="text-primary hover:underline hover:text-red">My Carts</a>
+        <a href="/order" class="text-primary hover:underline hover:text-red">My Orders</a>
+      </div>
+    </div>
+  </header>
+
   <div class="max-w-6xl mx-auto">
 
     <div class="bg-white p-6 rounded-xl shadow-sm mb-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
