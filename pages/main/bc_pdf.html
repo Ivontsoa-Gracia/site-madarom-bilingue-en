@@ -178,35 +178,25 @@
           totalDays = Math.floor(totalHours / 24);
           totalHours = totalHours % 24;
         }
-        
+
+        // Calcul de la date de livraison
         let deliveryDate = new Date(updatedAt);
         deliveryDate.setDate(deliveryDate.getDate() + totalDays);
         deliveryDate.setHours(deliveryDate.getHours() + totalHours);
 
-        let today = new Date();
-        let diffTime = deliveryDate - today;
+        let deliveryMessage = "This order is delivered in ";
+        if (totalDays > 0) deliveryMessage += `${totalDays} day${totalDays > 1 ? "s" : ""}`;
+        if (totalDays > 0 && totalHours > 0) deliveryMessage += " and ";
+        if (totalHours > 0) deliveryMessage += `${totalHours} hour${totalHours > 1 ? "s" : ""}`;
 
-        let deliveryMessage = "";
-        if (diffTime <= 0) {
-          deliveryMessage = "Products are delivered today or already delivered.";
-        } else {
-          let diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-          let diffHours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const formattedDate = deliveryDate.toLocaleDateString("fr-FR", {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric"
+        });
 
-          deliveryMessage = "This order is delivered in ";
-          if (diffDays > 0) deliveryMessage += `${diffDays} day${diffDays > 1 ? "s" : ""}`;
-          if (diffDays > 0 && diffHours > 0) deliveryMessage += " and ";
-          if (diffHours > 0) deliveryMessage += `${diffHours} hour${diffHours > 1 ? "s" : ""}`;
-
-          const formattedDate = deliveryDate.toLocaleDateString("fr-FR", {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric"
-          });
-
-          deliveryMessage += ` (on ${formattedDate})`;
-        }
+        deliveryMessage += ` (on ${formattedDate})`;
 
         document.getElementById("delivery-date").textContent = deliveryMessage;
 
