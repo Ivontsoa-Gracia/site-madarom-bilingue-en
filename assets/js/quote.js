@@ -26,7 +26,7 @@ function renderQuotes(data) {
     });
 
     tbody.innerHTML += `
-      <tr class="hover:bg-gray-50">
+      <tr class="hover:bg-gray-50 text-[#333333]">
         <td class="px-6 py-4 text-sm flex items-center gap-2 font-semibold">
           <div class="w-16 h-16 flex justify-center items-center bg-gray-50 rounded-full">
             <i class="fas fa-file-pdf text-gray-400 text-2xl"></i>
