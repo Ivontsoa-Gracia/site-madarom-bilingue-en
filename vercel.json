@@ -12,8 +12,11 @@
     { "src": "/signup", "dest": "/pages/authentification/signup.html"},
     { "src": "/reset-password", "dest": "/pages/authentification/reset.html"},
     { "src": "/quote", "dest": "/pages/main/quote.html"},
-    { "src": "/show", "dest": "/pages/main/quote_pdf.html"},
+    { "src": "/quote/show", "dest": "/pages/main/quote_pdf.html"},
+    { "src": "/order", "dest": "/pages/main/order.html"},
+    { "src": "/oder/show", "dest": "/pages/main/bc_pdf.html"},
     { "src": "/payement", "dest": "/pages/main/payement.html"},
+
     { "src": "/401", "dest": "/pages/errors/401.html"},
     { "src": "/403", "dest": "/pages/errors/403.html"},
     { "src": "/404", "dest": "/pages/errors/404.html"},

@@ -45,12 +45,7 @@ function renderQuotes(data) {
             <!-- Bouton centre -->
             <button onclick="openModal('order', '${quote.quote.id}')"
               class="btn-primary text-white px-3 py-1 text-sm flex items-center gap-1">
-              <i class="bx bx-cart"></i> Order
-            </button>
-            <!-- Bouton droite -->
-            <button onclick="openModal('cancel', '${quote.quote.id}')"
-              class="btn-default px-3 py-1 text-sm flex items-center gap-1 rounded-r-full border-l">
-              <i class="bx bx-trash"></i> Clear
+              <i class="bx bx-cart"></i> Pay
             </button>
           </div>
         </td>
@@ -192,7 +187,7 @@ async function fetchUserQuotes() {
     if (!response.ok) throw new Error("Failed to fetch quotes.");
 
     const data = await response.json();
-    allQuotes = data.filter(quote => quote.quote.status?.toLowerCase() === "pending");
+    allQuotes = data.filter(quote => quote.quote.status?.toLowerCase() === "command");
     applyFilters();
   } catch (error) {
     console.error("Error:", error);
@@ -216,7 +211,7 @@ function formatPrice(val) {
 
 async function viewQuote(id) {
   if (!id) return;
-  window.location.href = `/quote/show?ref=${encodeURIComponent(id)}`;
+  window.location.href = `/order/show?ref=${encodeURIComponent(id)}`;
 
 }
 
