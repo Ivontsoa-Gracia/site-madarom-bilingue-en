@@ -31,7 +31,7 @@ function renderQuotes(data) {
           <div class="w-16 h-16 flex justify-center items-center bg-gray-50 rounded-full">
             <i class="fas fa-file-pdf text-gray-400 text-2xl"></i>
           </div>
-          ${quote.quote_number || 'N/A'}
+          ${quote.quote.reference || 'N/A'}
         </td>
         <td class="px-6 py-4 text-lg font-semibold">${formatPrice(total)}</td>
         <td class="px-6 py-4 text-sm">${quote.quote.created_at.split('T')[0]}</td>
