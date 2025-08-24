@@ -41,14 +41,9 @@ function applyFilters() {
   let filtered = [...allQuotes];
   const dateVal = filterDate.value;
   const sort = sortOrder.value;
-  const statusVal = statusFilter.value;
 
   if (dateVal) {
     filtered = filtered.filter(q => q.created_at.startsWith(dateVal));
-  }
-
-  if (statusVal) {
-    filtered = filtered.filter(q => q.status === statusVal);
   }
 
   filtered.sort((a, b) => {
