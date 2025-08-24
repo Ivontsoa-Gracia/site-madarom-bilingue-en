@@ -43,7 +43,7 @@
 
     <!-- Client -->
     <div class="mb-6 bg-gray-50 p-4 border">
-      <h3 class="font-semibold mb-2 text-gray-700" id="client-name">Name</h3>
+      <h3 class="font-medium mb-2 text-gray-700 text-lg" id="client-name">Name</h3>
       <p class="text-sm text-gray-500" id="client-email">Email</p>
     </div>
 
@@ -95,9 +95,12 @@
   <script>
     function generatePDF() {
       const element = document.getElementById('devis');
+      const quoteNumber = document.getElementById("quote-number").textContent.replace(/\D/g, '');
+      const filename = `quote_${quoteNumber}.pdf`;
+
       const options = {
         margin: 0.5,
-        filename: 'quote.pdf',
+        filename: filename,
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { scale: 2 },
         jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
