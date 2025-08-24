@@ -43,12 +43,12 @@ function renderQuotes(data) {
               <i class="bx bx-show"></i> View
             </button>
             <!-- Bouton centre -->
-            <button onclick="orderQuote('${quote.quote.id}')"
+            <button onclick="openModal('order', '${quote.quote.id}')"
               class="btn-primary text-white px-3 py-1 text-sm flex items-center gap-1">
               <i class="bx bx-cart"></i> Order
             </button>
             <!-- Bouton droite -->
-            <button onclick="clearQuote('${quote.quote.id}')"
+            <button onclick="openModal('cancel', '${quote.quote.id}')"
               class="btn-default px-3 py-1 text-sm flex items-center gap-1 rounded-r-full border-l">
               <i class="bx bx-trash"></i> Clear
             </button>
@@ -228,6 +228,8 @@ async function orderQuote(id) {
   }
 
   try {
+    showLoader();
+
     const response = await fetch(`http://127.0.0.1:8000/api/quote/order/${id}`, {
       method: "POST",
       headers: {
@@ -246,6 +248,7 @@ async function orderQuote(id) {
       return;
     }
     
+    showToast("Order placed successfully!");
   } catch (error) {
     console.error("Error:", error);
     alert("Erreur réseau ou inattendue: " + error.message);
@@ -260,6 +263,8 @@ async function clearQuote(id) {
   }
 
   try {
+    showLoader();
+
     const response = await fetch(`http://127.0.0.1:8000/api/quote/cancel/${id}`, {
       method: "POST",
       headers: {
@@ -278,8 +283,54 @@ async function clearQuote(id) {
       return;
     }
     
+    showToast("Quote cancelled successfully!");
+    
   } catch (error) {
     console.error("Error:", error);
     alert("Erreur réseau ou inattendue: " + error.message);
   }
+}
+
+let selectedQuoteId = null;
+
+function openModal(type, id) {
+  selectedQuoteId = id;
+  document.getElementById(type + "Modal").classList.remove("hidden");
+}
+
+function closeModal(type) {
+  document.getElementById(type).classList.add("hidden");
+  selectedQuoteId = null;
+}
+
+document.getElementById("confirmOrderBtn").addEventListener("click", async () => {
+  if (selectedQuoteId) {
+    await orderQuote(selectedQuoteId);
+    closeModal("orderModal");
+  }
+});
+
+document.getElementById("confirmCancelBtn").addEventListener("click", async () => {
+  if (selectedQuoteId) {
+    await clearQuote(selectedQuoteId);
+    closeModal("cancelModal");
+  }
+});
+
+
+function showLoader() {
+  document.getElementById("loader").classList.remove("hidden");
+}
+
+function hideLoader() {
+  document.getElementById("loader").classList.add("hidden");
+}
+
+function showToast(message = "Action successful!", duration = 2500) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.remove("hidden");
+  setTimeout(() => {
+    toast.classList.add("hidden");
+  }, duration);
 }
