@@ -3,7 +3,6 @@ let allQuotes = [];
 const tbody = document.getElementById('quotesBody');
 const filterDate = document.getElementById('filterDate');
 const sortOrder = document.getElementById('sortOrder');
-const statusFilter = document.getElementById('statusFilter');
 
 function renderQuotes(data) {
   tbody.innerHTML = '';
@@ -136,7 +135,6 @@ function clearQuote(ref) {
 // Event listeners
 filterDate.addEventListener('input', applyFilters);
 sortOrder.addEventListener('change', applyFilters);
-statusFilter.addEventListener('change', applyFilters);
 
 // Initial load
 fetchUserQuotes();
