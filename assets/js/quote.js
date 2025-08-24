@@ -69,10 +69,10 @@ function renderPagination(totalItems) {
   if (totalPages <= 1) return;
 
   const prevBtn = document.createElement('button');
-  prevBtn.innerHTML = `<i class="fas fa-chevron-left"></i>`;
+  prevBtn.innerHTML = `&laquo;`;
   prevBtn.disabled = currentPage === 1;
-  prevBtn.className = `px-3 py-1 rounded ${
-    currentPage === 1 ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-gray-200 hover:bg-gray-300 text-gray-700'
+  prevBtn.className = `px-3 py-1 rounded-full ${
+    currentPage === 1 ? 'border border-gray-300 text-gray-600 hover:bg-gray-100 cursor-not-allowed' : 'border border-gray-300 text-gray-600 hover:bg-gray-100'
   }`;
   prevBtn.onclick = () => {
     if (currentPage > 1) {
@@ -119,10 +119,10 @@ function renderPagination(totalItems) {
   }
 
   const nextBtn = document.createElement('button');
-  nextBtn.innerHTML = `<i class="fas fa-chevron-right"></i>`;
+  nextBtn.innerHTML = `&raquo;`;
   nextBtn.disabled = currentPage === totalPages;
-  nextBtn.className = `px-3 py-1 rounded ${
-    currentPage === totalPages ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-gray-200 hover:bg-gray-300 text-gray-700'
+  nextBtn.className = `px-3 py-1 rounded-full ${
+    currentPage === totalPages ? 'border border-gray-300 text-gray-600 hover:bg-gray-100 cursor-not-allowed' : 'border border-gray-300 text-gray-600 hover:bg-gray-100'
   }`;
   nextBtn.onclick = () => {
     if (currentPage < totalPages) {
@@ -135,10 +135,10 @@ function renderPagination(totalItems) {
   function addPageButton(page) {
     const btn = document.createElement('button');
     btn.innerText = page;
-    btn.className = `px-3 py-1 rounded ${
+    btn.className = `px-4 py-1 rounded-full border ${
       page === currentPage 
-        ? 'bg-teal-600 text-white' 
-        : 'bg-gray-200 hover:bg-gray-300 text-gray-700'
+        ? 'bg-teal text-white' 
+        : 'border-gray-300 text-gray-600 hover:bg-gray-100'
     }`;
     btn.onclick = () => {
       currentPage = page;
