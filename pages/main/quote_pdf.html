@@ -140,7 +140,7 @@
 
         console.log(quote);
 
-        document.getElementById("quote-number").textContent = `N° ${quote.quote_number}`;
+        document.getElementById("quote-number").textContent = `N° ${quote.quote.reference}`;
         document.getElementById("client-name").textContent = quote.user.name;
         document.getElementById("client-email").textContent = quote.user.email;
 
