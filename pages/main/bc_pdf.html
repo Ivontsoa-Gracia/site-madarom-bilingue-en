@@ -169,7 +169,8 @@
 
         let updatedAt = new Date(quote.quote.updated_at);
 
-        // Nombre de jours ou conversion depuis les heures
+        updatedAt = new Date(updatedAt.getFullYear(), updatedAt.getMonth(), updatedAt.getDate());
+
         let totalDays = quote.quote.day || 0;
         let totalHours = quote.quote.hours || 0;
 
@@ -177,7 +178,7 @@
           totalDays = Math.floor(totalHours / 24);
           totalHours = totalHours % 24;
         }
-
+        
         let deliveryDate = new Date(updatedAt);
         deliveryDate.setDate(deliveryDate.getDate() + totalDays);
         deliveryDate.setHours(deliveryDate.getHours() + totalHours);
@@ -190,9 +191,7 @@
           deliveryMessage = "Products are delivered today or already delivered.";
         } else {
           let diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-          let diffHours = Math.floor(
-            (diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-          );
+          let diffHours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 
           deliveryMessage = "This order is delivered in ";
           if (diffDays > 0) deliveryMessage += `${diffDays} day${diffDays > 1 ? "s" : ""}`;
