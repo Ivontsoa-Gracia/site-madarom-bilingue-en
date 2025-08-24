@@ -151,22 +151,40 @@
 
         let createdAt = new Date(quote.quote.created_at);
 
-        let totalDays = quote.quote.day || 0; 
-        if (quote.quote.hours) {
-          totalDays += quote.quote.hours / 24; 
+        // Récupération des jours et heures
+        let totalDays = quote.quote.day || 0;
+        let totalHours = quote.quote.hours || 0;
+
+        // Conversion des heures > 24 en jours
+        if (totalHours >= 24) {
+          totalDays += Math.floor(totalHours / 24);
+          totalHours = totalHours % 24;
         }
 
+        // Calcul de la date de livraison
         let deliveryDate = new Date(createdAt);
         deliveryDate.setDate(deliveryDate.getDate() + totalDays);
+        deliveryDate.setHours(deliveryDate.getHours() + totalHours);
 
+        // Calcul du délai à partir d’aujourd’hui
         let today = new Date();
         let diffTime = deliveryDate - today;
-        let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
 
-        document.getElementById("delivery-date").textContent =
-          diffDays > 0
-            ? `sera livré dans ${diffDays} jour${diffDays > 1 ? 's' : ''}`
-            : `livré aujourd'hui ou déjà livré`;
+        if (diffTime <= 0) {
+          document.getElementById("delivery-date").textContent =
+            "Les produits sont livrés aujourd'hui ou déjà livrés";
+        } else {
+          let diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+          let diffHours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+          let message = "Les produits seront livrés dans ";
+          if (diffDays > 0) message += `${diffDays} jour${diffDays > 1 ? "s" : ""}`;
+          if (diffDays > 0 && diffHours > 0) message += " et ";
+          if (diffHours > 0) message += `${diffHours} heure${diffHours > 1 ? "s" : ""}`;
+
+          document.getElementById("delivery-date").textContent = message;
+        }
+
 
       } catch (error) {
         console.error("Erreur lors du chargement du devis :", error);
