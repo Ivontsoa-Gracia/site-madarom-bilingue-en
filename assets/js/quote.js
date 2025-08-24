@@ -44,7 +44,7 @@ function renderQuotes(data) {
             </button>
             <!-- Bouton centre -->
             <button onclick="orderQuote('${quote.quote.id}')"
-              class="btn-primary text-white px-3 py-1 text-sm flex items-center gap-1 hover:bg-blue-600">
+              class="btn-primary text-white px-3 py-1 text-sm flex items-center gap-1">
               <i class="bx bx-cart"></i> Order
             </button>
             <!-- Bouton droite -->
@@ -252,6 +252,34 @@ async function orderQuote(id) {
   }
 }
 
-function clearQuote(ref) {
-  alert(`Clearing quote: ${ref}`);
+async function clearQuote(id) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    alert("No token found. Please log in.");
+    return;
+  }
+
+  try {
+    const response = await fetch(`http://127.0.0.1:8000/api/quote/cancel/${id}`, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
+      }
+    });
+
+    const data = await response.json().catch(() => ({})); 
+
+    if (!response.ok) {
+      let data = {};
+      try { data = await response.json(); } catch (err) {}
+      console.error("Backend error:", data);
+      alert(`Erreur ${response.status}: ${data.message || "Voir console pour détails"}`);
+      return;
+    }
+    
+  } catch (error) {
+    console.error("Error:", error);
+    alert("Erreur réseau ou inattendue: " + error.message);
+  }
 }
