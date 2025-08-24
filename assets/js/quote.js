@@ -14,19 +14,28 @@ function renderQuotes(data) {
   data.forEach(quote => {
     tbody.innerHTML += `
       <tr class="hover:bg-gray-50">
-        <td class="px-6 py-6 rounded-full text-xl flex items-center gap-2 bg-gray-100">
-          <i class="fas fa-file-pdf text-gray-200"></i>
+        <td class="px-6 py-4 flex justify-center items-center">
+          <div class="w-10 h-10 flex justify-center items-center bg-gray-100 rounded-full">
+            <i class="fas fa-file-pdf text-gray-600 text-lg"></i>
+          </div>
         </td>
-        <td class="px-6 py-4 text-sm flex items-center gap-2">${quote.quote_number || 'N/A'}</td>
-        <td class="px-6 py-4 text-sm">${quote.quote.created_at.split('T')[0]}</td>
-        <td class="px-6 py-4 text-sm space-x-2">
-          <button onclick="viewQuote('${quote.id}')" class="btn-default text-[#333333] px-3 py-1 rounded text-sm">
+      
+        <td class="px-6 py-4 text-sm flex items-center gap-2">
+          ${quote.quote_number || 'N/A'}
+        </td>
+      
+        <td class="px-6 py-4 text-sm">
+          ${quote.quote.created_at.split('T')[0]}
+        </td>
+      
+        <td class="px-6 py-4 text-sm flex gap-2">
+          <button onclick="viewQuote('${quote.id}')" class="btn-default text-[#333333] px-3 py-1 rounded text-sm flex items-center gap-1">
             <i class="bx bx-show"></i> View
           </button>
-          <button onclick="orderQuote('${quote.quote.id}')" class="btn-primary text-white px-3 py-1 rounded text-sm">
+          <button onclick="orderQuote('${quote.quote.id}')" class="btn-primary text-white px-3 py-1 rounded text-sm flex items-center gap-1">
             <i class="bx bx-cart"></i> Order
           </button>
-          <button onclick="clearQuote('${quote.quote_number}')" class="btn-default px-3 py-1 rounded text-sm">
+          <button onclick="clearQuote('${quote.quote_number}')" class="btn-default px-3 py-1 rounded text-sm flex items-center gap-1">
             <i class="bx bx-trash"></i> Clear
           </button>
         </td>
