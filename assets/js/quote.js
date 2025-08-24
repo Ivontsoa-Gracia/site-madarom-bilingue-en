@@ -17,12 +17,12 @@ function renderQuotes(data) {
     quote.items.forEach(item => {
       total += item.price_snapshot * item.quantity;
     });
-    
+
     tbody.innerHTML += `
       <tr class="hover:bg-gray-50">
         <td class="px-6 py-4 text-sm flex items-center gap-2">
-          <div class="w-15 h-15 flex justify-center items-center bg-gray-100 rounded-full px-4 py-4">
-            <i class="fas fa-file-pdf text-gray-600 text-2xl"></i>
+          <div class="w-15 h-15 flex justify-center items-center bg-gray-50 rounded-full">
+            <i class="fas fa-file-pdf text-gray-400 text-2xl"></i>
           </div>
           ${quote.quote_number || 'N/A'}
         </td>
