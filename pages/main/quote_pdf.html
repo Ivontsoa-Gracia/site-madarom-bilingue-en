@@ -157,8 +157,10 @@
         let totalHours = 0;
 
         if (quote.quote.day && quote.quote.day > 0) {
+          // Si les jours sont déjà définis, on les prend directement
           totalDays = quote.quote.day;
         } else if (quote.quote.hours && quote.quote.hours > 0) {
+          // Sinon on utilise les heures
           totalHours = quote.quote.hours;
 
           if (totalHours >= 24) {
@@ -192,8 +194,18 @@
           if (diffDays > 0 && diffHours > 0) message += " et ";
           if (diffHours > 0) message += `${diffHours} heure${diffHours > 1 ? "s" : ""}`;
 
+          let formattedDate = deliveryDate.toLocaleDateString("fr-FR", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+          });
+
+          message += ` (le ${formattedDate})`;
+
           document.getElementById("delivery-date").textContent = message;
         }
+
 
       } catch (error) {
         console.error("Erreur lors du chargement du devis :", error);
