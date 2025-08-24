@@ -228,7 +228,7 @@ async function orderQuote(id) {
   }
 
   try {
-    showLoader();
+    showLoader(2000);
 
     const response = await fetch(`http://127.0.0.1:8000/api/quote/order/${id}`, {
       method: "POST",
@@ -263,7 +263,7 @@ async function clearQuote(id) {
   }
 
   try {
-    showLoader();
+    showLoader(2000);
 
     const response = await fetch(`http://127.0.0.1:8000/api/quote/cancel/${id}`, {
       method: "POST",
@@ -284,7 +284,7 @@ async function clearQuote(id) {
     }
     
     showToast("Quote cancelled successfully!");
-    
+
   } catch (error) {
     console.error("Error:", error);
     alert("Erreur réseau ou inattendue: " + error.message);
@@ -318,9 +318,15 @@ document.getElementById("confirmCancelBtn").addEventListener("click", async () =
 });
 
 
-function showLoader() {
-  document.getElementById("loader").classList.remove("hidden");
+function showLoader(duration = 2000) {
+  const loader = document.getElementById("loader");
+  loader.classList.remove("hidden");
+
+  setTimeout(() => {
+    loader.classList.add("hidden");
+  }, duration);
 }
+
 
 function hideLoader() {
   document.getElementById("loader").classList.add("hidden");
