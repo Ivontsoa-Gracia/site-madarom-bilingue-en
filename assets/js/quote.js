@@ -27,25 +27,34 @@ function renderQuotes(data) {
 
     tbody.innerHTML += `
       <tr class="hover:bg-gray-50">
-        <td class="px-6 py-4 text-sm flex items-center gap-2">
+        <td class="px-6 py-4 text-sm flex items-center gap-2 font-semibold">
           <div class="w-16 h-16 flex justify-center items-center bg-gray-50 rounded-full">
             <i class="fas fa-file-pdf text-gray-400 text-2xl"></i>
           </div>
           ${quote.quote_number || 'N/A'}
         </td>
-        <td class="px-6 py-4 text-sm">${formatPrice(total)}</td>
+        <td class="px-6 py-4 text-lg font-semibold">${formatPrice(total)}</td>
         <td class="px-6 py-4 text-sm">${quote.quote.created_at.split('T')[0]}</td>
-        <td class="px-6 py-4 text-sm flex gap-2">
-          <button onclick="viewQuote('${quote.id}')" class="btn-default text-[#333333] px-3 py-1 rounded text-sm flex items-center gap-1">
-            <i class="bx bx-show"></i> View
-          </button>
-          <button onclick="orderQuote('${quote.quote.id}')" class="btn-primary text-white px-3 py-1 rounded text-sm flex items-center gap-1">
-            <i class="bx bx-cart"></i> Order
-          </button>
-          <button onclick="clearQuote('${quote.quote_number}')" class="btn-default px-3 py-1 rounded text-sm flex items-center gap-1">
-            <i class="bx bx-trash"></i> Clear
-          </button>
+        <td class="px-6 py-4 text-sm">
+          <div class="inline-flex rounded-full overflow-hidden shadow-sm">
+            <!-- Bouton gauche -->
+            <button onclick="viewQuote('${quote.id}')"
+              class="btn-default text-[#333333] px-3 py-1 text-sm flex items-center gap-1 rounded-l-full border-r">
+              <i class="bx bx-show"></i> View
+            </button>
+            <!-- Bouton centre -->
+            <button onclick="orderQuote('${quote.quote.id}')"
+              class="btn-primary text-white px-3 py-1 text-sm flex items-center gap-1 hover:bg-blue-600">
+              <i class="bx bx-cart"></i> Order
+            </button>
+            <!-- Bouton droite -->
+            <button onclick="clearQuote('${quote.quote_number}')"
+              class="btn-default px-3 py-1 text-sm flex items-center gap-1 rounded-r-full border-l">
+              <i class="bx bx-trash"></i> Clear
+            </button>
+          </div>
         </td>
+      
       </tr>
     `;
   });
