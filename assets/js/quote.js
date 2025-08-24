@@ -59,19 +59,90 @@ function renderPagination(totalItems) {
 
   if (totalPages <= 1) return;
 
-  for (let i = 1; i <= totalPages; i++) {
+  const prevBtn = document.createElement('button');
+  prevBtn.innerHTML = `<i class="fas fa-chevron-left"></i>`;
+  prevBtn.disabled = currentPage === 1;
+  prevBtn.className = `px-3 py-1 rounded ${
+    currentPage === 1 ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-gray-200 hover:bg-gray-300 text-gray-700'
+  }`;
+  prevBtn.onclick = () => {
+    if (currentPage > 1) {
+      currentPage--;
+      applyFilters();
+    }
+  };
+  pagination.appendChild(prevBtn);
+
+  const maxVisible = 7; 
+  let startPage = 1;
+  let endPage = totalPages;
+
+  if (totalPages > 10) {
+    if (currentPage <= 4) {
+      startPage = 1;
+      endPage = 5;
+    } else if (currentPage >= totalPages - 3) {
+      startPage = totalPages - 4;
+      endPage = totalPages;
+    } else {
+      startPage = currentPage - 2;
+      endPage = currentPage + 2;
+    }
+  }
+
+  addPageButton(1);
+  if (startPage > 2) {
+    addDots();
+  }
+
+  for (let i = startPage; i <= endPage; i++) {
+    if (i !== 1 && i !== totalPages) {
+      addPageButton(i);
+    }
+  }
+
+  if (endPage < totalPages - 1) {
+    addDots();
+  }
+
+  if (totalPages > 1) {
+    addPageButton(totalPages);
+  }
+
+  const nextBtn = document.createElement('button');
+  nextBtn.innerHTML = `<i class="fas fa-chevron-right"></i>`;
+  nextBtn.disabled = currentPage === totalPages;
+  nextBtn.className = `px-3 py-1 rounded ${
+    currentPage === totalPages ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-gray-200 hover:bg-gray-300 text-gray-700'
+  }`;
+  nextBtn.onclick = () => {
+    if (currentPage < totalPages) {
+      currentPage++;
+      applyFilters();
+    }
+  };
+  pagination.appendChild(nextBtn);
+
+  function addPageButton(page) {
     const btn = document.createElement('button');
-    btn.innerText = i;
+    btn.innerText = page;
     btn.className = `px-3 py-1 rounded ${
-      i === currentPage 
+      page === currentPage 
         ? 'bg-teal-600 text-white' 
         : 'bg-gray-200 hover:bg-gray-300 text-gray-700'
     }`;
     btn.onclick = () => {
-      currentPage = i;
+      currentPage = page;
       applyFilters();
     };
     pagination.appendChild(btn);
+  }
+
+  function addDots() {
+    const span = document.createElement('span');
+    span.innerText = '...';
+    span.className = 'px-2 text-gray-500';
+    pagination.appendChild(span);
   }
 }
 
