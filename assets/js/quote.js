@@ -120,7 +120,7 @@ async function orderQuote(id) {
       }
     });
 
-    const data = await response.json().catch(() => ({})); // pour éviter erreur si pas de JSON
+    const data = await response.json().catch(() => ({})); 
 
     if (!response.ok) {
       let data = {};
@@ -130,9 +130,6 @@ async function orderQuote(id) {
       return;
     }
     
-    allQuotes = data.filter(quote => quote.quote.status?.toLowerCase() === "pending");
-    // console.log("Response:", data);
-    // alert(data.message || "Bon de commande généré avec succès !");
   } catch (error) {
     console.error("Error:", error);
     alert("Erreur réseau ou inattendue: " + error.message);
