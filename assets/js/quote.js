@@ -15,9 +15,12 @@ function renderQuotes(data) {
   data.forEach(quote => {
     tbody.innerHTML += `
       <tr class="hover:bg-gray-50">
-        <td class="px-6 py-4 text-sm">${quote.quote_number || 'N/A'}</td>
+        <td class="px-6 py-4 text-sm flex items-center gap-2">
+          <i class="fas fa-file-pdf text-red-500"></i>
+          ${quote.quote_number || 'N/A'}
+        </td>
         <td class="px-6 py-4 text-sm capitalize">${quote.status}</td>
-        <td class="px-6 py-4 text-sm">${quote.created_at.split('T')[0]}</td>
+        <td class="px-6 py-4 text-sm">${quote.quote.created_at.split('T')[0]}</td>
         <td class="px-6 py-4 text-sm space-x-2">
           <button onclick="viewQuote('${quote.id}')" class="bg-teal-600 hover:bg-teal-700 text-white px-3 py-1 rounded text-sm">View</button>
           <button onclick="orderQuote('${quote.quote.id}')" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm">Order</button>
@@ -123,7 +126,7 @@ async function orderQuote(id) {
 }
 
 
-
+  
 function clearQuote(ref) {
   alert(`Clearing quote: ${ref}`);
   // Ici tu peux ajouter la logique réelle pour supprimer ou archiver le devis
