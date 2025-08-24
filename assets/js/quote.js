@@ -16,17 +16,23 @@ function renderQuotes(data) {
     tbody.innerHTML += `
       <tr class="hover:bg-gray-50">
         <td class="px-6 py-4 text-sm flex items-center gap-2">
-          <i class="fas fa-file-pdf text-red-500"></i>
+          <i class="fas fa-file-pdf text-gray-200 bg-gray-50"></i>
           ${quote.quote_number || 'N/A'}
         </td>
-        <td class="px-6 py-4 text-sm capitalize">${quote.status}</td>
         <td class="px-6 py-4 text-sm">${quote.quote.created_at.split('T')[0]}</td>
         <td class="px-6 py-4 text-sm space-x-2">
-          <button onclick="viewQuote('${quote.id}')" class="bg-teal-50 hover:bg-teal-50 text-white px-3 py-1 rounded text-sm"> <i class='bx bx-show'></i> View</button>
-          <button onclick="orderQuote('${quote.quote.id}')" class="btn-primary text-white px-3 py-1 rounded text-sm"> <i class='bx bx-cart'> Order</button>
-          <button onclick="clearQuote('${quote.quote_number}')" class="btn-default text-white px-3 py-1 rounded text-sm"> <i class='bx bx-trash'> Clear</button>
+          <button onclick="viewQuote('${quote.id}')" class="btn-default text-[#333333] px-3 py-1 rounded text-sm">
+            <i class="bx bx-show"></i> View
+          </button>
+          <button onclick="orderQuote('${quote.quote.id}')" class="btn-primary text-white px-3 py-1 rounded text-sm">
+            <i class="bx bx-cart"></i> Order
+          </button>
+          <button onclick="clearQuote('${quote.quote_number}')" class="btn-default px-3 py-1 rounded text-sm">
+            <i class="bx bx-trash"></i> Clear
+          </button>
         </td>
       </tr>
+  
     `;
   });
 }
