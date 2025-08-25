@@ -34,7 +34,17 @@ function initQuotes() {
         });
         tbody.innerHTML += `
           <tr class="hover:bg-gray-50">
-            <td class="px-6 py-4 font-medium">${q.quote_number || 'N/A'} ${q.user.name}</td>
+            <td class="px-6 py-4 text-sm font-medium">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 flex justify-center items-center bg-gray-50 rounded-full">
+                    <i class="fas fa-file-pdf text-gray-400 text-2xl"></i>
+                    </div>
+                    <div class="flex flex-col">
+                    <span class="font-semibold text-gray-800">${q.quote_number || 'N/A'}</span>
+                    <span class="text-gray-500 text-sm"><i class="bx bx-user mr-2 text-lg"></i> ${q.user.name}</span>
+                    </div>
+                </div>
+            </td>
             <td class="px-6 py-4 text-lg font-semibold">${formatPrice(total)}</td>
             <td class="px-6 py-4">${renderStatusBadge(q.status)}</td>
             <td class="px-6 py-4">${q.created_at?.split('T')[0]}</td>
