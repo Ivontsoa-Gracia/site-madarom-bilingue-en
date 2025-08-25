@@ -6,13 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 <body class="flex">
 
-  <!-- Sidebar placeholder -->
   <div id="sidebar-placeholder"></div>
 
-  <!-- Main Content -->
   <main class="ml-64 w-full min-h-screen bg-gray-50">
     <div id="main-content" class="p-6">
       <h1 class="text-2xl font-bold mb-4 text-gray-800">Welcome, Admin!</h1>
@@ -21,7 +20,6 @@
   </main>
 
   <script>
-    // Charger dynamiquement le sidebar
     document.addEventListener("DOMContentLoaded", () => {
       fetch("sidebar.html")
         .then(response => {
@@ -31,21 +29,18 @@
         .then(html => {
           document.getElementById("sidebar-placeholder").innerHTML = html;
 
-          // Après injection du sidebar, activer les liens
           const links = document.querySelectorAll(".menu-link");
           const content = document.getElementById("main-content");
 
           links.forEach(link => {
             link.addEventListener("click", e => {
-              e.preventDefault(); // éviter reload
+              e.preventDefault(); 
 
               const page = link.getAttribute("href");
 
-              // Highlight active link
               links.forEach(l => l.classList.remove("bg-[#393E46]"));
               link.classList.add("bg-[#393E46]");
 
-              // Charger la page correspondante
               fetch(page)
                 .then(res => {
                   if (!res.ok) throw new Error(`Cannot load ${page}`);
