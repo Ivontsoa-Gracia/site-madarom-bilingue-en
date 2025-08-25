@@ -40,7 +40,7 @@
           validated: 'bg-green-60',
           command: 'bg-blue-50',
           canceled: 'bg-red-50'
-        }[order.quote.toLowerCase()] || 'bg-gray-400';
+        }[order.quote.status.toLowerCase()] || 'bg-gray-400';
 
         container.innerHTML += `
           <div class="relative bg-white p-5 rounded-xl shadow-md">
