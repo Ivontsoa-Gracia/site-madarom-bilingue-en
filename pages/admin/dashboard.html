@@ -19,16 +19,10 @@
     </div>
   </main>
 
-  <script src="../../assets/js/admin/order.js"></script>
-  <script src="../../assets/js/admin/quote.js"></script>
-  
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       fetch("sidebar.html")
-        .then(response => {
-          if (!response.ok) throw new Error("Failed to load sidebar");
-          return response.text();
-        })
+        .then(res => res.text())
         .then(html => {
           document.getElementById("sidebar-placeholder").innerHTML = html;
 
@@ -37,34 +31,50 @@
 
           links.forEach(link => {
             link.addEventListener("click", e => {
-              e.preventDefault(); 
+              e.preventDefault();
 
-              const page = link.getAttribute("href");
+              const htmlPage = link.dataset.page; // prend le vrai fichier à fetch
+              const url = link.getAttribute("href"); // garde /admin/quote pour l’URL
 
               links.forEach(l => l.classList.remove("bg-[#393E46]"));
               link.classList.add("bg-[#393E46]");
 
-              fetch(page)
+              // Injection du contenu
+              fetch(htmlPage)
                 .then(res => res.text())
                 .then(html => {
                   content.innerHTML = html;
 
-                  switch(page) {
-                    case 'order.html':
-                      initOrders(); 
+                  // Modifier l'URL sans recharger la page
+                  window.history.pushState(null, "", url);
+
+                  // Charger le script correspondant
+                  switch (url) {
+                    case '/admin/order':
+                      const orderScript = document.createElement('script');
+                      orderScript.src = '../../assets/js/admin/order.js';
+                      document.body.appendChild(orderScript);
                       break;
-                    case 'quote.html':
-                      initQuotes(); 
+
+                    case '/admin/quote':
+                      const quoteScript = document.createElement('script');
+                      quoteScript.src = '../../assets/js/admin/quote.js';
+                      document.body.appendChild(quoteScript);
                       break;
                   }
                 });
             });
           });
-        })
-        .catch(error => {
-          console.error("Error loading sidebar:", error);
         });
     });
+
+    // Gérer le back/forward du navigateur
+    window.addEventListener("popstate", () => {
+      const currentPath = window.location.pathname;
+      const link = document.querySelector(`.menu-link[href="${currentPath}"]`);
+      if (link) link.click();
+    });
+
   </script>
   
 </body>
