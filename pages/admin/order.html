@@ -111,7 +111,7 @@
             const data = await res.json();
             console.log("Les devis:", data);
 
-            allOrders = data.filter(quote => quote.status?.toLowerCase() === "validated"); 
+            allOrders = data; 
             populateStatusFilter(); 
             applyFilters();
         } catch (err) {
