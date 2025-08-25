@@ -22,60 +22,57 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       fetch("sidebar.html")
-        .then(res => res.text())
+        .then(response => response.text())
         .then(html => {
           document.getElementById("sidebar-placeholder").innerHTML = html;
-
+    
           const links = document.querySelectorAll(".menu-link");
           const content = document.getElementById("main-content");
-
+    
           links.forEach(link => {
             link.addEventListener("click", e => {
               e.preventDefault();
-
-              const htmlPage = link.dataset.page; // prend le vrai fichier à fetch
-              const url = link.getAttribute("href"); // garde /admin/quote pour l’URL
-
+    
+              const page = link.dataset.page;       // le HTML à charger
+              const scriptPath = link.dataset.script; // le JS à charger
+              const url = link.getAttribute("href");  // /admin/order ou /admin/quote
+    
+              // style actif du menu
               links.forEach(l => l.classList.remove("bg-[#393E46]"));
               link.classList.add("bg-[#393E46]");
-
-              // Injection du contenu
-              fetch(htmlPage)
+    
+              // injecter le contenu
+              fetch(page)
                 .then(res => res.text())
                 .then(html => {
                   content.innerHTML = html;
-
-                  // Modifier l'URL sans recharger la page
+    
+                  // mettre à jour l'URL dans la barre
                   window.history.pushState(null, "", url);
-
-                  // Charger le script correspondant
-                  switch (url) {
-                    case '/admin/order':
-                      const orderScript = document.createElement('script');
-                      orderScript.src = '../../assets/js/admin/order.js';
-                      document.body.appendChild(orderScript);
-                      break;
-
-                    case '/admin/quote':
-                      const quoteScript = document.createElement('script');
-                      quoteScript.src = '../../assets/js/admin/quote.js';
-                      document.body.appendChild(quoteScript);
-                      break;
+    
+                  // Charger dynamiquement le script
+                  if (scriptPath) {
+                    const oldScript = document.querySelector(`script[src="${scriptPath}"]`);
+                    if (oldScript) oldScript.remove(); // éviter doublons
+    
+                    const script = document.createElement("script");
+                    script.src = scriptPath;
+                    script.defer = true;
+                    document.body.appendChild(script);
                   }
                 });
             });
           });
         });
     });
-
-    // Gérer le back/forward du navigateur
+    
+    // Gestion bouton retour navigateur
     window.addEventListener("popstate", () => {
       const currentPath = window.location.pathname;
       const link = document.querySelector(`.menu-link[href="${currentPath}"]`);
       if (link) link.click();
     });
-
-  </script>
-  
+    </script>
+    
 </body>
 </html>
