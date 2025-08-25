@@ -22,17 +22,17 @@ function initOrders() {
 
         container.innerHTML += `
           <div class="relative bg-white p-5 rounded-xl shadow-md">
-            <span class="absolute top-3 right-3 text-xs font-medium px-3 py-1 rounded-full ${badgeColor}">
+            <span class="absolute top-3 right-3 text-xs px-3 py-1 rounded-full ${badgeColor}">
               ${order.quote.status}
             </span>
-            <h2 class="text-lg font-semibold text-gray-800">${order.quote.reference}</h2>
+            <h2 class="text-lg font-medium text-gray-800">${order.quote.reference}</h2>
             <p class="flex items-center text-gray-600 mt-2 text-sm">
               <i class="bx bx-calendar mr-2 text-lg"></i> ${order.quote.updated_at?.split('T')[0]}
             </p>
             <p class="flex items-center text-gray-600 mt-1 text-sm">
               <i class="bx bx-user mr-2 text-lg"></i> ${order.user.name}
             </p>
-            <h3 class="text-xl font-bold text-gray-900 mt-3">${formatPrice(total)}</h3>
+            <h3 class="text-xl font-medium text-gray-900 mt-3">${formatPrice(total)}</h3>
             <button onclick="viewQuote('${order.id}')" class="mt-4 flex items-center justify-center gap-2 btn-default text-sm px-4 py-2 rounded-full w-full">
               <i class="bx bx-show"></i> View details
             </button>
@@ -87,7 +87,7 @@ function initOrders() {
             }
 
             const data = await res.json();
-            console.log("Les bon de commandes:", data);
+            // console.log("Les bon de commandes:", data);
 
             allOrders = data.filter(quote => quote.status?.toLowerCase() === "validated"); 
             populateStatusFilter(); 
