@@ -1,4 +1,4 @@
-function initQuotes() {
+// function initQuotes() {
     let allQuotes = [];
 
     const tbody = document.getElementById('quotesBody');
@@ -97,4 +97,4 @@ function initQuotes() {
       if (!id) return;
       window.location.href = `/admin/quote/show?ref=${encodeURIComponent(id)}`;
     }
-}
+// }
