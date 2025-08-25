@@ -34,7 +34,9 @@ function initQuotes() {
             <td class="px-6 py-4">${renderStatusBadge(q.status)}</td>
             <td class="px-6 py-4">${q.created_at?.split('T')[0]}</td>
             <td class="px-6 py-4 text-right">
-              <button onclick="viewQuote('${q.id}')" class="bg-primary text-white text-sm px-3 py-1.5 rounded-lg hover:bg-[#8c1514]">View</button>
+                <button onclick="viewQuote('${q.id}')" class="mt-4 flex items-center justify-center gap-2 btn-default text-sm px-4 py-2 rounded-full w-full">
+                    <i class="bx bx-show"></i> View details
+                </button>
             </td>
           </tr>
         `;
@@ -95,7 +97,7 @@ function initQuotes() {
 
     window.viewQuote = function(id) {
         if (!id) return;
-        window.location.href = `/admin/order/show?ref=${encodeURIComponent(id)}`;
+        window.location.href = `/admin/quote/show?ref=${encodeURIComponent(id)}`;
     }
 
     filterDate.addEventListener('input', applyFilters);
