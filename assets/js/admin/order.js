@@ -8,11 +8,16 @@ function initOrders() {
     const renderCards = (data) => {
       container.innerHTML = '';
       data.forEach(order => {
+        let total = 0;
+        order.items.forEach(item => {
+          total += item.price_snapshot * item.quantity;
+        });
+
         const badgeColor = {
-          pending: 'bg-yellow-100 text-yellow',
-          validated: 'bg-green-100 text-green',
-          command: 'bg-blue-100 text-blue',
-          canceled: 'bg-red-100 text-red'
+          pending: 'bg-yellow-100 text-[#e6a534]',
+          validated: 'bg-green-100 text-[#68b56c]',
+          command: 'bg-blue-100 text-[#1f7ed1]',
+          canceled: 'bg-red-100 text-[#ab1a17]'
         }[order.quote.status.toLowerCase()] || 'bg-gray-400';
 
         container.innerHTML += `
@@ -27,8 +32,8 @@ function initOrders() {
             <p class="flex items-center text-gray-600 mt-1 text-sm">
               <i class="bx bx-user mr-2 text-lg"></i> ${order.user.name}
             </p>
-            <h3 class="text-xl font-bold text-gray-900 mt-3">$</h3>
-            <button onclick="viewQuote('${order.quote.id}')" class="mt-4 flex items-center justify-center gap-2 btn-primary text-white text-sm font-medium px-4 py-2 rounded-full w-full">
+            <h3 class="text-xl font-bold text-gray-900 mt-3">$${formatPrice(total)}</h3>
+            <button onclick="viewQuote('${order.id}')" class="mt-4 flex items-center justify-center gap-2 btn-default text-sm px-4 py-2 rounded-full w-full">
               <i class="bx bx-show"></i> View details
             </button>
           </div>
@@ -82,7 +87,7 @@ function initOrders() {
             }
 
             const data = await res.json();
-            console.log("Les devis:", data);
+            console.log("Les bon de commandes:", data);
 
             allOrders = data.filter(quote => quote.status?.toLowerCase() === "validated"); 
             populateStatusFilter(); 
@@ -104,4 +109,14 @@ function initOrders() {
     statusFilter.addEventListener('change', applyFilters);
 
     fetchOrders();
+
+    function formatPrice(val) {
+        return new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        }).format(val);
+      }
 }
+
