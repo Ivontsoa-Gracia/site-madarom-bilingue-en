@@ -91,34 +91,35 @@
     }
 
     async function fetchQuotes() {
-      const token = localStorage.getItem("token");
-      if (!token) return alert("No token found. Please log in.");
+        const token = localStorage.getItem("token");
+        if (!token) return alert("No token found. Please log in.");
 
-      try {
-        const res = await fetch("http://127.0.0.1:8000/api/quote", {
-          method: "GET",
-          headers: {
-            "Authorization": `Bearer ${token}`,
-            "Content-Type": "application/json"
-          }
-        });
+        try {
+            const res = await fetch("http://127.0.0.1:8000/api/quote", {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
+            }
+            });
 
-        if (!res.ok) {
-          const errorData = await res.json().catch(() => ({}));
-          throw new Error(errorData.message || errorData.error || "Fetch failed");
+            if (!res.ok) {
+            const errorData = await res.json().catch(() => ({}));
+            throw new Error(errorData.message || errorData.error || "Fetch failed");
+            }
+
+            const data = await res.json();
+            console.log("Les devis:", data);
+
+            allOrders = data.filter(quote => quote.status?.toLowerCase() === "validated"); // <== correction
+            populateStatusFilter(); 
+            applyFilters();
+        } catch (err) {
+            console.error("Error fetching quotes:", err);
+            alert(`Error fetching quotes: ${err.message}`);
         }
-
-        const data = await res.json();
-        console.log("Les devis:", data);
-
-        allQuotes = data.filter(quote => quote.status?.toLowerCase() === "validated");
-        populateStatusFilter(); 
-        applyFilters();
-      } catch (err) {
-        console.error("Error fetching quotes:", err);
-        alert(`Error fetching quotes: ${err.message}`);
-      }
     }
+
 
     function viewQuote(id) {
       if (!id) return;
