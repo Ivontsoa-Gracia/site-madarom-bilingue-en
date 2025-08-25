@@ -47,15 +47,15 @@
             <span class="absolute top-3 right-3 text-xs font-semibold px-3 py-1 rounded-full text-white ${badgeColor}">
               ${order.status}
             </span>
-            <h2 class="text-lg font-semibold text-gray-800">${order.reference}</h2>
+            <h2 class="text-lg font-semibold text-gray-800">${order.quote.reference}</h2>
             <p class="flex items-center text-gray-600 mt-2 text-sm">
-              <i class="bx bx-calendar mr-2 text-lg"></i> ${order.updated_at?.split('T')[0]}
+              <i class="bx bx-calendar mr-2 text-lg"></i> ${order.quote.updated_at?.split('T')[0]}
             </p>
             <p class="flex items-center text-gray-600 mt-1 text-sm">
-              <i class="bx bx-user mr-2 text-lg"></i> ${order.client_name}
+              <i class="bx bx-user mr-2 text-lg"></i> ${order.user.name}
             </p>
-            <h3 class="text-xl font-bold text-gray-900 mt-3">$${order.total}</h3>
-            <button onclick="viewQuote('${order.reference}')" class="mt-4 flex items-center justify-center gap-2 btn-primary text-white text-sm font-medium px-4 py-2 rounded-full w-full">
+            <h3 class="text-xl font-bold text-gray-900 mt-3">$</h3>
+            <button onclick="viewQuote('${order.quote.id}')" class="mt-4 flex items-center justify-center gap-2 btn-primary text-white text-sm font-medium px-4 py-2 rounded-full w-full">
               <i class="bx bx-show"></i> View details
             </button>
           </div>
@@ -68,12 +68,12 @@
       const dateVal = filterDate.value;
       const statusVal = statusFilter.value;
 
-      if (dateVal) filtered = filtered.filter(q => q.created_at?.startsWith(dateVal));
-      if (statusVal) filtered = filtered.filter(q => q.status === statusVal);
+      if (dateVal) filtered = filtered.filter(q => q.quote.updated_at?.startsWith(dateVal));
+      if (statusVal) filtered = filtered.filter(q => q.quote.status === statusVal);
 
       filtered.sort((a, b) => {
-        const dA = new Date(a.created_at);
-        const dB = new Date(b.created_at);
+        const dA = new Date(a.quote.updated_at);
+        const dB = new Date(b.quote.updated_at);
         return sortOrder.value === 'desc' ? dB - dA : dA - dB;
       });
 
@@ -81,7 +81,7 @@
     }
 
     const populateStatusFilter = () => {
-      const uniqueStatuses = [...new Set(allOrders.map(o => o.status))];
+      const uniqueStatuses = [...new Set(allOrders.map(o => o.quote.status))];
       uniqueStatuses.forEach(status => {
         const option = document.createElement('option');
         option.value = status;
@@ -90,28 +90,28 @@
       });
     }
 
-    async function fetchQuotes() {
+    async function fetchOrders() {
         const token = localStorage.getItem("token");
         if (!token) return alert("No token found. Please log in.");
 
         try {
             const res = await fetch("http://127.0.0.1:8000/api/quote", {
-            method: "GET",
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": "application/json"
-            }
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
             });
 
             if (!res.ok) {
-            const errorData = await res.json().catch(() => ({}));
-            throw new Error(errorData.message || errorData.error || "Fetch failed");
+                const errorData = await res.json().catch(() => ({}));
+                throw new Error(errorData.message || errorData.error || "Fetch failed");
             }
 
             const data = await res.json();
             console.log("Les devis:", data);
 
-            allOrders = data.filter(quote => quote.status?.toLowerCase() === "validated"); // <== correction
+            allOrders = data.filter(quote => quote.status?.toLowerCase() === "validated"); 
             populateStatusFilter(); 
             applyFilters();
         } catch (err) {
@@ -130,7 +130,7 @@
     sortOrder.addEventListener('change', applyFilters);
     statusFilter.addEventListener('change', applyFilters);
 
-    fetchQuotes();
+    fetchOrders();
   </script>
 
 </body>
