@@ -1,3 +1,4 @@
+function initOrders() {
     let allOrders = [];
     const container = document.querySelector('.grid');
     const filterDate = document.getElementById('filterDate');
@@ -103,3 +104,4 @@
     statusFilter.addEventListener('change', applyFilters);
 
     fetchOrders();
+}

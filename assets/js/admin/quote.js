@@ -1,4 +1,5 @@
-let allQuotes = [];
+function initQuotes() {
+    let allQuotes = [];
 
     const tbody = document.getElementById('quotesBody');
     const filterDate = document.getElementById('filterDate');
@@ -96,3 +97,4 @@ let allQuotes = [];
       if (!id) return;
       window.location.href = `/admin/quote/show?ref=${encodeURIComponent(id)}`;
     }
+}
