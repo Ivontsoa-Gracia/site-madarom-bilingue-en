@@ -97,4 +97,10 @@ function initQuotes() {
         if (!id) return;
         window.location.href = `/admin/order/show?ref=${encodeURIComponent(id)}`;
     }
+
+    filterDate.addEventListener('input', applyFilters);
+    sortOrder.addEventListener('change', applyFilters);
+    statusFilter.addEventListener('change', applyFilters);
+
+    fetchQuotes();
 }
