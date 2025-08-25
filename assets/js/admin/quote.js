@@ -93,8 +93,8 @@ function initQuotes() {
       }
     }
 
-    function viewQuote(id) {
-      if (!id) return;
-      window.location.href = `/admin/quote/show?ref=${encodeURIComponent(id)}`;
+    window.viewQuote = function(id) {
+        if (!id) return;
+        window.location.href = `/admin/order/show?ref=${encodeURIComponent(id)}`;
     }
 }
