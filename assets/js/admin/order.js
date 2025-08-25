@@ -32,7 +32,7 @@ function initOrders() {
             <p class="flex items-center text-gray-600 mt-1 text-sm">
               <i class="bx bx-user mr-2 text-lg"></i> ${order.user.name}
             </p>
-            <h3 class="text-xl font-bold text-gray-900 mt-3">$${formatPrice(total)}</h3>
+            <h3 class="text-xl font-bold text-gray-900 mt-3">${formatPrice(total)}</h3>
             <button onclick="viewQuote('${order.id}')" class="mt-4 flex items-center justify-center gap-2 btn-default text-sm px-4 py-2 rounded-full w-full">
               <i class="bx bx-show"></i> View details
             </button>

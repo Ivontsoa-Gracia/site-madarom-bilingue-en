@@ -37,22 +37,18 @@
               links.forEach(l => l.classList.remove("bg-[#393E46]"));
               link.classList.add("bg-[#393E46]");
     
-              // fetch la page html via rewrite Vercel
               fetch(pageUrl)
                 .then(res => res.text())
                 .then(html => {
                   content.innerHTML = html;
                   window.history.pushState(null, "", pageUrl);
     
-                  // déduire le JS associé
                   const pageName = pageUrl.split("/").pop() || "dashboard"; 
                   const scriptPath = `../../assets/js/admin/${pageName}.js`;
     
-                  // supprimer ancien script injecté
                   const oldScript = document.querySelector("script[data-page-script]");
                   if (oldScript) oldScript.remove();
     
-                  // injecter le bon script
                   const script = document.createElement("script");
                   script.src = scriptPath;
                   script.defer = true;
@@ -71,7 +67,6 @@
         });
     });
     
-    // support bouton retour navigateur
     window.addEventListener("popstate", () => {
       const currentPath = window.location.pathname;
       const link = document.querySelector(`.menu-link[href="${currentPath}"]`);
