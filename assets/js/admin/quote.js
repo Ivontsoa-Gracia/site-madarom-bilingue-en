@@ -59,7 +59,7 @@ function initQuotes() {
       renderQuotes(filtered);
     }
 
-    async function fetchQuotes() {
+    window.fetchQuotes = async function() {
       const token = localStorage.getItem("token");
       if (!token) {
         alert("No token found. Please log in.");
