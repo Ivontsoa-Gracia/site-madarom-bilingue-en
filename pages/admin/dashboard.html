@@ -42,16 +42,18 @@
               link.classList.add("bg-[#393E46]");
 
               fetch(page)
-                .then(res => {
-                  if (!res.ok) throw new Error(`Cannot load ${page}`);
-                  return res.text();
-                })
+                .then(res => res.text())
                 .then(html => {
                   content.innerHTML = html;
-                })
-                .catch(err => {
-                  content.innerHTML = `<div class="text-red-500">Error loading content.</div>`;
-                  console.error(err);
+
+                  switch(page) {
+                    case 'order.html':
+                      initOrders(); 
+                      break;
+                    case 'quote.html':
+                      initQuotes(); 
+                      break;
+                  }
                 });
             });
           });
@@ -61,5 +63,9 @@
         });
     });
   </script>
+
+  <script src="../../assets/js/admin/order.js"></script>
+  <script src="../../assets/js/admin/quote.js"></script>
+  
 </body>
 </html>

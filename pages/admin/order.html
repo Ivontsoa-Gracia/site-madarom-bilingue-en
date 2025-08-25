@@ -10,7 +10,6 @@
 </head>
 <body class="bg-gray-100 p-6">
 
-  <!-- Filtres -->
   <div class="flex flex-wrap gap-4 mb-6">
     <input type="date" id="filterDate" class="px-4 py-2 border rounded" placeholder="Filter by date">
     <select id="statusFilter" class="px-4 py-2 border rounded">
@@ -22,116 +21,7 @@
     </select>
   </div>
 
-  <!-- Container des cards -->
   <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6"></div>
-
-  <script>
-    let allOrders = [];
-    const container = document.querySelector('.grid');
-    const filterDate = document.getElementById('filterDate');
-    const sortOrder = document.getElementById('sortOrder');
-    const statusFilter = document.getElementById('statusFilter');
-
-    const renderCards = (data) => {
-      container.innerHTML = '';
-      data.forEach(order => {
-        const badgeColor = {
-          pending: 'bg-yellow-50',
-          validated: 'bg-green-60',
-          command: 'bg-blue-50',
-          canceled: 'bg-red-50'
-        }[order.quote.status.toLowerCase()] || 'bg-gray-400';
-
-        container.innerHTML += `
-          <div class="relative bg-white p-5 rounded-xl shadow-md">
-            <span class="absolute top-3 right-3 text-xs font-semibold px-3 py-1 rounded-full text-white ${badgeColor}">
-              ${order.quote.status}
-            </span>
-            <h2 class="text-lg font-semibold text-gray-800">${order.quote.reference}</h2>
-            <p class="flex items-center text-gray-600 mt-2 text-sm">
-              <i class="bx bx-calendar mr-2 text-lg"></i> ${order.quote.updated_at?.split('T')[0]}
-            </p>
-            <p class="flex items-center text-gray-600 mt-1 text-sm">
-              <i class="bx bx-user mr-2 text-lg"></i> ${order.user.name}
-            </p>
-            <h3 class="text-xl font-bold text-gray-900 mt-3">$</h3>
-            <button onclick="viewQuote('${order.quote.id}')" class="mt-4 flex items-center justify-center gap-2 btn-primary text-white text-sm font-medium px-4 py-2 rounded-full w-full">
-              <i class="bx bx-show"></i> View details
-            </button>
-          </div>
-        `;
-      });
-    }
-
-    const applyFilters = () => {
-      let filtered = [...allOrders];
-      const dateVal = filterDate.value;
-      const statusVal = statusFilter.value;
-
-      if (dateVal) filtered = filtered.filter(q => q.quote.updated_at?.startsWith(dateVal));
-      if (statusVal) filtered = filtered.filter(q => q.quote.status === statusVal);
-
-      filtered.sort((a, b) => {
-        const dA = new Date(a.quote.updated_at);
-        const dB = new Date(b.quote.updated_at);
-        return sortOrder.value === 'desc' ? dB - dA : dA - dB;
-      });
-
-      renderCards(filtered);
-    }
-
-    const populateStatusFilter = () => {
-      const uniqueStatuses = [...new Set(allOrders.map(o => o.quote.status))];
-      uniqueStatuses.forEach(status => {
-        const option = document.createElement('option');
-        option.value = status;
-        option.textContent = status.charAt(0).toUpperCase() + status.slice(1);
-        statusFilter.appendChild(option);
-      });
-    }
-
-    async function fetchOrders() {
-        const token = localStorage.getItem("token");
-        if (!token) return alert("No token found. Please log in.");
-
-        try {
-            const res = await fetch("http://127.0.0.1:8000/api/quote", {
-                method: "GET",
-                headers: {
-                    "Authorization": `Bearer ${token}`,
-                    "Content-Type": "application/json"
-                }
-            });
-
-            if (!res.ok) {
-                const errorData = await res.json().catch(() => ({}));
-                throw new Error(errorData.message || errorData.error || "Fetch failed");
-            }
-
-            const data = await res.json();
-            console.log("Les devis:", data);
-
-            allOrders = data.filter(quote => quote.status?.toLowerCase() === "validated"); 
-            populateStatusFilter(); 
-            applyFilters();
-        } catch (err) {
-            console.error("Error fetching quotes:", err);
-            alert(`Error fetching quotes: ${err.message}`);
-        }
-    }
-
-
-    function viewQuote(id) {
-      if (!id) return;
-      window.location.href = `/admin/order/show?ref=${encodeURIComponent(id)}`;
-    }
-
-    filterDate.addEventListener('input', applyFilters);
-    sortOrder.addEventListener('change', applyFilters);
-    statusFilter.addEventListener('change', applyFilters);
-
-    fetchOrders();
-  </script>
 
 </body>
 </html>
