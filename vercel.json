@@ -22,8 +22,6 @@
     { "src": "/admin/clients", "dest": "/pages/admin/clients.html"},
     { "src": "/admin/products", "dest": "/pages/admin/products.html"},
     { "src": "/admin/settings", "dest": "/pages/admin/settings.html"},
-
-
     { "src": "/401", "dest": "/pages/errors/401.html"},
     { "src": "/403", "dest": "/pages/errors/403.html"},
     { "src": "/404", "dest": "/pages/errors/404.html"},
