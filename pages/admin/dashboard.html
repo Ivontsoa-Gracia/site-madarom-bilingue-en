@@ -57,7 +57,14 @@
                   script.src = scriptPath;
                   script.defer = true;
                   script.dataset.pageScript = "true";
+                  script.onload = () => {
+                    const initFunc = "init" + pageName.charAt(0).toUpperCase() + pageName.slice(1) + "s";
+                    if (typeof window[initFunc] === "function") {
+                      window[initFunc]();
+                    }
+                  };
                   document.body.appendChild(script);
+
                 });
             });
           });
