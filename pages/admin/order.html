@@ -10,12 +10,23 @@
 </head>
 <body class="bg-gray-100 p-6">
 
-  <div class="flex flex-wrap gap-4 mb-6">
-    <input type="date" id="filterDate" class="px-4 py-2 border rounded" placeholder="Filter by date">
-    <select id="statusFilter" class="px-4 py-2 border rounded">
+  <!-- Filtres -->
+  <div class="flex flex-wrap gap-4 mb-8 bg-[#2a2a2a] p-4 rounded-2xl shadow-lg border border-gray-700">
+    <input 
+      type="date" 
+      id="filterDate" 
+      class="px-4 py-2 rounded-xl bg-[#1f1f1f] border border-gray-600 text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+      placeholder="Filter by date">
+    
+    <select 
+      id="statusFilter" 
+      class="px-4 py-2 rounded-xl bg-[#1f1f1f] border border-gray-600 text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
       <option value="">All Status</option>
     </select>
-    <select id="sortOrder" class="px-4 py-2 border rounded">
+
+    <select 
+      id="sortOrder" 
+      class="px-4 py-2 rounded-xl bg-[#1f1f1f] border border-gray-600 text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
       <option value="asc">Sort Ascending</option>
       <option value="desc">Sort Descending</option>
     </select>
