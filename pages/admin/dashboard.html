@@ -20,7 +20,7 @@
   </main>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      fetch("sidebar.html")
+      fetch("/admin/sidebar")
         .then(res => res.text())
         .then(html => {
           document.getElementById("sidebar-placeholder").innerHTML = html;
@@ -32,7 +32,7 @@
             link.addEventListener("click", e => {
               e.preventDefault();
     
-              const pageUrl = link.getAttribute("href"); // ex: /admin/order
+              const pageUrl = link.getAttribute("href"); 
     
               links.forEach(l => l.classList.remove("bg-[#393E46]"));
               link.classList.add("bg-[#393E46]");

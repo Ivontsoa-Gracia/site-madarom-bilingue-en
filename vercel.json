@@ -17,6 +17,7 @@
     { "src": "/order/show", "dest": "/pages/main/bc_pdf.html"},
     { "src": "/payement", "dest": "/pages/main/payement.html"},
     { "src": "/admin/dashboard", "dest": "/pages/admin/dashboard.html"},
+    { "src": "/admin/sidebar", "dest": "/pages/admin/sidebar.html"},
     { "src": "/admin/quote", "dest": "/pages/admin/quote.html"},
     { "src": "/admin/quote/show", "dest": "/pages/admin/quote_pdf.html"},
     { "src": "/admin/order", "dest": "/pages/admin/order.html"},
