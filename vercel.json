@@ -18,6 +18,7 @@
     { "src": "/payement", "dest": "/pages/main/payement.html"},
     { "src": "/admin/quote", "dest": "/pages/admin/quote.html"},
     { "src": "/admin/order", "dest": "/pages/admin/order.html"},
+    { "src": "/admin/order/show", "dest": "/pages/admin/order_pdf.html"},
     { "src": "/admin/invoices", "dest": "/pages/admin/invoices.html"},
     { "src": "/admin/clients", "dest": "/pages/admin/clients.html"},
     { "src": "/admin/products", "dest": "/pages/admin/products.html"},
