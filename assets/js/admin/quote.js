@@ -28,9 +28,14 @@ function initQuotes() {
       }
 
       data.forEach(q => {
+        let total = 0;
+        q.items.forEach(item => {
+          total += item.price_snapshot * item.quantity;
+        });
         tbody.innerHTML += `
           <tr class="hover:bg-gray-50">
-            <td class="px-6 py-4 font-medium">${q.quote_number || 'N/A'}</td>
+            <td class="px-6 py-4 font-medium">${q.quote_number || 'N/A'} ${q.user.name}</td>
+            <td class="px-6 py-4 text-lg font-semibold">${formatPrice(total)}</td>
             <td class="px-6 py-4">${renderStatusBadge(q.status)}</td>
             <td class="px-6 py-4">${q.created_at?.split('T')[0]}</td>
             <td class="px-6 py-4 text-right">
@@ -106,3 +111,12 @@ function initQuotes() {
 
     fetchQuotes();
 }
+
+function formatPrice(val) {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }).format(val);
+  }
