@@ -94,9 +94,9 @@ function initOrders() {
     }
 
 
-    function viewQuote(id) {
-      if (!id) return;
-      window.location.href = `/admin/order/show?ref=${encodeURIComponent(id)}`;
+    window.viewQuote = function(id) {
+        if (!id) return;
+        window.location.href = `/admin/order/show?ref=${encodeURIComponent(id)}`;
     }
 
     filterDate.addEventListener('input', applyFilters);
