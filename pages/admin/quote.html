@@ -153,7 +153,6 @@
           }
         });
 
-        // Vérifie si la réponse contient une erreur côté serveur
         if (!res.ok) {
           const errorData = await res.json().catch(() => ({}));
           const message = errorData.message || errorData.error || "Fetch failed";
@@ -163,7 +162,6 @@
         const data = await res.json();
         console.log("Les devis:", data);
 
-        // Filtrer uniquement les devis pending
         allQuotes = data.filter(quote => quote.status?.toLowerCase() === "pending");
 
         applyFilters();
@@ -175,7 +173,7 @@
 
     function viewQuote(id) {
       if (!id) return;
-      window.location.href = `quote_pdf.html?ref=${encodeURIComponent(id)}`;
+      window.location.href = `/admin/quote/show?ref=${encodeURIComponent(id)}`;
     }
 
     filterDate.addEventListener('input', applyFilters);
