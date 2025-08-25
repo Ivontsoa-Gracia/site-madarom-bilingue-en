@@ -36,16 +36,16 @@
       container.innerHTML = '';
       data.forEach(order => {
         const badgeColor = {
-          pending: 'bg-yellow-500',
-          validated: 'bg-green-600',
-          command: 'bg-blue-600',
-          canceled: 'bg-red-600'
-        }[order.status.toLowerCase()] || 'bg-gray-400';
+          pending: 'bg-yellow-50',
+          validated: 'bg-green-60',
+          command: 'bg-blue-50',
+          canceled: 'bg-red-50'
+        }[order.quote.toLowerCase()] || 'bg-gray-400';
 
         container.innerHTML += `
           <div class="relative bg-white p-5 rounded-xl shadow-md">
             <span class="absolute top-3 right-3 text-xs font-semibold px-3 py-1 rounded-full text-white ${badgeColor}">
-              ${order.status}
+              ${order.quote.status}
             </span>
             <h2 class="text-lg font-semibold text-gray-800">${order.quote.reference}</h2>
             <p class="flex items-center text-gray-600 mt-2 text-sm">
