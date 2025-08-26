@@ -10,7 +10,7 @@ function initQuotes() {
     const pagination = document.getElementById('pagination');
 
     const renderStatusBadge = (status) => {
-      const base = "px-2 py-1 rounded-full text-xs font-medium";w
+      const base = "px-2 py-1 rounded-full text-xs font-medium";
       switch (status) {
         case "validated":
           return `<span class="${base} bg-success/10 text-success">Validated</span>`;

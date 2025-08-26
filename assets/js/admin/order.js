@@ -198,8 +198,8 @@ function initOrders() {
             populateStatusFilter(); 
             applyFilters();
         } catch (err) {
-            console.error("Error fetching quotes:", err);
-            alert(`Error fetching quotes: ${err.message}`);
+            console.error("Error fetching orders:", err);
+            alert(`Error fetching orders: ${err.message}`);
         }
     }
 
