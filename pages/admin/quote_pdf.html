@@ -92,12 +92,12 @@
             <span class="font-medium">Sub-total:</span>
             <span id="subtotal">0 USD</span>
           </div>
-          <div class="flex justify-between">
+          <!-- <div class="flex justify-between">
             <span class="font-medium">VAT (20%):</span>
             <span id="tva">0 USD</span>
-          </div>
+          </div> -->
           <div class="flex justify-between text-lg font-semibold text-[#333333]">
-            <span>Total incl. VAT:</span>
+            <span>Total :</span>
             <span id="total">0 USD</span>
           </div>
         </div>
@@ -242,7 +242,6 @@
         modalStatus.className = "text-red-500 text-sm text-center mt-2";
       }
     });
-
 
     if (ref && token) loadQuoteData(ref);
     else alert("Aucun ID de devis ou token manquant.");

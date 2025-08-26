@@ -25,7 +25,7 @@
       <!-- Facturer button: visible seulement si status = 'command' -->
       <button id="invoice-btn" class="hidden flex items-center gap-2 bg-yellow-500 text-white px-4 py-2 rounded-full transition hover:bg-yellow-600">
         <i class='bx bx-receipt text-xl'></i>
-        <span>Facturer</span>
+        <span>Invoice</span>
       </button>
     </div>
   </div>
@@ -79,12 +79,12 @@
           <span class="font-medium">Sub-total:</span>
           <span id="subtotal">0 USD</span>
         </div>
-        <div class="flex justify-between">
+        <!-- <div class="flex justify-between">
           <span class="font-medium">VAT (20%):</span>
           <span id="tva">0 USD</span>
-        </div>
+        </div> -->
         <div class="flex justify-between text-lg font-semibold text-[#333333]">
-          <span>Total incl. VAT:</span>
+          <span>Total :</span>
           <span id="total">0 USD</span>
         </div>
       </div>
@@ -192,9 +192,10 @@
         });
 
         const tva = total * 0.2;
-        const ttc = total + tva;
+        // const ttc = total + tva;
+        const ttc = total ;
         document.getElementById("subtotal").textContent = formatPrice(total);
-        document.getElementById("tva").textContent = formatPrice(tva);
+        // document.getElementById("tva").textContent = formatPrice(tva);
         document.getElementById("total").textContent = formatPrice(ttc);
 
 
