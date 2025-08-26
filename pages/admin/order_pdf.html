@@ -10,7 +10,6 @@
 </head>
 <body class="bg-white p-6 text-gray-800 text-font-family">
 
-  <!-- Header actions -->
   <div class="flex justify-between items-center max-w-4xl mx-auto mb-6">
     <a href="javascript:history.back()">
       <button class="flex items-center gap-2 text-gray-600 hover:text-[#333333] transition font-semibold">
@@ -18,11 +17,19 @@
         <span>Back</span>
       </button>
     </a>
-    <button onclick="generatePDF()" class="flex items-center gap-2 btn-primary text-white px-4 py-2 rounded-full  transition">
-      <i class='bx bx-download text-xl'></i>
-      <span>Download PDF</span>
-    </button>
+    <div class="flex gap-2">
+      <button onclick="generatePDF()" class="flex items-center gap-2 btn-primary text-white px-4 py-2 rounded-full  transition">
+        <i class='bx bx-download text-xl'></i>
+        <span>Download PDF</span>
+      </button>
+      <!-- Facturer button: visible seulement si status = 'command' -->
+      <button id="invoice-btn" class="hidden flex items-center gap-2 bg-yellow-500 text-white px-4 py-2 rounded-full transition hover:bg-yellow-600">
+        <i class='bx bx-receipt text-xl'></i>
+        <span>Facturer</span>
+      </button>
+    </div>
   </div>
+
 
   <div id="devis" class="max-w-4xl mx-auto bg-white p-8 border border-gray-100">
     
@@ -90,6 +97,19 @@
     </div>
   </div>
 
+  <!-- Modal Facturer -->
+  <div id="invoice-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center px-4 z-50">
+    <div class="bg-white rounded-xl p-6 max-w-sm w-full transition-opacity duration-300 ease-in-out opacity-100">
+      <h2 class="text-lg font-bold text-red-600 mb-2">Confirm Invoice</h2>
+      <p class="text-sm text-gray-700 mb-4">Do you really want to generate an invoice for this order?</p>
+      <div class="flex justify-end gap-4">
+        <button id="invoice-cancel-btn" class="px-4 py-2 rounded-full btn-default transition">Cancel</button>
+        <button id="invoice-confirm-btn" class="px-4 py-2 rounded-full bg-red-600 hover:bg-red-700 text-white font-medium transition">Confirm</button>
+      </div>
+      <p id="invoice-status" class="mt-4 text-center text-sm hidden"></p>
+    </div>
+  </div>
+
   <script src="../../assets/js/quote.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
@@ -126,6 +146,15 @@
         console.warn("Aucun token trouvé dans localStorage");
     }
 
+    const invoiceBtn = document.getElementById("invoice-btn");
+    const invoiceModal = document.getElementById("invoice-modal");
+    const invoiceCancelBtn = document.getElementById("invoice-cancel-btn");
+    const invoiceConfirmBtn = document.getElementById("invoice-confirm-btn");
+    const invoiceStatus = document.getElementById("invoice-status");
+
+    let currentQuoteId = null; 
+    
+
     async function loadQuoteData(id) {
       try {
         const res = await fetch(`http://127.0.0.1:8000/api/quote/${id}`, {
@@ -138,7 +167,7 @@
         if (!res.ok) throw new Error("Devis non trouvé");
         const quote = await res.json();
 
-        console.log(quote);
+        currentQuoteId = quote.quote.id;
 
         document.getElementById("order-date").textContent = `Date: ${quote.quote.updated_at.split('T')[0]}`;
         document.getElementById("quote-number").textContent = `N° ${quote.quote.reference}`;
@@ -202,11 +231,51 @@
 
         document.getElementById("delivery-date").textContent = deliveryMessage;
 
+        if (quote.quote.status.toLowerCase() === "command") {
+          invoiceBtn.classList.remove("hidden");
+        }
+
       } catch (error) {
         console.error("Erreur lors du chargement du devis :", error);
         alert("Impossible de charger le devis.");
       }
     }
+
+    invoiceBtn.addEventListener("click", () => {
+      invoiceModal.classList.remove("hidden");
+    });
+
+    invoiceCancelBtn.addEventListener("click", () => {
+      invoiceModal.classList.add("hidden");
+      invoiceStatus.classList.add("hidden");
+    });
+
+    invoiceConfirmBtn.addEventListener("click", async () => {
+      if (!currentQuoteId) return;
+
+      invoiceStatus.classList.remove("hidden");
+      invoiceStatus.textContent = "Processing...";
+
+      try {
+        const res = await fetch(`http://127.0.0.1:8000/api/quote/invoice/${currentQuoteId}`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (!res.ok) throw new Error("Invoice failed");
+
+        invoiceStatus.textContent = "Invoice generated successfully!";
+        invoiceBtn.classList.add("hidden"); // cacher bouton après facturation
+        setTimeout(() => invoiceModal.classList.add("hidden"), 1500);
+
+      } catch (err) {
+        console.error(err);
+        invoiceStatus.textContent = "Error generating invoice.";
+      }
+    });
 
     const params = new URLSearchParams(window.location.search);
     const ref = params.get("ref");
