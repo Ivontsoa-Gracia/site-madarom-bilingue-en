@@ -10,8 +10,18 @@
 </head>
 <body class="bg-gray-100 p-6">
 
-  <!-- Filtres -->
-  <div class="flex flex-wrap gap-4 mb-8 bg-[#2a2a2a] p-4 rounded-2xl shadow-lg border border-gray-700">
+  <div class="flex items-center justify-between mb-10">
+    <h1 class="text-4xl font-bold text-primary flex items-center gap-2">
+      <i class="fas fa-file-invoice text-primary"></i>
+      Orders
+    </h1>
+    <button onclick="fetchOrders()" 
+      class="bg-secondary text-text px-4 py-2 rounded-full shadow hover:scale-105 transition-transform flex items-center justify-center">
+      <i class="fas fa-sync-alt text-lg"></i>
+    </button>
+  </div>
+
+  <div class="flex flex-wrap gap-4 mb-8 bg-[#2a2a2a] p-4 rounded-sm shadow-lg border border-gray-700">
     <input 
       type="date" 
       id="filterDate" 
