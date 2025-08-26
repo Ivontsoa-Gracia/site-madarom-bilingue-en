@@ -1,7 +1,7 @@
 function initOrders() {
     let allOrders = [];
     let currentPage = 1;
-    const itemsPerPage = 3;
+    const itemsPerPage = 6;
 
     const container = document.querySelector('.grid');
     const filterDate = document.getElementById('filterDate');
