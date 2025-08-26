@@ -20,10 +20,43 @@
     </a>
   </div>
 
-  <!-- Container en 2 colonnes -->
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+
+    <div class="bg-gray-50 p-8 border border-gray-200 rounded-md">
+      <h2 class="text-xl font-semibold text-[#333333] mb-4">Validation</h2>
+
+      <div class="space-y-4">
+        <div>
+          <label for="delivery-days" class="block mb-1 font-medium">Estimated Delivery (days)</label>
+          <input 
+            type="number" 
+            id="delivery-days" 
+            placeholder="Number of days *" 
+            required min="1" value="0"
+            class="border border-gray-300 rounded px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-teal-500" 
+          />
+        </div>
+
+        <div>
+          <label for="delivery-hour" class="block mb-1 font-medium">Delivery Hour (optional)</label>
+          <input 
+            type="time" 
+            id="delivery-hour" 
+            value="00:00"
+            class="border border-gray-300 rounded px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-teal-500" 
+          />
+        </div>
+
+        <button 
+          id="validate-btn" 
+          class="btn-primary text-white px-4 py-2 w-full rounded-md transition">
+          Confirm Request
+        </button>
+      </div>
+
+      <p id="status-message" class="mt-4 text-sm text-center"></p>
+    </div>
     
-    <!-- Facture / Devis -->
     <div id="devis" class="bg-gray-50 p-8 border border-gray-200 rounded-md">
       
       <div class="flex justify-between items-center border-b pb-6 mb-6">
@@ -71,45 +104,8 @@
       </div>
     </div>
 
-    <!-- Formulaire Validation -->
-    <div class="bg-gray-50 p-8 border border-gray-200 rounded-md">
-      <h2 class="text-xl font-semibold text-[#333333] mb-4">Validation</h2>
-
-      <div class="space-y-4">
-        <div>
-          <label for="delivery-days" class="block mb-1 font-medium">Estimated Delivery (days)</label>
-          <input 
-            type="number" 
-            id="delivery-days" 
-            placeholder="Number of days *" 
-            required min="1" value="0"
-            class="border border-gray-300 rounded px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-teal-500" 
-          />
-        </div>
-
-        <div>
-          <label for="delivery-hour" class="block mb-1 font-medium">Delivery Hour (optional)</label>
-          <input 
-            type="time" 
-            id="delivery-hour" 
-            value="00:00"
-            class="border border-gray-300 rounded px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-teal-500" 
-          />
-        </div>
-
-        <button 
-          id="validate-btn" 
-          class="bg-teal-600 text-white px-4 py-2 w-full rounded-md hover:bg-teal-700 transition">
-          Confirm Request
-        </button>
-      </div>
-
-      <p id="status-message" class="mt-4 text-sm text-center"></p>
-    </div>
-
   </div>
 
-  <!-- Modal -->
   <div id="confirm-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
     <div class="bg-white rounded-lg shadow-lg p-6 w-96">
       <h2 class="text-lg font-semibold mb-4">Confirm Quote</h2>
