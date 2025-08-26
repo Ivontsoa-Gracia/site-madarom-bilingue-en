@@ -37,17 +37,14 @@ function renderQuotes(data) {
         <td class="px-6 py-4 text-sm">${quote.quote.created_at.split('T')[0]}</td>
         <td class="px-6 py-4 text-sm">
           <div class="inline-flex rounded-full overflow-hidden shadow-sm">
-            <!-- Bouton gauche -->
             <button onclick="viewQuote('${quote.id}')"
               class="btn-default text-[#333333] px-3 py-1 text-sm flex items-center gap-1 rounded-l-full border-r">
               <i class="bx bx-show"></i> View
             </button>
-            <!-- Bouton centre -->
             <button onclick="openModal('order', '${quote.quote.id}')"
               class="btn-primary text-white px-3 py-1 text-sm flex items-center gap-1">
               <i class="bx bx-cart"></i> Order
             </button>
-            <!-- Bouton droite -->
             <button onclick="openModal('cancel', '${quote.quote.id}')"
               class="btn-default px-3 py-1 text-sm flex items-center gap-1 rounded-r-full border-l">
               <i class="bx bx-trash"></i> Clear

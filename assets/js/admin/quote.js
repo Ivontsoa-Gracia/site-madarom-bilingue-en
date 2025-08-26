@@ -1,13 +1,16 @@
 function initQuotes() {
     let allQuotes = [];
+    let currentPage = 1;
+    const itemsPerPage = 3;
 
     const tbody = document.getElementById('quotesBody');
     const filterDate = document.getElementById('filterDate');
     const sortOrder = document.getElementById('sortOrder');
     const statusFilter = document.getElementById('statusFilter');
+    const pagination = document.getElementById('pagination');
 
     const renderStatusBadge = (status) => {
-      const base = "px-2 py-1 rounded-full text-xs font-medium";
+      const base = "px-2 py-1 rounded-full text-xs font-medium";w
       switch (status) {
         case "validated":
           return `<span class="${base} bg-success/10 text-success">Validated</span>`;
@@ -24,14 +27,20 @@ function initQuotes() {
       tbody.innerHTML = '';
       if (data.length === 0) {
         tbody.innerHTML = `<tr><td colspan="4" class="text-center py-6 text-gray-500">No quotes available.</td></tr>`;
+        pagination.innerHTML = '';
         return;
       }
 
-      data.forEach(q => {
+      const start = (currentPage - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      const paginated = data.slice(start, end);
+
+      paginated.forEach(q => {
         let total = 0;
         q.items.forEach(item => {
           total += item.price_snapshot * item.quantity;
         });
+
         tbody.innerHTML += `
           <tr class="hover:bg-gray-50">
             <td class="px-6 py-4 text-sm font-medium">
@@ -56,6 +65,101 @@ function initQuotes() {
           </tr>
         `;
       });
+
+      renderPagination(data.length);
+    }
+
+    function renderPagination(totalItems) {
+      const totalPages = Math.ceil(totalItems / itemsPerPage);
+      pagination.innerHTML = '';
+    
+      if (totalPages <= 1) return;
+    
+      const prevBtn = document.createElement('button');
+      prevBtn.innerHTML = `&laquo;`;
+      prevBtn.disabled = currentPage === 1;
+      prevBtn.className = `px-3 py-1 rounded-full ${
+        currentPage === 1 ? 'border border-gray-300 text-gray-600 hover:bg-gray-100 cursor-not-allowed' : 'border border-gray-300 text-gray-600 hover:bg-gray-100'
+      }`;
+      prevBtn.onclick = () => {
+        if (currentPage > 1) {
+          currentPage--;
+          applyFilters();
+        }
+      };
+      pagination.appendChild(prevBtn);
+    
+      const maxVisible = 7; 
+      let startPage = 1;
+      let endPage = totalPages;
+    
+      if (totalPages > 10) {
+        if (currentPage <= 4) {
+          startPage = 1;
+          endPage = 5;
+        } else if (currentPage >= totalPages - 3) {
+          startPage = totalPages - 4;
+          endPage = totalPages;
+        } else {
+          startPage = currentPage - 2;
+          endPage = currentPage + 2;
+        }
+      }
+    
+      addPageButton(1);
+      if (startPage > 2) {
+        addDots();
+      }
+    
+      for (let i = startPage; i <= endPage; i++) {
+        if (i !== 1 && i !== totalPages) {
+          addPageButton(i);
+        }
+      }
+    
+      if (endPage < totalPages - 1) {
+        addDots();
+      }
+    
+      if (totalPages > 1) {
+        addPageButton(totalPages);
+      }
+    
+      const nextBtn = document.createElement('button');
+      nextBtn.innerHTML = `&raquo;`;
+      nextBtn.disabled = currentPage === totalPages;
+      nextBtn.className = `px-3 py-1 rounded-full ${
+        currentPage === totalPages ? 'border border-gray-300 text-gray-600 hover:bg-gray-100 cursor-not-allowed' : 'border border-gray-300 text-gray-600 hover:bg-gray-100'
+      }`;
+      nextBtn.onclick = () => {
+        if (currentPage < totalPages) {
+          currentPage++;
+          applyFilters();
+        }
+      };
+      pagination.appendChild(nextBtn);
+    
+      function addPageButton(page) {
+        const btn = document.createElement('button');
+        btn.innerText = page;
+        btn.className = `px-4 py-1 rounded-full border ${
+          page === currentPage 
+            ? 'bg-teal text-white' 
+            : 'border-gray-300 text-gray-600 hover:bg-gray-100'
+        }`;
+        btn.onclick = () => {
+          currentPage = page;
+          applyFilters();
+        };
+        pagination.appendChild(btn);
+      }
+    
+      function addDots() {
+        const span = document.createElement('span');
+        span.innerText = '...';
+        span.className = 'px-2 text-gray-500';
+        pagination.appendChild(span);
+      }
     }
 
     const applyFilters = () => {

@@ -28,16 +28,19 @@
 </head>
 <body class="bg-background text-text font-sans">
   <div class="max-w-5xl mx-auto py-10 px-4">
-    <!-- Header -->
+
     <div class="flex items-center justify-between mb-10">
-      <h1 class="text-4xl font-bold text-primary">Quotes</h1>
-      <button onclick="fetchQuotes()" class="bg-secondary text-text px-4 py-2 rounded-lg shadow hover:brightness-95">
-        Refresh
+      <h1 class="text-4xl font-bold text-primary flex items-center gap-2">
+        <i class='bx bx-file text-primary'></i>
+        Quotes
+      </h1>
+      <button onclick="fetchQuotes()" 
+        class="bg-secondary text-text px-4 py-2 rounded-full shadow hover:scale-105 transition-transform flex items-center justify-center">
+        <i class='bx bx-refresh text-lg'></i>
       </button>
     </div>
-
     <!-- Filter Card -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 bg-white p-6 rounded-2xl shadow mb-8">
+    <div class="flex flex-wrap gap-4 mb-8 bg-[#2a2a2a] p-4 rounded-sm shadow-lg border border-gray-700">
       <div>
         <label class="block mb-1 text-sm font-medium">Date</label>
         <input type="date" id="filterDate" class="w-full border border-secondary rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary" />
@@ -68,6 +71,8 @@
         </tbody>
       </table>
     </div>
+    
+    <div id="pagination" class="fixed bottom-4 left-0 right-0 flex justify-center items-center gap-2"></div>
   </div>
 
   <!-- <script>
