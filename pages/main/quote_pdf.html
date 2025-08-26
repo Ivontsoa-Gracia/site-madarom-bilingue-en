@@ -162,9 +162,10 @@
         });
 
         const tva = total * 0.2;
-        const ttc = total + tva;
+        // const ttc = total + tva;
+        const ttc = total;
         document.getElementById("subtotal").textContent = formatPrice(total);
-        document.getElementById("tva").textContent = formatPrice(tva);
+        // document.getElementById("tva").textContent = formatPrice(tva);
         document.getElementById("total").textContent = formatPrice(ttc);
 
 
