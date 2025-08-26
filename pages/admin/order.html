@@ -21,29 +21,44 @@
     </button>
   </div>
 
-  <div class="flex flex-wrap gap-4 mb-8 bg-[#2a2a2a] p-4 rounded-sm shadow-lg border border-gray-700">
-    <input 
-      type="date" 
-      id="filterDate" 
-      class="px-4 py-2 rounded-xl bg-[#1f1f1f] border border-gray-600 text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-      placeholder="Filter by date">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 bg-[#2a2a2a] p-6 rounded-sm shadow-lg border border-gray-700">
+    <div class="flex flex-col w-full">
+      <label for="filterDate" class="text-sm text-gray-400 mb-2">Filter by Date</label>
+      <input 
+        type="date" 
+        id="filterDate" 
+        class="w-full px-4 py-2 rounded-xl bg-[#1f1f1f] border border-gray-600 text-gray-200 
+               focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+      >
+    </div>
+  
+    <div class="flex flex-col w-full">
+      <label for="statusFilter" class="text-sm text-gray-400 mb-2">Filter by Status</label>
+      <select 
+        id="statusFilter" 
+        class="w-full px-4 py-2 rounded-xl bg-[#1f1f1f] border border-gray-600 text-gray-200 
+              focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+      >
+        <option value="">All Status</option>
+      </select>
+    </div>
     
-    <select 
-      id="statusFilter" 
-      class="px-4 py-2 rounded-xl bg-[#1f1f1f] border border-gray-600 text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
-      <option value="">All Status</option>
-    </select>
-
-    <select 
-      id="sortOrder" 
-      class="px-4 py-2 rounded-xl bg-[#1f1f1f] border border-gray-600 text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
-      <option value="asc">Sort Ascending</option>
-      <option value="desc">Sort Descending</option>
-    </select>
+    <div class="flex flex-col w-full">
+      <label for="sortOrder" class="text-sm text-gray-400 mb-2">Sort Order</label>
+      <select 
+        id="sortOrder" 
+        class="w-full px-4 py-2 rounded-xl bg-[#1f1f1f] border border-gray-600 text-gray-200 
+              focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+      >
+        <option value="asc">Sort Ascending</option>
+        <option value="desc">Sort Descending</option>
+      </select>
+    </div>
   </div>
+  
 
   <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6"></div>
-  <div id="pagination" class="fixed bottom-4 left-0 right-0 flex justify-center items-center gap-2"></div>
+  <div id="pagination" class="fixed bottom-4 flex justify-center items-center gap-2"></div>
 
 </body>
 </html>

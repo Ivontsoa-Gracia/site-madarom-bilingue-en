@@ -144,7 +144,7 @@ function initQuotes() {
         btn.innerText = page;
         btn.className = `px-4 py-1 rounded-full border ${
           page === currentPage 
-            ? 'bg-teal text-white' 
+            ? 'bg-red text-white' 
             : 'border-gray-300 text-gray-600 hover:bg-gray-100'
         }`;
         btn.onclick = () => {
