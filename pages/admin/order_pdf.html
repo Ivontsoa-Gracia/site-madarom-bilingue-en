@@ -95,8 +95,13 @@
       </div>
     </div>
 
-    <div id="payment-screenshot" class="hidden fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm flex items-center justify-center z-50">
-      <img src="" alt="Payment Screenshot" class="max-w-[90%] max-h-[90%] rounded shadow-lg cursor-pointer" id="payment-img">
+    <div id="payment-screenshot" class="w-96 hidden">
+      <img src="" alt="Payment Screenshot" class="w-full h-auto rounded border shadow-sm cursor-pointer" id="payment-img">
+    </div>
+    
+    <!-- Lightbox overlay -->
+    <div id="lightbox" class="hidden fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm flex items-center justify-center z-50">
+      <img src="" alt="Payment Screenshot Enlarged" class="max-w-[90%] max-h-[90%] rounded shadow-lg" id="lightbox-img">
     </div>
     
   </div>
@@ -182,21 +187,27 @@
         }
 
         const paymentDiv = document.getElementById("payment-screenshot");
+        const paymentImg = document.getElementById("payment-img");
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightbox-img");
+
         if (quote.quote.payment) {
           paymentDiv.classList.remove("hidden");
-          paymentDiv.querySelector("img").src = `https://31612b14c9b7.ngrok-free.app/storage/${quote.quote.payment.screenshot}`;
-         
+          paymentImg.src = `https://31612b14c9b7.ngrok-free.app/storage/${quote.quote.payment.screenshot}`;
+          lightboxImg.src = paymentImg.src;
+
+          // Au clic sur l'image → ouvrir lightbox
+          paymentImg.addEventListener("click", () => {
+            lightbox.classList.remove("hidden");
+          });
         } else {
           paymentDiv.classList.add("hidden");
         }
-        const paymentImg = document.getElementById("payment-img");
-        paymentImg.addEventListener("click", () => {
-          paymentDiv.classList.add("hidden"); 
-        });
 
-        paymentDiv.addEventListener("click", (e) => {
-          if (e.target === paymentDiv) {
-            paymentDiv.classList.add("hidden");
+        // Clic sur fond ou image pour fermer le lightbox
+        lightbox.addEventListener("click", (e) => {
+          if (e.target === lightbox || e.target === lightboxImg) {
+            lightbox.classList.add("hidden");
           }
         });
 
