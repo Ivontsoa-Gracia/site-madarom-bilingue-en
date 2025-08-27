@@ -292,32 +292,6 @@ async function clearQuote(id) {
   }
 }
 
-let selectedQuoteId = null;
-
-function openModal(type, id) {
-  selectedQuoteId = id;
-  document.getElementById(type + "Modal").classList.remove("hidden");
-}
-
-function closeModal(type) {
-  document.getElementById(type).classList.add("hidden");
-  selectedQuoteId = null;
-}
-
-document.getElementById("confirmOrderBtn").addEventListener("click", async () => {
-  if (selectedQuoteId) {
-    await orderQuote(selectedQuoteId);
-    closeModal("orderModal");
-  }
-});
-
-document.getElementById("confirmCancelBtn").addEventListener("click", async () => {
-  if (selectedQuoteId) {
-    await clearQuote(selectedQuoteId);
-    closeModal("cancelModal");
-  }
-});
-
 
 function showLoader(duration = 2000) {
   const loader = document.getElementById("loader");
@@ -327,7 +301,6 @@ function showLoader(duration = 2000) {
     loader.classList.add("hidden");
   }, duration);
 }
-
 
 function hideLoader() {
   document.getElementById("loader").classList.add("hidden");
