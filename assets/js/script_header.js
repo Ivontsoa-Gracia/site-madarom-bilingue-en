@@ -365,8 +365,8 @@ window.addEventListener('scroll', () => {
             localStorage.setItem('lang', newLang);
             selectedLangDesktop.textContent = newLang.toUpperCase();
             selectedLangMobile.textContent = newLang.toUpperCase();
-            const pageUrl = `/${newLang}/`
-            window.history.pushState(null, "", pageUrl);
+            window.location.href = `${window.location.origin}/${newLang}/`;
+
         });
     });
 });
