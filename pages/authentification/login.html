@@ -98,19 +98,19 @@
         }
         else {
           // console.log(data); 
-          alert("Connexion réussie !");
+          // alert("Connexion réussie !");
           // saveLastUrl();
           window.location.href = "/";
         }
 
       } else {
         const error = await res.json();
-        alert(error.message || "Identifiants incorrects.");
+        // alert(error.message || "Identifiants incorrects.");
       }
 
     } catch (error) {
       console.error("Erreur :", error);
-      alert("Une erreur est survenue.");
+      // alert("Une erreur est survenue.");
     } finally {
       btn.disabled = false;
       btn.innerHTML = "Se connecter";

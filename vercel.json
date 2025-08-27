@@ -16,6 +16,8 @@
     { "src": "/order", "dest": "/pages/main/order.html"},
     { "src": "/order/show", "dest": "/pages/main/bc_pdf.html"},
     { "src": "/payment", "dest": "/pages/main/payement.html"},
+    { "src": "/invoice", "dest": "/pages/main/invoice.html"},
+    { "src": "/invoice/show", "dest": "/pages/main/invoice_pdf.html"},
     { "src": "/admin/dashboard", "dest": "/pages/admin/dashboard.html"},
     { "src": "/admin/sidebar", "dest": "/pages/admin/sidebar.html"},
     { "src": "/admin/quote", "dest": "/pages/admin/quote.html"},

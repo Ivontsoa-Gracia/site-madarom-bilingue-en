@@ -234,7 +234,7 @@
                             confirmError.classList.remove("hidden");
                         }
                     } else {
-                        alert(data.message || "Erreur lors de l'inscription.");
+                        // alert(data.message || "Erreur lors de l'inscription.");
                     }
                     return;
                 }
@@ -242,7 +242,7 @@
                 if (data.user) {
                     localStorage.setItem("token", data.token);
                 } else {
-                    alert(data.message || "Identifiants incorrects.");
+                    // alert(data.message || "Identifiants incorrects.");
                 }
     
                 alert("Inscription réussie !");

@@ -97,7 +97,7 @@
     function generatePDF() {
       const element = document.getElementById('devis');
       const quoteNumber = document.getElementById("quote-number").textContent.replace(/\D/g, '');
-      const filename = `quote_${quoteNumber}.pdf`;
+      const filename = `order_${quoteNumber}.pdf`;
 
       const options = {
         margin: 0.5,
