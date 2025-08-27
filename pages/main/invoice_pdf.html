@@ -206,13 +206,9 @@
 
         document.getElementById("delivery-date").textContent = deliveryMessage;
 
-        if (quote.quote.status.toLowerCase() === "command") {
-          invoiceBtn.classList.remove("hidden");
-        }
-
       } catch (error) {
         console.error("Erreur lors du chargement du devis :", error);
-        alert("Impossible de charger le devis.");
+        // alert("Impossible de charger le devis.");
       }
     }
 
