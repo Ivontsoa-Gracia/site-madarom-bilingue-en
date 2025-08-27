@@ -147,6 +147,8 @@ document.addEventListener('DOMContentLoaded', () => {
             langDropdownMenu.classList.add('hidden');
             langDropdownBtn.setAttribute('aria-expanded', false);
             localStorage.setItem('lang', lang);
+            window.location.href = `${window.location.origin}/${newLang}/`;
+
           });
         });
 
@@ -182,6 +184,8 @@ document.addEventListener('DOMContentLoaded', () => {
             langDropdownMenuMobile.classList.add('hidden');
             langDropdownBtnMobile.setAttribute('aria-expanded', false);
             localStorage.setItem('lang', lang);
+            window.location.href = `${window.location.origin}/${newLang}/`;
+
           });
         });
 
@@ -350,25 +354,5 @@ window.addEventListener('scroll', () => {
     } 
   });
 
-  document.addEventListener('DOMContentLoaded', () => {
-    const langBtns = document.querySelectorAll('.langDropdownMenu button');
-    const selectedLangDesktop = document.getElementById('selected-lang');
-    const selectedLangMobile = document.getElementById('selected-lang-mobile');
-
-    let lang = (localStorage.getItem('lang') || 'en').toLowerCase();
-    selectedLangDesktop.textContent = lang.toUpperCase();
-    selectedLangMobile.textContent = lang.toUpperCase();
-
-    langBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const newLang = btn.dataset.lang.toLowerCase();
-            localStorage.setItem('lang', newLang);
-            selectedLangDesktop.textContent = newLang.toUpperCase();
-            selectedLangMobile.textContent = newLang.toUpperCase();
-            window.location.href = `${window.location.origin}/${newLang}/`;
-
-        });
-    });
-});
 
 
