@@ -152,7 +152,6 @@
             }
         }
     
-        // Toggle password visibility (pour tous les boutons)
         document.querySelectorAll(".toggle-password").forEach((btn) => {
             btn.addEventListener("click", () => {
                 const input = btn.previousElementSibling;
@@ -239,10 +238,7 @@
                     }
                     return;
                 }
-    
-                // Stockage de l'utilisateur dans localStorage
-                // Suppose que l'API renvoie les infos utilisateur dans data.user
-                // sinon adapte selon ta réponse API
+
                 if (data.user) {
                     localStorage.setItem("token", data.token);
                 } else {
@@ -254,8 +250,7 @@
                 step2.classList.add("hidden");
                 step1.classList.remove("hidden");
     
-                // Redirection vers index.html
-                window.location.href = "../../index.html";
+                window.location.href = "/";
     
             } catch (error) {
                 console.error(error);
