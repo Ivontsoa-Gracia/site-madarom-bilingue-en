@@ -34,20 +34,13 @@ function renderQuotes(data) {
           ${quote.quote.reference || 'N/A'}
         </td>
         <td class="px-6 py-4 text-lg font-semibold">${formatPrice(total)}</td>
-        <td class="px-6 py-4 text-sm">${quote.quote.created_at.split('T')[0]}</td>
+        <td class="px-6 py-4 text-sm">${quote.quote.updated_at.split('T')[0]}</td>
         <td class="px-6 py-4 text-sm">
           <div class="inline-flex rounded-full overflow-hidden shadow-sm">
+            <!-- Bouton gauche -->
             <button onclick="viewQuote('${quote.id}')"
               class="btn-default text-[#333333] px-3 py-1 text-sm flex items-center gap-1 rounded-l-full border-r">
               <i class="bx bx-show"></i> View
-            </button>
-            <button onclick="openModal('order', '${quote.quote.id}')"
-              class="btn-primary text-white px-3 py-1 text-sm flex items-center gap-1">
-              <i class="bx bx-cart"></i> Order
-            </button>
-            <button onclick="openModal('cancel', '${quote.quote.id}')"
-              class="btn-default px-3 py-1 text-sm flex items-center gap-1 rounded-r-full border-l">
-              <i class="bx bx-trash"></i> Clear
             </button>
           </div>
         </td>
@@ -189,7 +182,7 @@ async function fetchUserQuotes() {
     if (!response.ok) throw new Error("Failed to fetch quotes.");
 
     const data = await response.json();
-    allQuotes = data.filter(quote => quote.quote.status?.toLowerCase() === "pending");
+    allQuotes = data.filter(quote => quote.quote.status?.toLowerCase() === "command");
     applyFilters();
   } catch (error) {
     console.error("Error:", error);
@@ -213,127 +206,6 @@ function formatPrice(val) {
 
 async function viewQuote(id) {
   if (!id) return;
-  window.location.href = `/quote/show?ref=${encodeURIComponent(id)}`;
+  window.location.href = `/invoice/show?ref=${encodeURIComponent(id)}`;
 
-}
-
-async function orderQuote(id) {
-  const token = localStorage.getItem("token");
-  if (!token) {
-    alert("No token found. Please log in.");
-    return;
-  }
-
-  try {
-    showLoader(2000);
-
-    const response = await fetch(`http://127.0.0.1:8000/api/quote/order/${id}`, {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${token}`,
-        "Content-Type": "application/json"
-      }
-    });
-
-    const data = await response.json().catch(() => ({})); 
-
-    if (!response.ok) {
-      let data = {};
-      try { data = await response.json(); } catch (err) {}
-      console.error("Backend error:", data);
-      // alert(`Erreur ${response.status}: ${data.message || "Voir console pour détails"}`);
-      return;
-    }
-    
-    showToast("Order placed successfully!");
-  } catch (error) {
-    console.error("Error:", error);
-    // alert("Erreur réseau ou inattendue: " + error.message);
-  }
-}
-
-async function clearQuote(id) {
-  const token = localStorage.getItem("token");
-  if (!token) {
-    // alert("No token found. Please log in.");
-    return;
-  }
-
-  try {
-    showLoader(2000);
-
-    const response = await fetch(`http://127.0.0.1:8000/api/quote/cancel/${id}`, {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${token}`,
-        "Content-Type": "application/json"
-      }
-    });
-
-    const data = await response.json().catch(() => ({})); 
-
-    if (!response.ok) {
-      let data = {};
-      try { data = await response.json(); } catch (err) {}
-      console.error("Backend error:", data);
-      // alert(`Erreur ${response.status}: ${data.message || "Voir console pour détails"}`);
-      return;
-    }
-    
-    showToast("Quote cancelled successfully!");
-
-  } catch (error) {
-    console.error("Error:", error);
-    alert("Erreur réseau ou inattendue: " + error.message);
-  }
-}
-
-let selectedQuoteId = null;
-
-function openModal(type, id) {
-  selectedQuoteId = id;
-  document.getElementById(type + "Modal").classList.remove("hidden");
-}
-
-function closeModal(type) {
-  document.getElementById(type).classList.add("hidden");
-  selectedQuoteId = null;
-}
-
-document.getElementById("confirmOrderBtn").addEventListener("click", async () => {
-  if (selectedQuoteId) {
-    await orderQuote(selectedQuoteId);
-    closeModal("orderModal");
-  }
-});
-
-document.getElementById("confirmCancelBtn").addEventListener("click", async () => {
-  if (selectedQuoteId) {
-    await clearQuote(selectedQuoteId);
-    closeModal("cancelModal");
-  }
-});
-
-
-function showLoader(duration = 2000) {
-  const loader = document.getElementById("loader");
-  loader.classList.remove("hidden");
-
-  setTimeout(() => {
-    loader.classList.add("hidden");
-  }, duration);
-}
-
-
-function hideLoader() {
-  document.getElementById("loader").classList.add("hidden");
-}
-
-function showToast(message = "Action successful!", duration = 2500) {
-  const toast = document.getElementById("toast");
-  toast.textContent = message;
-  toast.classList.remove("hidden");
-  setTimeout(() => {
-    toast.classList.add("hidden");
-  }, duration);
 }
