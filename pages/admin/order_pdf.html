@@ -184,7 +184,7 @@
         const paymentDiv = document.getElementById("payment-screenshot");
         if (quote.quote.payment) {
           paymentDiv.classList.remove("hidden");
-          paymentDiv.querySelector("img").src = `http://127.0.0.1:8000/storage/${quote.quote.payment.screenshot_url}`;
+          paymentDiv.querySelector("img").src = `http://127.0.0.1:8000/storage/${quote.quote.payment.screenshot}`;
          
         } else {
           paymentDiv.classList.add("hidden");
