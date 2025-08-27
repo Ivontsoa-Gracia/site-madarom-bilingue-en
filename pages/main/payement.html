@@ -52,7 +52,7 @@
         if (!token) return alert("No token found. Please log in.");
 
         try {
-            const response = await fetch("http://127.0.0.1:8000/api/quote/payment-json", {
+            const response = await fetch("http://127.0.0.1:8000/api/quote/payment", {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${token}`,
