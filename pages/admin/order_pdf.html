@@ -112,7 +112,6 @@
     </div>
   </div>
 
-  <script src="../../assets/js/quote.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
   <script>
@@ -184,7 +183,7 @@
         const paymentDiv = document.getElementById("payment-screenshot");
         if (quote.quote.payment) {
           paymentDiv.classList.remove("hidden");
-          paymentDiv.querySelector("img").src = `https://f50e81eeebb0.ngrok-free.app/storage/app/public/${quote.quote.payment.screenshot}`;
+          paymentDiv.querySelector("img").src = `https://f50e81eeebb0.ngrok-free.app/storage/${quote.quote.payment.screenshot}`;
          
         } else {
           paymentDiv.classList.add("hidden");
