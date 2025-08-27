@@ -203,7 +203,7 @@ function initInvoices() {
 
     window.viewInvoice = function(id) {
         if (!id) return;
-        window.location.href = `/admin/order/show?ref=${encodeURIComponent(id)}`;
+        window.location.href = `/admin/invoice/show?ref=${encodeURIComponent(id)}`;
     }
 
     filterDate.addEventListener('input', applyFilters);
