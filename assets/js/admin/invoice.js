@@ -194,7 +194,7 @@ function initInvoices() {
             const data = await res.json();
             console.log("les factures: " , data);
 
-            allOrders = data.filter(quote => quote.status?.toLowerCase() === "facturation"); 
+            allOrders = data.filter(quote => quote.quote.status?.toLowerCase() === "facturation"); 
             populateStatusFilter(); 
             applyFilters();
         } catch (err) {
