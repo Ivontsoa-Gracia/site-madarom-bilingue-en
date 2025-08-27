@@ -1,4 +1,4 @@
-let allQuotes = [];
+let allInvoices = [];
 let currentPage = 1;
 const itemsPerPage = 3;
 
@@ -146,7 +146,7 @@ function renderPagination(totalItems) {
 }
 
 function applyFilters() {
-  let filtered = [...allQuotes];
+  let filtered = [...allInvoices];
   const dateVal = filterDate.value;
   const sort = sortOrder.value;
 
@@ -182,7 +182,7 @@ async function fetchUserQuotes() {
     if (!response.ok) throw new Error("Failed to fetch quotes.");
 
     const data = await response.json();
-    allQuotes = data.filter(quote => quote.quote.status?.toLowerCase() === "command");
+    allInvoices = data.filter(q => q.quote && q.quote.status?.toLowerCase() === "facturation");
     applyFilters();
   } catch (error) {
     console.error("Error:", error);
