@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Submit Payment Proof</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 <body class="bg-gray-50 min-h-screen flex items-center justify-center p-6">
 
@@ -26,13 +27,14 @@
       <input type="file" name="screenshot" id="screenshot" accept="image/*" required
              class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-green-500">
 
+      <div id="preview" class="mt-4 text-center"></div>
+
       <button type="submit"
-              class="bg-green-500 text-white font-semibold py-3 rounded-md hover:bg-green-600 transition">
+              class="btn-primary text-white font-semibold py-3 rounded-full transition">
         Submit Payment
       </button>
     </form>
 
-    <div id="preview" class="mt-4 text-center"></div>
   </div>
 
 <script>
