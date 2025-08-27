@@ -95,9 +95,10 @@
       </div>
     </div>
 
-    <div id="payment-screenshot" class="w-96 hidden">
-      <img src="" alt="Payment Screenshot" class="w-full h-auto rounded border shadow-sm">
+    <div id="payment-screenshot" class="hidden fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm flex items-center justify-center z-50">
+      <img src="" alt="Payment Screenshot" class="max-w-[90%] max-h-[90%] rounded shadow-lg cursor-pointer" id="payment-img">
     </div>
+    
   </div>
 
   <div id="invoice-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center px-4 z-50">
@@ -188,6 +189,17 @@
         } else {
           paymentDiv.classList.add("hidden");
         }
+        const paymentImg = document.getElementById("payment-img");
+        paymentImg.addEventListener("click", () => {
+          paymentDiv.classList.add("hidden"); 
+        });
+
+        paymentDiv.addEventListener("click", (e) => {
+          if (e.target === paymentDiv) {
+            paymentDiv.classList.add("hidden");
+          }
+        });
+
 
         const tbody = document.getElementById("quotes-items");
         tbody.innerHTML = "";
