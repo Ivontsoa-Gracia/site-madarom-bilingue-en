@@ -143,6 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
         langDropdownMenu.querySelectorAll('button').forEach(btn => {
           btn.addEventListener('click', function () {
             const lang = this.dataset.lang.toUpperCase();
+            const newLang = this.dataset.lang.toLowerCase();
             selectedLang.textContent = lang;
             langDropdownMenu.classList.add('hidden');
             langDropdownBtn.setAttribute('aria-expanded', false);
@@ -180,6 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
         langDropdownMenuMobile.querySelectorAll('button').forEach(btn => {
           btn.addEventListener('click', function () {
             const lang = this.dataset.lang.toUpperCase();
+            const newLang = this.dataset.lang.toLowerCase();
             selectedLangMobile.textContent = lang;
             langDropdownMenuMobile.classList.add('hidden');
             langDropdownBtnMobile.setAttribute('aria-expanded', false);
