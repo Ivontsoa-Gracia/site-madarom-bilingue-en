@@ -31,7 +31,14 @@
     { "src": "/admin/settings", "dest": "/pages/admin/settings.html"},
 
     { "src": "/en", "dest": "/index.html" },
+
     { "src": "/fr", "dest": "/fr/index.html" },
+    { "src": "/about", "dest": "/fr/index.html#about" },
+    { "src": "/service", "dest": "/fr/index.html#services" },
+    { "src": "/contact", "dest": "/fr/index.html#contact" },
+    { "src": "/products", "dest": "/fr/index.html#products" },
+    { "src": "/blog", "dest": "/fr/blog.html" },
+    { "src": "/blog-details", "dest": "/fr/blogDetails.html"},
 
     { "src": "/401", "dest": "/pages/errors/401.html"},
     { "src": "/403", "dest": "/pages/errors/403.html"},
