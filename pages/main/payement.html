@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submit Payment Proof</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    form { display: flex; flex-direction: column; gap: 10px; max-width: 400px; }
+    input, select, button { padding: 8px; font-size: 16px; }
+    .preview img { max-width: 200px; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h2>Submit Your Payment</h2>
+  <form id="paymentForm">
+    <input type="hidden" name="quote_id" id="quote_id">
+    <input type="text" name="phone_number" placeholder="Phone Number" required>
+    <input type="text" name="city" placeholder="City" required>
+    <input type="text" name="country" placeholder="Country" required>
+    <input type="file" name="screenshot" accept="image/*" required>
+    <button type="submit">Submit Payment</button>
+  </form>
+
+  <div class="preview" id="preview"></div>
+
+  <script>
+    document.getElementById('paymentForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      let form = e.target;
+      let formData = new FormData(form);
+
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("No token found. Please log in.");
+        return;
+      }
+
+      try {
+        let response = await fetch("http://127.0.0.1:8000/api/quote/payment", {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${token}`, 
+          },
+          body: formData
+        });
+
+        let result = await response.json();
+        console.log(result);
+
+        if (result.screenshot_url) {
+          document.getElementById("preview").innerHTML =
+            `<p>${result.message}</p><img src="${result.screenshot_url}" alt="Payment Proof">`;
+        } else {
+          alert("Failed to upload.");
+        }
+      } catch (error) {
+        console.error(error);
+        alert("Error while submitting payment.");
+      }
+    });
+
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      } else {
+        console.warn("Aucun token trouvé dans localStorage");
+    }
+
+    async function loadQuoteData(id) {
+      try {
+        const res = await fetch(`http://127.0.0.1:8000/api/quote/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (!res.ok) throw new Error("Devis non trouvé");
+        const quote = await res.json();
+
+        console.log(quote);
+
+        document.getElementById("quote_id").textContent = `${quote.quote.id}`;
+
+      } catch (error) {
+        console.error("Erreur lors du chargement du devis :", error);
+        alert("Impossible de charger le devis.");
+      }
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const ref = params.get("ref");
+    if (ref) {
+      console.log("ID du devis :", ref);
+      loadQuoteData(ref);
+    } else {
+      alert("Aucun ID de devis fourni.");
+    }
+  </script>
+</body>
+</html>

@@ -43,7 +43,7 @@ function renderQuotes(data) {
               <i class="bx bx-show"></i> View
             </button>
             <!-- Bouton centre -->
-            <button onclick="openModal('order', '${quote.quote.id}')"
+            <button onclick="payOrder('${quote.quote.id}')"
               class="btn-primary text-white px-3 py-1 text-sm flex items-center gap-1">
               <i class="bx bx-cart"></i> Pay
             </button>
@@ -212,6 +212,12 @@ function formatPrice(val) {
 async function viewQuote(id) {
   if (!id) return;
   window.location.href = `/order/show?ref=${encodeURIComponent(id)}`;
+
+}
+
+async function payOrder(id) {
+  if (!id) return;
+  window.location.href = `/payment?ref=${encodeURIComponent(id)}`;
 
 }
 
