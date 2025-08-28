@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
             langDropdownMenu.classList.add('hidden');
             langDropdownBtn.setAttribute('aria-expanded', false);
             localStorage.setItem('lang', lang);
-            window.location.href = `${window.location.origin}/${newLang}/`;
+            window.location.href = `${window.location.origin}/${newLang}`;
 
           });
         });
@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
             langDropdownMenuMobile.classList.add('hidden');
             langDropdownBtnMobile.setAttribute('aria-expanded', false);
             localStorage.setItem('lang', lang);
-            window.location.href = `${window.location.origin}/${newLang}/`;
+            window.location.href = `${window.location.origin}/${newLang}`;
 
           });
         });
