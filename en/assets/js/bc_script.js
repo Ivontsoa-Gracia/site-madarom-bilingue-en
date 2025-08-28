@@ -169,7 +169,7 @@ function applyFilters() {
 }
 
 async function fetchUserQuotes() {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
 
   if (!token) {
     alert("No token found. Please log in.");
@@ -222,7 +222,7 @@ async function payOrder(id) {
 }
 
 async function orderQuote(id) {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   if (!token) {
     alert("No token found. Please log in.");
     return;
@@ -257,7 +257,7 @@ async function orderQuote(id) {
 }
 
 async function clearQuote(id) {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   if (!token) {
     alert("No token found. Please log in.");
     return;

@@ -181,7 +181,7 @@ function initQuotes() {
     }
 
     window.fetchQuotes = async function() {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
       if (!token) {
         alert("No token found. Please log in.");
         return;

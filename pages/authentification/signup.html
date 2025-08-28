@@ -240,7 +240,7 @@
                 }
 
                 if (data.user) {
-                    localStorage.setItem("token", data.token);
+                    sessionStorage.setItem("token", data.token);
                 } else {
                     // alert(data.message || "Identifiants incorrects.");
                 }
@@ -250,7 +250,7 @@
                 step2.classList.add("hidden");
                 step1.classList.remove("hidden");
     
-                const lang = localStorage.getItem('lang').toLowerCase();
+                const lang = sessionStorage.getItem('lang').toLowerCase();
                 window.location.href = `${window.location.origin}/${lang}/`;
 
             } catch (error) {

@@ -116,11 +116,11 @@
     }
 
 
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
 
     if (token) {
       } else {
-        console.warn("Aucun token trouvé dans localStorage");
+        console.warn("Aucun token trouvé dans sessionStorage");
     }
 
     let currentQuoteId = null; 

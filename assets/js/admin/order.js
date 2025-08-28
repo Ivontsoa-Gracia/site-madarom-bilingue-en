@@ -174,7 +174,7 @@ function initOrders() {
     }
 
     async function fetchOrders() {
-        const token = localStorage.getItem("token");
+        const token = sessionStorage.getItem("token");
         if (!token) return alert("No token found. Please log in.");
 
         try {

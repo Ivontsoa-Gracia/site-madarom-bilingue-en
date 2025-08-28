@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       headerPlaceholder.innerHTML = html;
 
-      const token = localStorage.getItem('token');
+      const token = sessionStorage.getItem('token');
       const cartBtnDesktop = document.querySelector('.btn-cart'); 
       const cartBtnMobile = document.getElementById('cart-count-mobile')?.closest('.btn-cart'); 
       const loginBtn = document.getElementById('login-btn'); 
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (token) {
 
       } else {
-        console.warn("Aucun token trouvé dans localStorage");
+        console.warn("Aucun token trouvé dans sessionStorage");
       }
 
       fetch('http://localhost:8000/api/user-session', {
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
           if (logoutMobile) {
             logoutMobile.addEventListener('click', () => {
-              localStorage.removeItem('user');
+              sessionStorage.removeItem('user');
               location.reload();
             });
           }
@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
             selectedLang.textContent = lang;
             langDropdownMenu.classList.add('hidden');
             langDropdownBtn.setAttribute('aria-expanded', false);
-            localStorage.setItem('lang', lang);
+            sessionStorage.setItem('lang', lang);
             window.location.href = `${window.location.origin}/${newLang}/`;
 
           });
@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
 
-        const savedLang = localStorage.getItem('lang');
+        const savedLang = sessionStorage.getItem('lang');
         if (savedLang) selectedLang.textContent = savedLang;
       }
 
@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
             selectedLangMobile.textContent = lang;
             langDropdownMenuMobile.classList.add('hidden');
             langDropdownBtnMobile.setAttribute('aria-expanded', false);
-            localStorage.setItem('lang', lang);
+            sessionStorage.setItem('lang', lang);
             window.location.href = `${window.location.origin}/${newLang}/`;
 
           });
@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
 
-        const savedLang = localStorage.getItem('lang');
+        const savedLang = sessionStorage.getItem('lang');
         if (savedLang) selectedLangMobile.textContent = savedLang;
       }
     })
@@ -282,7 +282,7 @@ window.addEventListener('scroll', () => {
   
     if (!confirmLogout) return;
   
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     if (!token) {
       alert("Vous êtes déjà déconnecté.");
       return;
@@ -304,7 +304,7 @@ window.addEventListener('scroll', () => {
         throw new Error(`Erreur serveur ${response.status}`);
       }
   
-      localStorage.removeItem("token");
+      sessionStorage.removeItem("token");
   
       alert("Déconnecté avec succès !");
       location.reload();

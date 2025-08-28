@@ -19,8 +19,8 @@ async function register(name, email, password, password_confirmation) {
     const data = await response.json();
 
     if (response.ok) {
-      // Stocke l'utilisateur connecté dans localStorage
-      localStorage.setItem("user", JSON.stringify(data));
+      // Stocke l'utilisateur connecté dans sessionStorage
+      sessionStorage.setItem("user", JSON.stringify(data));
       alert("Inscription réussie ! Vous êtes maintenant connecté.");
       location.reload();
     } else {
@@ -47,7 +47,7 @@ async function login(email, password) {
     const data = await response.json();
 
     if (response.ok) {
-      localStorage.setItem("user", JSON.stringify(data));
+      sessionStorage.setItem("user", JSON.stringify(data));
       alert("Connexion réussie !");
       location.reload();
     } else {
@@ -64,14 +64,14 @@ function logoutWithConfirmation() {
   const confirmLogout = window.confirm("Voulez-vous vraiment vous déconnecter ?");
 
   if (confirmLogout) {
-    localStorage.removeItem("user");
+    sessionStorage.removeItem("user");
     location.reload();
   }
 }
 
-// ✅ Vérifie s’il y a un utilisateur en localStorage
+// ✅ Vérifie s’il y a un utilisateur en sessionStorage
 function getCurrentUser() {
-  const user = localStorage.getItem("user");
+  const user = sessionStorage.getItem("user");
   return user ? JSON.parse(user) : null;
 }
 

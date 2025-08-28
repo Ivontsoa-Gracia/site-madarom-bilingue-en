@@ -65,7 +65,7 @@
   const country = document.getElementById("country");
   const screenshot = document.getElementById("screenshot");
   const preview = document.getElementById("preview");
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
 
   async function fileToBase64(file) {
       return new Promise((resolve, reject) => {

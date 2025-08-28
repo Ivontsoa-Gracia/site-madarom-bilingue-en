@@ -11,9 +11,9 @@ function formatPrice(val) {
 
 // Récupère le panier utilisateur depuis la session (liste d’objets avec product_id et quantity)
 async function fetchCartItems() {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   if (!token) {
-    console.warn("Aucun token trouvé dans localStorage → utilisateur non connecté.");
+    console.warn("Aucun token trouvé dans sessionStorage → utilisateur non connecté.");
     cartItems = [];
     updateCartDisplay();
     return;
@@ -220,7 +220,7 @@ async function onQuantityInputChange(e, index) {
 
 // Met à jour la quantité d’un produit via API
 async function updateCartQuantity(productId, quantity) {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   if (!token) return false;
 
   try {
@@ -248,7 +248,7 @@ async function updateCartQuantity(productId, quantity) {
 
 // Supprime un produit du panier
 async function removeProductFromCart(productId) {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   if (!token) return false;
 
   try {
@@ -343,7 +343,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const requestQuoteBtn = document.getElementById("request-quote");
   if (requestQuoteBtn) {
     requestQuoteBtn.addEventListener("click", async () => {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
       if (!token) {
         alert("Please log in to request a quote.");
         return;
@@ -378,7 +378,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 // Supprime tout le panier via l'API
 async function clearCart() {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   if (!token) return;
 
   const confirmBtn = document.getElementById("btn-open-clear-cart");

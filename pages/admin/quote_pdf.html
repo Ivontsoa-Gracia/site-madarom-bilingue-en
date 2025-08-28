@@ -139,7 +139,7 @@
       }).format(val);
     }
 
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     const ref = new URLSearchParams(window.location.search).get("ref");
 
     async function loadQuoteData(id) {
