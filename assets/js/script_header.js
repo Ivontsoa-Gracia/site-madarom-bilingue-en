@@ -128,6 +128,10 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
       });
+
+      if (!sessionStorage.getItem('lang')) {
+        sessionStorage.setItem('lang', 'EN'); 
+      }
       // -- Langue selector desktop --
       const langDropdownBtn = document.getElementById('langDropdownBtn');
       const langDropdownMenu = document.getElementById('langDropdownMenu');
