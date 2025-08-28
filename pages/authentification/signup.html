@@ -250,8 +250,9 @@
                 step2.classList.add("hidden");
                 step1.classList.remove("hidden");
     
-                window.location.href = "/";
-    
+                const lang = localStorage.getItem('lang').toLowerCase();
+                window.location.href = `/${lang}`;
+
             } catch (error) {
                 console.error(error);
                 alert("Erreur de connexion.");

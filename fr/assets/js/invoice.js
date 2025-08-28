@@ -39,8 +39,8 @@ function renderQuotes(data) {
           <div class="inline-flex rounded-full overflow-hidden shadow-sm">
             <!-- Bouton gauche -->
             <button onclick="viewQuote('${quote.id}')"
-              class="btn-default text-[#333333] px-3 py-1 text-sm flex items-center gap-1 rounded-l-full border-r">
-              <i class="bx bx-show"></i> View
+              class="btn-default text-[#333333] px-3 py-1 text-sm flex items-center rounded-l-full border-r">
+              <i class="bx bx-show"></i> voir
             </button>
           </div>
         </td>

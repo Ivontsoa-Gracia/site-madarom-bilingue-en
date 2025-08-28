@@ -213,7 +213,7 @@ function formatPrice(val) {
 
 async function viewQuote(id) {
   if (!id) return;
-  window.location.href = `/quote/show?ref=${encodeURIComponent(id)}`;
+  window.location.href = `/en/quote/show?ref=${encodeURIComponent(id)}`;
 
 }
 

@@ -100,7 +100,9 @@
           // console.log(data); 
           // alert("Connexion réussie !");
           // saveLastUrl();
-          window.location.href = "/";
+          const lang = localStorage.getItem('lang').toLowerCase();
+          window.location.href = `/${lang}`;
+
         }
 
       } else {

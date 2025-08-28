@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Quote</title>
+  <title>Commande</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../../assets/css/style.css">
@@ -12,15 +12,15 @@
 
   <!-- Header actions -->
   <div class="flex justify-between items-center max-w-4xl mx-auto mb-6">
-    <a href="/order">
+    <a href="/fr/order">
       <button class="flex items-center gap-2 text-gray-600 hover:text-[#333333] transition font-semibold">
         <i class='bx bx-arrow-back text-xl'></i>
-        <span>Back</span>
+        <span>Retour</span>
       </button>
     </a>
     <button onclick="generatePDF()" class="flex items-center gap-2 btn-primary text-white px-4 py-2 rounded-full  transition">
       <i class='bx bx-download text-xl'></i>
-      <span>Download PDF</span>
+      <span>Exporter en PDF</span>
     </button>
   </div>
 
@@ -30,7 +30,7 @@
     <div class="flex justify-between items-center border-b pb-6 mb-6">
       <div class="flex flex-col gap-2">
         <img src="../../assets/img/logo.jpg" alt="Mad'arom logo" class="w-32 h-auto mb-2">
-        <h1 class="text-3xl font-extrabold text-[#333333] tracking-wide">ORDER</h1>
+        <h1 class="text-3xl font-extrabold text-[#333333] tracking-wide">COMMANDE</h1>
         <p class="text-sm text-gray-500" id="order-date"></p>
         <p class="text-sm text-gray-500" id="quote-number">#QTE-XXXXXX</p>
       </div>
@@ -44,7 +44,7 @@
 
     <!-- Client -->
     <div class="mb-6 bg-gray-50 p-4 border">
-      <h3 class="font-medium mb-2 text-gray-700 text-lg" id="client-name">Name</h3>
+      <h3 class="font-medium mb-2 text-gray-700 text-lg" id="client-name">Nom</h3>
       <p class="text-sm text-gray-500" id="client-email">Email</p>
     </div>
 
@@ -53,9 +53,9 @@
       <table class="w-full text-sm">
         <thead>
           <tr class="bg-gray-50 text-[#333333] text-left">
-            <th class="py-3 px-4 font-medium">Product</th>
-            <th class="py-3 px-4 text-center font-medium">Quantity</th>
-            <th class="py-3 px-4 text-right font-medium">Unit Price</th>
+            <th class="py-3 px-4 font-medium">Produit</th>
+            <th class="py-3 px-4 text-center font-medium">Quantité</th>
+            <th class="py-3 px-4 text-right font-medium">Prix Unitaire</th>
             <th class="py-3 px-4 text-right font-medium">Total</th>
           </tr>
         </thead>
@@ -69,15 +69,15 @@
     <div class="mt-6 flex justify-end">
       <div class="w-full md:w-1/2 bg-gray-50 p-4 border space-y-2">
         <div class="flex justify-between">
-          <span class="font-medium">Sub-total:</span>
+          <span class="font-medium">Sous-total:</span>
           <span id="subtotal">0 USD</span>
         </div>
-        <div class="flex justify-between">
+        <!-- <div class="flex justify-between">
           <span class="font-medium">VAT (20%):</span>
           <span id="tva">0 USD</span>
-        </div>
+        </div> -->
         <div class="flex justify-between text-lg font-semibold text-[#333333]">
-          <span>Total incl. VAT:</span>
+          <span>Total:</span>
           <span id="total">0 USD</span>
         </div>
       </div>
@@ -86,7 +86,7 @@
     <!-- Footer -->
     <div class="mt-8 text-xs text-gray-500 text-left">
       <p id="delivery-date"></p>
-      <p class="mt-1">Thank you for your trust!</p>
+      <p class="mt-1">Merci de votre confiance!</p>
     </div>
   </div>
 
@@ -155,7 +155,7 @@
 
           tbody.innerHTML += `
             <tr>
-              <td class="py-2 px-2">${item.product.name_en}</td>
+              <td class="py-2 px-2">${item.product.name_fr}</td>
               <td class="py-2 px-2 text-center">${item.quantity}</td>
               <td class="py-2 px-2 text-right">${formatPrice(item.price_snapshot)}</td>
               <td class="py-2 px-2 text-right">${formatPrice(sub)}</td>
@@ -163,9 +163,10 @@
         });
 
         const tva = total * 0.2;
-        const ttc = total + tva;
+        // const ttc = total + tva;
+        const ttc = total;
         document.getElementById("subtotal").textContent = formatPrice(total);
-        document.getElementById("tva").textContent = formatPrice(tva);
+        // document.getElementById("tva").textContent = formatPrice(tva);
         document.getElementById("total").textContent = formatPrice(ttc);
 
 
@@ -186,10 +187,10 @@
         deliveryDate.setDate(deliveryDate.getDate() + totalDays);
         deliveryDate.setHours(deliveryDate.getHours() + totalHours);
 
-        let deliveryMessage = "This order is delivered in ";
-        if (totalDays > 0) deliveryMessage += `${totalDays} day${totalDays > 1 ? "s" : ""}`;
-        if (totalDays > 0 && totalHours > 0) deliveryMessage += " and ";
-        if (totalHours > 0) deliveryMessage += `${totalHours} hour${totalHours > 1 ? "s" : ""}`;
+        let deliveryMessage = "Cette commande sera livrée dans ";
+        if (totalDays > 0) deliveryMessage += `${totalDays} jour${totalDays > 1 ? "s" : ""}`;
+        if (totalDays > 0 && totalHours > 0) deliveryMessage += " et ";
+        if (totalHours > 0) deliveryMessage += `${totalHours} heur${totalHours > 1 ? "s" : ""}`;
 
         const formattedDate = deliveryDate.toLocaleDateString("fr-FR", {
           weekday: "long",
@@ -198,7 +199,7 @@
           day: "numeric"
         });
 
-        deliveryMessage += ` , on ${formattedDate}`;
+        deliveryMessage += ` , le ${formattedDate}`;
 
         document.getElementById("delivery-date").textContent = deliveryMessage;
 

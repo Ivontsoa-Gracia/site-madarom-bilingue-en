@@ -53,7 +53,7 @@ function renderProducts() {
       >
         <img 
           src="https://www.madarom.net/assets/${product.image_path ?? 'assets/img/p1.png'}" 
-          alt="${product.name_en}" 
+          alt="${product.name_fr}" 
           class="h-full w-full object-cover transition-opacity duration-300 hover:opacity-90"
         >
       </div>
@@ -64,7 +64,7 @@ function renderProducts() {
           ${product.name_latin}
         </h3>
         <p class="text-sm text-gray-500 mb-4 leading-relaxed">
-          ${product.name_en}
+          ${product.name_fr}
         </p>
         
         <!-- Prix -->
@@ -157,8 +157,8 @@ window.showDetail = function(productId) {
         <!-- Texte -->
         <div class="w-full lg:w-1/2 text-center lg:text-left">
           <h1 class="text-3xl sm:text-4xl font-bold text-primary mb-2">${product.name_latin ?? '–'}</h1>
-          <h2 class="text-xl text-gray-600 mb-4">${product.name_en}</h2>
-          <p class="text-gray-700 text-base leading-relaxed mb-6">${product.description_en}</p>
+          <h2 class="text-xl text-gray-600 mb-4">${product.name_fr}</h2>
+          <p class="text-gray-700 text-base leading-relaxed mb-6">${product.description_fr}</p>
 
           <!-- Prix -->
           <div class="flex flex-col w-full sm:w-auto sm:min-w-[120px] mb-10">
@@ -188,7 +188,7 @@ window.showDetail = function(productId) {
         <div class="w-full lg:w-1/2">
           <div class="rounded-2xl overflow-hidden shadow-md border border-gray-200">
             <img src="https://www.madarom.net/assets/${product.image_path ?? 'assets/img/p1.png'}" 
-                alt="${product.name_en}" 
+                alt="${product.name_fr}" 
                 class="w-full h-80 sm:h-96 object-cover transition-transform duration-500 hover:scale-105">
           </div>
         </div>
@@ -206,7 +206,7 @@ window.addToCart = function(productId) {
   const token = localStorage.getItem('token');
   
   if (!token) {
-    window.location.href = "./pages/authentification/login.html";
+    window.location.href = "/signin";
     return;
   }
 
@@ -227,10 +227,10 @@ window.addToCart = function(productId) {
             ${product.name_latin ?? '–'}
           </h1>
           <h2 class="text-lg sm:text-xl text-gray-600 mb-4 tracking-wide">
-            ${product.name_en}
+            ${product.name_fr}
           </h2>
           <p class="text-gray-700 text-base sm:text-lg mb-6 leading-relaxed max-w-xl mx-auto lg:mx-0">
-            ${product.description_en}
+            ${product.description_fr}
           </p>
 
           <!-- Section prix + quantité -->
@@ -284,7 +284,7 @@ window.addToCart = function(productId) {
         <div class="w-full lg:w-1/2">
           <div class="rounded-2xl overflow-hidden shadow-md border border-gray-200">
             <img src="https://www.madarom.net/assets/${product.image_path ?? 'assets/img/p1.png'}" 
-                alt="${product.name_en}" 
+                alt="${product.name_fr}" 
                 class="w-full h-80 sm:h-96 object-cover transition-transform duration-500 hover:scale-105">
           </div>
         </div>
@@ -315,7 +315,7 @@ window.hideDetail = function() {
 async function addToCartStorage(product, quantity) {
   const token = localStorage.getItem('token');
   if (!token) {
-    window.location.href = "./pages/authentification/login.html";
+    window.location.href = "/signin";
     return;
   }
   try {
@@ -354,7 +354,7 @@ async function addToCartStorage(product, quantity) {
 window.handleAddToCart = function(productId) {
   const token = localStorage.getItem('token');
   if (!token) {
-    window.location.href = "./pages/authentification/login.html";
+    window.location.href = "/signin";
     return;
   }
   const product = allProducts.find(p => p.id === productId);

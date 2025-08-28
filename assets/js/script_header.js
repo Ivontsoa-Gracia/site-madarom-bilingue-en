@@ -342,11 +342,11 @@ window.addEventListener('scroll', () => {
     const path = window.location.pathname;
   
     const sections = {
-      "/": "home",
-      "/about": "about",
-      "/service": "services",
-      "/contact": "contact",
-      "/products": "products"
+      "/en": "home",
+      "/en/about": "about",
+      "/en/service": "services",
+      "/en/contact": "contact",
+      "/en/products": "products"
     };
   
     const sectionId = sections[path];

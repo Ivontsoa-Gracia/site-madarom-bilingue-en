@@ -211,13 +211,13 @@ function formatPrice(val) {
 
 async function viewQuote(id) {
   if (!id) return;
-  window.location.href = `/order/show?ref=${encodeURIComponent(id)}`;
+  window.location.href = `/en/order/show?ref=${encodeURIComponent(id)}`;
 
 }
 
 async function payOrder(id) {
   if (!id) return;
-  window.location.href = `/payment?ref=${encodeURIComponent(id)}`;
+  window.location.href = `/en/payment?ref=${encodeURIComponent(id)}`;
 
 }
 

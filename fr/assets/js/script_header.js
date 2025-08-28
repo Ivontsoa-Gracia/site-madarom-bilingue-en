@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       headerPlaceholder.innerHTML = html;
 
-      // Contrôle visibilité Panier vs Login
       const token = localStorage.getItem('token');
       const cartBtnDesktop = document.querySelector('.btn-cart'); 
       const cartBtnMobile = document.getElementById('cart-count-mobile')?.closest('.btn-cart'); 
@@ -20,13 +19,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const loginBtnMobile = document.getElementById('login-btn-mobile'); 
 
       if (!token) {
-        // Utilisateur non connecté : masquer panier, montrer login
         if (cartBtnDesktop) cartBtnDesktop.classList.add('hidden');
         if (cartBtnMobile) cartBtnMobile.classList.add('hidden');
         if (loginBtn) loginBtn.classList.remove('hidden');
         if (loginBtnMobile) loginBtnMobile.classList.remove('hidden');
       } else {
-        // Utilisateur connecté : montrer panier, masquer login
         if (cartBtnDesktop) cartBtnDesktop.classList.remove('hidden');
         if (cartBtnMobile) cartBtnMobile.classList.remove('hidden');
         if (loginBtn) loginBtn.classList.add('hidden');
@@ -36,9 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
       updateCartCount();
       loadCategoriesToMenu();
 
-      // const token = localStorage.getItem('token'); 
       if (token) {
-        // console.log("User token :", token);
+
       } else {
         console.warn("Aucun token trouvé dans localStorage");
       }
@@ -102,7 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch(err => console.error('Erreur récupération user:', err));
 
-      // --- Burger menu toggle ---
       const burger = document.getElementById('burger-menu');
       const mobileMenu = document.getElementById('mobile-menu');
 
@@ -112,7 +107,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
 
-      // --- Smooth Scroll for anchor links ---
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', e => {
           const targetId = anchor.getAttribute('href');
@@ -128,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
       });
-      // -- Langue selector desktop --
+
       const langDropdownBtn = document.getElementById('langDropdownBtn');
       const langDropdownMenu = document.getElementById('langDropdownMenu');
       const selectedLang = document.getElementById('selected-lang');
@@ -153,7 +147,6 @@ document.addEventListener('DOMContentLoaded', () => {
           });
         });
 
-        // Fermer dropdown langue au clic ailleurs
         document.addEventListener('click', () => {
           if (!langDropdownMenu.classList.contains('hidden')) {
             langDropdownMenu.classList.add('hidden');
@@ -161,12 +154,10 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
 
-        // Appliquer langue sauvegardée
         const savedLang = localStorage.getItem('lang');
         if (savedLang) selectedLang.textContent = savedLang;
       }
 
-      // -- Langue selector mobile --
       const langDropdownBtnMobile = document.getElementById('langDropdownBtnMobile');
       const langDropdownMenuMobile = document.getElementById('langDropdownMenuMobile');
       const selectedLangMobile = document.getElementById('selected-lang-mobile');
@@ -207,7 +198,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// --- Scroll header behavior (en dehors de DOMContentLoaded car scroll existe après) ---
 window.addEventListener('scroll', () => {
   const header = document.querySelector('header');
   const navLinks = document.querySelectorAll('.nav-link');
@@ -342,11 +332,11 @@ window.addEventListener('scroll', () => {
     const path = window.location.pathname;
   
     const sections = {
-      "/": "home",
-      "/about": "about",
-      "/service": "services",
-      "/contact": "contact",
-      "/products": "products"
+      "/fr": "home",
+      "/fr/about": "about",
+      "/fr/service": "services",
+      "/fr/contact": "contact",
+      "/fr/products": "products"
     };
   
     const sectionId = sections[path];
