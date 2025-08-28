@@ -116,12 +116,12 @@
     }
 
 
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
 
     if (token) {
         // console.log("User token :", token);
       } else {
-        console.warn("Aucun token trouvé dans localStorage");
+        console.warn("Aucun token trouvé dans sessionStorage");
     }
 
     async function loadQuoteData(id) {

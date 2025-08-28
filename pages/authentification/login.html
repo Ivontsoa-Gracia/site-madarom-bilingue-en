@@ -87,20 +87,15 @@
 
       if (res.ok) {
         const data = await res.json();
-        // localStorage.removeItem("user"); 
-        localStorage.setItem("token", data.token);
+        // sessionStorage.removeItem("user"); 
+        sessionStorage.setItem("token", data.token);
 
         if(data.user.role === 'admin')
         {
-          // saveLastUrl();
-          // window.location.href = "/pages/admin/dasboard.html";
           location.assign("/admin/dashboard");
         }
         else {
-          // console.log(data); 
-          // alert("Connexion réussie !");
-          // saveLastUrl();
-          const lang = localStorage.getItem('lang').toLowerCase();
+          const lang = sessionStorage.getItem('lang').toLowerCase();
           window.location.href = `${window.location.origin}/${lang}/`;
 
         }

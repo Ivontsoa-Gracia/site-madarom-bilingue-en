@@ -1,7 +1,7 @@
 // const LAST_URL = 'http://127.0.0.1:8000/api/url';
 
 export function saveLastUrl() {
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(sessionStorage.getItem("user"));
     if (!user || !user.token) return;
 
     fetch("http://127.0.0.1:8000/api/url", {
@@ -19,7 +19,7 @@ export function saveLastUrl() {
 }
 
 export async function getLastUrl() {
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(sessionStorage.getItem("user"));
     if (!user || !user.token) return null;
   
     try {

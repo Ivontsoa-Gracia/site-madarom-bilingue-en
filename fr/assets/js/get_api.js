@@ -201,9 +201,9 @@ window.showDetail = function(productId) {
 
 window.addToCart = function(productId) {
 
-  localStorage.removeItem('cart');
+  sessionStorage.removeItem('cart');
 
-  const token = localStorage.getItem('token');
+  const token = sessionStorage.getItem('token');
   
   if (!token) {
     window.location.href = "/signin";
@@ -313,7 +313,7 @@ window.hideDetail = function() {
 
 
 async function addToCartStorage(product, quantity) {
-  const token = localStorage.getItem('token');
+  const token = sessionStorage.getItem('token');
   if (!token) {
     window.location.href = "/signin";
     return;
@@ -352,7 +352,7 @@ async function addToCartStorage(product, quantity) {
 
 
 window.handleAddToCart = function(productId) {
-  const token = localStorage.getItem('token');
+  const token = sessionStorage.getItem('token');
   if (!token) {
     window.location.href = "/signin";
     return;
@@ -484,7 +484,7 @@ export async function updateCartCount() {
   const mobileCount = document.getElementById("cart-count-mobile");
   if (!desktopCount && !mobileCount) return;
 
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   if (!token) {
     // Pas de token = panier vide ou pas connecté
     if (desktopCount) desktopCount.textContent = '0';

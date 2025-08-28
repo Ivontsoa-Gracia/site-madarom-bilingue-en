@@ -164,7 +164,7 @@ function applyFilters() {
 }
 
 async function fetchUserQuotes() {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
 
   if (!token) {
     alert("No token found. Please log in.");
