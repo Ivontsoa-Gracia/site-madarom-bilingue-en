@@ -251,7 +251,7 @@
                 step1.classList.remove("hidden");
     
                 const lang = localStorage.getItem('lang').toLowerCase();
-                window.location.href = `/${lang}`;
+                window.location.href = `${window.location.origin}/${lang}/`;
 
             } catch (error) {
                 console.error(error);

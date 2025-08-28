@@ -101,7 +101,7 @@
           // alert("Connexion réussie !");
           // saveLastUrl();
           const lang = localStorage.getItem('lang').toLowerCase();
-          window.location.href = `/${lang}`;
+          window.location.href = `${window.location.origin}/${lang}/`;
 
         }
 
