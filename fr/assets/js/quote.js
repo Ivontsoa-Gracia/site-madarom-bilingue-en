@@ -213,7 +213,9 @@ function formatPrice(val) {
 
 async function viewQuote(id) {
   if (!id) return;
-  window.location.href = `${window.location.origin}/fr/quote/show?ref=${encodeURIComponent(id)}`;
+  const lang = sessionStorage.getItem('lang').toLowerCase();
+  // window.location.href = `${window.location.origin}/${lang}/`;
+  window.location.href = `${window.location.origin}/${lang}/fr/quote/show?ref=${encodeURIComponent(id)}`;
 
 }
 
