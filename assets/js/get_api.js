@@ -206,7 +206,7 @@ window.addToCart = function(productId) {
   const token = localStorage.getItem('token');
   
   if (!token) {
-    window.location.href = "./pages/authentification/login.html";
+    window.location.href = "/signin";
     return;
   }
 
@@ -315,7 +315,7 @@ window.hideDetail = function() {
 async function addToCartStorage(product, quantity) {
   const token = localStorage.getItem('token');
   if (!token) {
-    window.location.href = "./pages/authentification/login.html";
+    window.location.href = "/signin";
     return;
   }
   try {
@@ -354,7 +354,7 @@ async function addToCartStorage(product, quantity) {
 window.handleAddToCart = function(productId) {
   const token = localStorage.getItem('token');
   if (!token) {
-    window.location.href = "./pages/authentification/login.html";
+    window.location.href = "/signin";
     return;
   }
   const product = allProducts.find(p => p.id === productId);

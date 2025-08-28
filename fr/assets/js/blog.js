@@ -1,41 +1,42 @@
 const articles = [
-    {
-      id: "ART040825-001",
-      date: "Mai 2025",
-      title: "The Secret Power of Malagasy Essential Oils",
-      summary: "Madagascar is renowned for producing some of the purest and most potent essential oils in the world. From ravintsara to niaouli, these oils provide a natural, therapeutic solution for boosting immunity, reducing stress, and improving sleep. At Mad’Arom, we partner directly with small-scale farmers to ensure 100% traceability and sustainable sourcing, combining traditional wisdom with modern science.",
-      contenu: "Madagascar’s unique climate and biodiversity make it an exceptional source of essential oils with remarkable purity and effectiveness. The island is home to endemic plants like ravintsara and niaouli, whose essential oils have been treasured for centuries for their medicinal and aromatic properties. Ravintsara essential oil is widely known for its antiviral and immune-boosting effects. It’s commonly used to support respiratory health and strengthen the body’s defenses during cold and flu seasons. Its fresh, camphoraceous aroma also helps to reduce mental fatigue and enhance concentration. Niaouli oil, another Malagasy treasure, offers gentle yet powerful antiseptic and anti-inflammatory benefits. It’s often used to soothe skin irritations, aid wound healing, and promote respiratory wellness. Its subtle, eucalyptus-like scent makes it a favorite for aromatherapy and relaxation. At Mad’Arom, our commitment goes beyond quality. We work directly with smallholder farmers across Madagascar, ensuring that every drop of oil is 100% traceable from plant to bottle. This approach guarantees sustainable harvesting practices that protect the environment and empower local communities. Whether your goal is to boost immunity, relieve stress, or improve sleep quality, Malagasy essential oils provide a natural, effective option. Backed by centuries of traditional use and validated by modern scientific research, these oils unlock the healing power of nature. Discover the purity and potency of Malagasy essential oils — carefully distilled and bottled with respect for both people and the planet.",
-      image: [
-        "./assets/img/articles/article1-001.jpg",
-        "./assets/img/articles/article1-002.jpg",
-      ],
-      theme: "Essential Oils",
-    },
-    {
-      id: "ART040825-002",
-      date: "January 2025",
-      title: "How to Use Essential Oils Safely: A Beginner’s Guide",
-      summary: "Essential oils are powerful natural extracts, but using them safely is essential to enjoy their full benefits. This beginner’s guide from Mad’Arom offers tips on dilution, aromatherapy, and safe practices to get started with confidence.",
-      contenu: "Essential oils are concentrated plant extracts with incredible potential — but they must be used correctly. At Mad’Arom, we emphasize education alongside quality. Here are key safety tips for beginners: Always dilute essential oils before applying them to the skin using a carrier oil such as coconut, jojoba, or almond oil. Avoid internal use unless guided by a certified aromatherapist. Always perform a patch test to check for allergic reactions. Use a diffuser for gentle, therapeutic inhalation. Store your oils in dark glass bottles away from heat and sunlight to preserve their potency. By following these precautions, essential oils can enhance your well-being naturally and safely. Start safe, stay natural.",
-      image: [
-        "./assets/img/articles/article2-001.jpg",
-        "./assets/img/articles/article2-002.jpg"
-      ],
-      theme: "Essential Oils",
-    },
-    {
-      id: "ART040825-003",
-      date: "August 2025",
-      title: "Spices from Madagascar: Why Chefs Around the World Love Them",
-      summary: "Madagascar produces some of the world’s most flavorful and aromatic spices. From Bourbon vanilla to wild black pepper, discover why top chefs trust these ethically sourced, hand-harvested treasures.",
-      contenu: "Madagascar is a paradise for spice lovers. The island is globally celebrated for producing top-quality spices such as Bourbon vanilla, wild black pepper, cinnamon, and cloves. These spices are prized not only for their bold flavors and aromas, but also for their purity and traceability. At Mad’Arom, we collaborate closely with local farmers who cultivate their crops organically and sustainably. Each batch is sun-dried, hand-sorted, and packaged with care to ensure peak freshness. Whether you’re a gourmet chef or a conscious home cook, Malagasy spices deliver a sensory experience that’s both ethical and exceptional. Taste the island. Cook with purpose.",
-      image: [
-        "./assets/img/articles/article3-001.jpg",
-        "./assets/img/articles/article3-002.jpg",
-      ],
-      theme: "Spices",
-    }
-  ];
+  {
+    id: "ART040825-001",
+    date: "Mai 2025",
+    title: "Le pouvoir secret des huiles essentielles malgaches",
+    summary: "Madagascar est réputé pour produire certaines des huiles essentielles les plus pures et les plus puissantes au monde. Du ravintsara au niaouli, ces huiles offrent une solution naturelle et thérapeutique pour renforcer l’immunité, réduire le stress et améliorer le sommeil. Chez Mad’Arom, nous collaborons directement avec des petits producteurs afin de garantir une traçabilité à 100 % et un approvisionnement durable, alliant savoir traditionnel et science moderne.",
+    contenu: "Le climat et la biodiversité uniques de Madagascar en font une source exceptionnelle d’huiles essentielles d’une pureté et d’une efficacité remarquables. L’île abrite des plantes endémiques comme le ravintsara et le niaouli, dont les huiles essentielles sont prisées depuis des siècles pour leurs propriétés médicinales et aromatiques. L’huile essentielle de ravintsara est largement connue pour ses effets antiviraux et stimulants du système immunitaire. Elle est souvent utilisée pour soutenir la santé respiratoire et renforcer les défenses naturelles de l’organisme pendant les saisons de rhume et de grippe. Son arôme frais et camphré aide également à réduire la fatigue mentale et à améliorer la concentration. L’huile de niaouli, autre trésor malgache, offre des bienfaits antiseptiques et anti-inflammatoires doux mais puissants. Elle est souvent utilisée pour apaiser les irritations cutanées, favoriser la cicatrisation et soutenir le bien-être respiratoire. Son parfum subtil, proche de l’eucalyptus, en fait un favori en aromathérapie et en relaxation. Chez Mad’Arom, notre engagement va au-delà de la qualité. Nous travaillons directement avec les petits producteurs à travers Madagascar, garantissant que chaque goutte d’huile est traçable à 100 % de la plante au flacon. Cette approche assure des pratiques de récolte durables qui protègent l’environnement et renforcent les communautés locales. Que votre objectif soit de renforcer l’immunité, de soulager le stress ou d’améliorer la qualité du sommeil, les huiles essentielles malgaches offrent une option naturelle et efficace. Soutenues par des siècles d’usage traditionnel et validées par la recherche scientifique moderne, ces huiles révèlent le pouvoir de guérison de la nature. Découvrez la pureté et la puissance des huiles essentielles malgaches — distillées et mises en flacon avec respect pour les hommes et la planète.",
+    image: [
+      "./assets/img/articles/article1-001.jpg",
+      "./assets/img/articles/article1-002.jpg",
+    ],
+    theme: "Huiles essentielles",
+  },
+  {
+    id: "ART040825-002",
+    date: "Janvier 2025",
+    title: "Comment utiliser les huiles essentielles en toute sécurité : guide pour débutants",
+    summary: "Les huiles essentielles sont de puissants extraits naturels, mais les utiliser correctement est essentiel pour profiter pleinement de leurs bienfaits. Ce guide pour débutants de Mad’Arom propose des conseils sur la dilution, l’aromathérapie et les bonnes pratiques pour commencer en toute confiance.",
+    contenu: "Les huiles essentielles sont des extraits végétaux concentrés au potentiel incroyable — mais elles doivent être utilisées correctement. Chez Mad’Arom, nous mettons l’accent autant sur l’éducation que sur la qualité. Voici quelques conseils de sécurité essentiels pour les débutants : Diluez toujours les huiles essentielles avant de les appliquer sur la peau avec une huile végétale comme l’huile de coco, de jojoba ou d’amande. Évitez toute ingestion sauf sur recommandation d’un aromathérapeute certifié. Faites toujours un test cutané pour vérifier d’éventuelles réactions allergiques. Utilisez un diffuseur pour une inhalation douce et thérapeutique. Conservez vos huiles dans des flacons en verre foncé, à l’abri de la chaleur et du soleil, afin de préserver leur efficacité. En suivant ces précautions, les huiles essentielles peuvent améliorer naturellement et en toute sécurité votre bien-être. Commencez en sécurité, restez au naturel.",
+    image: [
+      "./assets/img/articles/article2-001.jpg",
+      "./assets/img/articles/article2-002.jpg"
+    ],
+    theme: "Huiles essentielles",
+  },
+  {
+    id: "ART040825-003",
+    date: "Août 2025",
+    title: "Épices de Madagascar : pourquoi les chefs du monde entier les adorent",
+    summary: "Madagascar produit certaines des épices les plus aromatiques et savoureuses au monde. De la vanille Bourbon au poivre noir sauvage, découvrez pourquoi les plus grands chefs font confiance à ces trésors récoltés à la main et issus de filières éthiques.",
+    contenu: "Madagascar est un paradis pour les amateurs d’épices. L’île est mondialement célébrée pour la production d’épices de première qualité telles que la vanille Bourbon, le poivre noir sauvage, la cannelle et le clou de girofle. Ces épices sont appréciées non seulement pour leurs saveurs et arômes puissants, mais aussi pour leur pureté et leur traçabilité. Chez Mad’Arom, nous collaborons étroitement avec des cultivateurs locaux qui travaillent de manière biologique et durable. Chaque lot est séché au soleil, trié à la main et emballé avec soin afin de garantir une fraîcheur optimale. Que vous soyez un chef gastronomique ou un cuisinier passionné à domicile, les épices malgaches offrent une expérience sensorielle à la fois éthique et exceptionnelle. Goûtez l’île. Cuisinez avec intention.",
+    image: [
+      "./assets/img/articles/article3-001.jpg",
+      "./assets/img/articles/article3-002.jpg",
+    ],
+    theme: "Épices",
+  }
+];
+
   
   // Fonction pour afficher la liste d’articles (pour la page principale)
   function renderArticlesList(containerId) {
@@ -47,10 +48,10 @@ const articles = [
       container.innerHTML += `
         <article
           class="cursor-pointer bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-row group mx-auto"
-          onclick="window.location.href='/blog-details?id=${item.id}'"
+          onclick="window.location.href='/fr/blog-details?id=${item.id}'"
           role="button"
           tabindex="0"
-          onkeydown="if(event.key==='Enter'){window.location.href='/blog-details?id=${item.id}'}"
+          onkeydown="if(event.key==='Enter'){window.location.href='/fr/blog-details?id=${item.id}'}"
         >
           <!-- Right: Image -->
           <div class="w-72 shrink-0 relative overflow-hidden rounded-r-2xl">
@@ -69,12 +70,12 @@ const articles = [
                 datetime="${item.date.replace(/(\d{2})\/(\d{2})\/(\d{2})/, '20$3-$2-$1')}"
                 class="text-gray-400 text-xs tracking-wide"
               >
-                Published on ${item.date}
+              Publié le ${item.date}
               </time>
               <span
                 class="inline-block cursor-pointer select-none text-[#ab1a17] hover:text-[#81110e] font-semibold text-sm transition-colors duration-300"
               >
-                Show more →
+                Voir plus →
               </span>
             </div>
         
@@ -114,7 +115,7 @@ const articles = [
         <!-- Header -->
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-gray-300 pb-5">
           <time datetime="${article.date}" class="text-sm text-gray-500 tracking-wide select-none">
-            Published on <span class="font-semibold text-gray-700">${article.date}</span>
+            Publié le <span class="font-semibold text-gray-700">${article.date}</span>
           </time>
           <span class="mt-4 sm:mt-0 inline-block bg-[#ab1a17]/20 text-[#ab1a17] font-semibold text-xs uppercase tracking-wide px-5 py-1.5 rounded-full shadow-sm select-none transition-colors duration-300 hover:bg-[#ab1a17]/40 cursor-default">
             ${article.theme || "Essential Oils"}

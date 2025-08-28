@@ -40,12 +40,12 @@ function renderQuotes(data) {
             <!-- Bouton gauche -->
             <button onclick="viewQuote('${quote.id}')"
               class="btn-default text-[#333333] px-3 py-1 text-sm flex items-center gap-1 rounded-l-full border-r">
-              <i class="bx bx-show"></i> View
+              <i class="bx bx-show"></i> Voir
             </button>
             <!-- Bouton centre -->
             <button onclick="payOrder('${quote.quote.id}')"
               class="btn-primary text-white px-3 py-1 text-sm flex items-center gap-1">
-              <i class="bx bx-cart"></i> Pay
+              <i class="bx bx-cart"></i> Payer
             </button>
           </div>
         </td>
@@ -211,13 +211,13 @@ function formatPrice(val) {
 
 async function viewQuote(id) {
   if (!id) return;
-  window.location.href = `/order/show?ref=${encodeURIComponent(id)}`;
+  window.location.href = `/fr/order/show?ref=${encodeURIComponent(id)}`;
 
 }
 
 async function payOrder(id) {
   if (!id) return;
-  window.location.href = `/payment?ref=${encodeURIComponent(id)}`;
+  window.location.href = `/fr/payment?ref=${encodeURIComponent(id)}`;
 
 }
 
