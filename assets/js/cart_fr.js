@@ -81,7 +81,7 @@ async function fetchProductDetails(id) {
     return {
       id: data.id,
       name_latin: data.name_latin,
-      name_en: data.name_en,
+      name_fr: data.name_fr,
       image_path: data.image_path,
       price
     };
