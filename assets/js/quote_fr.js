@@ -214,7 +214,7 @@ async function viewQuote(id) {
   if (!id) return;
   // window.location.href = `/fr/quote/show?ref=${encodeURIComponent(id)}`;
   const lang = sessionStorage.getItem('lang').toLowerCase();
-  window.location.href = `${window.location.origin}/${lang}//fr/quote/show?ref=${encodeURIComponent(id)}`;
+  window.location.href = `/fr/quote/show?ref=${encodeURIComponent(id)}`;
 
 }
 
