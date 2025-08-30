@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.warn("Aucun token trouvé dans sessionStorage");
       }
 
-      fetch('http://localhost:8000/api/user-session', {
+      fetch('https://madarom-project-production.up.railway.app/user-session', {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -299,7 +299,7 @@ window.addEventListener('scroll', () => {
     }
   
     try {
-      const response = await fetch("http://localhost:8000/api/logout", {
+      const response = await fetch("https://madarom-project-production.up.railway.app/logout", {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${token}`,
