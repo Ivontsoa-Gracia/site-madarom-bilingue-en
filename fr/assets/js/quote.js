@@ -205,11 +205,10 @@ function formatPrice(val) {
   return new Intl.NumberFormat("fr-MG", {
     style: "currency",
     currency: "MGA",
+    currencyDisplay: "code", 
     minimumFractionDigits: 0
   }).format(val);
 }
-
-
 
 async function viewQuote(id) {
   if (!id) return;

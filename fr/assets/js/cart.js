@@ -1,12 +1,12 @@
 const api_url = "http://127.0.0.1:8000/api";
 let cartItems = [];
 
-// Format prix USD
 function formatPrice(val) {
   return new Intl.NumberFormat("fr-MG", {
     style: "currency",
     currency: "MGA",
-    minimumFractionDigits: 0 // pas de décimales pour l'Ariary
+    currencyDisplay: "code", 
+    minimumFractionDigits: 0
   }).format(val);
 }
 

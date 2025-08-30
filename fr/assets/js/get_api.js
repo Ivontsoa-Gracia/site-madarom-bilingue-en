@@ -14,7 +14,8 @@ function formatPrice(val) {
   return new Intl.NumberFormat("fr-MG", {
     style: "currency",
     currency: "MGA",
-    minimumFractionDigits: 0 // pas de décimales pour l'Ariary
+    currencyDisplay: "code", 
+    minimumFractionDigits: 0
   }).format(val);
 }
 

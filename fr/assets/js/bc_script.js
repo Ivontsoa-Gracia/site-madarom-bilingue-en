@@ -200,14 +200,13 @@ sortOrder.addEventListener('change', applyFilters);
 fetchUserQuotes();
 
 function formatPrice(val) {
-  return new Intl.NumberFormat("en-US", {
+  return new Intl.NumberFormat("fr-MG", {
     style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
+    currency: "MGA",
+    currencyDisplay: "code", 
+    minimumFractionDigits: 0
   }).format(val);
 }
-
 
 async function viewQuote(id) {
   if (!id) return;
