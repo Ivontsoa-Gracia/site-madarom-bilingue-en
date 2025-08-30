@@ -1,5 +1,5 @@
-const API_URL = 'https://madarom-project-production.up.railway.app/products/details';
-// const API_URL = 'https://madarom-project-production.up.railway.app/products';
+const API_URL = 'https://madarom-project-production.up.railway.app/api/products/details';
+// const API_URL = 'https://madarom-project-production.up.railway.app/api/products';
 const productContainer = document.getElementById('product-container');
 const paginationContainer = document.getElementById('pagination');
 const detailSection = document.getElementById('product-detail');
@@ -319,7 +319,7 @@ async function addToCartStorage(product, quantity) {
     return;
   }
   try {
-    const response = await fetch('https://madarom-project-production.up.railway.app/cart', {
+    const response = await fetch('https://madarom-project-production.up.railway.app/api/cart', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -384,7 +384,7 @@ async function loadCategories() {
   const container = document.getElementById("category-container");
 
   try {
-    const res = await fetch("https://madarom-project-production.up.railway.app/categories");
+    const res = await fetch("https://madarom-project-production.up.railway.app/api/categories");
     const categories = await res.json();
 
     categories.forEach(category => {
@@ -419,7 +419,7 @@ async function loadSubCategories() {
   const container = document.getElementById("subcategory-container");
 
   try {
-    const res = await fetch("https://madarom-project-production.up.railway.app/subcategories");
+    const res = await fetch("https://madarom-project-production.up.railway.app/api/subcategories");
     const subcategories = await res.json();
 
     subcategories.forEach(sub => {
@@ -493,7 +493,7 @@ export async function updateCartCount() {
   }
 
   try {
-    const response = await fetch('https://madarom-project-production.up.railway.app/cart', {
+    const response = await fetch('https://madarom-project-production.up.railway.app/api/cart', {
       headers: {
         'Authorization': `Bearer ${token}`
       }
@@ -532,7 +532,7 @@ export async function loadCategoriesToMenu() {
   const dropdown = document.getElementById("products-dropdown");
 
   try {
-    const res = await fetch("https://madarom-project-production.up.railway.app/categories");
+    const res = await fetch("https://madarom-project-production.up.railway.app/api/categories");
     const categories = await res.json();
 
     categories.forEach(category => {
