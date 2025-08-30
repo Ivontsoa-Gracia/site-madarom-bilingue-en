@@ -3,11 +3,13 @@ let cartItems = [];
 
 // Format prix USD
 function formatPrice(val) {
-  return new Intl.NumberFormat("en-US", {
+  return new Intl.NumberFormat("fr-MG", {
     style: "currency",
-    currency: "USD"
+    currency: "MGA",
+    minimumFractionDigits: 0 // pas de décimales pour l'Ariary
   }).format(val);
 }
+
 
 // Récupère le panier utilisateur depuis la session (liste d’objets avec product_id et quantity)
 async function fetchCartItems() {
@@ -74,7 +76,7 @@ async function fetchProductDetails(id) {
 
     console.log('details produit:', data);
 
-    const price = parseFloat(data.active_price?.amount ?? 0);
+    const price = parseFloat(data.active_price?.amount_mga ?? 0);
     return {
       id: data.id,
       name_latin: data.name_latin,

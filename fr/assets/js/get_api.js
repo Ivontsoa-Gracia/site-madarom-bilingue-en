@@ -11,12 +11,12 @@ const perPage = 6;
 let activeSubCategoryId = null; 
 
 function formatPrice(val) {
-  return new Intl.NumberFormat("en-US", {
+  return new Intl.NumberFormat("fr-MG", {
     style: "currency",
-    currency: "USD"
+    currency: "MGA",
+    minimumFractionDigits: 0 // pas de décimales pour l'Ariary
   }).format(val);
 }
-
 
 document.addEventListener('DOMContentLoaded', fetchProducts);
 
@@ -69,7 +69,7 @@ function renderProducts() {
         
         <!-- Prix -->
         <span class="text-base font-semibold text-red mb-4">
-          ${formatPrice(product.active_price.amount)}
+          ${formatPrice(product.active_price.amount_mga)}
         </span>
 
         <!-- Bouton Panier -->
@@ -78,7 +78,7 @@ function renderProducts() {
             class="w-full btn-primary text-white font-medium py-2 px-4 rounded-full flex items-center justify-center gap-2 transition-colors duration-200"
             onclick="addToCart(${product.id})"
           >
-            <i class="fas fa-cart-plus text-lg"></i> Add to cart
+            <i class="fas fa-cart-plus text-lg"></i> Ajouter au panier
           </button>
         </div>
       </div>
@@ -164,7 +164,7 @@ window.showDetail = function(productId) {
           <div class="flex flex-col w-full sm:w-auto sm:min-w-[120px] mb-10">
             <span class="text-sm text-gray-600 font-medium mb-1">Price/kg</span>
             <span class="text-xl font-bold text-red">
-              ${formatPrice(product.active_price.amount)}
+              ${formatPrice(product.active_price.amount_mga)}
             </span>
           </div>
 
@@ -173,7 +173,7 @@ window.showDetail = function(productId) {
             <button 
               class="btn-primary text-white font-medium px-6 py-2 rounded-full flex items-center justify-center gap-2 transition"
               onclick="addToCart(${product.id})">
-              <i class="fas fa-cart-plus text-lg"></i> Add to cart
+              <i class="fas fa-cart-plus text-lg"></i> Ajouter au panier
             </button>
             
             <button 
@@ -241,7 +241,7 @@ window.addToCart = function(productId) {
               <div class="flex flex-col w-full sm:w-auto sm:min-w-[120px]">
                 <span class="text-sm text-gray-600 font-medium mb-1">Price/kg</span>
                 <span class="text-xl font-bold text-red">
-                  ${formatPrice(product.active_price.amount)}
+                  ${formatPrice(product.active_price.amount_mga)}
                 </span>
               </div>
 
@@ -269,7 +269,7 @@ window.addToCart = function(productId) {
               class="w-full sm:w-auto btn-primary text-white font-semibold py-2 px-6 rounded-full flex items-center justify-center gap-2 transition duration-200"
               onclick="handleAddToCart(${product.id})"
             >
-              <i class="fas fa-cart-plus text-lg"></i> Add to cart
+              <i class="fas fa-cart-plus text-lg"></i> Ajouter au panier
             </button>
 
             <button 
@@ -402,7 +402,7 @@ async function loadCategories() {
       });
 
       const span = document.createElement("span");
-      span.textContent = category.name;
+      span.textContent = category.name_fr;
 
       label.appendChild(input);
       label.appendChild(span);
@@ -425,7 +425,7 @@ async function loadSubCategories() {
     subcategories.forEach(sub => {
       const div = document.createElement("div");
       div.className = "filter-item p-2 rounded cursor-pointer";
-      div.textContent = sub.name;
+      div.textContent = sub.name_fr;
       div.setAttribute("data-id", sub.id);
       div.setAttribute("data-type", "subcategory");
 
@@ -538,7 +538,7 @@ export async function loadCategoriesToMenu() {
     categories.forEach(category => {
       const a = document.createElement("a");
       a.href = "#products"; // redirige vers la section produit
-      a.textContent = category.name;
+      a.textContent = category.name_fr;
       a.className = "block px-4 py-2 hover:bg-gray-100 text-black";
       a.setAttribute("data-category-id", category.id);
 
