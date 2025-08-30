@@ -1,5 +1,5 @@
-const API_URL_REG = 'http://127.0.0.1:8000/api/register';
-const API_URL_LOG = 'http://127.0.0.1:8000/api/login';
+const API_URL_REG = 'https://madarom-project-production.up.railway.app/api/register';
+const API_URL_LOG = 'https://madarom-project-production.up.railway.app/api/login';
 
 async function register(name, email, password, password_confirmation) {
   try {
