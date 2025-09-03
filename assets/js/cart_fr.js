@@ -24,7 +24,7 @@ async function fetchCartItems() {
     // Récupérer les détails de chaque produit
     const detailedCart = await Promise.all(
       localCart.map(async item => {
-        const productDetails = await fetchProductDetails(item.product_id);
+        const productDetails = await fetchProductDetails(item.id);
         if (productDetails) {
           return {
             ...productDetails,   // contient id, name_latin, name_fr, image_path, price...
@@ -302,7 +302,7 @@ async function updateCartQuantity(productId, quantity) {
   if (!token) {
     // Mode localStorage
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const item = cart.find(i => i.product.id === productId);
+    const item = cart.find(i => i.product_id === productId);
     if (item) {
       item.quantity = quantity;
       localStorage.setItem('cart', JSON.stringify(cart));
@@ -334,7 +334,7 @@ async function removeProductFromCart(productId) {
   if (!token) {
     // Mode localStorage
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    cart = cart.filter(i => i.product.id !== productId);
+    cart = cart.filter(i => i.product_id !== productId);
     localStorage.setItem('cart', JSON.stringify(cart));
     return true;
   }
