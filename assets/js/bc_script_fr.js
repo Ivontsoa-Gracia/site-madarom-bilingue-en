@@ -177,7 +177,7 @@ async function fetchUserQuotes() {
   }
 
   try {
-    const response = await fetch("https://madarom-project-production.up.railway.app/api/quote/user", {
+    const response = await fetch("http://127.0.0.1:8000/api/quote/user", {
       headers: {
         "Authorization": `Bearer ${token}`,
         "Content-Type": "application/json"
@@ -230,7 +230,7 @@ async function orderQuote(id) {
   try {
     showLoader(2000);
 
-    const response = await fetch(`https://madarom-project-production.up.railway.app/api/quote/order/${id}`, {
+    const response = await fetch(`http://127.0.0.1:8000/api/quote/order/${id}`, {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${token}`,
@@ -265,7 +265,7 @@ async function clearQuote(id) {
   try {
     showLoader(2000);
 
-    const response = await fetch(`https://madarom-project-production.up.railway.app/api/quote/cancel/${id}`, {
+    const response = await fetch(`http://127.0.0.1:8000/api/quote/cancel/${id}`, {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${token}`,

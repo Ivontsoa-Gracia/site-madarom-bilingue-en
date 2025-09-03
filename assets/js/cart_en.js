@@ -1,4 +1,4 @@
-const api_url = "https://madarom-project-production.up.railway.app/api";
+const api_url = "http://127.0.0.1:8000/api";
 let cartItems = [];
 
 // Format prix USD
