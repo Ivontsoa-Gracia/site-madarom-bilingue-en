@@ -1,8 +1,6 @@
 const api_url = "http://127.0.0.1:8000/api";
 let cartItems = [];
 
-import { saveLastUrl } from './url.js';
-
 function formatPrice(val) {
   return new Intl.NumberFormat("fr-MG", {
     style: "currency",
@@ -562,3 +560,9 @@ async function clearCart() {
   }, 1500);
 }
 
+export function saveLastUrl() {
+  const currentUrl = window.location.href;
+  if (!currentUrl.includes("/signin")) {
+    localStorage.setItem("last_url", currentUrl);
+  }
+}
