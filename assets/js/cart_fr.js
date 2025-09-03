@@ -1,6 +1,8 @@
 const api_url = "http://127.0.0.1:8000/api";
 let cartItems = [];
 
+import { saveLastUrl } from './url.js';
+
 function formatPrice(val) {
   return new Intl.NumberFormat("fr-MG", {
     style: "currency",
@@ -432,10 +434,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   
       // Vérifier si l'utilisateur est connecté
       if (!token) {
+        saveLastUrl();
         window.location.href = "/signin";
-        return;
       }
-  
+      
       // Vérifier si un panier existe dans localStorage
       const localCart = localStorage.getItem("cart");
       if (localCart) {
