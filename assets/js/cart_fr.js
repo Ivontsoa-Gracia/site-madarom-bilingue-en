@@ -439,41 +439,41 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
       
       // Vérifier si un panier existe dans localStorage
-      const localCart = localStorage.getItem("cart");
-      if (localCart) {
-        const cartItems = JSON.parse(localCart);
+      // const localCart = localStorage.getItem("cart");
+      // if (localCart) {
+      //   const cartItems = JSON.parse(localCart);
   
-        // Envoyer chaque item du panier au backend /cart
-        for (const cartItem of cartItems) {
-          try {
-            const response = await fetch("http://127.0.0.1:8000/api/cart", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-              },
-              body: JSON.stringify({
-                product_id: cartItem.product_id || cartItem.product.id, // selon ta structure
-                quantity: cartItem.quantity
-              })
-            });
+      //   // Envoyer chaque item du panier au backend /cart
+      //   for (const cartItem of cartItems) {
+      //     try {
+      //       const response = await fetch("http://127.0.0.1:8000/api/cart", {
+      //         method: "POST",
+      //         headers: {
+      //           "Content-Type": "application/json",
+      //           "Authorization": `Bearer ${token}`
+      //         },
+      //         body: JSON.stringify({
+      //           product_id: cartItem.product_id || cartItem.product.id, // selon ta structure
+      //           quantity: cartItem.quantity
+      //         })
+      //       });
   
-            if (!response.ok) {
-              const errorData = await response.json();
-              console.error("Erreur API ajout panier:", errorData);
-              alert("Erreur lors de l'ajout au panier : " + (errorData.message || "Erreur inconnue"));
-              return; // stoppe si une erreur
-            }
-          } catch (error) {
-            console.error("Erreur réseau:", error);
-            alert("Erreur réseau lors de l'ajout au panier.");
-            return;
-          }
-        }
+      //       if (!response.ok) {
+      //         const errorData = await response.json();
+      //         console.error("Erreur API ajout panier:", errorData);
+      //         alert("Erreur lors de l'ajout au panier : " + (errorData.message || "Erreur inconnue"));
+      //         return; // stoppe si une erreur
+      //       }
+      //     } catch (error) {
+      //       console.error("Erreur réseau:", error);
+      //       alert("Erreur réseau lors de l'ajout au panier.");
+      //       return;
+      //     }
+      //   }
   
-        // Une fois que le panier local est envoyé, on peut le vider
-        localStorage.removeItem("cart");
-      }
+      //   // Une fois que le panier local est envoyé, on peut le vider
+      //   localStorage.removeItem("cart");
+      // }
   
       // Enfin → envoyer la demande de devis
       const notes = "Quote request";
