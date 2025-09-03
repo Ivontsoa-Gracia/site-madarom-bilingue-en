@@ -318,22 +318,28 @@ async function addToCartStorage(product, quantity) {
   if (!token) {
     // Utilisateur non connecté → stocker dans localStorage
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
+  
     // Vérifier si le produit existe déjà dans le panier
-    const existingItem = cart.find(item => item.product.id === product.id);
+    const existingItem = cart.find(item => item.product_id === product.id);
+  
     if (existingItem) {
       existingItem.quantity += quantity;
     } else {
-      cart.push({ product, quantity });
+      cart.push({
+        product_id: product.id,
+        price: product.active_price?.amount ?? 0,
+        quantity: quantity
+      });
     }
-
+  
     localStorage.setItem('cart', JSON.stringify(cart));
-
+  
     showNotification(`${product.name_latin} ajouté au panier (${quantity} kg)`);
     hideDetail();
     updateCartCount();
     return; // on sort de la fonction, pas besoin d'appeler l'API
   }
+  
 
   // Utilisateur connecté → appel API
   try {
