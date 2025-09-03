@@ -327,7 +327,6 @@ async function addToCartStorage(product, quantity) {
     } else {
       cart.push({
         product_id: product.id,
-        price: product.active_price?.amount ?? 0,
         quantity: quantity
       });
     }

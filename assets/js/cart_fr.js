@@ -21,16 +21,27 @@ async function fetchCartItems() {
   
     const localCart = JSON.parse(localStorage.getItem('cart')) || [];
   
-    cartItems = localCart.map(item => ({
-      product_id: item.product_id,
-      price: item.price,
-      quantity: item.quantity
-    }));
+    // Récupérer les détails de chaque produit
+    const detailedCart = await Promise.all(
+      localCart.map(async item => {
+        const productDetails = await fetchProductDetails(item.product_id);
+        if (productDetails) {
+          return {
+            ...productDetails,   // contient id, name_latin, name_fr, image_path, price...
+            quantity: item.quantity
+          };
+        }
+        return null;
+      })
+    );
   
-    console.log("Panier local récupéré:", cartItems);
+    cartItems = detailedCart.filter(p => p !== null);
+  
+    console.log("Panier local détaillé:", cartItems);
     updateCartDisplay();
     return;
   }
+  
   
 
   try {
