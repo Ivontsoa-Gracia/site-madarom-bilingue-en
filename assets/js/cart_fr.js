@@ -18,18 +18,20 @@ async function fetchCartItems() {
 
   if (!token) {
     console.warn("Aucun token trouvé → utilisateur non connecté, récupération depuis localStorage.");
-
+  
     const localCart = JSON.parse(localStorage.getItem('cart')) || [];
-
+  
     cartItems = localCart.map(item => ({
-      ...item.product,
+      product_id: item.product_id,
+      price: item.price,
       quantity: item.quantity
     }));
-
+  
     console.log("Panier local récupéré:", cartItems);
     updateCartDisplay();
     return;
   }
+  
 
   try {
     const res = await fetch(`${api_url}/cart`, {
