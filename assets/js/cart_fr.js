@@ -266,7 +266,7 @@ function updateCartDisplay() {
 }
 
 // Change la quantité et met à jour l’API
-async function changeQuantity(index, delta) {
+  window.changeQuantity = async function (index, delta) {
   const product = cartItems[index];
   const newQty = product.quantity + delta;
   if (newQty < 1) return;
@@ -279,7 +279,7 @@ async function changeQuantity(index, delta) {
 }
 
 // Saisie directe dans l’input de quantité
-async function onQuantityInputChange(e, index) {
+  window.onQuantityInputChange = async function(e, index) {
   let val = parseInt(e.target.value);
   if (isNaN(val) || val < 1) {
     val = 1;
@@ -354,7 +354,7 @@ async function removeProductFromCart(productId) {
 // Supprime un produit via modal
 let productToRemoveIndex = null;
 
-function removeProduct(index) {
+window.removeProduct = function(index) {
   productToRemoveIndex = index;
   const productName = cartItems[index]?.name_latin || "ce produit";
   document.getElementById("product-name-to-remove").textContent = productName;
