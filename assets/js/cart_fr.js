@@ -560,7 +560,7 @@ async function clearCart() {
   }, 1500);
 }
 
-export function saveLastUrl() {
+function saveLastUrl() {
   const currentUrl = window.location.href;
   if (!currentUrl.includes("/signin")) {
     localStorage.setItem("last_url", currentUrl);
