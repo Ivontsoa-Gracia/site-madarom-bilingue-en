@@ -55,7 +55,7 @@
   </div>
 
   <script type="module">
-  import { saveLastUrl } from '../../assets/js/url.js';
+  import { getLastUrl, clearLastUrl } from '../../assets/js/url.js';
 
   const API_URL_LOG = 'http://127.0.0.1:8000/api/login'; 
 
@@ -76,7 +76,6 @@
     };
 
     try {
-
       const res = await fetch(API_URL_LOG, {
         method: "POST",
         headers: {
@@ -87,32 +86,33 @@
 
       if (res.ok) {
         const data = await res.json();
-        // sessionStorage.removeItem("user"); 
         sessionStorage.setItem("token", data.token);
 
-        if(data.user.role === 'admin')
-        {
+        if (data.user.role === "admin") {
           location.assign("/admin/dashboard");
+        } else {
+          const lastUrl = getLastUrl();
+          clearLastUrl();
+          if (lastUrl) {
+            window.location.href = lastUrl; 
+          } else {
+            const lang = sessionStorage.getItem("lang")?.toLowerCase() || "fr";
+            window.location.href = `${window.location.origin}/${lang}/`;
+          }
         }
-        else {
-          const lang = sessionStorage.getItem('lang').toLowerCase();
-          window.location.href = `${window.location.origin}/${lang}/`;
-
-        }
-
       } else {
         const error = await res.json();
-        // alert(error.message || "Identifiants incorrects.");
+        alert(error.message || "Identifiants incorrects.");
       }
-
     } catch (error) {
       console.error("Erreur :", error);
-      // alert("Une erreur est survenue.");
+      alert("Une erreur est survenue.");
     } finally {
       btn.disabled = false;
       btn.innerHTML = "Se connecter";
     }
   });
+
 
   // Afficher / masquer le mot de passe
   document.querySelector(".toggle-password").addEventListener("click", () => {
