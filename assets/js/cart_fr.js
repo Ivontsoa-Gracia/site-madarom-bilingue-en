@@ -24,7 +24,7 @@ async function fetchCartItems() {
     // Récupérer les détails de chaque produit
     const detailedCart = await Promise.all(
       localCart.map(async item => {
-        const productDetails = await fetchProductDetails(item.id);
+        const productDetails = await fetchProductDetails(item.product_id);
         if (productDetails) {
           return {
             ...productDetails,   // contient id, name_latin, name_fr, image_path, price...
