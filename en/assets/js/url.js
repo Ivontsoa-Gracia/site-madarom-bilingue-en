@@ -1,10 +1,10 @@
-// const LAST_URL = 'https://madarom-project-production.up.railway.app/api/url';
+// const LAST_URL = 'http://127.0.0.1:8000/api/url';
 
 export function saveLastUrl() {
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user || !user.token) return;
 
-    fetch("https://madarom-project-production.up.railway.app/api/url", {
+    fetch("http://127.0.0.1:8000/api/url", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -23,7 +23,7 @@ export async function getLastUrl() {
     if (!user || !user.token) return null;
   
     try {
-      const response = await fetch("https://madarom-project-production.up.railway.app/api/url", {
+      const response = await fetch("http://127.0.0.1:8000/api/url", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

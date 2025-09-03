@@ -1,5 +1,5 @@
-const API_URL = 'https://madarom-project-production.up.railway.app/api/products/details';
-// const API_URL = 'https://madarom-project-production.up.railway.app/api/products';
+const API_URL = 'http://127.0.0.1:8000/api/products/details';
+// const API_URL = 'http://127.0.0.1:8000/api/products';
 const productContainer = document.getElementById('product-container');
 const paginationContainer = document.getElementById('pagination');
 const detailSection = document.getElementById('product-detail');
@@ -11,13 +11,12 @@ const perPage = 6;
 let activeSubCategoryId = null; 
 
 function formatPrice(val) {
-  return new Intl.NumberFormat("fr-MG", {
+  return new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "MGA",
-    currencyDisplay: "code", 
-    minimumFractionDigits: 0
+    currency: "USD"
   }).format(val);
 }
+
 
 document.addEventListener('DOMContentLoaded', fetchProducts);
 
@@ -70,7 +69,7 @@ function renderProducts() {
         
         <!-- Prix -->
         <span class="text-base font-semibold text-red mb-4">
-          ${formatPrice(product.active_price.amount_mga)}
+          ${formatPrice(product.active_price.amount)}
         </span>
 
         <!-- Bouton Panier -->
@@ -79,7 +78,7 @@ function renderProducts() {
             class="w-full btn-primary text-white font-medium py-2 px-4 rounded-full flex items-center justify-center gap-2 transition-colors duration-200"
             onclick="addToCart(${product.id})"
           >
-            <i class="fas fa-cart-plus text-lg"></i> Ajouter au panier
+            <i class="fas fa-cart-plus text-lg"></i> Add to cart
           </button>
         </div>
       </div>
@@ -165,7 +164,7 @@ window.showDetail = function(productId) {
           <div class="flex flex-col w-full sm:w-auto sm:min-w-[120px] mb-10">
             <span class="text-sm text-gray-600 font-medium mb-1">Price/kg</span>
             <span class="text-xl font-bold text-red">
-              ${formatPrice(product.active_price.amount_mga)}
+              ${formatPrice(product.active_price.amount)}
             </span>
           </div>
 
@@ -174,7 +173,7 @@ window.showDetail = function(productId) {
             <button 
               class="btn-primary text-white font-medium px-6 py-2 rounded-full flex items-center justify-center gap-2 transition"
               onclick="addToCart(${product.id})">
-              <i class="fas fa-cart-plus text-lg"></i> Ajouter au panier
+              <i class="fas fa-cart-plus text-lg"></i> Add to cart
             </button>
             
             <button 
@@ -202,14 +201,14 @@ window.showDetail = function(productId) {
 
 window.addToCart = function(productId) {
 
-  sessionStorage.removeItem('cart');
+  // sessionStorage.removeItem('cart');
 
-  const token = sessionStorage.getItem('token');
+  // const token = sessionStorage.getItem('token');
   
-  if (!token) {
-    window.location.href = "/signin";
-    return;
-  }
+  // if (!token) {
+  //   window.location.href = "/signin";
+  //   return;
+  // }
 
   const product = allProducts.find(p => p.id === productId);
   if (!product) return;
@@ -242,7 +241,7 @@ window.addToCart = function(productId) {
               <div class="flex flex-col w-full sm:w-auto sm:min-w-[120px]">
                 <span class="text-sm text-gray-600 font-medium mb-1">Price/kg</span>
                 <span class="text-xl font-bold text-red">
-                  ${formatPrice(product.active_price.amount_mga)}
+                  ${formatPrice(product.active_price.amount)}
                 </span>
               </div>
 
@@ -270,7 +269,7 @@ window.addToCart = function(productId) {
               class="w-full sm:w-auto btn-primary text-white font-semibold py-2 px-6 rounded-full flex items-center justify-center gap-2 transition duration-200"
               onclick="handleAddToCart(${product.id})"
             >
-              <i class="fas fa-cart-plus text-lg"></i> Ajouter au panier
+              <i class="fas fa-cart-plus text-lg"></i> Add to cart
             </button>
 
             <button 
@@ -315,12 +314,30 @@ window.hideDetail = function() {
 
 async function addToCartStorage(product, quantity) {
   const token = sessionStorage.getItem('token');
+
   if (!token) {
-    window.location.href = "/signin";
-    return;
+    // Utilisateur non connecté → stocker dans localStorage
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Vérifier si le produit existe déjà dans le panier
+    const existingItem = cart.find(item => item.product.id === product.id);
+    if (existingItem) {
+      existingItem.quantity += quantity;
+    } else {
+      cart.push({ product, quantity });
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    showNotification(`${product.name_latin} ajouté au panier (${quantity} kg)`);
+    hideDetail();
+    updateCartCount();
+    return; // on sort de la fonction, pas besoin d'appeler l'API
   }
+
+  // Utilisateur connecté → appel API
   try {
-    const response = await fetch('https://madarom-project-production.up.railway.app/api/cart', {
+    const response = await fetch('http://127.0.0.1:8000/api/cart', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -333,16 +350,13 @@ async function addToCartStorage(product, quantity) {
     });
 
     if (!response.ok) {
-      // gérer erreur si besoin (ex: 401, 422, etc)
       const errorData = await response.json();
       console.error('Erreur API ajout panier:', errorData);
       alert('Erreur lors de l\'ajout au panier : ' + (errorData.message || 'Erreur inconnue'));
       return;
     }
 
-    const data = await response.json();
-
-    showNotification(`${product.name_latin} added to cart (${quantity} kg)`);
+    showNotification(`${product.name_latin} ajouté au panier (${quantity} kg)`);
     hideDetail();
     updateCartCount();
   } catch (error) {
@@ -352,12 +366,51 @@ async function addToCartStorage(product, quantity) {
 }
 
 
+// async function addToCartStorage(product, quantity) {
+//   const token = sessionStorage.getItem('token');
+//   if (!token) {
+//     window.location.href = "/signin";
+//     return;
+//   }
+//   try {
+//     const response = await fetch('http://127.0.0.1:8000/api/cart', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'Authorization': `Bearer ${token}`
+//       },
+//       body: JSON.stringify({
+//         product_id: product.id,
+//         quantity: quantity
+//       })
+//     });
+
+//     if (!response.ok) {
+//       // gérer erreur si besoin (ex: 401, 422, etc)
+//       const errorData = await response.json();
+//       console.error('Erreur API ajout panier:', errorData);
+//       alert('Erreur lors de l\'ajout au panier : ' + (errorData.message || 'Erreur inconnue'));
+//       return;
+//     }
+
+//     const data = await response.json();
+
+//     showNotification(`${product.name_latin} added to cart (${quantity} kg)`);
+//     hideDetail();
+//     updateCartCount();
+//   } catch (error) {
+//     console.error('Erreur réseau:', error);
+//     alert('Erreur réseau, veuillez réessayer plus tard.');
+//   }
+// }
+
+
 window.handleAddToCart = function(productId) {
-  const token = sessionStorage.getItem('token');
-  if (!token) {
-    window.location.href = "/signin";
-    return;
-  }
+  // const token = sessionStorage.getItem('token');
+  // if (!token) {
+  //   window.location.href = "/signin";
+  //   return;
+  // }
   const product = allProducts.find(p => p.id === productId);
   const quantity = parseInt(document.getElementById('quantity').value) || 1;
   addToCartStorage(product, quantity);
@@ -385,7 +438,7 @@ async function loadCategories() {
   const container = document.getElementById("category-container");
 
   try {
-    const res = await fetch("https://madarom-project-production.up.railway.app/api/categories");
+    const res = await fetch("http://127.0.0.1:8000/api/categories");
     const categories = await res.json();
 
     categories.forEach(category => {
@@ -403,7 +456,7 @@ async function loadCategories() {
       });
 
       const span = document.createElement("span");
-      span.textContent = category.name_fr;
+      span.textContent = category.name;
 
       label.appendChild(input);
       label.appendChild(span);
@@ -420,13 +473,13 @@ async function loadSubCategories() {
   const container = document.getElementById("subcategory-container");
 
   try {
-    const res = await fetch("https://madarom-project-production.up.railway.app/api/subcategories");
+    const res = await fetch("http://127.0.0.1:8000/api/subcategories");
     const subcategories = await res.json();
 
     subcategories.forEach(sub => {
       const div = document.createElement("div");
       div.className = "filter-item p-2 rounded cursor-pointer";
-      div.textContent = sub.name_fr;
+      div.textContent = sub.name;
       div.setAttribute("data-id", sub.id);
       div.setAttribute("data-type", "subcategory");
 
@@ -486,18 +539,20 @@ export async function updateCartCount() {
   if (!desktopCount && !mobileCount) return;
 
   const token = sessionStorage.getItem("token");
+
   if (!token) {
-    // Pas de token = panier vide ou pas connecté
-    if (desktopCount) desktopCount.textContent = '0';
-    if (mobileCount) mobileCount.textContent = '0';
+    // Panier local pour utilisateur non connecté
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+    if (desktopCount) desktopCount.textContent = count;
+    if (mobileCount) mobileCount.textContent = count;
     return;
   }
 
+  // Utilisateur connecté → récupération panier via API
   try {
-    const response = await fetch('https://madarom-project-production.up.railway.app/api/cart', {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
+    const response = await fetch('http://127.0.0.1:8000/api/cart', {
+      headers: { 'Authorization': `Bearer ${token}` }
     });
 
     if (!response.ok) {
@@ -508,19 +563,59 @@ export async function updateCartCount() {
     }
 
     const cartItems = await response.json();
-
-    // Supposons que cartItems est un tableau des produits dans le panier
     const count = cartItems.length;
 
     if (desktopCount) desktopCount.textContent = count;
     if (mobileCount) mobileCount.textContent = count;
-
   } catch (error) {
     console.error('Erreur réseau récupération panier:', error);
     if (desktopCount) desktopCount.textContent = '0';
     if (mobileCount) mobileCount.textContent = '0';
   }
 }
+
+
+// export async function updateCartCount() {
+//   const desktopCount = document.getElementById("cart-count");
+//   const mobileCount = document.getElementById("cart-count-mobile");
+//   if (!desktopCount && !mobileCount) return;
+
+//   const token = sessionStorage.getItem("token");
+//   if (!token) {
+//     // Pas de token = panier vide ou pas connecté
+//     if (desktopCount) desktopCount.textContent = '0';
+//     if (mobileCount) mobileCount.textContent = '0';
+//     return;
+//   }
+
+//   try {
+//     const response = await fetch('http://127.0.0.1:8000/api/cart', {
+//       headers: {
+//         'Authorization': `Bearer ${token}`
+//       }
+//     });
+
+//     if (!response.ok) {
+//       console.error('Erreur API récupération panier:', response.status);
+//       if (desktopCount) desktopCount.textContent = '0';
+//       if (mobileCount) mobileCount.textContent = '0';
+//       return;
+//     }
+
+//     const cartItems = await response.json();
+
+//     // Supposons que cartItems est un tableau des produits dans le panier
+//     const count = cartItems.length;
+
+//     if (desktopCount) desktopCount.textContent = count;
+//     if (mobileCount) mobileCount.textContent = count;
+
+//   } catch (error) {
+//     console.error('Erreur réseau récupération panier:', error);
+//     if (desktopCount) desktopCount.textContent = '0';
+//     if (mobileCount) mobileCount.textContent = '0';
+//   }
+// }
 
 // Appel initial
 updateCartCount();
@@ -533,13 +628,13 @@ export async function loadCategoriesToMenu() {
   const dropdown = document.getElementById("products-dropdown");
 
   try {
-    const res = await fetch("https://madarom-project-production.up.railway.app/api/categories");
+    const res = await fetch("http://127.0.0.1:8000/api/categories");
     const categories = await res.json();
 
     categories.forEach(category => {
       const a = document.createElement("a");
       a.href = "#products"; // redirige vers la section produit
-      a.textContent = category.name_fr;
+      a.textContent = category.name;
       a.className = "block px-4 py-2 hover:bg-gray-100 text-black";
       a.setAttribute("data-category-id", category.id);
 
