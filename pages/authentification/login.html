@@ -118,6 +118,8 @@
                   alert("Erreur lors de l'ajout au panier : " + (errorData.message || "Erreur inconnue"));
                   return; // stoppe si une erreur
                 }
+
+                removeItem.localStorage("cart");
               } catch (error) {
                 console.error("Erreur réseau:", error);
                 alert("Erreur réseau lors de l'ajout au panier.");
