@@ -450,3 +450,12 @@ function saveLastUrl() {
     localStorage.setItem("last_url", currentUrl);
   }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const token = sessionStorage.getItem("token"); 
+  const userMenus = document.getElementById("user-menus");
+
+  if (token) {
+    userMenus.classList.remove("hidden");
+  }
+});
