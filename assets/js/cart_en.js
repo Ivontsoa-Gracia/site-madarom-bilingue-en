@@ -376,11 +376,11 @@ document.addEventListener("DOMContentLoaded", async () => {
           alert("Quote request sent successfully!");
         } else {
           const errorData = await res.json();
-          alert("Error: " + (errorData.error || "Failed to send quote request"));
+          console.error("Network error:", errorData.error);
+
         }
       } catch (error) {
         console.error("Network error:", error);
-        alert("Network error, please try again later.");
       }
     });
   }
