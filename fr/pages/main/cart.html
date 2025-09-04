@@ -17,14 +17,12 @@
   <header class="w-full bg-[#fcffff] py-4 px-4 md:px-6 shadow-sm">
     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
       
-      <!-- Left: Keep Shopping -->
       <div class="flex items-center gap-2 text-sm">
         <a href="/fr/products" class="hover:underline text-primary flex items-center">
           <i class="fas fa-arrow-left mr-1"></i> Continuer vos achats
         </a>
       </div>
   
-      <!-- Center: Purchase Steps -->
       <div class="overflow-x-auto">
         <div class="flex items-center gap-3 md:gap-6 text-primary text-xs md:text-sm font-medium min-w-max">
           
@@ -71,7 +69,7 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
 
-      <!-- Products List -->
+      
       <section
         class="bg-white rounded-[4px] p-6 lg:col-span-3">
         <div class="flex items-center justify-between mb-6">
@@ -86,13 +84,11 @@
         
         </div>
 
-        <!-- Flèche gauche -->
         <button id="scroll-left"
         class="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 backdrop-blur-md bg-white/30 border border-white/20 text-teal rounded-[4px] shadow-lg p-2 sm:hidden hover:bg-white/40 transition duration-200">
         <i class="fas fa-chevron-left"></i>
       </button>
 
-      <!-- Flèche droite -->
       <button id="scroll-right"
         class="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 backdrop-blur-md bg-white/30 border border-white/20 text-teal rounded-[4px] shadow-lg p-2 sm:hidden hover:bg-white/40 transition duration-200">
         <i class="fas fa-chevron-right"></i>
@@ -101,12 +97,12 @@
         <div class="relative">
           <div id="cart-container"
             class="flex sm:block overflow-x-auto gap-4 sm:gap-0 sm:space-y-6 scrollbar-thin scrollbar-thumb-teal-500 scrollbar-track-gray-200 snap-x sm:snap-none scroll-smooth">
-            <!-- JS injecte les produits ici -->
+            
           </div>
         </div>
       </section>
 
-      <!-- Summary -->
+      
       <aside class="bg-white rounded-[4px] p-6 lg:col-span-2 flex flex-col justify-between">
         <div>
           <h2 class="text-xl sm:text-2xl font-semibold mb-6" text-primary>Récapitulatif</h2>
@@ -127,7 +123,6 @@
     </div>
   </div>
 
-  <!-- Delete Confirmation Modal -->
   <div id="confirm-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center px-4 z-50">
     <div
       class="bg-white rounded-xl p-6 max-w-sm w-full transition-opacity duration-300 ease-in-out opacity-100">
@@ -148,7 +143,6 @@
     </div>
   </div>
 
-  <!-- Confirmation Modal centered -->
   <div id="clearCartModal"
     class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center px-4 z-50">
 

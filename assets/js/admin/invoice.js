@@ -221,4 +221,3 @@ function initInvoices() {
         }).format(val);
       }
 }
-

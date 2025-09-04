@@ -234,3 +234,4 @@ function formatPrice(val) {
       maximumFractionDigits: 2
     }).format(val);
   }
+  

@@ -37,62 +37,58 @@ const articles = [
   }
 ];
 
-  
-  // Fonction pour afficher la liste d’articles (pour la page principale)
   function renderArticlesList(containerId) {
     const container = document.getElementById(containerId);
     if (!container) return;
-  
+
     container.innerHTML = "";
     articles.forEach((item) => {
       container.innerHTML += `
         <article
-          class="cursor-pointer bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-row group mx-auto"
-          onclick="window.location.href='/fr/blog-details?id=${item.id}'"
+          class="cursor-pointer bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col md:flex-row group mx-auto max-w-4xl"
+          onclick="window.location.href='/blog-details?id=${item.id}'"
           role="button"
           tabindex="0"
-          onkeydown="if(event.key==='Enter'){window.location.href='/fr/blog-details?id=${item.id}'}"
+          onkeydown="if(event.key==='Enter'){window.location.href='/blog-details?id=${item.id}'}"
         >
-          <!-- Right: Image -->
-          <div class="w-72 shrink-0 relative overflow-hidden rounded-r-2xl">
+          <!-- Image -->
+          <div class="w-full md:w-72 h-56 md:h-auto shrink-0 relative overflow-hidden md:rounded-r-2xl">
             <img
               src="${item.image[0]}"
               alt="${item.title}"
-              class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105 rounded-r-2xl"
+              class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
               loading="lazy"
             />
           </div>
         
-          <!-- Left: Content -->
-          <div class="flex flex-col justify-between p-6 flex-1 min-w-0">
-            <div class="flex justify-between items-center mb-3">
+          <!-- Content -->
+          <div class="flex flex-col justify-between p-4 md:p-6 flex-1 min-w-0">
+            <div class="flex justify-between items-center mb-2 md:mb-3">
               <time
                 datetime="${item.date.replace(/(\d{2})\/(\d{2})\/(\d{2})/, '20$3-$2-$1')}"
-                class="text-gray-400 text-xs tracking-wide"
+                class="text-gray-400 text-xs md:text-sm tracking-wide"
               >
-              Publié le ${item.date}
+                Published on ${item.date}
               </time>
               <span
-                class="inline-block cursor-pointer select-none text-[#ab1a17] hover:text-[#81110e] font-semibold text-sm transition-colors duration-300"
+                class="inline-block cursor-pointer select-none text-[#ab1a17] hover:text-[#81110e] font-semibold text-xs md:text-sm transition-colors duration-300"
               >
-                Voir plus →
+                Show more →
               </span>
             </div>
         
             <h3
-              class="text-2xl font-semibold text-[#222831] leading-snug line-clamp-2 mb-2"
+              class="text-lg md:text-2xl font-semibold text-[#222831] leading-snug line-clamp-2 mb-2"
               title="${item.title}"
             >
               ${item.title}
             </h3>
         
-            <p class="text-gray-600 text-base line-clamp-4 mt-2 leading-relaxed">
+            <p class="text-gray-600 text-sm md:text-base line-clamp-4 mt-1 md:mt-2 leading-relaxed">
               ${item.summary}
             </p>
           </div>
         </article>
-    
-    
       `;
     });
   }

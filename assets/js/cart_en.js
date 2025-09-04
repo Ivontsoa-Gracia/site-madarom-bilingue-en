@@ -67,7 +67,6 @@ async function fetchCartItems() {
     );
 
     cartItems = detailedCart.filter(p => p !== null);
-    // console.log("detailedCart après filtrage:", cartItems);
 
     updateCartDisplay();
 
