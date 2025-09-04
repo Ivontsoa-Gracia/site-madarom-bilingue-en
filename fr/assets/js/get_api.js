@@ -546,9 +546,9 @@ export async function updateCartCount() {
   const token = sessionStorage.getItem("token");
 
   if (!token) {
-    // Panier local pour utilisateur non connecté
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const count = cart.length;
     if (desktopCount) desktopCount.textContent = count;
     if (mobileCount) mobileCount.textContent = count;
     return;
