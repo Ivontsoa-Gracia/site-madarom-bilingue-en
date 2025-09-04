@@ -13,19 +13,19 @@ document.addEventListener('DOMContentLoaded', () => {
       headerPlaceholder.innerHTML = html;
 
       const token = sessionStorage.getItem('token');
-      const cartBtnDesktop = document.querySelector('.btn-cart'); 
-      const cartBtnMobile = document.getElementById('cart-count-mobile')?.closest('.btn-cart'); 
+      // const cartBtnDesktop = document.querySelector('.btn-cart'); 
+      // const cartBtnMobile = document.getElementById('cart-count-mobile')?.closest('.btn-cart'); 
       const loginBtn = document.getElementById('login-btn'); 
       const loginBtnMobile = document.getElementById('login-btn-mobile'); 
 
       if (!token) {
-        if (cartBtnDesktop) cartBtnDesktop.classList.add('hidden');
-        if (cartBtnMobile) cartBtnMobile.classList.add('hidden');
+        // if (cartBtnDesktop) cartBtnDesktop.classList.add('hidden');
+        // if (cartBtnMobile) cartBtnMobile.classList.add('hidden');
         if (loginBtn) loginBtn.classList.remove('hidden');
         if (loginBtnMobile) loginBtnMobile.classList.remove('hidden');
       } else {
-        if (cartBtnDesktop) cartBtnDesktop.classList.remove('hidden');
-        if (cartBtnMobile) cartBtnMobile.classList.remove('hidden');
+        // if (cartBtnDesktop) cartBtnDesktop.classList.remove('hidden');
+        // if (cartBtnMobile) cartBtnMobile.classList.remove('hidden');
         if (loginBtn) loginBtn.classList.add('hidden');
         if (loginBtnMobile) loginBtnMobile.classList.add('hidden');
       }

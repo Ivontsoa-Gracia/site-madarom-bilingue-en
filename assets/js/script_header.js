@@ -21,14 +21,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (!token) {
         // Utilisateur non connecté : masquer panier, montrer login
-        if (cartBtnDesktop) cartBtnDesktop.classList.add('hidden');
-        if (cartBtnMobile) cartBtnMobile.classList.add('hidden');
+        // if (cartBtnDesktop) cartBtnDesktop.classList.add('hidden');
+        // if (cartBtnMobile) cartBtnMobile.classList.add('hidden');
         if (loginBtn) loginBtn.classList.remove('hidden');
         if (loginBtnMobile) loginBtnMobile.classList.remove('hidden');
       } else {
         // Utilisateur connecté : montrer panier, masquer login
-        if (cartBtnDesktop) cartBtnDesktop.classList.remove('hidden');
-        if (cartBtnMobile) cartBtnMobile.classList.remove('hidden');
+        // if (cartBtnDesktop) cartBtnDesktop.classList.remove('hidden');
+        // if (cartBtnMobile) cartBtnMobile.classList.remove('hidden');
         if (loginBtn) loginBtn.classList.add('hidden');
         if (loginBtnMobile) loginBtnMobile.classList.add('hidden');
       }
