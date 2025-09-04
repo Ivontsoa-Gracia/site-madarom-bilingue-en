@@ -107,11 +107,11 @@
     }
 
     function formatPrice(val) {
-      return new Intl.NumberFormat("fr-MG", {
+      return new Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: "MGA",
-        currencyDisplay: "code", 
-        minimumFractionDigits: 0
+        currency: "USD",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
       }).format(val);
     }
 
@@ -146,14 +146,14 @@
         let total = 0;
 
         quote.items.forEach(item => {
-          const sub = item.price_snapshot_mga * item.quantity; 
+          const sub = item.price_snapshot * item.quantity; 
           total += sub;
 
           tbody.innerHTML += `
             <tr>
               <td class="py-2 px-2">${item.product.name_fr}</td>
               <td class="py-2 px-2 text-center">${item.quantity}</td>
-              <td class="py-2 px-2 text-right">${formatPrice(item.price_snapshot_mga)}</td>
+              <td class="py-2 px-2 text-right">${formatPrice(item.price_snapshot)}</td>
               <td class="py-2 px-2 text-right">${formatPrice(sub)}</td>
             </tr>`;
         });

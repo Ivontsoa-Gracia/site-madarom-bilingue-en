@@ -202,17 +202,16 @@ sortOrder.addEventListener('change', applyFilters);
 fetchUserQuotes();
 
 function formatPrice(val) {
-  return new Intl.NumberFormat("fr-MG", {
+  return new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "MGA",
-    currencyDisplay: "code", 
-    minimumFractionDigits: 0
+    currency: "USD",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
   }).format(val);
 }
 
 async function viewQuote(id) {
   if (!id) return;
-  // window.location.href = `/fr/quote/show?ref=${encodeURIComponent(id)}`;
   const lang = sessionStorage.getItem('lang').toLowerCase();
   window.location.href = `/fr/quote/show?ref=${encodeURIComponent(id)}`;
 
@@ -242,21 +241,18 @@ async function orderQuote(id) {
       let data = {};
       try { data = await response.json(); } catch (err) {}
       console.error("Backend error:", data);
-      // alert(`Erreur ${response.status}: ${data.message || "Voir console pour détails"}`);
       return;
     }
     
     showToast("Order placed successfully!");
   } catch (error) {
     console.error("Error:", error);
-    // alert("Erreur réseau ou inattendue: " + error.message);
   }
 }
 
 async function clearQuote(id) {
   const token = sessionStorage.getItem("token");
   if (!token) {
-    // alert("No token found. Please log in.");
     return;
   }
 
@@ -277,7 +273,6 @@ async function clearQuote(id) {
       let data = {};
       try { data = await response.json(); } catch (err) {}
       console.error("Backend error:", data);
-      // alert(`Erreur ${response.status}: ${data.message || "Voir console pour détails"}`);
       return;
     }
     

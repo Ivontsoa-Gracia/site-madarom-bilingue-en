@@ -1,5 +1,4 @@
 const API_URL = 'http://127.0.0.1:8000/api/products/details';
-// const API_URL = 'http://127.0.0.1:8000/api/products';
 const productContainer = document.getElementById('product-container');
 const paginationContainer = document.getElementById('pagination');
 const detailSection = document.getElementById('product-detail');
@@ -13,10 +12,11 @@ let activeSubCategoryId = null;
 function formatPrice(val) {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "USD"
+    currency: "USD",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
   }).format(val);
 }
-
 
 document.addEventListener('DOMContentLoaded', fetchProducts);
 
@@ -26,9 +26,6 @@ async function fetchProducts() {
     const data = await response.json();
     allProducts = data;
     filteredProducts = allProducts;
-
-    // console.log("all products: ", allProducts);
-    // console.log("filtre: " , filteredProducts);
     renderProducts();
     renderPagination();
   } catch (error) {
@@ -201,15 +198,6 @@ window.showDetail = function(productId) {
 
 window.addToCart = function(productId) {
 
-  sessionStorage.removeItem('cart');
-
-  const token = sessionStorage.getItem('token');
-  
-  if (!token) {
-    window.location.href = "/signin";
-    return;
-  }
-
   const product = allProducts.find(p => p.id === productId);
   if (!product) return;
 
@@ -314,10 +302,29 @@ window.hideDetail = function() {
 
 async function addToCartStorage(product, quantity) {
   const token = sessionStorage.getItem('token');
+
   if (!token) {
-    window.location.href = "/signin";
-    return;
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  
+    const existingItem = cart.find(item => item.product_id === product.id);
+  
+    if (existingItem) {
+      existingItem.quantity += quantity;
+    } else {
+      cart.push({
+        product_id: product.id,
+        quantity: quantity
+      });
+    }
+  
+    localStorage.setItem('cart', JSON.stringify(cart));
+  
+    showNotification(`${product.name_latin} ajouté au panier (${quantity} kg)`);
+    hideDetail();
+    updateCartCount();
+    return; 
   }
+  
   try {
     const response = await fetch('http://127.0.0.1:8000/api/cart', {
       method: 'POST',
@@ -332,16 +339,13 @@ async function addToCartStorage(product, quantity) {
     });
 
     if (!response.ok) {
-      // gérer erreur si besoin (ex: 401, 422, etc)
       const errorData = await response.json();
       console.error('Erreur API ajout panier:', errorData);
       alert('Erreur lors de l\'ajout au panier : ' + (errorData.message || 'Erreur inconnue'));
       return;
     }
 
-    const data = await response.json();
-
-    showNotification(`${product.name_latin} added to cart (${quantity} kg)`);
+    showNotification(`${product.name_latin} ajouté au panier (${quantity} kg)`);
     hideDetail();
     updateCartCount();
   } catch (error) {
@@ -350,13 +354,7 @@ async function addToCartStorage(product, quantity) {
   }
 }
 
-
 window.handleAddToCart = function(productId) {
-  const token = sessionStorage.getItem('token');
-  if (!token) {
-    window.location.href = "/signin";
-    return;
-  }
   const product = allProducts.find(p => p.id === productId);
   const quantity = parseInt(document.getElementById('quantity').value) || 1;
   addToCartStorage(product, quantity);
@@ -364,7 +362,7 @@ window.handleAddToCart = function(productId) {
 
 function showNotification(message) {
   const toast = document.getElementById('toast');
-  const messageSpan = toast.querySelector('span'); // cible le span du message
+  const messageSpan = toast.querySelector('span');
 
   if (!messageSpan) return;
 
@@ -373,7 +371,6 @@ function showNotification(message) {
   toast.classList.remove('opacity-0', 'translate-y-10');
   toast.classList.add('opacity-100', 'translate-y-0');
 
-  // Masquer après 3 secondes
   setTimeout(() => {
     toast.classList.add('opacity-0', 'translate-y-10');
     toast.classList.remove('opacity-100', 'translate-y-0');
@@ -475,7 +472,6 @@ function highlightSelectedSubcategory() {
   });
 }
 
-// Charger les filtres
 loadCategories();
 loadSubCategories();
 
@@ -485,18 +481,19 @@ export async function updateCartCount() {
   if (!desktopCount && !mobileCount) return;
 
   const token = sessionStorage.getItem("token");
+
   if (!token) {
-    // Pas de token = panier vide ou pas connecté
-    if (desktopCount) desktopCount.textContent = '0';
-    if (mobileCount) mobileCount.textContent = '0';
+
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const count = cart.length;
+    if (desktopCount) desktopCount.textContent = count;
+    if (mobileCount) mobileCount.textContent = count;
     return;
   }
 
   try {
     const response = await fetch('http://127.0.0.1:8000/api/cart', {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
+      headers: { 'Authorization': `Bearer ${token}` }
     });
 
     if (!response.ok) {
@@ -507,13 +504,10 @@ export async function updateCartCount() {
     }
 
     const cartItems = await response.json();
-
-    // Supposons que cartItems est un tableau des produits dans le panier
     const count = cartItems.length;
 
     if (desktopCount) desktopCount.textContent = count;
     if (mobileCount) mobileCount.textContent = count;
-
   } catch (error) {
     console.error('Erreur réseau récupération panier:', error);
     if (desktopCount) desktopCount.textContent = '0';
@@ -521,7 +515,6 @@ export async function updateCartCount() {
   }
 }
 
-// Appel initial
 updateCartCount();
 
 
@@ -537,17 +530,16 @@ export async function loadCategoriesToMenu() {
 
     categories.forEach(category => {
       const a = document.createElement("a");
-      a.href = "#products"; // redirige vers la section produit
+      a.href = "#products"; 
       a.textContent = category.name;
       a.className = "block px-4 py-2 hover:bg-gray-100 text-black";
       a.setAttribute("data-category-id", category.id);
 
-      // Ajoute l'écouteur de clic
       a.addEventListener("click", (e) => {
-        e.preventDefault(); // évite la redirection immédiate
+        e.preventDefault(); 
 
-        applyCategoryFilter(parseInt(category.id)); // filtre par catégorie
-        document.querySelector("#products").scrollIntoView({ behavior: "smooth" }); // scroll vers la section
+        applyCategoryFilter(parseInt(category.id)); 
+        document.querySelector("#products").scrollIntoView({ behavior: "smooth" }); 
       });
 
       dropdown.appendChild(a);
@@ -559,15 +551,12 @@ export async function loadCategoriesToMenu() {
 }
 
 function applyCategoryFilter(categoryId) {
-  // Décoche toutes les checkbox
   document.querySelectorAll('input[data-type="category"]').forEach(input => {
     input.checked = parseInt(input.value) === categoryId;
   });
 
-  // Réinitialise la sous-catégorie active
   activeSubCategoryId = null;
 
-  // Applique le filtre
   filteredProducts = allProducts.filter(p => p.category_id === categoryId);
 
   currentPage = 1;

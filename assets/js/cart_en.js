@@ -1,7 +1,6 @@
 const api_url = "http://127.0.0.1:8000/api";
 let cartItems = [];
 
-// Format prix USD
 function formatPrice(val) {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -9,12 +8,30 @@ function formatPrice(val) {
   }).format(val);
 }
 
-// Récupère le panier utilisateur depuis la session (liste d’objets avec product_id et quantity)
 async function fetchCartItems() {
   const token = sessionStorage.getItem("token");
+
   if (!token) {
-    console.warn("Aucun token trouvé dans sessionStorage → utilisateur non connecté.");
-    cartItems = [];
+    console.warn("Aucun token trouvé → utilisateur non connecté, récupération depuis localStorage.");
+  
+    const localCart = JSON.parse(localStorage.getItem('cart')) || [];
+  
+    const detailedCart = await Promise.all(
+      localCart.map(async item => {
+        const productDetails = await fetchProductDetails(item.product_id);
+        if (productDetails) {
+          return {
+            ...productDetails,   
+            quantity: item.quantity
+          };
+        }
+        return null;
+      })
+    );
+  
+    cartItems = detailedCart.filter(p => p !== null);
+  
+    console.log("Panier local détaillé:", cartItems);
     updateCartDisplay();
     return;
   }
@@ -34,8 +51,7 @@ async function fetchCartItems() {
     }
 
     const sessionCart = await res.json();
-
-    console.log("cart data: ", sessionCart);
+    console.log("cart data:", sessionCart);
 
     const detailedCart = await Promise.all(
       sessionCart.map(async item => {
@@ -62,7 +78,6 @@ async function fetchCartItems() {
   }
 }
 
-// Récupère les détails d’un produit via /products/details/{id}
 async function fetchProductDetails(id) {
   try {
     const res = await fetch(`${api_url}/products/details/${id}`);
@@ -74,7 +89,8 @@ async function fetchProductDetails(id) {
 
     console.log('details produit:', data);
 
-    const price = parseFloat(data.active_price?.amount ?? 0);
+    const price = parseFloat(data.active_price?.amount_mga ?? 0);
+    console.log('prix du produit:', price);
     return {
       id: data.id,
       name_latin: data.name_latin,
@@ -99,7 +115,6 @@ function strictObject(obj) {
   });
 }
 
-// Met à jour le panier avec les nouveaux détails
 function updateCartDisplay() {
   console.log("updateCartDisplay appelé");
   console.log("cartItems:", cartItems);
@@ -149,7 +164,7 @@ function updateCartDisplay() {
   
       <div class="flex flex-col flex-1 text-center sm:text-left gap-2">
         <h3 class="font-semibold text-base sm:text-lg text-primary">${item.name_latin}</h3>
-        <p class="text-gray-500 text-sm">Unit Price : <span class="font-medium">${formatPrice(item.price)}</span></p>
+        <p class="text-gray-500 text-sm">Prix Unitaire : <span class="font-medium">${formatPrice(item.price)}</span></p>
   
         <div class="flex justify-center sm:justify-start items-center gap-2 mt-1">
           <button class="w-8 h-8 bg-gray-200 hover:bg-gray-300 text-xl rounded" onclick="changeQuantity(${index}, -1)">−</button>
@@ -168,13 +183,12 @@ function updateCartDisplay() {
     cartContainer.appendChild(productDiv);
   });
   
-  // Afficher une seule fois le résumé APRÈS la boucle
   const summaryLine = document.createElement("div");
   summaryLine.className = "rounded-lg text-sm bg-white";
   
   summaryLine.innerHTML = `
     <div class="rounded-md text-sm text-gray-400 text-left">
-      Validate your cart to receive a personalized quote and proceed with a purchase order request.
+      Validez votre panier pour recevoir un devis personnalisé et procéder à une demande de bon de commande.
     </div>
   `;
   
@@ -187,8 +201,7 @@ function updateCartDisplay() {
   }
 }
 
-// Change la quantité et met à jour l’API
-async function changeQuantity(index, delta) {
+  window.changeQuantity = async function (index, delta) {
   const product = cartItems[index];
   const newQty = product.quantity + delta;
   if (newQty < 1) return;
@@ -200,8 +213,7 @@ async function changeQuantity(index, delta) {
   }
 }
 
-// Saisie directe dans l’input de quantité
-async function onQuantityInputChange(e, index) {
+  window.onQuantityInputChange = async function(e, index) {
   let val = parseInt(e.target.value);
   if (isNaN(val) || val < 1) {
     val = 1;
@@ -218,10 +230,18 @@ async function onQuantityInputChange(e, index) {
   }
 }
 
-// Met à jour la quantité d’un produit via API
 async function updateCartQuantity(productId, quantity) {
   const token = sessionStorage.getItem("token");
-  if (!token) return false;
+  if (!token) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const item = cart.find(i => i.product_id === productId);
+    if (item) {
+      item.quantity = quantity;
+      localStorage.setItem('cart', JSON.stringify(cart));
+      return true;
+    }
+    return false;
+  }
 
   try {
     const res = await fetch(`${api_url}/cart/${productId}`, {
@@ -233,57 +253,48 @@ async function updateCartQuantity(productId, quantity) {
       body: JSON.stringify({ quantity })
     });
 
-    if (!res.ok) {
-      console.error("Erreur API update:", res.status);
-      return false;
-    }
-
-    return true;
-
+    return res.ok;
   } catch (error) {
     console.error("Erreur réseau mise à jour:", error);
     return false;
   }
 }
 
-// Supprime un produit du panier
 async function removeProductFromCart(productId) {
   const token = sessionStorage.getItem("token");
-  if (!token) return false;
+  if (!token) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart = cart.filter(i => i.product_id !== productId);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    return true;
+  }
 
   try {
     const res = await fetch(`${api_url}/cart/${productId}`, {
       method: 'DELETE',
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
+      headers: { 'Authorization': `Bearer ${token}` }
     });
-
     return res.ok;
-
   } catch (error) {
     console.error("Erreur suppression produit:", error);
     return false;
   }
 }
 
-// Supprime un produit via modal
 let productToRemoveIndex = null;
 
-function removeProduct(index) {
+window.removeProduct = function(index) {
   productToRemoveIndex = index;
   const productName = cartItems[index]?.name_latin || "ce produit";
   document.getElementById("product-name-to-remove").textContent = productName;
   document.getElementById("confirm-modal").classList.remove("hidden");
 }
 
-// Écouteurs d’événements ajoutés UNE SEULE FOIS au chargement DOM
 document.addEventListener("DOMContentLoaded", async () => {
   console.log("DOM prêt, on appelle fetchCartItems()");
 
   await fetchCartItems();
 
-  // Listeners modaux et boutons
   const clearCartBtn = document.getElementById("btn-open-clear-cart");
   if (clearCartBtn) {
     clearCartBtn.addEventListener("click", () => {
@@ -314,7 +325,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // Modal suppression produit
   const confirmBtn = document.getElementById("confirm-btn");
   if (confirmBtn) {
     confirmBtn.addEventListener("click", async () => {
@@ -339,18 +349,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // Request quote button
   const requestQuoteBtn = document.getElementById("request-quote");
+
   if (requestQuoteBtn) {
     requestQuoteBtn.addEventListener("click", async () => {
       const token = sessionStorage.getItem("token");
+  
       if (!token) {
-        alert("Please log in to request a quote.");
-        return;
+        saveLastUrl();
+        window.location.href = "/signin";
       }
 
       const notes = "Quote request";
-
+  
       try {
         const res = await fetch(`${api_url}/quote`, {
           method: "POST",
@@ -360,9 +371,8 @@ document.addEventListener("DOMContentLoaded", async () => {
           },
           body: JSON.stringify({ notes })
         });
-
+  
         if (res.ok) {
-          const data = await res.json();
           alert("Quote request sent successfully!");
         } else {
           const errorData = await res.json();
@@ -374,12 +384,18 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     });
   }
+  
 });
 
-// Supprime tout le panier via l'API
 async function clearCart() {
   const token = sessionStorage.getItem("token");
-  if (!token) return;
+
+  if (!token) {
+    localStorage.removeItem("cart");
+    cartItems = [];
+    updateCartDisplay();
+    return;
+  }
 
   const confirmBtn = document.getElementById("btn-open-clear-cart");
   const spinner = document.getElementById("loadingSpinner");
@@ -391,7 +407,6 @@ async function clearCart() {
     return;
   }
 
-  // UI loading state
   spinner.classList.remove("opacity-0", "scale-90");
   confirmText.classList.add("opacity-50");
   confirmBtn.disabled = true;
@@ -408,7 +423,6 @@ async function clearCart() {
       cartItems = [];
       updateCartDisplay();
 
-      // Affiche le message de succès
       message.classList.remove("hidden");
     } else {
       console.error("Échec suppression panier:", res.status);
@@ -417,7 +431,6 @@ async function clearCart() {
     console.error("Erreur réseau clearCart:", error);
   }
 
-  // Reset UI state après un petit délai
   setTimeout(() => {
     const modal = document.getElementById("clearCartModal");
     if (modal) modal.classList.add("hidden");
@@ -428,3 +441,12 @@ async function clearCart() {
   }, 1500);
 }
 
+function saveLastUrl() {
+  const currentUrl = window.location.href;
+  if (
+    !currentUrl.includes("/signin") &&
+    !currentUrl.includes("/signup")
+  ) {
+    localStorage.setItem("last_url", currentUrl);
+  }
+}

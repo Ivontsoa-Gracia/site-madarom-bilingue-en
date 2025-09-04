@@ -107,160 +107,203 @@
         </div>
     </div>
 
-    <script>
+    <script type="module">
+        import { getLastUrl, clearLastUrl } from '../../assets/js/url.js';
+      
         const API_URL_REG = 'http://127.0.0.1:8000/api/register';
-    
+      
         const email = document.getElementById("email");
         const password = document.getElementById("password");
         const confirmPassword = document.getElementById("confirmPassword");
         const emailError = document.getElementById("emailError");
         const confirmError = document.getElementById("confirmError");
-    
+      
         const checklist = {
-            length: document.getElementById("length"),
-            uppercase: document.getElementById("uppercase"),
-            special: document.getElementById("special"),
+          length: document.getElementById("length"),
+          uppercase: document.getElementById("uppercase"),
+          special: document.getElementById("special"),
         };
-    
+      
         const step1 = document.getElementById("step1");
         const step2 = document.getElementById("step2");
         const nextBtn = document.getElementById("nextBtn");
         const form = document.getElementById("signupForm");
-    
+      
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    
+      
         function updateIcon(item, valid) {
-            const icon = item.querySelector(".icon");
-            icon.classList.remove("text-green-500", "text-red-500");
-            icon.classList.add(valid ? "text-green-500" : "text-red-500");
+          const icon = item.querySelector(".icon");
+          icon.classList.remove("text-green-500", "text-red-500");
+          icon.classList.add(valid ? "text-green-500" : "text-red-500");
         }
-    
+      
         function validatePasswordChecklist() {
-            const value = password.value;
-            updateIcon(checklist.length, value.length >= 8);
-            updateIcon(checklist.uppercase, /[A-Z]/.test(value));
-            updateIcon(checklist.special, /[\d\W]/.test(value));
+          const value = password.value;
+          updateIcon(checklist.length, value.length >= 8);
+          updateIcon(checklist.uppercase, /[A-Z]/.test(value));
+          updateIcon(checklist.special, /[\d\W]/.test(value));
         }
-    
+      
         function checkPasswordMatch() {
-            if (confirmPassword.value !== "" && password.value !== confirmPassword.value) {
-                confirmError.classList.remove("hidden");
-                return false;
-            } else {
-                confirmError.classList.add("hidden");
-                return true;
-            }
+          if (confirmPassword.value !== "" && password.value !== confirmPassword.value) {
+            confirmError.classList.remove("hidden");
+            return false;
+          } else {
+            confirmError.classList.add("hidden");
+            return true;
+          }
         }
-    
+      
         document.querySelectorAll(".toggle-password").forEach((btn) => {
-            btn.addEventListener("click", () => {
-                const input = btn.previousElementSibling;
-                if (input.type === "password") {
-                    input.type = "text";
-                    btn.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
-                } else {
-                    input.type = "password";
-                    btn.innerHTML = '<i class="fa-solid fa-eye"></i>';
-                }
-            });
-        });
-    
-        password.addEventListener("input", validatePasswordChecklist);
-    
-        nextBtn.addEventListener("click", () => {
-            let valid = true;
-    
-            if (!emailRegex.test(email.value)) {
-                emailError.classList.remove("hidden");
-                valid = false;
+          btn.addEventListener("click", () => {
+            const input = btn.previousElementSibling;
+            if (input.type === "password") {
+              input.type = "text";
+              btn.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
             } else {
-                emailError.classList.add("hidden");
+              input.type = "password";
+              btn.innerHTML = '<i class="fa-solid fa-eye"></i>';
             }
-    
-            const strongPassword =
-                password.value.length >= 8 &&
-                /[A-Z]/.test(password.value) &&
-                /[\d\W]/.test(password.value);
-    
-            if (!strongPassword) valid = false;
-    
-            if (valid) {
-                step1.classList.add("hidden");
-                step2.classList.remove("hidden");
-            }
+          });
         });
-    
+      
+        password.addEventListener("input", validatePasswordChecklist);
+      
+        nextBtn.addEventListener("click", () => {
+          let valid = true;
+      
+          if (!emailRegex.test(email.value)) {
+            emailError.classList.remove("hidden");
+            valid = false;
+          } else {
+            emailError.classList.add("hidden");
+          }
+      
+          const strongPassword =
+            password.value.length >= 8 &&
+            /[A-Z]/.test(password.value) &&
+            /[\d\W]/.test(password.value);
+      
+          if (!strongPassword) valid = false;
+      
+          if (valid) {
+            step1.classList.add("hidden");
+            step2.classList.remove("hidden");
+          }
+        });
+      
         form.addEventListener("submit", async (e) => {
-            e.preventDefault();
-    
-            if (!checkPasswordMatch()) return;
-    
-            const btn = form.querySelector("button[type=submit]");
-            btn.disabled = true;
-            btn.innerHTML = "Inscription...";
-    
-            const nameFromEmail = email.value.split("@")[0];
-    
-            const payload = {
-                name: nameFromEmail,
-                email: email.value.trim(),
-                password: password.value,
-                password_confirmation: confirmPassword.value,
-            };
-    
-            try {
-                const response = await fetch(API_URL_REG, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Accept: "application/json",
-                    },
-                    body: JSON.stringify(payload),
-                });
-    
-                const data = await response.json();
-
-                btn.disabled = false;
-                btn.innerHTML = "S’inscrire";
-    
-                if (!response.ok) {
-                    if (data.errors) {
-                        if (data.errors.email) {
-                            emailError.textContent = data.errors.email[0];
-                            emailError.classList.remove("hidden");
-                        }
-                        if (data.errors.password) {
-                            confirmError.textContent = data.errors.password[0];
-                            confirmError.classList.remove("hidden");
-                        }
-                    } else {
-                        // alert(data.message || "Erreur lors de l'inscription.");
-                    }
-                    return;
+          e.preventDefault();
+      
+          if (!checkPasswordMatch()) return;
+      
+          const btn = form.querySelector("button[type=submit]");
+          btn.disabled = true;
+          btn.innerHTML = "Inscription...";
+      
+          const nameFromEmail = email.value.split("@")[0];
+      
+          const payload = {
+            name: nameFromEmail,
+            email: email.value.trim(),
+            password: password.value,
+            password_confirmation: confirmPassword.value,
+          };
+      
+          try {
+            const response = await fetch(API_URL_REG, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+              },
+              body: JSON.stringify(payload),
+            });
+      
+            const data = await response.json();
+      
+            btn.disabled = false;
+            btn.innerHTML = "S’inscrire";
+      
+            if (!response.ok) {
+              if (data.errors) {
+                if (data.errors.email) {
+                  emailError.textContent = data.errors.email[0];
+                  emailError.classList.remove("hidden");
                 }
-
-                if (data.user) {
-                    sessionStorage.setItem("token", data.token);
-                } else {
-                    // alert(data.message || "Identifiants incorrects.");
+                if (data.errors.password) {
+                  confirmError.textContent = data.errors.password[0];
+                  confirmError.classList.remove("hidden");
                 }
-    
-                alert("Inscription réussie !");
-                form.reset();
-                step2.classList.add("hidden");
-                step1.classList.remove("hidden");
-    
-                const lang = sessionStorage.getItem('lang').toLowerCase();
-                window.location.href = `${window.location.origin}/${lang}/`;
-
-            } catch (error) {
-                console.error(error);
-                alert("Erreur de connexion.");
-                btn.disabled = false;
-                btn.innerHTML = "S’inscrire";
+              }
+              return;
             }
+      
+            if (data.user) {
+              sessionStorage.setItem("token", data.token);
+      
+              if (data.user.role === "admin") {
+                location.assign("/admin/dashboard");
+              } else {
+                const localCart = localStorage.getItem("cart");
+                const token = sessionStorage.getItem("token");
+      
+                if (localCart) {
+                  const cartItems = JSON.parse(localCart);
+      
+                  for (const cartItem of cartItems) {
+                    try {
+                      const resp = await fetch("http://127.0.0.1:8000/api/cart", {
+                        method: "POST",
+                        headers: {
+                          "Content-Type": "application/json",
+                          "Authorization": `Bearer ${token}`
+                        },
+                        body: JSON.stringify({
+                          product_id: cartItem.product_id || cartItem.product.id,
+                          quantity: cartItem.quantity
+                        })
+                      });
+      
+                      if (!resp.ok) {
+                        const errorData = await resp.json();
+                        console.error("Erreur API ajout panier:", errorData);
+                        alert("Erreur lors de l'ajout au panier : " + (errorData.message || "Erreur inconnue"));
+                        return;
+                      }
+                    } catch (error) {
+                      console.error("Erreur réseau:", error);
+                      alert("Erreur réseau lors de l'ajout au panier.");
+                      return;
+                    }
+                  }
+                  localStorage.removeItem("cart");
+                }
+      
+                const lastUrl = getLastUrl();
+                clearLastUrl();
+                if (lastUrl) {
+                  window.location.href = lastUrl;
+                } else {
+                  const lang = sessionStorage.getItem("lang")?.toLowerCase() || "fr";
+                  window.location.href = `${window.location.origin}/${lang}/`;
+                }
+              }
+      
+              alert("Inscription réussie !");
+              form.reset();
+              step2.classList.add("hidden");
+              step1.classList.remove("hidden");
+            }
+      
+          } catch (error) {
+            console.error(error);
+            alert("Erreur de connexion.");
+            btn.disabled = false;
+            btn.innerHTML = "S’inscrire";
+          }
         });
-    </script>
+      </script>      
     
 </body>
 </html>
