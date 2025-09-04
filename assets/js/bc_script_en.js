@@ -314,3 +314,12 @@ function showToast(message = "Action successful!", duration = 2500) {
     toast.classList.add("hidden");
   }, duration);
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const token = sessionStorage.getItem("token"); 
+  const userMenus = document.getElementById("user-menus");
+
+  if (token) {
+    userMenus.classList.remove("hidden");
+  }
+});
