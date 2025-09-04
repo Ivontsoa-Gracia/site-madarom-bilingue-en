@@ -31,7 +31,7 @@ async function fetchCartItems() {
   
     cartItems = detailedCart.filter(p => p !== null);
   
-    console.log("Panier local détaillé:", cartItems);
+    // console.log("Panier local détaillé:", cartItems);
     updateCartDisplay();
     return;
   }
@@ -51,7 +51,7 @@ async function fetchCartItems() {
     }
 
     const sessionCart = await res.json();
-    console.log("cart data:", sessionCart);
+    // console.log("cart data:", sessionCart);
 
     const detailedCart = await Promise.all(
       sessionCart.map(async item => {
@@ -67,7 +67,7 @@ async function fetchCartItems() {
     );
 
     cartItems = detailedCart.filter(p => p !== null);
-    console.log("detailedCart après filtrage:", cartItems);
+    // console.log("detailedCart après filtrage:", cartItems);
 
     updateCartDisplay();
 
@@ -87,10 +87,10 @@ async function fetchProductDetails(id) {
     }
     const data = await res.json();
 
-    console.log('details produit:', data);
+    // console.log('details produit:', data);
 
     const price = parseFloat(data.active_price?.amount_mga ?? 0);
-    console.log('prix du produit:', price);
+    // console.log('prix du produit:', price);
     return {
       id: data.id,
       name_latin: data.name_latin,
@@ -116,8 +116,8 @@ function strictObject(obj) {
 }
 
 function updateCartDisplay() {
-  console.log("updateCartDisplay appelé");
-  console.log("cartItems:", cartItems);
+  // console.log("updateCartDisplay appelé");
+  // console.log("cartItems:", cartItems);
 
   const cartContainer = document.getElementById("cart-container");
   const summaryItems = document.getElementById("summary-items");
@@ -363,6 +363,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const notes = "Quote request";
   
       try {
+
         const res = await fetch(`${api_url}/quote`, {
           method: "POST",
           headers: {
