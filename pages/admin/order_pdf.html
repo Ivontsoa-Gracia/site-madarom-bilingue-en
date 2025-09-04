@@ -23,7 +23,6 @@
         <i class='bx bx-download text-xl'></i>
         <span>Download PDF</span>
       </button>
-      <!-- Facturer button: visible seulement si status = 'command' -->
       <button id="invoice-btn" class="hidden flex items-center gap-2 bg-yellow-500 text-white px-4 py-2 rounded-full transition hover:bg-yellow-600">
         <i class='bx bx-receipt text-xl'></i>
         <span>Invoice</span>
@@ -68,7 +67,7 @@
             </tr>
           </thead>
           <tbody id="quotes-items" class="divide-y divide-gray-100">
-            <!-- Dynamically inserted -->
+            
           </tbody>
         </table>
       </div>
@@ -79,10 +78,6 @@
             <span class="font-medium">Sub-total:</span>
             <span id="subtotal">0 USD</span>
           </div>
-          <!-- <div class="flex justify-between">
-            <span class="font-medium">VAT (20%):</span>
-            <span id="tva">0 USD</span>
-          </div> -->
           <div class="flex justify-between text-lg font-semibold text-[#333333]">
             <span>Total :</span>
             <span id="total">0 USD</span>
@@ -99,8 +94,7 @@
     <div id="payment-screenshot" class="w-96 hidden">
       <img src="" alt="Payment Screenshot" class="w-full h-auto rounded border shadow-sm cursor-pointer" id="payment-img">
     </div>
-    
-    <!-- Lightbox overlay -->
+
     <div id="lightbox" class="hidden fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm flex items-center justify-center z-50">
       <img src="" alt="Payment Screenshot Enlarged" class="max-w-[90%] max-h-[90%] rounded shadow-lg" id="lightbox-img">
     </div>
@@ -197,7 +191,6 @@
           paymentImg.src = `https://31612b14c9b7.ngrok-free.app/storage/${quote.quote.payment.screenshot}`;
           lightboxImg.src = paymentImg.src;
 
-          // Au clic sur l'image → ouvrir lightbox
           paymentImg.addEventListener("click", () => {
             lightbox.classList.remove("hidden");
           });
@@ -205,13 +198,11 @@
           paymentDiv.classList.add("hidden");
         }
 
-        // Clic sur fond ou image pour fermer le lightbox
         lightbox.addEventListener("click", (e) => {
           if (e.target === lightbox || e.target === lightboxImg) {
             lightbox.classList.add("hidden");
           }
         });
-
 
         const tbody = document.getElementById("quotes-items");
         tbody.innerHTML = "";
@@ -231,10 +222,8 @@
         });
 
         const tva = total * 0.2;
-        // const ttc = total + tva;
         const ttc = total ;
         document.getElementById("subtotal").textContent = formatPrice(total);
-        // document.getElementById("tva").textContent = formatPrice(tva);
         document.getElementById("total").textContent = formatPrice(ttc);
 
 
@@ -250,7 +239,6 @@
           totalHours = totalHours % 24;
         }
 
-        // Calcul de la date de livraison
         let deliveryDate = new Date(updatedAt);
         deliveryDate.setDate(deliveryDate.getDate() + totalDays);
         deliveryDate.setHours(deliveryDate.getHours() + totalHours);

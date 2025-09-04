@@ -291,7 +291,6 @@ async function clearQuote(id) {
   }
 }
 
-
 function showLoader(duration = 2000) {
   const loader = document.getElementById("loader");
   loader.classList.remove("hidden");

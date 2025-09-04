@@ -1,0 +1,1 @@
+export function saveLastUrl(){const t=window.location.href;t.includes("/signin")||t.includes("/signup")||localStorage.setItem("last_url",t)}export function getLastUrl(){return localStorage.getItem("last_url")}export function clearLastUrl(){localStorage.removeItem("last_url")}

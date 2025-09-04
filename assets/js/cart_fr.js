@@ -357,7 +357,6 @@ window.removeProduct = function(index) {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-  // console.log("DOM prêt, on appelle fetchCartItems()");
 
   await fetchCartItems();
 

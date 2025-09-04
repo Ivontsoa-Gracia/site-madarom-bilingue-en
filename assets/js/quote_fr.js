@@ -310,7 +310,6 @@ document.getElementById("confirmCancelBtn").addEventListener("click", async () =
   }
 });
 
-
 function showLoader(duration = 2000) {
   const loader = document.getElementById("loader");
   loader.classList.remove("hidden");
@@ -319,7 +318,6 @@ function showLoader(duration = 2000) {
     loader.classList.add("hidden");
   }, duration);
 }
-
 
 function hideLoader() {
   document.getElementById("loader").classList.add("hidden");

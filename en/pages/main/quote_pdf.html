@@ -40,13 +40,11 @@
       </div>
     </div>
 
-    <!-- Client -->
     <div class="mb-6 bg-gray-50 p-4 border">
       <h3 class="font-medium mb-2 text-gray-700 text-lg" id="client-name">Name</h3>
       <p class="text-sm text-gray-500" id="client-email">Email</p>
     </div>
 
-    <!-- Items table -->
     <div class="overflow-x-auto border border-gray-200">
       <table class="w-full text-sm">
         <thead>
@@ -58,12 +56,11 @@
           </tr>
         </thead>
         <tbody id="quotes-items" class="divide-y divide-gray-100">
-          <!-- Dynamically inserted -->
+         
         </tbody>
       </table>
     </div>
 
-    <!-- Totals -->
     <div class="mt-6 flex justify-end">
       <div class="w-full md:w-1/2 bg-gray-50 p-4 border space-y-2">
         <div class="flex justify-between">
@@ -81,7 +78,6 @@
       </div>
     </div>
 
-    <!-- Footer -->
     <div class="mt-8 text-xs text-gray-500 text-left">
       <p>This quote is valid for 15 days from the date of issue.</p>
       <p class="mt-1">Thank you for your trust!</p>
@@ -120,7 +116,6 @@
     const token = sessionStorage.getItem("token");
 
     if (token) {
-        // console.log("User token :", token);
       } else {
         console.warn("Aucun token trouvé dans sessionStorage");
     }
@@ -160,11 +155,8 @@
             </tr>`;
         });
 
-        const tva = total * 0.2;
-        // const ttc = total + tva;
         const ttc = total;
         document.getElementById("subtotal").textContent = formatPrice(total);
-        // document.getElementById("tva").textContent = formatPrice(tva);
         document.getElementById("total").textContent = formatPrice(ttc);
 
 

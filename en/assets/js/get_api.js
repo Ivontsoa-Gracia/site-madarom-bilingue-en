@@ -562,6 +562,3 @@ function applyCategoryFilter(categoryId) {
   renderProducts();
   renderPagination();
 }
-
-
-

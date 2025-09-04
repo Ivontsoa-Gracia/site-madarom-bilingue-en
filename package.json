@@ -1,4 +1,16 @@
 {
+  "name": "site-madarom-bilingue-en",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "watch": "node watch-minify.js"
+  },
+  "devDependencies": {
+    "chokidar": "^3.5.3",
+    "clean-css": "^5.3.3",
+    "html-minifier-terser": "^7.2.0",
+    "terser": "^5.44.0"
+  },
   "dependencies": {
     "three": "^0.178.0"
   }

@@ -63,7 +63,7 @@
             </tr>
           </thead>
           <tbody id="quotes-items" class="divide-y divide-gray-100">
-            <!-- Dynamically inserted -->
+         
           </tbody>
         </table>
       </div>
@@ -186,7 +186,6 @@
           totalHours = totalHours % 24;
         }
 
-        // Calcul de la date de livraison
         let deliveryDate = new Date(updatedAt);
         deliveryDate.setDate(deliveryDate.getDate() + totalDays);
         deliveryDate.setHours(deliveryDate.getHours() + totalHours);

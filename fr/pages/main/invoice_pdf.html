@@ -35,7 +35,7 @@
           <img src="../../assets/img/logo.jpg" alt="Mad'arom logo" class="w-32 h-auto mb-2">
           <h1 class="text-3xl font-extrabold text-[#333333] tracking-wide">Facture</h1>
           <p class="text-sm text-gray-500" id="order-date"></p>
-          <p class="text-sm text-gray-500" id="quote-number">#QTE-XXXXXX</p>
+          <p class="text-sm text-gray-500" id="quote-number">#INV-XXXXXX</p>
         </div>
         <div class="text-right">
           <h2 class="font-semibold text-lg logo-font">Mad'arom</h2>
@@ -63,7 +63,7 @@
             </tr>
           </thead>
           <tbody id="quotes-items" class="divide-y divide-gray-100">
-            <!-- Dynamically inserted -->
+            
           </tbody>
         </table>
       </div>
@@ -185,7 +185,6 @@
           totalHours = totalHours % 24;
         }
 
-        // Calcul de la date de livraison
         let deliveryDate = new Date(updatedAt);
         deliveryDate.setDate(deliveryDate.getDate() + totalDays);
         deliveryDate.setHours(deliveryDate.getHours() + totalHours);
@@ -208,7 +207,7 @@
 
       } catch (error) {
         console.error("Erreur lors du chargement du devis :", error);
-        // alert("Impossible de charger le devis.");
+        
       }
     }
 
@@ -220,6 +219,7 @@
     } else {
       alert("Aucun ID de devis fourni.");
     }
+
   </script>
 </body>
 </html>

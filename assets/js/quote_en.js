@@ -319,7 +319,6 @@ function showLoader(duration = 2000) {
   }, duration);
 }
 
-
 function hideLoader() {
   document.getElementById("loader").classList.add("hidden");
 }

@@ -11,7 +11,6 @@
 </head>
 <body class="bg-white p-6 text-gray-800 text-font-family">
 
-  <!-- Header actions -->
   <div class="flex justify-between items-center max-w-4xl mx-auto mb-6">
     <a href="/fr/order">
       <button class="flex items-center gap-2 text-gray-600 hover:text-[#333333] transition font-semibold">
@@ -27,7 +26,6 @@
 
   <div id="devis" class="max-w-4xl mx-auto bg-white p-8 border border-gray-100">
     
-    <!-- Header -->
     <div class="flex justify-between items-center border-b pb-6 mb-6">
       <div class="flex flex-col gap-2">
         <img src="../../assets/img/logo.jpg" alt="Mad'arom logo" class="w-32 h-auto mb-2">
@@ -43,13 +41,11 @@
       </div>
     </div>
 
-    <!-- Client -->
     <div class="mb-6 bg-gray-50 p-4 border">
       <h3 class="font-medium mb-2 text-gray-700 text-lg" id="client-name">Nom</h3>
       <p class="text-sm text-gray-500" id="client-email">Email</p>
     </div>
 
-    <!-- Items table -->
     <div class="overflow-x-auto border border-gray-200">
       <table class="w-full text-sm">
         <thead>
@@ -61,22 +57,18 @@
           </tr>
         </thead>
         <tbody id="quotes-items" class="divide-y divide-gray-100">
-          <!-- Dynamically inserted -->
+          
         </tbody>
       </table>
     </div>
 
-    <!-- Totals -->
     <div class="mt-6 flex justify-end">
       <div class="w-full md:w-1/2 bg-gray-50 p-4 border space-y-2">
         <div class="flex justify-between">
           <span class="font-medium">Sous-total:</span>
           <span id="subtotal">0 USD</span>
         </div>
-        <!-- <div class="flex justify-between">
-          <span class="font-medium">VAT (20%):</span>
-          <span id="tva">0 USD</span>
-        </div> -->
+
         <div class="flex justify-between text-lg font-semibold text-[#333333]">
           <span>Total:</span>
           <span id="total">0 USD</span>
@@ -84,7 +76,6 @@
       </div>
     </div>
 
-    <!-- Footer -->
     <div class="mt-8 text-xs text-gray-500 text-left">
       <p id="delivery-date"></p>
       <p class="mt-1">Merci de votre confiance!</p>
@@ -162,11 +153,8 @@
             </tr>`;
         });
 
-        const tva = total * 0.2;
-        // const ttc = total + tva;
         const ttc = total;
         document.getElementById("subtotal").textContent = formatPrice(total);
-        // document.getElementById("tva").textContent = formatPrice(tva);
         document.getElementById("total").textContent = formatPrice(ttc);
 
 
@@ -182,7 +170,6 @@
           totalHours = totalHours % 24;
         }
 
-        // Calcul de la date de livraison
         let deliveryDate = new Date(updatedAt);
         deliveryDate.setDate(deliveryDate.getDate() + totalDays);
         deliveryDate.setHours(deliveryDate.getHours() + totalHours);

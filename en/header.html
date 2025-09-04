@@ -4,7 +4,6 @@
         <a href="#" class="logo-font text-2xl text-white">Mad'<span class="logo-part text-white">arom</span></a>
       </div>
   
-      <!-- Nav Menu Desktop -->
       <nav class="hidden lg:flex items-center space-x-8" id="nav-menu">
         <a href="/en" class="nav-link font-medium text-white transition">Home</a>
         <a href="/en/about" class="nav-link font-medium text-white transition">About</a>
@@ -14,7 +13,7 @@
               Products <i class="fas fa-chevron-down ml-1 text-xs"></i>
             </a>
             <div id="products-dropdown" class="absolute hidden group-hover:block bg-white shadow-lg rounded-md py-2 w-48 z-50">
-              <!-- Les catégories seront injectées ici -->
+             
             </div>
           </div>
           
@@ -23,15 +22,14 @@
         <a href="/en/contact" class="nav-link font-medium text-white transition">Contact</a>
       </nav>
   
-      <!-- Right Section Desktop -->
       <div class="hidden lg:flex items-center space-x-4">
-        <!-- Panier -->
+        
         <a href="/en/cart" class="btn-cart text-white relative">
           <i class="fas fa-shopping-cart text-xl"></i>
           <span id="cart-count" class="absolute -top-2 -right-2 bg-red text-[#fcffff] text-xs w-5 h-5 rounded-full flex items-center justify-center">0</span>
         </a>
   
-        <!-- User Connected -->
+        
         <div id="user-section" class="relative hidden">
           <button
             id="user-avatar"
@@ -48,7 +46,6 @@
           </div>
         </div>
   
-        <!-- Langue Selector -->
         <div class="btn-langue relative inline-block text-left text-white ">
           <button id="langDropdownBtn" aria-haspopup="true" aria-expanded="false"
             class="btn-lang items-center justify-center px-4 py-2 border border-white text-sm font-medium rounded-full bg-white/10 transition focus:outline-none">
@@ -65,26 +62,22 @@
           </div>
         </div>
   
-        <!-- Bouton Login -->
         <a href="/signin" id="login-btn" class="hidden">
           <button class="btn-primary text-white px-6 py-2 rounded-full font-medium transition duration-300">Login</button>
         </a>
         
       </div>
   
-      <!-- Burger Menu Mobile -->
       <button id="burger-menu" class="btn-menu lg:hidden text-white focus:outline-none" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
         <i class="fas fa-bars text-2xl"></i>
       </button>
     </div>
   
-    <!-- Mobile Menu -->
     <nav
       id="mobile-menu"
       class="hidden lg:hidden flex flex-col bg-white shadow-lg absolute top-16 left-0 right-0 z-40"
       aria-label="Mobile menu"
     >
-      <!-- Liens Nav principaux -->
       <div class="flex flex-col divide-y divide-gray-200">
         <a href="/en" class="block py-3 px-4 text-black hover:bg-gray-100">Home</a>
         <a href="/en/about" class="block py-3 px-4 text-black hover:bg-gray-100">About</a>
@@ -94,10 +87,8 @@
         <a href="/en/contact" class="block py-3 px-4 text-black hover:bg-gray-100">Contact</a>
       </div>
   
-      <!-- Séparateur -->
       <div class="border-t border-gray-300 my-2"></div>
   
-      <!-- Profil utilisateur (mobile) -->
       <div id="user-section-mobile" class="px-4 py-3 flex items-center justify-between border-t border-gray-300 hidden">
         <div class="flex items-center space-x-3">
           <div id="user-avatar-mobile" class="w-8 h-8 bg-[#a7c6a9] text-white font-semibold rounded-full flex items-center justify-center relative" style="font-family: 'Poppins', sans-serif;">
@@ -108,9 +99,8 @@
         <button onclick="logoutWithConfirmation()" id="logout-btn-mobile" class="text-red-600 text-sm hover:underline">Logout</button>
       </div>
   
-      <!-- Panier + Langue -->
       <div class="flex items-center justify-between px-4 py-3">
-        <!-- Panier -->
+        
         <a href="/signin" id="login-btn-mobile" class="btn-primary text-white px-6 py-2 rounded-full font-medium transition duration-300">Login</a>
 
         <a href="/en/cart" class="btn-cart text-black relative">
@@ -118,7 +108,6 @@
           <span id="cart-count-mobile" class="absolute -top-2 -right-2 bg-red text-[#fcffff] text-xs w-5 h-5 rounded-full flex items-center justify-center">0</span>
         </a>
   
-        <!-- Langue Selector Mobile -->
         <div class="btn-langue relative inline-block text-left text-gray-800">
           <button id="langDropdownBtnMobile" aria-haspopup="true" aria-expanded="false"
             class="inline-flex items-center justify-center px-4 py-2 border border-gray-400 text-sm font-medium rounded-full text-black bg-white/90 hover:bg-gray-200 transition focus:outline-none focus:ring-2 focus:ring-gray-400">

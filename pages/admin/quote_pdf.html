@@ -93,10 +93,6 @@
             <span class="font-medium">Sub-total:</span>
             <span id="subtotal">0 USD</span>
           </div>
-          <!-- <div class="flex justify-between">
-            <span class="font-medium">VAT (20%):</span>
-            <span id="tva">0 USD</span>
-          </div> -->
           <div class="flex justify-between text-lg font-semibold text-[#333333]">
             <span>Total :</span>
             <span id="total">0 USD</span>
@@ -171,10 +167,8 @@
         });
 
         const tva = total * 0.2;
-        // const ttc = total + tva;
         const ttc = total;
         document.getElementById("subtotal").textContent = formatPrice(total);
-        // document.getElementById("tva").textContent = formatPrice(tva);
         document.getElementById("total").textContent = formatPrice(ttc);
       } catch (error) {
         console.error("Erreur chargement devis:", error);

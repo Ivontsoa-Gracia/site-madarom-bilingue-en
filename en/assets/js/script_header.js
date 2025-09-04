@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       headerPlaceholder.innerHTML = html;
 
-      // Contrôle visibilité Panier vs Login
       const token = sessionStorage.getItem('token');
       const cartBtnDesktop = document.querySelector('.btn-cart'); 
       const cartBtnMobile = document.getElementById('cart-count-mobile')?.closest('.btn-cart'); 

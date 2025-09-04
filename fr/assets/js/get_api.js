@@ -298,7 +298,6 @@ window.hideDetail = function() {
   }
 };
 
-
 async function addToCartStorage(product, quantity) {
   const token = sessionStorage.getItem('token');
 
@@ -352,45 +351,6 @@ async function addToCartStorage(product, quantity) {
     alert('Erreur réseau, veuillez réessayer plus tard.');
   }
 }
-
-
-// async function addToCartStorage(product, quantity) {
-//   const token = sessionStorage.getItem('token');
-//   if (!token) {
-//     window.location.href = "/signin";
-//     return;
-//   }
-//   try {
-//     const response = await fetch('http://127.0.0.1:8000/api/cart', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         'Authorization': `Bearer ${token}`
-//       },
-//       body: JSON.stringify({
-//         product_id: product.id,
-//         quantity: quantity
-//       })
-//     });
-
-//     if (!response.ok) {
-//       // gérer erreur si besoin (ex: 401, 422, etc)
-//       const errorData = await response.json();
-//       console.error('Erreur API ajout panier:', errorData);
-//       alert('Erreur lors de l\'ajout au panier : ' + (errorData.message || 'Erreur inconnue'));
-//       return;
-//     }
-
-//     const data = await response.json();
-
-//     showNotification(`${product.name_latin} added to cart (${quantity} kg)`);
-//     hideDetail();
-//     updateCartCount();
-//   } catch (error) {
-//     console.error('Erreur réseau:', error);
-//     alert('Erreur réseau, veuillez réessayer plus tard.');
-//   }
-// }
 
 window.handleAddToCart = function(productId) {
   const product = allProducts.find(p => p.id === productId);
@@ -553,50 +513,6 @@ export async function updateCartCount() {
   }
 }
 
-
-// export async function updateCartCount() {
-//   const desktopCount = document.getElementById("cart-count");
-//   const mobileCount = document.getElementById("cart-count-mobile");
-//   if (!desktopCount && !mobileCount) return;
-
-//   const token = sessionStorage.getItem("token");
-//   if (!token) {
-//     // Pas de token = panier vide ou pas connecté
-//     if (desktopCount) desktopCount.textContent = '0';
-//     if (mobileCount) mobileCount.textContent = '0';
-//     return;
-//   }
-
-//   try {
-//     const response = await fetch('http://127.0.0.1:8000/api/cart', {
-//       headers: {
-//         'Authorization': `Bearer ${token}`
-//       }
-//     });
-
-//     if (!response.ok) {
-//       console.error('Erreur API récupération panier:', response.status);
-//       if (desktopCount) desktopCount.textContent = '0';
-//       if (mobileCount) mobileCount.textContent = '0';
-//       return;
-//     }
-
-//     const cartItems = await response.json();
-
-//     // Supposons que cartItems est un tableau des produits dans le panier
-//     const count = cartItems.length;
-
-//     if (desktopCount) desktopCount.textContent = count;
-//     if (mobileCount) mobileCount.textContent = count;
-
-//   } catch (error) {
-//     console.error('Erreur réseau récupération panier:', error);
-//     if (desktopCount) desktopCount.textContent = '0';
-//     if (mobileCount) mobileCount.textContent = '0';
-//   }
-// }
-
-// Appel initial
 updateCartCount();
 
 
@@ -645,6 +561,3 @@ function applyCategoryFilter(categoryId) {
   renderProducts();
   renderPagination();
 }
-
-
-

@@ -517,7 +517,6 @@ export async function updateCartCount() {
 
 updateCartCount();
 
-
 window.addEventListener("storage", updateCartCount);
 
 

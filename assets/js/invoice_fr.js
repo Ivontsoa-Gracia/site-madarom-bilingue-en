@@ -206,7 +206,6 @@ function formatPrice(val) {
 async function viewQuote(id) {
   if (!id) return;
   window.location.href = `/fr/invoice/show?ref=${encodeURIComponent(id)}`;
-
 }
 
 document.addEventListener("DOMContentLoaded", () => {
