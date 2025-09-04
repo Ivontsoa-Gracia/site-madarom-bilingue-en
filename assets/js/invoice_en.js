@@ -203,7 +203,6 @@ function formatPrice(val) {
   }).format(val);
 }
 
-
 async function viewQuote(id) {
   if (!id) return;
   window.location.href = `/en/invoice/show?ref=${encodeURIComponent(id)}`;

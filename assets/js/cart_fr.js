@@ -1,17 +1,23 @@
 const api_url = "http://127.0.0.1:8000/api";
 let cartItems = [];
 
+// function formatPrice(val) {
+//   return new Intl.NumberFormat("fr-MG", {
+//     style: "currency",
+//     currency: "MGA",
+//     currencyDisplay: "code", 
+//     minimumFractionDigits: 0
+//   }).format(val);
+// }
+
 function formatPrice(val) {
-  return new Intl.NumberFormat("fr-MG", {
+  return new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "MGA",
-    currencyDisplay: "code", 
-    minimumFractionDigits: 0
+    currency: "USD",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
   }).format(val);
 }
-
-
-// Récupère le panier utilisateur depuis la session (liste d’objets avec product_id et quantity)
 
 async function fetchCartItems() {
   const token = sessionStorage.getItem("token");
@@ -27,7 +33,7 @@ async function fetchCartItems() {
         const productDetails = await fetchProductDetails(item.product_id);
         if (productDetails) {
           return {
-            ...productDetails,   // contient id, name_latin, name_fr, image_path, price...
+            ...productDetails,   
             quantity: item.quantity
           };
         }
@@ -41,8 +47,6 @@ async function fetchCartItems() {
     updateCartDisplay();
     return;
   }
-  
-  
 
   try {
     const res = await fetch(`${api_url}/cart`, {
@@ -177,7 +181,6 @@ function strictObject(obj) {
   });
 }
 
-// Met à jour le panier avec les nouveaux détails
 function updateCartDisplay() {
   console.log("updateCartDisplay appelé");
   console.log("cartItems:", cartItems);
@@ -246,7 +249,6 @@ function updateCartDisplay() {
     cartContainer.appendChild(productDiv);
   });
   
-  // Afficher une seule fois le résumé APRÈS la boucle
   const summaryLine = document.createElement("div");
   summaryLine.className = "rounded-lg text-sm bg-white";
   
@@ -265,7 +267,6 @@ function updateCartDisplay() {
   }
 }
 
-// Change la quantité et met à jour l’API
   window.changeQuantity = async function (index, delta) {
   const product = cartItems[index];
   const newQty = product.quantity + delta;
@@ -278,7 +279,6 @@ function updateCartDisplay() {
   }
 }
 
-// Saisie directe dans l’input de quantité
   window.onQuantityInputChange = async function(e, index) {
   let val = parseInt(e.target.value);
   if (isNaN(val) || val < 1) {
@@ -296,11 +296,9 @@ function updateCartDisplay() {
   }
 }
 
-// Met à jour la quantité d’un produit via API
 async function updateCartQuantity(productId, quantity) {
   const token = sessionStorage.getItem("token");
   if (!token) {
-    // Mode localStorage
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     const item = cart.find(i => i.product_id === productId);
     if (item) {
@@ -311,7 +309,6 @@ async function updateCartQuantity(productId, quantity) {
     return false;
   }
 
-  // Utilisateur connecté → API
   try {
     const res = await fetch(`${api_url}/cart/${productId}`, {
       method: 'PUT',
@@ -332,7 +329,6 @@ async function updateCartQuantity(productId, quantity) {
 async function removeProductFromCart(productId) {
   const token = sessionStorage.getItem("token");
   if (!token) {
-    // Mode localStorage
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     cart = cart.filter(i => i.product_id !== productId);
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -351,7 +347,6 @@ async function removeProductFromCart(productId) {
   }
 }
 
-// Supprime un produit via modal
 let productToRemoveIndex = null;
 
 window.removeProduct = function(index) {
@@ -361,13 +356,11 @@ window.removeProduct = function(index) {
   document.getElementById("confirm-modal").classList.remove("hidden");
 }
 
-// Écouteurs d’événements ajoutés UNE SEULE FOIS au chargement DOM
 document.addEventListener("DOMContentLoaded", async () => {
   console.log("DOM prêt, on appelle fetchCartItems()");
 
   await fetchCartItems();
 
-  // Listeners modaux et boutons
   const clearCartBtn = document.getElementById("btn-open-clear-cart");
   if (clearCartBtn) {
     clearCartBtn.addEventListener("click", () => {
@@ -398,7 +391,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // Modal suppression produit
   const confirmBtn = document.getElementById("confirm-btn");
   if (confirmBtn) {
     confirmBtn.addEventListener("click", async () => {
@@ -423,57 +415,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // Request quote button
   const requestQuoteBtn = document.getElementById("request-quote");
 
   if (requestQuoteBtn) {
     requestQuoteBtn.addEventListener("click", async () => {
       const token = sessionStorage.getItem("token");
   
-      // Vérifier si l'utilisateur est connecté
       if (!token) {
         saveLastUrl();
         window.location.href = "/signin";
       }
-      
-      // Vérifier si un panier existe dans localStorage
-      // const localCart = localStorage.getItem("cart");
-      // if (localCart) {
-      //   const cartItems = JSON.parse(localCart);
-  
-      //   // Envoyer chaque item du panier au backend /cart
-      //   for (const cartItem of cartItems) {
-      //     try {
-      //       const response = await fetch("http://127.0.0.1:8000/api/cart", {
-      //         method: "POST",
-      //         headers: {
-      //           "Content-Type": "application/json",
-      //           "Authorization": `Bearer ${token}`
-      //         },
-      //         body: JSON.stringify({
-      //           product_id: cartItem.product_id || cartItem.product.id, // selon ta structure
-      //           quantity: cartItem.quantity
-      //         })
-      //       });
-  
-      //       if (!response.ok) {
-      //         const errorData = await response.json();
-      //         console.error("Erreur API ajout panier:", errorData);
-      //         alert("Erreur lors de l'ajout au panier : " + (errorData.message || "Erreur inconnue"));
-      //         return; // stoppe si une erreur
-      //       }
-      //     } catch (error) {
-      //       console.error("Erreur réseau:", error);
-      //       alert("Erreur réseau lors de l'ajout au panier.");
-      //       return;
-      //     }
-      //   }
-  
-      //   // Une fois que le panier local est envoyé, on peut le vider
-      //   localStorage.removeItem("cart");
-      // }
-  
-      // Enfin → envoyer la demande de devis
+     
       const notes = "Quote request";
   
       try {
@@ -501,8 +453,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   
 });
 
-
-// Supprime tout le panier via l'API
 async function clearCart() {
   const token = sessionStorage.getItem("token");
 
@@ -523,7 +473,6 @@ async function clearCart() {
     return;
   }
 
-  // UI loading state
   spinner.classList.remove("opacity-0", "scale-90");
   confirmText.classList.add("opacity-50");
   confirmBtn.disabled = true;
@@ -540,7 +489,6 @@ async function clearCart() {
       cartItems = [];
       updateCartDisplay();
 
-      // Affiche le message de succès
       message.classList.remove("hidden");
     } else {
       console.error("Échec suppression panier:", res.status);
@@ -549,7 +497,6 @@ async function clearCart() {
     console.error("Erreur réseau clearCart:", error);
   }
 
-  // Reset UI state après un petit délai
   setTimeout(() => {
     const modal = document.getElementById("clearCartModal");
     if (modal) modal.classList.add("hidden");
@@ -562,7 +509,10 @@ async function clearCart() {
 
 function saveLastUrl() {
   const currentUrl = window.location.href;
-  if (!currentUrl.includes("/signin")) {
+  if (
+    !currentUrl.includes("/signin") &&
+    !currentUrl.includes("/signup")
+  ) {
     localStorage.setItem("last_url", currentUrl);
   }
 }

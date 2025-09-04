@@ -1,5 +1,4 @@
 const API_URL = 'http://127.0.0.1:8000/api/products/details';
-// const API_URL = 'http://127.0.0.1:8000/api/products';
 const productContainer = document.getElementById('product-container');
 const paginationContainer = document.getElementById('pagination');
 const detailSection = document.getElementById('product-detail');
@@ -26,9 +25,6 @@ async function fetchProducts() {
     const data = await response.json();
     allProducts = data;
     filteredProducts = allProducts;
-
-    // console.log("all products: ", allProducts);
-    // console.log("filtre: " , filteredProducts);
     renderProducts();
     renderPagination();
   } catch (error) {
@@ -201,15 +197,6 @@ window.showDetail = function(productId) {
 
 window.addToCart = function(productId) {
 
-  // sessionStorage.removeItem('cart');
-
-  // const token = sessionStorage.getItem('token');
-  
-  // if (!token) {
-  //   window.location.href = "/signin";
-  //   return;
-  // }
-
   const product = allProducts.find(p => p.id === productId);
   if (!product) return;
 
@@ -316,10 +303,8 @@ async function addToCartStorage(product, quantity) {
   const token = sessionStorage.getItem('token');
 
   if (!token) {
-    // Utilisateur non connecté → stocker dans localStorage
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
   
-    // Vérifier si le produit existe déjà dans le panier
     const existingItem = cart.find(item => item.product_id === product.id);
   
     if (existingItem) {
@@ -336,11 +321,9 @@ async function addToCartStorage(product, quantity) {
     showNotification(`${product.name_latin} ajouté au panier (${quantity} kg)`);
     hideDetail();
     updateCartCount();
-    return; // on sort de la fonction, pas besoin d'appeler l'API
+    return; 
   }
   
-
-  // Utilisateur connecté → appel API
   try {
     const response = await fetch('http://127.0.0.1:8000/api/cart', {
       method: 'POST',
@@ -409,13 +392,7 @@ async function addToCartStorage(product, quantity) {
 //   }
 // }
 
-
 window.handleAddToCart = function(productId) {
-  // const token = sessionStorage.getItem('token');
-  // if (!token) {
-  //   window.location.href = "/signin";
-  //   return;
-  // }
   const product = allProducts.find(p => p.id === productId);
   const quantity = parseInt(document.getElementById('quantity').value) || 1;
   addToCartStorage(product, quantity);
@@ -423,7 +400,7 @@ window.handleAddToCart = function(productId) {
 
 function showNotification(message) {
   const toast = document.getElementById('toast');
-  const messageSpan = toast.querySelector('span'); // cible le span du message
+  const messageSpan = toast.querySelector('span');
 
   if (!messageSpan) return;
 
@@ -432,7 +409,6 @@ function showNotification(message) {
   toast.classList.remove('opacity-0', 'translate-y-10');
   toast.classList.add('opacity-100', 'translate-y-0');
 
-  // Masquer après 3 secondes
   setTimeout(() => {
     toast.classList.add('opacity-0', 'translate-y-10');
     toast.classList.remove('opacity-100', 'translate-y-0');
@@ -461,7 +437,7 @@ async function loadCategories() {
       });
 
       const span = document.createElement("span");
-      span.textContent = category.name;
+      span.textContent = category.name_fr;
 
       label.appendChild(input);
       label.appendChild(span);
@@ -484,7 +460,7 @@ async function loadSubCategories() {
     subcategories.forEach(sub => {
       const div = document.createElement("div");
       div.className = "filter-item p-2 rounded cursor-pointer";
-      div.textContent = sub.name;
+      div.textContent = sub.name_fr;
       div.setAttribute("data-id", sub.id);
       div.setAttribute("data-type", "subcategory");
 
@@ -534,7 +510,6 @@ function highlightSelectedSubcategory() {
   });
 }
 
-// Charger les filtres
 loadCategories();
 loadSubCategories();
 
@@ -554,7 +529,6 @@ export async function updateCartCount() {
     return;
   }
 
-  // Utilisateur connecté → récupération panier via API
   try {
     const response = await fetch('http://127.0.0.1:8000/api/cart', {
       headers: { 'Authorization': `Bearer ${token}` }
@@ -638,17 +612,16 @@ export async function loadCategoriesToMenu() {
 
     categories.forEach(category => {
       const a = document.createElement("a");
-      a.href = "#products"; // redirige vers la section produit
-      a.textContent = category.name;
+      a.href = "#products";
+      a.textContent = category.name_fr;
       a.className = "block px-4 py-2 hover:bg-gray-100 text-black";
       a.setAttribute("data-category-id", category.id);
 
-      // Ajoute l'écouteur de clic
       a.addEventListener("click", (e) => {
-        e.preventDefault(); // évite la redirection immédiate
+        e.preventDefault(); 
 
-        applyCategoryFilter(parseInt(category.id)); // filtre par catégorie
-        document.querySelector("#products").scrollIntoView({ behavior: "smooth" }); // scroll vers la section
+        applyCategoryFilter(parseInt(category.id)); 
+        document.querySelector("#products").scrollIntoView({ behavior: "smooth" }); 
       });
 
       dropdown.appendChild(a);
@@ -660,15 +633,12 @@ export async function loadCategoriesToMenu() {
 }
 
 function applyCategoryFilter(categoryId) {
-  // Décoche toutes les checkbox
   document.querySelectorAll('input[data-type="category"]').forEach(input => {
     input.checked = parseInt(input.value) === categoryId;
   });
 
-  // Réinitialise la sous-catégorie active
   activeSubCategoryId = null;
 
-  // Applique le filtre
   filteredProducts = allProducts.filter(p => p.category_id === categoryId);
 
   currentPage = 1;

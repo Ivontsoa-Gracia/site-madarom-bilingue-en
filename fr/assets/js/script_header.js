@@ -345,6 +345,3 @@ window.addEventListener('scroll', () => {
       if (el) el.scrollIntoView({ behavior: "smooth" });
     } 
   });
-
-
-

@@ -195,11 +195,11 @@ sortOrder.addEventListener('change', applyFilters);
 fetchUserQuotes();
 
 function formatPrice(val) {
-  return new Intl.NumberFormat("fr-MG", {
+  return new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "MGA",
-    currencyDisplay: "code", 
-    minimumFractionDigits: 0
+    currency: "USD",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
   }).format(val);
 }
 

@@ -21,14 +21,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (!token) {
         // Utilisateur non connecté : masquer panier, montrer login
-        if (cartBtnDesktop) cartBtnDesktop.classList.add('hidden');
-        if (cartBtnMobile) cartBtnMobile.classList.add('hidden');
+        // if (cartBtnDesktop) cartBtnDesktop.classList.add('hidden');
+        // if (cartBtnMobile) cartBtnMobile.classList.add('hidden');
         if (loginBtn) loginBtn.classList.remove('hidden');
         if (loginBtnMobile) loginBtnMobile.classList.remove('hidden');
       } else {
         // Utilisateur connecté : montrer panier, masquer login
-        if (cartBtnDesktop) cartBtnDesktop.classList.remove('hidden');
-        if (cartBtnMobile) cartBtnMobile.classList.remove('hidden');
+        // if (cartBtnDesktop) cartBtnDesktop.classList.remove('hidden');
+        // if (cartBtnMobile) cartBtnMobile.classList.remove('hidden');
         if (loginBtn) loginBtn.classList.add('hidden');
         if (loginBtnMobile) loginBtnMobile.classList.add('hidden');
       }
@@ -128,6 +128,10 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
       });
+
+      if (!sessionStorage.getItem('lang')) {
+        sessionStorage.setItem('lang', 'EN'); 
+      }
       // -- Langue selector desktop --
       const langDropdownBtn = document.getElementById('langDropdownBtn');
       const langDropdownMenu = document.getElementById('langDropdownMenu');
@@ -149,6 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
             langDropdownBtn.setAttribute('aria-expanded', false);
             sessionStorage.setItem('lang', lang);
             window.location.href = `${window.location.origin}/${newLang}/`;
+
 
           });
         });
@@ -187,6 +192,8 @@ document.addEventListener('DOMContentLoaded', () => {
             langDropdownBtnMobile.setAttribute('aria-expanded', false);
             sessionStorage.setItem('lang', lang);
             window.location.href = `${window.location.origin}/${newLang}/`;
+
+
 
           });
         });
@@ -355,6 +362,3 @@ window.addEventListener('scroll', () => {
       if (el) el.scrollIntoView({ behavior: "smooth" });
     } 
   });
-
-
-

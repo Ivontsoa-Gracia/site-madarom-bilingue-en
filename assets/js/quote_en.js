@@ -210,7 +210,6 @@ function formatPrice(val) {
   }).format(val);
 }
 
-
 async function viewQuote(id) {
   if (!id) return;
   window.location.href = `/en/quote/show?ref=${encodeURIComponent(id)}`;
@@ -241,21 +240,18 @@ async function orderQuote(id) {
       let data = {};
       try { data = await response.json(); } catch (err) {}
       console.error("Backend error:", data);
-      // alert(`Erreur ${response.status}: ${data.message || "Voir console pour détails"}`);
       return;
     }
     
     showToast("Order placed successfully!");
   } catch (error) {
     console.error("Error:", error);
-    // alert("Erreur réseau ou inattendue: " + error.message);
   }
 }
 
 async function clearQuote(id) {
   const token = sessionStorage.getItem("token");
   if (!token) {
-    // alert("No token found. Please log in.");
     return;
   }
 
@@ -276,7 +272,6 @@ async function clearQuote(id) {
       let data = {};
       try { data = await response.json(); } catch (err) {}
       console.error("Backend error:", data);
-      // alert(`Erreur ${response.status}: ${data.message || "Voir console pour détails"}`);
       return;
     }
     
