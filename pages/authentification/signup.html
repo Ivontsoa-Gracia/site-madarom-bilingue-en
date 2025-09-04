@@ -46,7 +46,7 @@
                             name="password"
                             required
                             class="input-field"
-                            placeholder="Mot de passe"
+                            placeholder="Password"
                             autocomplete="new-password"
                         />
                         <button type="button" class="toggle-password" aria-label="Afficher / Cacher mot de passe" tabindex="-1">
@@ -57,19 +57,19 @@
                     <ul class="text-xs text-gray-500 mb-4" id="passwordChecklist">
                         <li id="length" class="flex items-center gap-2">
                             <i class="fas fa-check icon text-red-500"></i>
-                            Minimum 8 caractères
+                            Minimum 8 characters
                         </li>
                         <li id="uppercase" class="flex items-center gap-2">
                             <i class="fas fa-check icon text-red-500"></i>
-                            Une lettre majuscule
+                            At least one uppercase letter
                         </li>
                         <li id="special" class="flex items-center gap-2">
                             <i class="fas fa-check icon text-red-500"></i>
-                            Un chiffre et un caractère spécial
+                            At least one number and one special character
                         </li>
                     </ul>
 
-                    <button type="button" id="nextBtn" class="btn-primary rounded-full">Suivant</button>
+                    <button type="button" id="nextBtn" class="btn-primary rounded-full">Next</button>
                 </div>
 
                 <!-- Étape 2 -->
@@ -85,23 +85,23 @@
                             name="confirmPassword"
                             required
                             class="input-field"
-                            placeholder="Confirmer mot de passe"
+                            placeholder="Confirm Password"
                             autocomplete="new-password"
                         />
                         <button type="button" class="toggle-password" aria-label="Afficher / Cacher mot de passe" tabindex="-1">
                             <i class="fa-solid fa-eye"></i>
                         </button>
                     </div>
-                    <p id="confirmError" class="text-red-500 text-xs mb-4 hidden">Les mots de passe ne correspondent pas.</p>
+                    <p id="confirmError" class="text-red-500 text-xs mb-4 hidden">Passwords do not match.</p>
 
-                    <button type="submit" class="btn-primary rounded-full">S’inscrire</button>
+                    <button type="submit" class="btn-primary rounded-full">Sign up</button>
                 </div>
             </form>
 
             <div class="mt-8 text-center">
                 <p class="text-gray-500">
-                    Déjà un compte ?
-                    <a href="/signin" class="text-[#56b6a8] font-medium">Se connecter</a>
+                    Already have an account?
+                    <a href="/signin" class="text-[#56b6a8] font-medium">Log in</a>
                 </p>
             </div>
         </div>

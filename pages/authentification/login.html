@@ -18,7 +18,6 @@
     <div class="bg-white rounded-lg p-8 sm:p-10 shadow">
 
       <form id="loginForm" novalidate>
-        <!-- Email -->
         <div class="input-container mb-4">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 input-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
@@ -26,29 +25,27 @@
           <input type="email" id="username" required class="input-field" placeholder="Email" autocomplete="username" />
         </div>
 
-        <!-- Mot de passe -->
         <div class="input-container mb-4">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 input-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
           </svg>
-          <input type="password" id="password" required class="input-field" placeholder="Mot de passe" autocomplete="current-password" />
+          <input type="password" id="password" required class="input-field" placeholder="Password" autocomplete="current-password" />
           <button type="button" class="toggle-password" aria-label="Afficher / Cacher mot de passe" tabindex="-1">
             <i class="fa-solid fa-eye"></i>
           </button>
         </div>
 
-        <!-- Mot de passe oublié -->
-        <div class="text-right mb-6">
+        <!-- <div class="text-right mb-6">
           <a href="/reset-password" class="text-sm text-[#56b6a8] hover:underline font-medium">Mot de passe oublié ?</a>
-        </div>
+        </div> -->
 
-        <button type="submit" class="btn-primary rounded-full w-full">Se connecter</button>
+        <button type="submit" class="btn-primary rounded-full w-full">Log in</button>
       </form>
 
       <div class="mt-8 text-center">
         <p class="text-gray-500">
-          Pas encore de compte ?
-          <a href="/signup" data-link class="text-[#56b6a8] font-medium">S’inscrire</a>
+          Not registered yet?
+          <a href="/signup" data-link class="text-[#56b6a8] font-medium">Sign up</a>
         </p>
       </div>
     </div>
