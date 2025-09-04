@@ -252,6 +252,7 @@
                 if (localCart) {
                   const cartItems = JSON.parse(localCart);
       
+                console.log("Mety 1");
                   for (const cartItem of cartItems) {
                     try {
                       const resp = await fetch("http://127.0.0.1:8000/api/cart", {
@@ -278,6 +279,8 @@
                       return;
                     }
                   }
+                    console.log("Mety 2");
+
                   localStorage.removeItem("cart");
                 }
       
@@ -291,7 +294,6 @@
                 }
               }
       
-              alert("Inscription réussie !");
               form.reset();
               step2.classList.add("hidden");
               step1.classList.remove("hidden");
