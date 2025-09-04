@@ -97,7 +97,6 @@
           if (localCart) {
             const cartItems = JSON.parse(localCart);
       
-            // Envoyer chaque item du panier au backend /cart
             for (const cartItem of cartItems) {
               try {
                 const response = await fetch("http://127.0.0.1:8000/api/cart", {
@@ -107,7 +106,7 @@
                     "Authorization": `Bearer ${token}`
                   },
                   body: JSON.stringify({
-                    product_id: cartItem.product_id || cartItem.product.id, // selon ta structure
+                    product_id: cartItem.product_id || cartItem.product.id, 
                     quantity: cartItem.quantity
                   })
                 });
@@ -116,7 +115,7 @@
                   const errorData = await response.json();
                   console.error("Erreur API ajout panier:", errorData);
                   alert("Erreur lors de l'ajout au panier : " + (errorData.message || "Erreur inconnue"));
-                  return; // stoppe si une erreur
+                  return; 
                 }
 
               } catch (error) {
@@ -125,13 +124,12 @@
                 return;
               }
             }
-      
-            // Une fois que le panier local est envoyé, on peut le vider
+    
             localStorage.removeItem("cart");
           }
 
           const lastUrl = getLastUrl();
-          clearLastUrl();
+          clearLastUrl();  
           if (lastUrl) {
             window.location.href = lastUrl; 
           } else {
