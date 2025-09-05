@@ -1,4 +1,4 @@
-const API_URL = 'http://127.0.0.1:8000/api/products/details';
+const API_URL = 'https://madarom-project-production.up.railway.app/api/products/details';
 const productContainer = document.getElementById('product-container');
 const paginationContainer = document.getElementById('pagination');
 const detailSection = document.getElementById('product-detail');
@@ -324,7 +324,7 @@ async function addToCartStorage(product, quantity) {
   }
   
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/cart', {
+    const response = await fetch('https://madarom-project-production.up.railway.app/api/cart', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -379,7 +379,7 @@ async function loadCategories() {
   const container = document.getElementById("category-container");
 
   try {
-    const res = await fetch("http://127.0.0.1:8000/api/categories");
+    const res = await fetch("https://madarom-project-production.up.railway.app/api/categories");
     const categories = await res.json();
 
     categories.forEach(category => {
@@ -414,7 +414,7 @@ async function loadSubCategories() {
   const container = document.getElementById("subcategory-container");
 
   try {
-    const res = await fetch("http://127.0.0.1:8000/api/subcategories");
+    const res = await fetch("https://madarom-project-production.up.railway.app/api/subcategories");
     const subcategories = await res.json();
 
     subcategories.forEach(sub => {
@@ -490,7 +490,7 @@ export async function updateCartCount() {
   }
 
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/cart', {
+    const response = await fetch('https://madarom-project-production.up.railway.app/api/cart', {
       headers: { 'Authorization': `Bearer ${token}` }
     });
 
@@ -523,7 +523,7 @@ export async function loadCategoriesToMenu() {
   const dropdown = document.getElementById("products-dropdown");
 
   try {
-    const res = await fetch("http://127.0.0.1:8000/api/categories");
+    const res = await fetch("https://madarom-project-production.up.railway.app/api/categories");
     const categories = await res.json();
 
     categories.forEach(category => {

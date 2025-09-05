@@ -128,7 +128,7 @@
 
     async function loadQuoteData(id) {
       try {
-        const res = await fetch(`http://127.0.0.1:8000/api/quote/${id}`, {
+        const res = await fetch(`https://madarom-project-production.up.railway.app/api/quote/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'

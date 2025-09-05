@@ -159,7 +159,7 @@
 
     async function loadQuoteData(id) {
       try {
-        const res = await fetch(`http://127.0.0.1:8000/api/quote/${id}`, {
+        const res = await fetch(`https://madarom-project-production.up.railway.app/api/quote/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -188,7 +188,7 @@
 
         if (quote.quote.payment) {
           paymentDiv.classList.remove("hidden");
-          paymentImg.src = `https://31612b14c9b7.ngrok-free.app/storage/${quote.quote.payment.screenshot}`;
+          paymentImg.src = `https://madarom-project-production.up.railway.app/storage/${quote.quote.payment.screenshot}`;
           lightboxImg.src = paymentImg.src;
 
           paymentImg.addEventListener("click", () => {
@@ -285,7 +285,7 @@
       invoiceStatus.textContent = "Processing...";
 
       try {
-        const res = await fetch(`http://127.0.0.1:8000/api/quote/invoice/${currentQuoteId}`, {
+        const res = await fetch(`https://madarom-project-production.up.railway.app/api/quote/invoice/${currentQuoteId}`, {
           method: "POST",
           headers: {
             Authorization: `Bearer ${token}`,
