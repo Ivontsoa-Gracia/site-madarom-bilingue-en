@@ -170,7 +170,7 @@ body {
 
 .partner-logo {
     transition: all 0.3s ease;
-    filter: grayscale(100%);
+    /* filter: grayscale(100%); */
     opacity: 0.8;
 }
 .partner-logo:hover {
