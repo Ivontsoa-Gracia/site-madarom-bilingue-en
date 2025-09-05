@@ -155,7 +155,7 @@ async function fetchProductDetails(id) {
 
     // console.log('details produit:', data);
 
-    const price = parseFloat(data.active_price?.amount_mga ?? 0);
+    const price = parseFloat(data.active_price?.amount ?? 0);
     // console.log('prix du produit:', price);
     return {
       id: data.id,
@@ -225,7 +225,7 @@ function updateCartDisplay() {
         &times;
       </button>
   
-      <img src="https://www.madarom.net/${item.image_path}" alt="${item.name_fr}"
+      <img src="https://www.madarom.net/assets/${item.image_path ?? 'assets/img/p1.png'}" alt="${item.name_fr}"
         class="w-28 h-28 sm:w-20 sm:h-20 object-cover rounded-lg mx-auto sm:mx-0" />
   
       <div class="flex flex-col flex-1 text-center sm:text-left gap-2">
