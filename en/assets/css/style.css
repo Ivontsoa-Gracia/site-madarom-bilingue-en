@@ -185,3 +185,21 @@ body {
     opacity: 0.1;
     z-index: -1;
 }
+
+.leaf-bg {
+    background-image: url('http://static.photos/agriculture/1200x630/123');
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: overlay;
+}
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+.logo-hover {
+    transition: all 0.3s ease;
+}
+.logo-hover:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 4px 6px rgba(0, 128, 0, 0.2));
+}
