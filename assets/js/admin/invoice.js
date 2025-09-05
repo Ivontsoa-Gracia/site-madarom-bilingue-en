@@ -178,7 +178,7 @@ function initInvoices() {
         if (!token) return alert("No token found. Please log in.");
 
         try {
-            const res = await fetch("http://127.0.0.1:8000/api/quote", {
+            const res = await fetch("https://madarom-project-production.up.railway.app/api/quote", {
                 method: "GET",
                 headers: {
                     "Authorization": `Bearer ${token}`,

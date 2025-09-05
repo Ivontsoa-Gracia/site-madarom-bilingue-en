@@ -111,7 +111,7 @@
     <script type="module">
         import { getLastUrl, clearLastUrl } from '../../assets/js/url.js';
       
-        const API_URL_REG = 'http://127.0.0.1:8000/api/register';
+        const API_URL_REG = 'https://madarom-project-production.up.railway.app/api/register';
       
         const email = document.getElementById("email");
         const password = document.getElementById("password");
@@ -255,7 +255,7 @@
                 console.log("Mety 1");
                   for (const cartItem of cartItems) {
                     try {
-                      const resp = await fetch("http://127.0.0.1:8000/api/cart", {
+                      const resp = await fetch("https://madarom-project-production.up.railway.app/api/cart", {
                         method: "POST",
                         headers: {
                           "Content-Type": "application/json",

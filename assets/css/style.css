@@ -166,3 +166,20 @@ body {
     font-family: 'Poppins', sans-serif;
     text-align: center;
 }
+
+.partner-logo {
+    transition: all 0.3s ease;
+    filter: grayscale(100%);
+    opacity: 0.8;
+}
+.partner-logo:hover {
+    filter: grayscale(0);
+    opacity: 1;
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+.leaf-decoration {
+    position: absolute;
+    opacity: 0.1;
+    z-index: -1;
+}
