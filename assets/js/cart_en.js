@@ -88,7 +88,7 @@ async function fetchProductDetails(id) {
 
     // console.log('details produit:', data);
 
-    const price = parseFloat(data.active_price?.amount_mga ?? 0);
+    const price = parseFloat(data.active_price?.amount ?? 0);
     // console.log('prix du produit:', price);
     return {
       id: data.id,
