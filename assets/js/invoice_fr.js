@@ -22,7 +22,7 @@ function renderQuotes(data) {
   paginated.forEach(quote => {
     let total = 0;
     quote.items.forEach(item => {
-      total += item.price_snapshot_mga * item.quantity;
+      total += item.price_snapshot * item.quantity;
     });
 
     tbody.innerHTML += `
