@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -12,15 +12,15 @@
 <body class="bg-white p-6 text-gray-800 text-font-family">
 
   <div class="flex justify-between items-center max-w-4xl mx-auto mb-6">
-    <a href="/en/order">
+    <a href="/zh-cn/order">
       <button class="flex items-center gap-2 text-gray-600 hover:text-[#333333] transition font-semibold">
         <i class='bx bx-arrow-back text-xl'></i>
-        <span>Back</span>
+        <span>返回</span>
       </button>
     </a>
     <button onclick="generatePDF()" class="flex items-center gap-2 btn-primary text-white px-4 py-2 rounded-full  transition">
       <i class='bx bx-download text-xl'></i>
-      <span>Download PDF</span>
+      <span>下载 PDF</span>
     </button>
   </div>
 
@@ -29,7 +29,7 @@
     <div class="flex justify-between items-center border-b pb-6 mb-6">
       <div class="flex flex-col gap-2">
         <img src="../../assets/img/logo.jpg" alt="Mad'arom logo" class="w-32 h-auto mb-2">
-        <h1 class="text-3xl font-extrabold text-[#333333] tracking-wide">ORDER</h1>
+        <h1 class="text-3xl font-extrabold text-[#333333] tracking-wide">订单</h1>
         <p class="text-sm text-gray-500" id="order-date"></p>
         <p class="text-sm text-gray-500" id="quote-number">#QTE-XXXXXX</p>
       </div>
@@ -42,18 +42,18 @@
     </div>
 
     <div class="mb-6 bg-gray-50 p-4 border">
-      <h3 class="font-medium mb-2 text-gray-700 text-lg" id="client-name">Name</h3>
-      <p class="text-sm text-gray-500" id="client-email">Email</p>
+      <h3 class="font-medium mb-2 text-gray-700 text-lg" id="client-name">姓名</h3>
+      <p class="text-sm text-gray-500" id="client-email">邮箱</p>
     </div>
 
     <div class="overflow-x-auto border border-gray-200">
       <table class="w-full text-sm">
         <thead>
           <tr class="bg-gray-50 text-[#333333] text-left">
-            <th class="py-3 px-4 font-medium">Product</th>
-            <th class="py-3 px-4 text-center font-medium">Quantity</th>
-            <th class="py-3 px-4 text-right font-medium">Unit Price</th>
-            <th class="py-3 px-4 text-right font-medium">Total</th>
+            <th class="py-3 px-4 font-medium">产品</th>
+            <th class="py-3 px-4 text-center font-medium">数量</th>
+            <th class="py-3 px-4 text-right font-medium">单价</th>
+            <th class="py-3 px-4 text-right font-medium">总计</th>
           </tr>
         </thead>
         <tbody id="quotes-items" class="divide-y divide-gray-100">
@@ -64,11 +64,11 @@
     <div class="mt-6 flex justify-end">
       <div class="w-full md:w-1/2 bg-gray-50 p-4 border space-y-2">
         <div class="flex justify-between">
-          <span class="font-medium">Sub-total:</span>
+          <span class="font-medium">小计:</span>
           <span id="subtotal">0 USD</span>
         </div>
         <div class="flex justify-between text-lg font-semibold text-[#333333]">
-          <span>Total :</span>
+          <span>总计 :</span>
           <span id="total">0 USD</span>
         </div>
       </div>
@@ -76,7 +76,7 @@
 
     <div class="mt-8 text-xs text-gray-500 text-left">
       <p id="delivery-date"></p>
-      <p class="mt-1">Thank you for your trust!</p>
+      <p class="mt-1">感谢您的信任！</p>
     </div>
   </div>
 
@@ -108,13 +108,14 @@
       }).format(val);
     }
 
+    async function translateText(text, targetLang = "zh-CN") {
+      const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|${targetLang}`;
+      const res = await fetch(url);
+      const data = await res.json();
+      return data.responseData.translatedText;
+    }
 
     const token = sessionStorage.getItem("token");
-
-    if (token) {
-      } else {
-        console.warn("Aucun token trouvé dans sessionStorage");
-    }
 
     async function loadQuoteData(id) {
       try {
@@ -128,10 +129,8 @@
         if (!res.ok) throw new Error("Devis non trouvé");
         const quote = await res.json();
 
-        console.log(quote);
-
-        document.getElementById("order-date").textContent = `Date: ${quote.quote.updated_at.split('T')[0]}`;
-        document.getElementById("quote-number").textContent = `N° ${quote.quote.reference}`;
+        document.getElementById("order-date").textContent = `日期: ${quote.quote.updated_at.split('T')[0]}`;
+        document.getElementById("quote-number").textContent = `订单号 ${quote.quote.reference}`;
         document.getElementById("client-name").textContent = quote.user.name;
         document.getElementById("client-email").textContent = quote.user.email;
 
@@ -139,26 +138,28 @@
         tbody.innerHTML = "";
         let total = 0;
 
-        quote.items.forEach(item => {
+        // Traduire tous les noms de produits en parallèle
+        const translatedNames = await Promise.all(
+          quote.items.map(item => translateText(item.product.name_en))
+        );
+
+        quote.items.forEach((item, index) => {
           const sub = item.price_snapshot * item.quantity; 
           total += sub;
 
           tbody.innerHTML += `
             <tr>
-              <td class="py-2 px-2">${item.product.name_en}</td>
+              <td class="py-2 px-2">${translatedNames[index]}</td>
               <td class="py-2 px-2 text-center">${item.quantity}</td>
               <td class="py-2 px-2 text-right">${formatPrice(item.price_snapshot)}</td>
               <td class="py-2 px-2 text-right">${formatPrice(sub)}</td>
             </tr>`;
         });
 
-        const ttc = total;
         document.getElementById("subtotal").textContent = formatPrice(total);
-        document.getElementById("total").textContent = formatPrice(ttc);
-
+        document.getElementById("total").textContent = formatPrice(total);
 
         let updatedAt = new Date(quote.quote.updated_at);
-
         updatedAt = new Date(updatedAt.getFullYear(), updatedAt.getMonth(), updatedAt.getDate());
 
         let totalDays = quote.quote.day || 0;
@@ -173,35 +174,34 @@
         deliveryDate.setDate(deliveryDate.getDate() + totalDays);
         deliveryDate.setHours(deliveryDate.getHours() + totalHours);
 
-        let deliveryMessage = "This order is delivered in ";
-        if (totalDays > 0) deliveryMessage += `${totalDays} day${totalDays > 1 ? "s" : ""}`;
-        if (totalDays > 0 && totalHours > 0) deliveryMessage += " and ";
-        if (totalHours > 0) deliveryMessage += `${totalHours} hour${totalHours > 1 ? "s" : ""}`;
+        let deliveryMessage = "预计送达时间：";
+        if (totalDays > 0) deliveryMessage += `${totalDays}天`;
+        if (totalDays > 0 && totalHours > 0) deliveryMessage += " ";
+        if (totalHours > 0) deliveryMessage += `${totalHours}小时`;
 
-        const formattedDate = deliveryDate.toLocaleDateString("fr-FR", {
+        const formattedDate = deliveryDate.toLocaleDateString("zh-CN", {
           weekday: "long",
           year: "numeric",
           month: "long",
           day: "numeric"
         });
 
-        deliveryMessage += ` , on ${formattedDate}`;
+        deliveryMessage += ` , ${formattedDate}`;
 
         document.getElementById("delivery-date").textContent = deliveryMessage;
 
       } catch (error) {
         console.error("Erreur lors du chargement du devis :", error);
-        alert("Impossible de charger le devis.");
+        alert("无法加载订单信息。");
       }
     }
 
     const params = new URLSearchParams(window.location.search);
     const ref = params.get("ref");
     if (ref) {
-      console.log("ID du devis :", ref);
       loadQuoteData(ref);
     } else {
-      alert("Aucun ID de devis fourni.");
+      alert("未提供订单ID。");
     }
   </script>
 </body>

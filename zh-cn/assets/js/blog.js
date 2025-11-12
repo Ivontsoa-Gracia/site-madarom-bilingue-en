@@ -8,8 +8,8 @@ const articles = [
     contenu:
       "近年来，亚洲对天然精油的需求快速增长。从新加坡的水疗行业到中国的天然护肤品牌，再到台湾的芳疗品牌，越来越多企业选择纯净、可持续的产品。Madarom 来自马达加斯加，出口 100% 纯天然精油，每一滴都承载自然的力量与科学的精粹。马达加斯加独特的气候孕育出卓越的芳香分子，如 Ravintsara、依兰依兰、粉胡椒与 Niaouli。这些精油成为亚洲市场真实与高品质的新标杆。Madarom 坚持道德采购与全程追溯，所有精油均通过 GC/MS 检测并附带 COA、MSDS 认证。我们的客户包括新加坡、香港、上海与台北的水疗中心、护肤品牌与批发商。Madarom 提供散装出口、OEM 与白标合作。",
     image: [
-      "./assets/img/articles/blog1-cn-001.jpg",
-      "./assets/img/articles/blog1-cn-002.jpg",
+      "./assets/img/articles/article1-001.jpg",
+      "./assets/img/articles/article1-002.jpg",
     ],
     theme: "精油",
   },
@@ -22,8 +22,8 @@ const articles = [
     contenu:
       "选择合适的精油供应商决定品牌的核心价值。Madarom 马达加斯加为亚洲品牌提供高品质、可追溯、纯天然精油。第一步：确定品牌目标（放松、净化或能量） | 第二步：了解精油等级（纯净、无添加） | 第三步：根据亚洲喜好配方（柔和、清新） | 第四步：选择可靠出口伙伴（多语言服务与灵活包装）。",
     image: [
-      "./assets/img/articles/blog2-cn-001.jpg",
-      "./assets/img/articles/blog2-cn-002.jpg",
+      "./assets/img/articles/article2-001.jpg",
+      "./assets/img/articles/article2-002.jpg",
     ],
     theme: "品牌策略",
   },
@@ -36,8 +36,8 @@ const articles = [
     contenu:
       "在精油的世界中，乳香与依兰依兰堪称“王与后”。它们的纯净与奢华使其成为亚洲香氛与水疗市场的首选。乳香象征净化与疗愈；依兰依兰代表热带花香之魂，舒缓情绪、滋养肌肤。推荐混合：依兰依兰 + 橙子（放松）或 乳香 + Ravintsara（净化）。Madarom 保证道德采购与实验室检测，提供 OEM 与品牌定制方案。",
     image: [
-      "./assets/img/articles/blog3-cn-001.jpg",
-      "./assets/img/articles/blog3-cn-002.jpg",
+      "./assets/img/articles/article3-001.jpg",
+      "./assets/img/articles/article3-002.jpg",
     ],
     theme: "健康养生",
   },

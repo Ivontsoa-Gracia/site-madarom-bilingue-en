@@ -8,8 +8,8 @@ const articles = [
     contenu:
       "In recent years, the demand for natural essential oils in Asia has grown rapidly. From Singapore’s spa industry to China’s natural cosmetics and Taiwan’s aromatherapy brands, businesses are turning toward ethical, high-purity products — and Madagascar is leading the trend. At Madarom, we export 100% pure essential oils sourced directly from Malagasy farmers. Each drop tells a story of biodiversity, tradition, and science. Madagascar’s unique climate allows plants to produce exceptional aromatic molecules. Examples include Ravintsara, Ylang-Ylang, Baie Rose, and Niaouli. These oils have become Asia’s new reference for authenticity and performance. Madarom stands for ethical sourcing and traceable production: GC/MS tested, COA + MSDS certified, steam-distilled, and sustainable. Asian buyers appreciate our premium quality and commitment to sustainability. Our clients include spa and wellness centers, natural skincare brands, and essential oil distributors across Asia. We provide bulk export, OEM, and white-label services.",
     image: [
-      "./assets/img/articles/blog1-en-001.jpg",
-      "./assets/img/articles/blog1-en-002.jpg",
+      "./assets/img/articles/article1-001.jpg",
+      "./assets/img/articles/article1-002.jpg",
     ],
     theme: "Essential Oils",
   },
@@ -22,8 +22,8 @@ const articles = [
     contenu:
       "Choosing the right essential oil supplier defines your brand’s identity — especially in the Asian wellness market, where quality and story matter. Here’s how to make the right choice with Madarom Madagascar. Step 1: Identify your brand’s purpose – relaxation, detox, or respiratory wellness. Step 2: Understand oil grades – choose GC/MS verified, sustainably sourced oils. Step 3: Blend for Asian sensibilities – 20% top note, 30% middle, 50% base. Step 4: Choose a reliable export partner – flexible packaging, OEM, and support in English & Mandarin.",
     image: [
-      "./assets/img/articles/blog2-en-001.jpg",
-      "./assets/img/articles/blog2-en-002.jpg",
+      "./assets/img/articles/article2-001.jpg",
+      "./assets/img/articles/article2-002.jpg",
     ],
     theme: "Brand Strategy",
   },
@@ -36,8 +36,8 @@ const articles = [
     contenu:
       "In the world of essential oils, few stand out like Frankincense and Ylang-Ylang — the King and Queen of Madagascar. Their purity and luxury make them essential to Asia’s spa and fragrance markets. Frankincense represents purity and healing. Ylang-Ylang, Madagascar’s floral jewel, balances emotions and enhances beauty. These oils are loved in Singapore and Taiwan’s wellness industries. Try blends like Ylang-Ylang + Orange for relaxation or Frankincense + Ravintsara for grounding. Madarom provides ethical sourcing, testing, and OEM solutions.",
     image: [
-      "./assets/img/articles/blog3-en-001.jpg",
-      "./assets/img/articles/blog3-en-002.jpg",
+      "./assets/img/articles/article3-001.jpg",
+      "./assets/img/articles/article3-002.jpg",
     ],
     theme: "Wellness",
   },

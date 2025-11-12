@@ -8,8 +8,8 @@ const articles = [
     contenu:
       "Ces dernières années, la demande en huiles essentielles naturelles a explosé en Asie. De l’industrie du spa à Singapour aux cosmétiques naturels en Chine et à Taïwan, les marques recherchent désormais des produits éthiques et d’une pureté exceptionnelle — et Madagascar est devenue une référence. Chez Madarom, nous exportons des huiles essentielles 100 % pures, directement issues des producteurs malgaches. Chaque goutte raconte une histoire de biodiversité, de tradition et de science. Le climat unique de Madagascar permet la production de molécules aromatiques d’une qualité rare. Parmi les plus prisées : Ravintsara, Ylang-Ylang, Baie Rose et Niaouli. Ces huiles sont désormais des références en Asie pour leur authenticité et leurs performances. Madarom garantit une origine éthique et une traçabilité totale : analyses GC/MS, certificats COA et MSDS, distillation à la vapeur et production durable. Nos clients incluent des centres de bien-être, marques de soins naturels et distributeurs d’huiles essentielles à travers toute l’Asie.",
     image: [
-      "./assets/img/articles/blog1-fr-001.jpg",
-      "./assets/img/articles/blog1-fr-002.jpg",
+      "./assets/img/articles/article1-001.jpg",
+      "./assets/img/articles/article1-002.jpg",
     ],
     theme: "Huiles Essentielles",
   },
@@ -22,8 +22,8 @@ const articles = [
     contenu:
       "Choisir le bon fournisseur d’huiles essentielles, c’est définir l’identité même de votre marque — surtout sur le marché asiatique, où la qualité et l’histoire du produit priment. Étape 1 : Définir la mission de votre marque — relaxation, détox ou équilibre respiratoire. Étape 2 : Comprendre les grades d’huiles — privilégier les huiles testées GC/MS et issues de sources durables. Étape 3 : Adapter les mélanges aux goûts asiatiques — 20 % note de tête, 30 % note de cœur, 50 % note de base. Étape 4 : Choisir un partenaire d’export fiable — emballages flexibles, OEM et accompagnement bilingue (anglais et mandarin).",
     image: [
-      "./assets/img/articles/blog2-fr-001.jpg",
-      "./assets/img/articles/blog2-fr-002.jpg",
+      "./assets/img/articles/article2-001.jpg",
+      "./assets/img/articles/article2-002.jpg",
     ],
     theme: "Stratégie de Marque",
   },
@@ -36,8 +36,8 @@ const articles = [
     contenu:
       "Dans l’univers des huiles essentielles, peu se distinguent autant que l’Encens et l’Ylang-Ylang — les véritables roi et reine de Madagascar. Leur pureté et leur raffinement en font des incontournables du marché asiatique du spa et de la parfumerie. L’Encens symbolise la purification et la guérison. L’Ylang-Ylang, joyau floral de Madagascar, équilibre les émotions et sublime la peau. Ces huiles sont particulièrement prisées à Singapour et Taïwan. Essayez des synergies comme Ylang-Ylang + Orange (relaxation) ou Encens + Ravintsara (purification). Madarom assure un approvisionnement éthique, des tests de qualité et des services OEM personnalisés.",
     image: [
-      "./assets/img/articles/blog3-fr-001.jpg",
-      "./assets/img/articles/blog3-fr-002.jpg",
+      "./assets/img/articles/article3-001.jpg",
+      "./assets/img/articles/article3-002.jpg",
     ],
     theme: "Bien-être",
   },
