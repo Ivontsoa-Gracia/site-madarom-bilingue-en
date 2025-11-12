@@ -345,3 +345,22 @@ window.addEventListener('scroll', () => {
       if (el) el.scrollIntoView({ behavior: "smooth" });
     } 
   });
+
+  const whatsappBtn = document.getElementById('whatsapp-btn');
+  const whatsappText = document.getElementById('whatsapp-text');
+
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+
+    if (scrollY > 100) {
+      whatsappBtn.classList.add('px-3', 'py-3');
+      whatsappBtn.classList.remove('px-4', 'py-2');
+      whatsappText.classList.add('opacity-0');
+      whatsappText.classList.remove('opacity-100');
+    } else {
+      whatsappBtn.classList.remove('px-3', 'py-3');
+      whatsappBtn.classList.add('px-4', 'py-2');
+      whatsappText.classList.remove('opacity-0');
+      whatsappText.classList.add('opacity-100');
+    }
+  });
