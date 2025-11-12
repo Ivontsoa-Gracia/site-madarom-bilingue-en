@@ -52,10 +52,10 @@ const articles = [
       container.innerHTML += `
         <article
           class="cursor-pointer bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col md:flex-row group mx-auto max-w-4xl"
-          onclick="window.location.href='/en/blog-details?id=${item.id}'"
+          onclick="window.location.href='/zh-cn/blog-details?id=${item.id}'"
           role="button"
           tabindex="0"
-          onkeydown="if(event.key==='Enter'){window.location.href='/en/blog-details?id=${item.id}'}"
+          onkeydown="if(event.key==='Enter'){window.location.href='/zh-cn/blog-details?id=${item.id}'}"
         >
           <!-- Image -->
           <div class="w-full md:w-72 h-56 md:h-auto shrink-0 relative overflow-hidden md:rounded-r-2xl">
