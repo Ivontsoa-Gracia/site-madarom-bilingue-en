@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>User Quotes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="icon" href="/assets/img/favicon.ico" type="image/x-icon" />
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <header class="w-full bg-[#fcffff] py-4 px-4 md:px-6 shadow-sm mb-6">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+  
+      <div class="overflow-x-auto">
+        <div class="flex items-center gap-3 md:gap-6 text-primary text-xs md:text-sm font-medium min-w-max">
+          
+          <div class="flex items-center gap-1 whitespace-nowrap">
+            <i class="fas fa-shopping-cart text-base md:text-lg text-red"></i>
+            <span>Cart</span>
+          </div>
+          <div class="w-6 h-0.5 bg-[#AB1A17] mx-1 hidden md:block"></div>
+  
+          <div class="flex items-center gap-1 whitespace-nowrap">
+            <i class="fas fa-file-invoice text-base md:text-lg text-red"></i>
+            <span>Quote</span>
+          </div>
+          <div class="w-6 h-0.5 bg-[#AB1A17] mx-1 hidden md:block"></div>
+  
+          <div class="flex items-center gap-1 whitespace-nowrap">
+            <i class="fas fa-file-contract text-base md:text-lg text-red"></i>
+            <span>Purchase Order</span>
+          </div>
+          <div class="w-6 h-0.5 bg-[#AB1A17] mx-1 hidden md:block"></div>
+  
+          <div class="flex items-center gap-1 whitespace-nowrap">
+            <i class="fas fa-credit-card text-base md:text-lg text-red"></i>
+            <span>Payment</span>
+          </div>
+          <div class="w-6 h-0.5 bg-[#AB1A17] mx-1 hidden md:block"></div>
+  
+          <div class="flex items-center gap-1 whitespace-nowrap">
+            <i class="fas fa-truck text-base md:text-lg text-red"></i>
+            <span>Delivery</span>
+          </div>
+        </div>
+      </div>
+  
+      <div id="user-menus" class="flex items-center gap-3 text-sm justify-end hidden">
+        <a href="/en/cart" class="text-primary hover:underline hover:text-red">My Carts</a>
+        <a href="/en/quote" class="text-primary hover:underline hover:text-red">My Quotes</a>
+        <a href="/en/invoice" class="text-primary hover:underline hover:text-red">My Invoices</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-6xl mx-auto">
+
+    <div class="bg-white p-6 rounded-xl shadow-sm mb-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+      <h1 class="text-3xl font-bold text-[#333333]">My Orders</h1>
+
+      <div class="flex gap-6">
+        <div class="flex flex-col">
+          <label class="text-sm font-medium text-gray-600 mb-2">Filter by Date</label>
+          <input 
+            type="date" 
+            id="filterDate" 
+            class="px-3 py-2 rounded-lg bg-gray-50 focus:bg-white focus:ring-2 focus:ring-teal-500 outline-none transition w-40" 
+          />
+        </div>
+      
+        <div class="flex flex-col">
+          <label class="text-sm font-medium text-gray-600 mb-2">Sort by Date</label>
+          <select 
+            id="sortOrder" 
+            class="px-3 py-2 rounded-lg bg-gray-50 focus:bg-white focus:ring-2 focus:ring-teal-500 outline-none transition w-40"
+          >
+            <option value="desc">Most Recent</option>
+            <option value="asc">Oldest</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    
+    <div class="overflow-x-auto bg-white rounded-lg shadow">
+      <table class="min-w-full divide-y divide-gray-200">
+        <tbody id="quotesBody" class="divide-y divide-gray-100"></tbody>
+      </table>
+    </div>
+
+    <div id="pagination" class="fixed bottom-4 left-0 right-0 flex justify-center items-center gap-2"></div>
+
+  </div>
+
+  <script src="../../assets/js/bc_script_en.js"></script>
+</body>
+</html>

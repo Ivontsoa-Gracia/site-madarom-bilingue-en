@@ -32,9 +32,20 @@ async function fetchProducts() {
   }
 }
 
-function renderProducts() {
+async function translateText(text, targetLang = "zh-CN") {
+  const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|${targetLang}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  return data.responseData.translatedText;
+}
+
+async function renderProducts() {
   const start = (currentPage - 1) * perPage;
   const paginated = filteredProducts.slice(start, start + perPage);
+
+  const translatedNames = await Promise.all(
+    paginated.map(p => translateText(p.name_en))
+  );
 
   productContainer.innerHTML = paginated.map(product => `
     <div 
@@ -60,7 +71,7 @@ function renderProducts() {
           ${product.name_latin}
         </h3>
         <p class="text-sm text-gray-500 mb-4 leading-relaxed">
-          ${product.name_en}
+           ${translatedNames[i]}
         </p>
         
         <!-- Prix -->
@@ -74,7 +85,7 @@ function renderProducts() {
             class="w-full btn-primary text-white font-medium py-2 px-4 rounded-full flex items-center justify-center gap-2 transition-colors duration-200"
             onclick="addToCart(${product.id})"
           >
-            <i class="fas fa-cart-plus text-lg"></i> Add to cart
+            <i class="fas fa-cart-plus text-lg"></i> 加入购物车
           </button>
         </div>
       </div>
@@ -138,13 +149,16 @@ function renderPagination() {
   paginationContainer.appendChild(wrapper);
 }
 
-window.showDetail = function(productId) {
+window.showDetail = async function(productId) {
   const product = allProducts.find(p => p.id === productId);
   if (!product) return;
 
   detailSection.classList.remove('hidden');
   detailSection.scrollIntoView({ behavior: 'smooth' });
   window.location.hash = '#detail';
+
+  const translatedName = await translateText(product.name_en, "zh-CN");
+  const translatedDescription = await translateText(product.description_en, "zh-CN");
 
   detailSection.innerHTML = `
     <div class="w-full bg-white py-12 px-6 sm:px-12 lg:px-20 rounded-3xl max-w-7xl mx-auto">
@@ -153,8 +167,8 @@ window.showDetail = function(productId) {
         <!-- Texte -->
         <div class="w-full lg:w-1/2 text-center lg:text-left">
           <h1 class="text-3xl sm:text-4xl font-bold text-primary mb-2">${product.name_latin ?? '–'}</h1>
-          <h2 class="text-xl text-gray-600 mb-4">${product.name_en}</h2>
-          <p class="text-gray-700 text-base leading-relaxed mb-6">${product.description_en}</p>
+          <h2 class="text-xl text-gray-600 mb-4">${translatedName}</h2>
+          <p class="text-gray-700 text-base leading-relaxed mb-6">${translatedDescription}</p>
 
           <!-- Prix -->
           <div class="flex flex-col w-full sm:w-auto sm:min-w-[120px] mb-10">
@@ -169,13 +183,13 @@ window.showDetail = function(productId) {
             <button 
               class="btn-primary text-white font-medium px-6 py-2 rounded-full flex items-center justify-center gap-2 transition"
               onclick="addToCart(${product.id})">
-              <i class="fas fa-cart-plus text-lg"></i> Add to cart
+              <i class="fas fa-cart-plus text-lg"></i> 加入购物车
             </button>
             
             <button 
               class="btn-default px-6 py-2 rounded-full transition text-sm md:text-base"
               onclick="hideDetail()">
-              Close
+              关闭
             </button>
           </div>
         </div>
@@ -195,7 +209,7 @@ window.showDetail = function(productId) {
   `;
 };
 
-window.addToCart = function(productId) {
+window.addToCart = async function(productId) {
 
   const product = allProducts.find(p => p.id === productId);
   if (!product) return;
@@ -203,6 +217,9 @@ window.addToCart = function(productId) {
   detailSection.classList.remove('hidden');
   detailSection.scrollIntoView({ behavior: 'smooth' });
   window.location.hash = '#detail';
+
+  const translatedName = await translateText(product.name_en, "zh-CN");
+  const translatedDescription = await translateText(product.description_en, "zh-CN");
 
   detailSection.innerHTML = `
     <div class="w-full bg-white py-12 px-6 sm:px-10 lg:px-16 max-w-7xl mx-auto">
@@ -214,10 +231,10 @@ window.addToCart = function(productId) {
             ${product.name_latin ?? '–'}
           </h1>
           <h2 class="text-lg sm:text-xl text-gray-600 mb-4 tracking-wide">
-            ${product.name_en}
+            ${translatedName}
           </h2>
           <p class="text-gray-700 text-base sm:text-lg mb-6 leading-relaxed max-w-xl mx-auto lg:mx-0">
-            ${product.description_en}
+            ${translatedDescription}
           </p>
 
           <!-- Section prix + quantité -->
@@ -226,7 +243,7 @@ window.addToCart = function(productId) {
             
               <!-- Prix -->
               <div class="flex flex-col w-full sm:w-auto sm:min-w-[120px]">
-                <span class="text-sm text-gray-600 font-medium mb-1">Price/kg</span>
+                <span class="text-sm text-gray-600 font-medium mb-1">价格/公斤</span>
                 <span class="text-xl font-bold text-red">
                   ${formatPrice(product.active_price.amount)}
                 </span>
@@ -234,7 +251,7 @@ window.addToCart = function(productId) {
 
               <!-- Quantité -->
               <div class="flex flex-col w-full sm:w-auto sm:min-w-[180px]">
-                <label for="quantity" class="text-sm text-gray-600 font-medium mb-1">Quantity (kg)</label>
+                <label for="quantity" class="text-sm text-gray-600 font-medium mb-1">数量（公斤）</label>
                 <div class="flex items-center gap-2">
                   <button onclick="changeQuantity(-1)" class="px-3 py-1 rounded-md bg-gray-200 hover:bg-gray-300 font-bold text-lg text-gray-700">
                     −
@@ -256,13 +273,13 @@ window.addToCart = function(productId) {
               class="w-full sm:w-auto btn-primary text-white font-semibold py-2 px-6 rounded-full flex items-center justify-center gap-2 transition duration-200"
               onclick="handleAddToCart(${product.id})"
             >
-              <i class="fas fa-cart-plus text-lg"></i> Add to cart
+              <i class="fas fa-cart-plus text-lg"></i> 加入购物车
             </button>
 
             <button 
               class="btn-default px-6 py-2 rounded-full transition text-sm md:text-base"
               onclick="hideDetail()">
-              Close
+              关闭
             </button>
           </div>
         </div>
@@ -344,7 +361,7 @@ async function addToCartStorage(product, quantity) {
       return;
     }
 
-    showNotification(`${product.name_latin} added to cart (${quantity} kg)`);
+    showNotification(`${product.name_latin} 已加入购物车 (${quantity} 公斤)`);
     hideDetail();
     updateCartCount();
   } catch (error) {
@@ -378,12 +395,15 @@ function showNotification(message) {
 
 async function loadCategories() {
   const container = document.getElementById("category-container");
+  container.innerHTML = ""; // vider avant de recharger
 
   try {
     const res = await fetch("https://madarom-project-production.up.railway.app/api/categories");
     const categories = await res.json();
 
-    categories.forEach(category => {
+    for (const category of categories) {
+      const translatedName = await translateText(category.name, "zh-CN"); // traduction
+
       const label = document.createElement("label");
       label.className = "flex items-center space-x-3 cursor-pointer";
 
@@ -398,30 +418,31 @@ async function loadCategories() {
       });
 
       const span = document.createElement("span");
-      span.textContent = category.name;
+      span.textContent = translatedName; // utiliser la traduction
 
       label.appendChild(input);
       label.appendChild(span);
       container.appendChild(label);
-
-      
-    });
+    }
   } catch (error) {
-    console.error("Erreur lors du chargement des catégorys:", error);
+    console.error("Erreur lors du chargement des catégories:", error);
   }
 }
 
 async function loadSubCategories() {
   const container = document.getElementById("subcategory-container");
+  container.innerHTML = ""; // vider avant de recharger
 
   try {
     const res = await fetch("https://madarom-project-production.up.railway.app/api/subcategories");
     const subcategories = await res.json();
 
-    subcategories.forEach(sub => {
+    for (const sub of subcategories) {
+      const translatedName = await translateText(sub.name, "zh-CN"); // traduction
+
       const div = document.createElement("div");
       div.className = "filter-item p-2 rounded cursor-pointer";
-      div.textContent = sub.name;
+      div.textContent = translatedName; // utiliser la traduction
       div.setAttribute("data-id", sub.id);
       div.setAttribute("data-type", "subcategory");
 
@@ -436,11 +457,12 @@ async function loadSubCategories() {
       });
 
       container.appendChild(div);
-    });
+    }
   } catch (error) {
-    console.error("Erreur lors du chargement des sous-catégorys :", error);
+    console.error("Erreur lors du chargement des sous-catégories :", error);
   }
 }
+
 
 function filterProducts() {
   const selectedCategoryIds = Array.from(
@@ -527,27 +549,31 @@ export async function loadCategoriesToMenu() {
     const res = await fetch("https://madarom-project-production.up.railway.app/api/categories");
     const categories = await res.json();
 
-    categories.forEach(category => {
+    for (const category of categories) {
       const a = document.createElement("a");
       a.href = "#products"; 
-      a.textContent = category.name;
+      
+      // Traduction du nom en chinois
+      const translatedName = await translateText(category.name, "zh-CN");
+      a.textContent = translatedName;
+
       a.className = "block px-4 py-2 hover:bg-gray-100 text-black";
       a.setAttribute("data-category-id", category.id);
 
       a.addEventListener("click", (e) => {
         e.preventDefault(); 
-
         applyCategoryFilter(parseInt(category.id)); 
         document.querySelector("#products").scrollIntoView({ behavior: "smooth" }); 
       });
 
       dropdown.appendChild(a);
-    });
+    }
 
   } catch (error) {
     console.error("Erreur lors du chargement des catégories :", error);
   }
 }
+
 
 function applyCategoryFilter(categoryId) {
   document.querySelectorAll('input[data-type="category"]').forEach(input => {

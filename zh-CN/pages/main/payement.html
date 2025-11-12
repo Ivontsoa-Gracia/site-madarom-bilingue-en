@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submit Payment Proof</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="icon" href="/assets/img/favicon.ico" type="image/x-icon" />
+</head>
+<body class="bg-white p-6 text-gray-800 text-font-family">
+    <div class="flex justify-between items-center max-w-4xl mx-auto mb-6">
+        <a href="/en/order">
+            <button class="flex items-center gap-2 text-gray-600 hover:text-[#333333] transition font-semibold">
+            <i class='bx bx-arrow-back text-xl'></i>
+            <span>Back</span>
+            </button>
+        </a>
+    </div>
+  <div class="max-w-2xl mx-auto bg-white p-8 border border-gray-100">
+    <h2 class="text-3xl font-bold mb-2 text-gray-800 text-center">Payment Proof</h2>
+    <p class="text-gray-500 text-center mb-6 text-sm">Submit your details to confirm your payment</p>
+
+    <form id="paymentForm" class="flex flex-col gap-5">
+      <input type="hidden" name="quote_id" id="quote_id">
+
+      <div>
+        <label for="phone_number" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+        <input type="text" name="phone_number" id="phone_number" required
+          class="w-full border border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-red-800 transition">
+      </div>
+
+      <div>
+        <label for="city" class="block text-sm font-medium text-gray-700 mb-1">City</label>
+        <input type="text" name="city" id="city" required
+          class="w-full border border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-red-800 transition">
+      </div>
+
+      <div>
+        <label for="country" class="block text-sm font-medium text-gray-700 mb-1">Country</label>
+        <input type="text" name="country" id="country" required
+          class="w-full border border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-red-800 transition">
+      </div>
+
+      <div>
+        <label for="screenshot" class="block text-sm font-medium text-gray-700 mb-1">Payment Screenshot*</label>
+        <input type="file" name="screenshot" id="screenshot" accept="image/*" required
+          class="w-full border border-gray-300 rounded-xl p-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-800 transition">
+      </div>
+
+      <div id="preview" class="mt-2 text-center"></div>
+
+      <button type="submit"
+        class="w-full btn-primary text-white font-semibold py-3 rounded-xl shadow-lg transition-transform transform hover:scale-[1.02] active:scale-95">
+        Submit Payment
+      </button>
+    </form>
+  </div>
+
+    <script>
+        const form = document.getElementById("paymentForm");
+        const quote_id = document.getElementById("quote_id");
+        const phone_number = document.getElementById("phone_number");
+        const city = document.getElementById("city");
+        const country = document.getElementById("country");
+        const screenshot = document.getElementById("screenshot");
+        const preview = document.getElementById("preview");
+        const token = sessionStorage.getItem("token");
+
+        async function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result.split(',')[1]);
+                reader.onerror = error => reject(error);
+            });
+        }
+
+        screenshot.addEventListener("change", async () => {
+            if (screenshot.files && screenshot.files[0]) {
+                const reader = new FileReader();
+                reader.onload = e => {
+                    preview.innerHTML = `<img src="${e.target.result}" class="mx-auto max-w-xs rounded-lg shadow-md mt-3"/>`;
+                };
+                reader.readAsDataURL(screenshot.files[0]);
+            } else {
+                preview.innerHTML = "";
+            }
+        });
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            if (!token) {
+                alert("No token found. Please login first.");
+                return;
+            }
+
+            const btn = form.querySelector("button[type=submit]");
+            btn.disabled = true;
+            btn.innerHTML = "Submitting...";
+
+            try {
+                const screenshotBase64 = await fileToBase64(screenshot.files[0]);
+                const payload = {
+                    quote_id: quote_id.value,
+                    phone_number: phone_number.value,
+                    city: city.value,
+                    country: country.value,
+                    screenshot: screenshotBase64
+                };
+
+                const response = await fetch("https://madarom-project-production.up.railway.app/api/quote/payment", {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    alert(data.message);
+                    form.reset();
+                    preview.innerHTML = "";
+                } else {
+                    const error = await response.json();
+                    console.error(error);
+                    alert(error.message || "Une erreur est survenue.");
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Une erreur est survenue lors de la soumission.");
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = "Submit Payment";
+            }
+        });
+
+        async function loadQuoteData(id) {
+            try {
+                const res = await fetch(`https://madarom-project-production.up.railway.app/api/quote/${id}`, {
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    }
+                });
+                if (!res.ok) throw new Error("Devis non trouvé");
+                const quote = await res.json();
+                quote_id.value = quote.id || quote.quote?.id; 
+            } catch (err) {
+                console.error(err);
+                alert("Impossible de charger le devis.");
+            }
+        }
+
+        const params = new URLSearchParams(window.location.search);
+        const ref = params.get("ref");
+        if (ref) {
+            loadQuoteData(ref);
+        } else {
+            alert("Aucun ID de devis fourni.");
+        }
+    </script>
+
+</body>
+</html>
