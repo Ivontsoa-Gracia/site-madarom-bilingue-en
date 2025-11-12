@@ -216,8 +216,16 @@ body {
     padding-right: 1rem;
   }
 
-  #whatsapp-btn.collapsed #whatsapp-text {
-    opacity: 0;
-    transform: translateX(20px);
-    pointer-events: none;
+  #whatsapp-text {
+    display: inline-block;
+    transition: width 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+    overflow: hidden;
+    white-space: nowrap;
   }
+  
+  #whatsapp-btn.collapsed #whatsapp-text {
+    width: 0;
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  
