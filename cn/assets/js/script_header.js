@@ -348,11 +348,11 @@ window.addEventListener('scroll', () => {
     const path = window.location.pathname;
   
     const sections = {
-      "/zh-CN": "home",
-      "/zh-CN/about": "about",
-      "/zh-CN/service": "services",
-      "/zh-CN/contact": "contact",
-      "/zh-CN/products": "products"
+      "/cn": "home",
+      "/cn/about": "about",
+      "/cn/service": "services",
+      "/cn/contact": "contact",
+      "/cn/products": "products"
     };
   
     const sectionId = sections[path];
