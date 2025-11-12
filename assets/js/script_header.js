@@ -366,22 +366,19 @@ window.addEventListener('scroll', () => {
 
   const whatsappBtn = document.getElementById('whatsapp-btn');
   const whatsappText = document.getElementById('whatsapp-text');
-  let lastScroll = 0;
 
   window.addEventListener('scroll', () => {
-    const currentScroll = window.scrollY;
+    const scrollY = window.scrollY;
 
-    // Quand on scroll vers le bas, on réduit le bouton à juste l'icône
-    if (currentScroll > 100) {
-      whatsappBtn.classList.add('px-3', 'py-3', 'rounded-full');
+    if (scrollY > 100) {
+      whatsappBtn.classList.add('px-3', 'py-3');
       whatsappBtn.classList.remove('px-4', 'py-2');
-      whatsappText.classList.add('hidden');
+      whatsappText.classList.add('opacity-0');
+      whatsappText.classList.remove('opacity-100');
     } else {
-      // Revenir au bouton complet en haut de page
       whatsappBtn.classList.remove('px-3', 'py-3');
       whatsappBtn.classList.add('px-4', 'py-2');
-      whatsappText.classList.remove('hidden');
+      whatsappText.classList.remove('opacity-0');
+      whatsappText.classList.add('opacity-100');
     }
-
-    lastScroll = currentScroll;
   });
