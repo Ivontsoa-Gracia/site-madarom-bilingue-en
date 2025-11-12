@@ -47,51 +47,52 @@ async function renderProducts() {
     paginated.map(p => translateText(p.name_en))
   );
 
-  productContainer.innerHTML = paginated.map(product => `
+  productContainer.innerHTML = paginated.map((product, index) => `  <!-- note index ici -->
+  <div 
+    class="product-card bg-white rounded-2xl overflow-hidden shadow-lg transition-transform duration-300 flex flex-col hover:scale-105" 
+    data-aos="fade-right"
+    style="height: 100%;"
+  >
+    <!-- Image Produit -->
     <div 
-      class="product-card bg-white rounded-2xl overflow-hidden shadow-lg transition-transform duration-300 flex flex-col hover:scale-105" 
-      data-aos="fade-right"
-      style="height: 100%;"
+      class="h-60 bg-[#f5fefc] flex items-center justify-center cursor-pointer"
+      onclick="showDetail(${product.id})"
     >
-      <!-- Image Produit -->
-      <div 
-        class="h-60 bg-[#f5fefc] flex items-center justify-center cursor-pointer"
-        onclick="showDetail(${product.id})"
+      <img 
+        src="https://www.madarom.net/assets/${product.image_path ?? 'assets/img/p1.png'}" 
+        alt="${product.name_en}" 
+        class="h-full w-full object-cover transition-opacity duration-300 hover:opacity-90"
       >
-        <img 
-          src="https://www.madarom.net/assets/${product.image_path ?? 'assets/img/p1.png'}" 
-          alt="${product.name_en}" 
-          class="h-full w-full object-cover transition-opacity duration-300 hover:opacity-90"
-        >
-      </div>
-
-      <!-- Contenu Texte -->
-      <div class="p-6 flex flex-col flex-grow">
-        <h3 class="text-lg text-gray-900 font-bold mb-1 tracking-tight">
-          ${product.name_latin}
-        </h3>
-        <p class="text-sm text-gray-500 mb-4 leading-relaxed">
-           ${translatedNames[i]}
-        </p>
-        
-        <!-- Prix -->
-        <span class="text-base font-semibold text-red mb-4">
-          ${formatPrice(product.active_price.amount)}
-        </span>
-
-        <!-- Bouton Panier -->
-        <div class="mt-auto">
-          <button 
-            class="w-full btn-primary text-white font-medium py-2 px-4 rounded-full flex items-center justify-center gap-2 transition-colors duration-200"
-            onclick="addToCart(${product.id})"
-          >
-            <i class="fas fa-cart-plus text-lg"></i> 加入购物车
-          </button>
-        </div>
-      </div>
     </div>
 
-  `).join('');
+    <!-- Contenu Texte -->
+    <div class="p-6 flex flex-col flex-grow">
+      <h3 class="text-lg text-gray-900 font-bold mb-1 tracking-tight">
+        ${product.name_latin}
+      </h3>
+      <p class="text-sm text-gray-500 mb-4 leading-relaxed">
+         ${translatedNames[index]} <!-- ici on utilise index -->
+      </p>
+      
+      <!-- Prix -->
+      <span class="text-base font-semibold text-red mb-4">
+        ${formatPrice(product.active_price.amount)}
+      </span>
+
+      <!-- Bouton Panier -->
+      <div class="mt-auto">
+        <button 
+          class="w-full btn-primary text-white font-medium py-2 px-4 rounded-full flex items-center justify-center gap-2 transition-colors duration-200"
+          onclick="addToCart(${product.id})"
+        >
+          <i class="fas fa-cart-plus text-lg"></i> 加入购物车
+        </button>
+      </div>
+    </div>
+  </div>
+
+`).join('');
+
 }
 
 function renderPagination() {
