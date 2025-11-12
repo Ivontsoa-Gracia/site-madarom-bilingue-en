@@ -10,7 +10,7 @@ const pagination = document.getElementById('pagination');
 function renderQuotes(data) {
   tbody.innerHTML = '';
   if (data.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="4" class="px-6 py-4 text-center text-gray-500">No quotes found.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="4" class="px-6 py-4 text-center text-gray-500">未找到报价</td></tr>`;
     pagination.innerHTML = '';
     return;
   }
@@ -212,7 +212,7 @@ function formatPrice(val) {
 
 async function viewQuote(id) {
   if (!id) return;
-  window.location.href = `/en/quote/show?ref=${encodeURIComponent(id)}`;
+  window.location.href = `/zh-cn/quote/show?ref=${encodeURIComponent(id)}`;
 
 }
 

@@ -10,7 +10,7 @@ const pagination = document.getElementById('pagination');
 function renderQuotes(data) {
   tbody.innerHTML = '';
   if (data.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="4" class="px-6 py-4 text-center text-gray-500">No quotes found.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="4" class="px-6 py-4 text-center text-gray-500">No orders found.</td></tr>`;
     pagination.innerHTML = '';
     return;
   }

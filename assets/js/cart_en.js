@@ -132,7 +132,7 @@ function updateCartDisplay() {
   let total = 0;
 
   if (cartItems.length === 0) {
-    cartContainer.innerHTML = "<p class='text-gray-500 italic'>Votre panier est vide.</p>";
+    cartContainer.innerHTML = "<p class='text-gray-500 italic'>Your cart is empty.</p>";
     const totalAmountElement = document.getElementById("total-amount");
     if (totalAmountElement) {
       totalAmountElement.textContent = formatPrice(0);
