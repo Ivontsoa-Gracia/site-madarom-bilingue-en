@@ -39,15 +39,15 @@ function renderQuotes(data) {
           <div class="inline-flex rounded-full overflow-hidden shadow-sm">
             <button onclick="viewQuote('${quote.id}')"
               class="btn-default text-[#333333] px-3 py-1 text-sm flex items-center gap-1 rounded-l-full border-r">
-              <i class="bx bx-show"></i> View
+              <i class="bx bx-show"></i> 查看
             </button>
             <button onclick="openModal('order', '${quote.quote.id}')"
               class="btn-primary text-white px-3 py-1 text-sm flex items-center gap-1">
-              <i class="bx bx-cart"></i> Order
+              <i class="bx bx-cart"></i> 下单
             </button>
             <button onclick="openModal('cancel', '${quote.quote.id}')"
               class="btn-default px-3 py-1 text-sm flex items-center gap-1 rounded-r-full border-l">
-              <i class="bx bx-trash"></i> Clear
+              <i class="bx bx-trash"></i> 清空
             </button>
           </div>
         </td>

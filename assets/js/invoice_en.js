@@ -182,7 +182,7 @@ async function fetchUserQuotes() {
     if (!response.ok) throw new Error("Failed to fetch quotes.");
 
     const data = await response.json();
-    allQuotes = data.filter(quote => quote.quote.status?.toLowerCase() === "command");
+    allQuotes = data.filter(quote => quote.quote.status?.toLowerCase() === "facturation");
     applyFilters();
   } catch (error) {
     console.error("Error:", error);

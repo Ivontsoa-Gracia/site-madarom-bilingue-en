@@ -40,7 +40,7 @@ function renderQuotes(data) {
             <!-- Bouton gauche -->
             <button onclick="viewQuote('${quote.id}')"
               class="btn-default text-[#333333] px-3 py-1 text-sm flex items-center gap-1 rounded-l-full border-r">
-              <i class="bx bx-show"></i> View
+              <i class="bx bx-show"></i> 查看
             </button>
           </div>
         </td>
@@ -182,7 +182,7 @@ async function fetchUserQuotes() {
     if (!response.ok) throw new Error("Failed to fetch quotes.");
 
     const data = await response.json();
-    allQuotes = data.filter(quote => quote.quote.status?.toLowerCase() === "command");
+    allQuotes = data.filter(quote => quote.quote.status?.toLowerCase() === "facturation");
     applyFilters();
   } catch (error) {
     console.error("Error:", error);

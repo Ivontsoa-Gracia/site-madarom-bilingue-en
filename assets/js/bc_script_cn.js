@@ -40,12 +40,12 @@ function renderQuotes(data) {
             <!-- Bouton gauche -->
             <button onclick="viewQuote('${quote.id}')"
               class="btn-default text-[#333333] px-3 py-1 text-sm flex items-center gap-1 rounded-l-full border-r">
-              <i class="bx bx-show"></i> View
+              <i class="bx bx-show"></i> 查看
             </button>
             <!-- Bouton centre -->
             <button onclick="payOrder('${quote.quote.id}')"
               class="btn-primary text-white px-3 py-1 text-sm flex items-center gap-1">
-              <i class="bx bx-cart"></i> Pay
+              <i class="bx bx-cart"></i> 付款
             </button>
           </div>
         </td>
@@ -248,7 +248,7 @@ async function orderQuote(id) {
       return;
     }
     
-    showToast("Order placed successfully!");
+    showToast("订单已成功下达！");
   } catch (error) {
     console.error("Error:", error);
     alert("Erreur réseau ou inattendue: " + error.message);
@@ -283,7 +283,7 @@ async function clearQuote(id) {
       return;
     }
     
-    showToast("Quote cancelled successfully!");
+    showToast("报价已成功取消！");
 
   } catch (error) {
     console.error("Error:", error);
@@ -304,7 +304,7 @@ function hideLoader() {
   document.getElementById("loader").classList.add("hidden");
 }
 
-function showToast(message = "Action successful!", duration = 2500) {
+function showToast(message = "操作成功！", duration = 2500) {
   const toast = document.getElementById("toast");
   toast.textContent = message;
   toast.classList.remove("hidden");
