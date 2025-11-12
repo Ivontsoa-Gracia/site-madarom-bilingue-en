@@ -3,30 +3,33 @@
       <div class="flex items-center">
         <a href="#" class="logo-font text-2xl text-white">Mad'<span class="logo-part text-white">arom</span></a>
       </div>
-
+  
       <nav class="hidden lg:flex items-center space-x-8" id="nav-menu">
-        <a href="/en" class="nav-link font-medium text-white transition">Home</a>
-        <a href="/en/about" class="nav-link font-medium text-white transition">About</a>
-        <a href="/en/service" class="nav-link font-medium text-white transition">Services</a>
+        <a href="/zh-CN" class="nav-link font-medium text-white transition">首页</a>
+        <a href="/zh-CN/about" class="nav-link font-medium text-white transition">关于我们</a>
+        <a href="/zh-CN/service" class="nav-link font-medium text-white transition">服务</a>
         <div class="relative group">
-            <a href="/en/products" class="nav-link font-medium text-white flex items-center transition" id="products-btn">
-              Products <i class="fas fa-chevron-down ml-1 text-xs"></i>
+            <a href="/zh-CN/products" class="nav-link font-medium text-white flex items-center transition" id="products-btn">
+              产品 <i class="fas fa-chevron-down ml-1 text-xs"></i>
             </a>
             <div id="products-dropdown" class="absolute hidden group-hover:block bg-white shadow-lg rounded-md py-2 w-48 z-50">
+             
             </div>
           </div>
           
           
-        <a href="/en/blog" class="nav-link font-medium text-white transition">Blog</a>
-        <a href="/en/contact" class="nav-link font-medium text-white transition">Contact</a>
+        <a href="/zh-CN/blog" class="nav-link font-medium text-white transition">博客</a>
+        <a href="/zh-CN/contact" class="nav-link font-medium text-white transition">联系我们</a>
       </nav>
   
       <div class="hidden lg:flex items-center space-x-4">
-        <a href="/en/cart" class="btn-cart text-white relative">
+        
+        <a href="/zh-CN/cart" class="btn-cart text-white relative">
           <i class="fas fa-shopping-cart text-xl"></i>
           <span id="cart-count" class="absolute -top-2 -right-2 bg-red text-[#fcffff] text-xs w-5 h-5 rounded-full flex items-center justify-center">0</span>
         </a>
   
+        
         <div id="user-section" class="relative hidden">
           <button
             id="user-avatar"
@@ -55,7 +58,7 @@
             <div class="py-1 text-sm text-gray-800">
               <button class="block w-full text-left px-4 py-2 hover:bg-gray-100" data-lang="en" type="button" role="menuitem">🇬🇧 English</button>
               <button class="block w-full text-left px-4 py-2 hover:bg-gray-100" data-lang="fr" type="button" role="menuitem">🇫🇷 Français</button>
-              <button class="block w-full text-left px-4 py-2 hover:bg-gray-100" data-lang="zh-CN" type="button" role="menuitem">🇨🇳 中文</button> 
+              <button class="block w-full text-left px-4 py-2 hover:bg-gray-100" data-lang="zh-CN" type="button" role="menuitem">🇨🇳 中文</button>  
             </div>
           </div>
         </div>
@@ -77,12 +80,12 @@
       aria-label="Mobile menu"
     >
       <div class="flex flex-col divide-y divide-gray-200">
-        <a href="/en" class="block py-3 px-4 text-black hover:bg-gray-100">Home</a>
-        <a href="/en/about" class="block py-3 px-4 text-black hover:bg-gray-100">About</a>
-        <a href="/en/service" class="block py-3 px-4 text-black hover:bg-gray-100">Services</a>
-        <a href="/en/products" class="block py-3 px-4 text-black hover:bg-gray-100">Products</a>
-        <a href="/en/blog" class="block py-3 px-4 text-black hover:bg-gray-100">Blog</a>
-        <a href="/en/contact" class="block py-3 px-4 text-black hover:bg-gray-100">Contact</a>
+        <a href="/zh-CN" class="block py-3 px-4 text-black hover:bg-gray-100">首页</a>
+        <a href="/zh-CN/about" class="block py-3 px-4 text-black hover:bg-gray-100">关于我们</a>
+        <a href="/zh-CN/service" class="block py-3 px-4 text-black hover:bg-gray-100">服务</a>
+        <a href="/zh-CN/products" class="block py-3 px-4 text-black hover:bg-gray-100">产品</a>
+        <a href="/zh-CN/blog" class="block py-3 px-4 text-black hover:bg-gray-100">博客</a>
+        <a href="/zh-CN/contact" class="block py-3 px-4 text-black hover:bg-gray-100">联系我们</a>
       </div>
   
       <div class="border-t border-gray-300 my-2"></div>
@@ -94,14 +97,14 @@
           </div>
           <span id="user-email-mobile" class="text-black text-sm"></span>
         </div>
-        <button onclick="logoutWithConfirmation()" id="logout-btn-mobile" class="text-red-600 text-sm hover:underline">Sign out</button>
+        <button onclick="logoutWithConfirmation()" id="logout-btn-mobile" class="text-red-600 text-sm hover:underline">Logout</button>
       </div>
   
       <div class="flex items-center justify-between px-4 py-3">
+        
+        <a href="/signin" id="login-btn-mobile" class="btn-primary text-white px-6 py-2 rounded-full font-medium transition duration-300">Login</a>
 
-        <a href="/signin" id="login-btn-mobile" class="btn-primary text-white px-6 py-2 rounded-full font-medium transition duration-300">Sign in</a>
-
-        <a href="/en/cart" class="btn-cart text-black relative">
+        <a href="/zh-CN/cart" class="btn-cart text-black relative">
           <i class="fas fa-shopping-cart text-xl"></i>
           <span id="cart-count-mobile" class="absolute -top-2 -right-2 bg-red text-[#fcffff] text-xs w-5 h-5 rounded-full flex items-center justify-center">0</span>
         </a>
@@ -118,7 +121,7 @@
             <div class="py-1 text-sm text-gray-800">
               <button class="block w-full text-left px-4 py-2 hover:bg-gray-100" data-lang="en" type="button" role="menuitem">🇬🇧 English</button>
               <button class="block w-full text-left px-4 py-2 hover:bg-gray-100" data-lang="fr" type="button" role="menuitem">🇫🇷 Français</button>
-              <button class="block w-full text-left px-4 py-2 hover:bg-gray-100" data-lang="zh-CN" type="button" role="menuitem">🇨🇳 中文</button> 
+              <button class="block w-full text-left px-4 py-2 hover:bg-gray-100" data-lang="zh-CN" type="button" role="menuitem">🇨🇳 中文</button>              
             </div>
           </div>
         </div>

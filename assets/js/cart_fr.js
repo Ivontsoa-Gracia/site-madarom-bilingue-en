@@ -90,60 +90,6 @@ async function fetchCartItems() {
   }
 }
 
-
-// async function fetchCartItems() {
-//   const token = sessionStorage.getItem("token");
-//   if (!token) {
-//     console.warn("Aucun token trouvé dans sessionStorage → utilisateur non connecté.");
-//     cartItems = [];
-//     updateCartDisplay();
-//     return;
-//   }
-
-//   try {
-//     const res = await fetch(`${api_url}/cart`, {
-//       headers: {
-//         'Authorization': `Bearer ${token}`
-//       }
-//     });
-
-//     if (!res.ok) {
-//       console.error('Erreur API récupération panier:', res.status);
-//       cartItems = [];
-//       updateCartDisplay();
-//       return;
-//     }
-
-//     const sessionCart = await res.json();
-
-    // console.log("cart data: ", sessionCart);
-
-//     const detailedCart = await Promise.all(
-//       sessionCart.map(async item => {
-//         const productDetails = await fetchProductDetails(item.product_id);
-//         if (productDetails) {
-//           return {
-//             ...productDetails,
-//             quantity: item.quantity
-//           };
-//         }
-//         return null;
-//       })
-//     );
-
-//     cartItems = detailedCart.filter(p => p !== null);
-    // console.log("detailedCart après filtrage:", cartItems);
-
-//     updateCartDisplay();
-
-//   } catch (error) {
-//     console.error('Erreur réseau récupération panier:', error);
-//     cartItems = [];
-//     updateCartDisplay();
-//   }
-// }
-
-// Récupère les détails d’un produit via /products/details/{id}
 async function fetchProductDetails(id) {
   try {
     const res = await fetch(`${api_url}/products/details/${id}`);
@@ -153,10 +99,8 @@ async function fetchProductDetails(id) {
     }
     const data = await res.json();
 
-    // console.log('details produit:', data);
 
     const price = parseFloat(data.active_price?.amount ?? 0);
-    // console.log('prix du produit:', price);
     return {
       id: data.id,
       name_latin: data.name_latin,
@@ -182,8 +126,6 @@ function strictObject(obj) {
 }
 
 function updateCartDisplay() {
-  // console.log("updateCartDisplay appelé");
-  // console.log("cartItems:", cartItems);
 
   const cartContainer = document.getElementById("cart-container");
   const summaryItems = document.getElementById("summary-items");
@@ -225,7 +167,7 @@ function updateCartDisplay() {
         &times;
       </button>
   
-      <img src="https://www.madarom.net/${item.image_path}" alt="${item.name_fr}"
+      <img src="https://www.madarom.net/assets/${item.image_path}" alt="${item.name_fr}"
         class="w-28 h-28 sm:w-20 sm:h-20 object-cover rounded-lg mx-auto sm:mx-0" />
   
       <div class="flex flex-col flex-1 text-center sm:text-left gap-2">

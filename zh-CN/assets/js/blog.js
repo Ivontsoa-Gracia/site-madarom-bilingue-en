@@ -1,61 +1,61 @@
 const articles = [
   {
-    id: "BLOGFR-001",
-    date: "Mai 2025",
-    title: "Pourquoi les huiles essentielles de Madagascar séduisent le marché asiatique du bien-être",
+    id: "BLOGCN-001",
+    date: "2025年5月",
+    title: "马达加斯加精油如何引领亚洲健康市场",
     summary:
-      "La demande en huiles essentielles naturelles explose en Asie. Des spas de Singapour aux marques de cosmétiques naturelles de Chine et de Taïwan, toutes recherchent des produits purs et éthiques — et Madagascar est en tête.",
+      "亚洲对天然精油的需求快速增长。从新加坡的水疗行业到中国与台湾的天然护肤品牌，越来越多企业选择纯净、可持续的产品。Madarom 以 100% 纯天然精油引领趋势。",
     contenu:
-      "Ces dernières années, la demande en huiles essentielles naturelles a explosé en Asie. De l’industrie du spa à Singapour aux cosmétiques naturels en Chine et à Taïwan, les marques recherchent désormais des produits éthiques et d’une pureté exceptionnelle — et Madagascar est devenue une référence. Chez Madarom, nous exportons des huiles essentielles 100 % pures, directement issues des producteurs malgaches. Chaque goutte raconte une histoire de biodiversité, de tradition et de science. Le climat unique de Madagascar permet la production de molécules aromatiques d’une qualité rare. Parmi les plus prisées : Ravintsara, Ylang-Ylang, Baie Rose et Niaouli. Ces huiles sont désormais des références en Asie pour leur authenticité et leurs performances. Madarom garantit une origine éthique et une traçabilité totale : analyses GC/MS, certificats COA et MSDS, distillation à la vapeur et production durable. Nos clients incluent des centres de bien-être, marques de soins naturels et distributeurs d’huiles essentielles à travers toute l’Asie.",
+      "近年来，亚洲对天然精油的需求快速增长。从新加坡的水疗行业到中国的天然护肤品牌，再到台湾的芳疗品牌，越来越多企业选择纯净、可持续的产品。Madarom 来自马达加斯加，出口 100% 纯天然精油，每一滴都承载自然的力量与科学的精粹。马达加斯加独特的气候孕育出卓越的芳香分子，如 Ravintsara、依兰依兰、粉胡椒与 Niaouli。这些精油成为亚洲市场真实与高品质的新标杆。Madarom 坚持道德采购与全程追溯，所有精油均通过 GC/MS 检测并附带 COA、MSDS 认证。我们的客户包括新加坡、香港、上海与台北的水疗中心、护肤品牌与批发商。Madarom 提供散装出口、OEM 与白标合作。",
     image: [
-      "./assets/img/articles/blog1-fr-001.jpg",
-      "./assets/img/articles/blog1-fr-002.jpg",
+      "./assets/img/articles/blog1-cn-001.jpg",
+      "./assets/img/articles/blog1-cn-002.jpg",
     ],
-    theme: "Huiles Essentielles",
+    theme: "精油",
   },
   {
-    id: "BLOGFR-002",
-    date: "Mai 2025",
-    title: "Comment choisir la bonne huile essentielle pour votre marque (Édition Asie)",
+    id: "BLOGCN-002",
+    date: "2025年5月",
+    title: "如何为您的品牌选择合适的精油（亚洲市场指南）",
     summary:
-      "Choisir le bon fournisseur d’huiles essentielles définit l’identité de votre marque — surtout en Asie, où qualité et histoire sont essentielles. Voici le guide Madarom.",
+      "选择合适的精油供应商决定品牌的核心价值。Madarom 为亚洲品牌提供高品质、可追溯、纯天然的解决方案。",
     contenu:
-      "Choisir le bon fournisseur d’huiles essentielles, c’est définir l’identité même de votre marque — surtout sur le marché asiatique, où la qualité et l’histoire du produit priment. Étape 1 : Définir la mission de votre marque — relaxation, détox ou équilibre respiratoire. Étape 2 : Comprendre les grades d’huiles — privilégier les huiles testées GC/MS et issues de sources durables. Étape 3 : Adapter les mélanges aux goûts asiatiques — 20 % note de tête, 30 % note de cœur, 50 % note de base. Étape 4 : Choisir un partenaire d’export fiable — emballages flexibles, OEM et accompagnement bilingue (anglais et mandarin).",
+      "选择合适的精油供应商决定品牌的核心价值。Madarom 马达加斯加为亚洲品牌提供高品质、可追溯、纯天然精油。第一步：确定品牌目标（放松、净化或能量） | 第二步：了解精油等级（纯净、无添加） | 第三步：根据亚洲喜好配方（柔和、清新） | 第四步：选择可靠出口伙伴（多语言服务与灵活包装）。",
     image: [
-      "./assets/img/articles/blog2-fr-001.jpg",
-      "./assets/img/articles/blog2-fr-002.jpg",
+      "./assets/img/articles/blog2-cn-001.jpg",
+      "./assets/img/articles/blog2-cn-002.jpg",
     ],
-    theme: "Stratégie de Marque",
+    theme: "品牌策略",
   },
   {
-    id: "BLOGFR-003",
-    date: "Mai 2025",
-    title: "Le secret des huiles « Roi et Reine » de Madagascar",
+    id: "BLOGCN-003",
+    date: "2025年5月",
+    title: "马达加斯加“精油之王与之后”的秘密",
     summary:
-      "Encens et Ylang-Ylang — le roi et la reine de Madagascar — incarnent pureté et luxe naturel. Découvrez pourquoi ils conquièrent le marché asiatique du bien-être.",
+      "乳香与依兰依兰——马达加斯加的“王与后”，以纯净与奢华闻名，深受亚洲水疗与香氛品牌喜爱。",
     contenu:
-      "Dans l’univers des huiles essentielles, peu se distinguent autant que l’Encens et l’Ylang-Ylang — les véritables roi et reine de Madagascar. Leur pureté et leur raffinement en font des incontournables du marché asiatique du spa et de la parfumerie. L’Encens symbolise la purification et la guérison. L’Ylang-Ylang, joyau floral de Madagascar, équilibre les émotions et sublime la peau. Ces huiles sont particulièrement prisées à Singapour et Taïwan. Essayez des synergies comme Ylang-Ylang + Orange (relaxation) ou Encens + Ravintsara (purification). Madarom assure un approvisionnement éthique, des tests de qualité et des services OEM personnalisés.",
+      "在精油的世界中，乳香与依兰依兰堪称“王与后”。它们的纯净与奢华使其成为亚洲香氛与水疗市场的首选。乳香象征净化与疗愈；依兰依兰代表热带花香之魂，舒缓情绪、滋养肌肤。推荐混合：依兰依兰 + 橙子（放松）或 乳香 + Ravintsara（净化）。Madarom 保证道德采购与实验室检测，提供 OEM 与品牌定制方案。",
     image: [
-      "./assets/img/articles/blog3-fr-001.jpg",
-      "./assets/img/articles/blog3-fr-002.jpg",
+      "./assets/img/articles/blog3-cn-001.jpg",
+      "./assets/img/articles/blog3-cn-002.jpg",
     ],
-    theme: "Bien-être",
+    theme: "健康养生",
   },
 ];
-
+  
   function renderArticlesList(containerId) {
     const container = document.getElementById(containerId);
     if (!container) return;
-
+  
     container.innerHTML = "";
     articles.forEach((item) => {
       container.innerHTML += `
         <article
           class="cursor-pointer bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col md:flex-row group mx-auto max-w-4xl"
-          onclick="window.location.href='/fr/blog-details?id=${item.id}'"
+          onclick="window.location.href='/en/blog-details?id=${item.id}'"
           role="button"
           tabindex="0"
-          onkeydown="if(event.key==='Enter'){window.location.href='/fr/blog-details?id=${item.id}'}"
+          onkeydown="if(event.key==='Enter'){window.location.href='/en/blog-details?id=${item.id}'}"
         >
           <!-- Image -->
           <div class="w-full md:w-72 h-56 md:h-auto shrink-0 relative overflow-hidden md:rounded-r-2xl">
@@ -74,12 +74,12 @@ const articles = [
                 datetime="${item.date.replace(/(\d{2})\/(\d{2})\/(\d{2})/, '20$3-$2-$1')}"
                 class="text-gray-400 text-xs md:text-sm tracking-wide"
               >
-                Published on ${item.date}
+              發佈於 ${item.date}
               </time>
               <span
                 class="inline-block cursor-pointer select-none text-[#ab1a17] hover:text-[#81110e] font-semibold text-xs md:text-sm transition-colors duration-300"
               >
-                Show more →
+              顯示更多 →
               </span>
             </div>
         
@@ -117,7 +117,7 @@ const articles = [
         <!-- Header -->
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-gray-300 pb-5">
           <time datetime="${article.date}" class="text-sm text-gray-500 tracking-wide select-none">
-            Publié le <span class="font-semibold text-gray-700">${article.date}</span>
+          發佈於 <span class="font-semibold text-gray-700">${article.date}</span>
           </time>
           <span class="mt-4 sm:mt-0 inline-block bg-[#ab1a17]/20 text-[#ab1a17] font-semibold text-xs uppercase tracking-wide px-5 py-1.5 rounded-full shadow-sm select-none transition-colors duration-300 hover:bg-[#ab1a17]/40 cursor-default">
             ${article.theme || "Essential Oils"}
@@ -193,7 +193,6 @@ const articles = [
       intervalId = setInterval(nextImage, 30000); 
     }
   
-    // Create dots
     article.image.forEach((_, i) => {
       const dot = document.createElement('button');
       dot.className = 'w-3 h-3 rounded-full bg-gray-300 cursor-pointer transition-colors';
@@ -215,10 +214,8 @@ const articles = [
       resetInterval();
     });
   
-    // Start auto-slide
     resetInterval();
   
-    // Initial display
     updateSliderPosition();
   }
   

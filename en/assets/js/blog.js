@@ -1,41 +1,47 @@
 const articles = [
-    {
-      id: "ART040825-001",
-      date: "Mai 2025",
-      title: "The Secret Power of Malagasy Essential Oils",
-      summary: "Madagascar is renowned for producing some of the purest and most potent essential oils in the world. From ravintsara to niaouli, these oils provide a natural, therapeutic solution for boosting immunity, reducing stress, and improving sleep. At Mad’Arom, we partner directly with small-scale farmers to ensure 100% traceability and sustainable sourcing, combining traditional wisdom with modern science.",
-      contenu: "Madagascar’s unique climate and biodiversity make it an exceptional source of essential oils with remarkable purity and effectiveness. The island is home to endemic plants like ravintsara and niaouli, whose essential oils have been treasured for centuries for their medicinal and aromatic properties. Ravintsara essential oil is widely known for its antiviral and immune-boosting effects. It’s commonly used to support respiratory health and strengthen the body’s defenses during cold and flu seasons. Its fresh, camphoraceous aroma also helps to reduce mental fatigue and enhance concentration. Niaouli oil, another Malagasy treasure, offers gentle yet powerful antiseptic and anti-inflammatory benefits. It’s often used to soothe skin irritations, aid wound healing, and promote respiratory wellness. Its subtle, eucalyptus-like scent makes it a favorite for aromatherapy and relaxation. At Mad’Arom, our commitment goes beyond quality. We work directly with smallholder farmers across Madagascar, ensuring that every drop of oil is 100% traceable from plant to bottle. This approach guarantees sustainable harvesting practices that protect the environment and empower local communities. Whether your goal is to boost immunity, relieve stress, or improve sleep quality, Malagasy essential oils provide a natural, effective option. Backed by centuries of traditional use and validated by modern scientific research, these oils unlock the healing power of nature. Discover the purity and potency of Malagasy essential oils — carefully distilled and bottled with respect for both people and the planet.",
-      image: [
-        "./assets/img/articles/article1-001.jpg",
-        "./assets/img/articles/article1-002.jpg",
-      ],
-      theme: "Essential Oils",
-    },
-    {
-      id: "ART040825-002",
-      date: "January 2025",
-      title: "How to Use Essential Oils Safely: A Beginner’s Guide",
-      summary: "Essential oils are powerful natural extracts, but using them safely is essential to enjoy their full benefits. This beginner’s guide from Mad’Arom offers tips on dilution, aromatherapy, and safe practices to get started with confidence.",
-      contenu: "Essential oils are concentrated plant extracts with incredible potential — but they must be used correctly. At Mad’Arom, we emphasize education alongside quality. Here are key safety tips for beginners: Always dilute essential oils before applying them to the skin using a carrier oil such as coconut, jojoba, or almond oil. Avoid internal use unless guided by a certified aromatherapist. Always perform a patch test to check for allergic reactions. Use a diffuser for gentle, therapeutic inhalation. Store your oils in dark glass bottles away from heat and sunlight to preserve their potency. By following these precautions, essential oils can enhance your well-being naturally and safely. Start safe, stay natural.",
-      image: [
-        "./assets/img/articles/article2-001.jpg",
-        "./assets/img/articles/article2-002.jpg"
-      ],
-      theme: "Essential Oils",
-    },
-    {
-      id: "ART040825-003",
-      date: "August 2025",
-      title: "Spices from Madagascar: Why Chefs Around the World Love Them",
-      summary: "Madagascar produces some of the world’s most flavorful and aromatic spices. From Bourbon vanilla to wild black pepper, discover why top chefs trust these ethically sourced, hand-harvested treasures.",
-      contenu: "Madagascar is a paradise for spice lovers. The island is globally celebrated for producing top-quality spices such as Bourbon vanilla, wild black pepper, cinnamon, and cloves. These spices are prized not only for their bold flavors and aromas, but also for their purity and traceability. At Mad’Arom, we collaborate closely with local farmers who cultivate their crops organically and sustainably. Each batch is sun-dried, hand-sorted, and packaged with care to ensure peak freshness. Whether you’re a gourmet chef or a conscious home cook, Malagasy spices deliver a sensory experience that’s both ethical and exceptional. Taste the island. Cook with purpose.",
-      image: [
-        "./assets/img/articles/article3-001.jpg",
-        "./assets/img/articles/article3-002.jpg",
-      ],
-      theme: "Spices",
-    }
-  ];
+  {
+    id: "BLOGEN-001",
+    date: "May 2025",
+    title: "Why Madagascar Essential Oils Are Taking Over the Asian Wellness Market",
+    summary:
+      "Asia’s demand for natural essential oils is growing fast. From Singapore’s spas to China’s clean beauty brands, businesses seek high-purity, ethical products — and Madagascar leads this transformation. At Madarom, we export 100% pure, GC/MS-tested essential oils sourced directly from Malagasy farmers.",
+    contenu:
+      "In recent years, the demand for natural essential oils in Asia has grown rapidly. From Singapore’s spa industry to China’s natural cosmetics and Taiwan’s aromatherapy brands, businesses are turning toward ethical, high-purity products — and Madagascar is leading the trend. At Madarom, we export 100% pure essential oils sourced directly from Malagasy farmers. Each drop tells a story of biodiversity, tradition, and science. Madagascar’s unique climate allows plants to produce exceptional aromatic molecules. Examples include Ravintsara, Ylang-Ylang, Baie Rose, and Niaouli. These oils have become Asia’s new reference for authenticity and performance. Madarom stands for ethical sourcing and traceable production: GC/MS tested, COA + MSDS certified, steam-distilled, and sustainable. Asian buyers appreciate our premium quality and commitment to sustainability. Our clients include spa and wellness centers, natural skincare brands, and essential oil distributors across Asia. We provide bulk export, OEM, and white-label services.",
+    image: [
+      "./assets/img/articles/blog1-en-001.jpg",
+      "./assets/img/articles/blog1-en-002.jpg",
+    ],
+    theme: "Essential Oils",
+  },
+  {
+    id: "BLOGEN-002",
+    date: "May 2025",
+    title: "How to Choose the Right Essential Oil for Your Brand (Asian Market Edition)",
+    summary:
+      "Choosing the right essential oil supplier defines your brand’s identity — especially in Asia, where quality and story matter most. Discover Madarom’s key steps to selecting trusted, high-purity oils.",
+    contenu:
+      "Choosing the right essential oil supplier defines your brand’s identity — especially in the Asian wellness market, where quality and story matter. Here’s how to make the right choice with Madarom Madagascar. Step 1: Identify your brand’s purpose – relaxation, detox, or respiratory wellness. Step 2: Understand oil grades – choose GC/MS verified, sustainably sourced oils. Step 3: Blend for Asian sensibilities – 20% top note, 30% middle, 50% base. Step 4: Choose a reliable export partner – flexible packaging, OEM, and support in English & Mandarin.",
+    image: [
+      "./assets/img/articles/blog2-en-001.jpg",
+      "./assets/img/articles/blog2-en-002.jpg",
+    ],
+    theme: "Brand Strategy",
+  },
+  {
+    id: "BLOGEN-003",
+    date: "May 2025",
+    title: "The Secret Behind Madagascar’s 'King & Queen' Essential Oils",
+    summary:
+      "Frankincense and Ylang-Ylang — the King and Queen of Madagascar — define the luxury of purity and wellness. Discover why they dominate Asia’s fragrance and spa industries.",
+    contenu:
+      "In the world of essential oils, few stand out like Frankincense and Ylang-Ylang — the King and Queen of Madagascar. Their purity and luxury make them essential to Asia’s spa and fragrance markets. Frankincense represents purity and healing. Ylang-Ylang, Madagascar’s floral jewel, balances emotions and enhances beauty. These oils are loved in Singapore and Taiwan’s wellness industries. Try blends like Ylang-Ylang + Orange for relaxation or Frankincense + Ravintsara for grounding. Madarom provides ethical sourcing, testing, and OEM solutions.",
+    image: [
+      "./assets/img/articles/blog3-en-001.jpg",
+      "./assets/img/articles/blog3-en-002.jpg",
+    ],
+    theme: "Wellness",
+  },
+];
   
   function renderArticlesList(containerId) {
     const container = document.getElementById(containerId);

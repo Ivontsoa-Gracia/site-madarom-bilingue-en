@@ -1,0 +1,205 @@
+
+@font-face {
+    font-family: 'Cubest';
+    src: url('/assets/fonts/Cubest-Medium.woff2') format('woff2');
+    font-display: swap;
+  }
+  
+  
+body {
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+.text-font-family {
+    font-family: 'Poppins', sans-serif;
+
+}
+.logo-font {
+    font-family: 'Cubest', sans-serif;
+}
+.hero-section {
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+.filter-item:hover {
+    background-color: rgba(86, 182, 168, 0.1);
+}
+.nav-link {
+    color: #fcffff;
+}
+.nav-link:hover {
+    color: #ab1a17;
+}
+
+.btn-red {
+    background-color: #ab1a17;
+}
+
+.bg-red {
+    background-color: #ab1a17;
+}
+
+.bg-green {
+    background-color: #aac2ae;
+}
+
+.text-action {
+    color: #aac2ae;
+}
+
+.btn-primary {
+    background-color: #ab1a17;
+}
+
+.btn-primary:hover {
+    background-color: #AD3930;
+}
+
+.btn-secondary {
+    border: 1px solid #ab1a17;
+    color: #ab1a17;
+}
+
+.btn-secondary:hover {
+    background-color: #f8e7e6;
+}
+
+.btn-default {
+    border: 1px solid #333333;
+    color: #333333;
+}
+
+.btn-default:hover {
+    background-color: #f5fafb;
+}
+
+.text-red {
+    color: #ab1a17;
+}
+.text-teal {
+    color: #a7c6a9;
+}
+
+.text-orange {
+    color: #abc6aa;
+}
+
+.text-primary {
+    color: #333333;
+}
+.bg-teal {
+    background-color: #a7c6a9;
+}
+.border-teal {
+    border-color: #a7c6a9;
+}
+.glow-effect {
+    box-shadow: 0 0 15px rgba(250, 16, 101, 0.5);
+}
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.leaf-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23a7c6a9' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.phare-container {
+    display: flex;
+}
+
+.phare-container div {
+    flex-grow: 1;
+    height: 200px;
+}
+
+.phare-container div:hover {
+    flex-grow: 10;
+}
+
+.go-back:hover {
+    color: #a7c6a9;
+}
+
+#toast {
+    backdrop-filter: blur(12px);
+    background-color: #272739; 
+    border-left: 3px solid #68b56c;
+}
+
+.success {
+    color: #68b56c;
+}
+
+.warning {
+    color: #e6a534;
+}
+
+.danger {
+    color: #f44336;
+}
+
+.nav-cart:hover {
+    color: #ab1a17;
+}
+
+.hero-blog {
+    background-color: #aac2ae;
+    opacity: 0.7;
+    width: 100%;
+    height: 500px;
+    /* background-image: url("../img/hero.jpg"); */
+    background-size: cover;       
+    background-position: center;  
+    background-repeat: no-repeat; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+}
+
+
+.partner-logo {
+    transition: all 0.3s ease;
+    /* filter: grayscale(100%); */
+    opacity: 0.9;
+}
+.partner-logo:hover {
+    filter: grayscale(0);
+    opacity: 1;
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+.leaf-decoration {
+    position: absolute;
+    opacity: 0.1;
+    z-index: -1;
+}
+
+.leaf-bg {
+    background-image: url('http://static.photos/agriculture/1200x630/123');
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: overlay;
+}
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+.logo-hover {
+    transition: all 0.3s ease;
+}
+.logo-hover:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 4px 6px rgba(0, 128, 0, 0.2));
+}
