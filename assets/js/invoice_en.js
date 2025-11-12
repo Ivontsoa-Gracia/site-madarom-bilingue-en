@@ -10,7 +10,7 @@ const pagination = document.getElementById('pagination');
 function renderQuotes(data) {
   tbody.innerHTML = '';
   if (data.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="4" class="px-6 py-4 text-center text-gray-500">No quotes found.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="4" class="px-6 py-4 text-center text-gray-500">No invoices found.</td></tr>`;
     pagination.innerHTML = '';
     return;
   }
@@ -36,11 +36,12 @@ function renderQuotes(data) {
         <td class="px-6 py-4 text-lg font-semibold">${formatPrice(total)}</td>
         <td class="px-6 py-4 text-sm">${quote.quote.updated_at.split('T')[0]}</td>
         <td class="px-6 py-4 text-sm">
-          <div class="inline-flex rounded-full overflow-hidden shadow-sm">
-            <!-- Bouton gauche -->
+          <div class="inline-flex shadow-sm rounded-full overflow-hidden">
+            <!-- Bouton pour voir le devis -->
             <button onclick="viewQuote('${quote.id}')"
-              class="btn-default text-[#333333] px-3 py-1 text-sm flex items-center gap-1 rounded-l-full border-r">
-              <i class="bx bx-show"></i> View
+              class="flex items-center gap-1 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-full transition">
+              <i class="bx bx-show"></i>
+              <span>View</span>
             </button>
           </div>
         </td>
