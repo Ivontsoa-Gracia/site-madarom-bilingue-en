@@ -242,7 +242,7 @@
     e.preventDefault();
     const id = document.getElementById("productId").value;
     const data = {
-      code: document.getElementById("code").value || null,
+      reference: document.getElementById("code").value || null,
       name_latin: document.getElementById("nameLatin").value,
       name_fr: document.getElementById("nameFr").value,
       name_en: document.getElementById("nameEn").value || null,
