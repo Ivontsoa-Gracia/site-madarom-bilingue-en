@@ -202,3 +202,24 @@ body {
     transform: scale(1.05);
     filter: drop-shadow(0 4px 6px rgba(0, 128, 0, 0.2));
 }
+
+#whatsapp-btn {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+  }
+  
+  /* quand il devient rond */
+  #whatsapp-btn.collapsed {
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    justify-content: center;
+  }
+  
+  /* le texte disparaît */
+  #whatsapp-btn.collapsed #whatsapp-text {
+    opacity: 0;
+    width: 0;
+    margin: 0;
+    overflow: hidden;
+  }

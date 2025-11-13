@@ -24,19 +24,23 @@
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
 
+  <div id="header-placeholder"></div>
+
+  <a href="https://wa.me/261344599960" target="_blank" 
+    id="whatsapp-btn" 
+    class="fixed bottom-6 right-6 flex items-center bg-green-500 text-white px-5 py-3 rounded-full shadow-xl z-50 transform transition-all duration-300 ease-in-out hover:scale-105 cursor-pointer">
+    <i class="fab fa-whatsapp text-2xl"></i>
+    <span id="whatsapp-text" class="ml-2 font-medium whitespace-nowrap transition-all duration-300 ease-in-out">
+      联系我们
+    </span>
+  </a>
+
     <header class="relative w-full h-80">
         <img src="./assets/img/hero.jpg" alt="Hero Image" class="absolute inset-0 w-full h-full object-cover" />
         <div class="absolute inset-0 bg-black/60 flex items-center justify-center">
         <h1 class="text-4xl md:text-5xl text-white font-bold text-center px-4">在每一滴精油与每一味香料中，发现马达加斯加的灵魂</h1>
         </div>
     </header>
-
-    <a href="/en/blog" 
-        class="fixed bottom-4 left-4 inline-flex items-center px-4 py-2 rounded-full bg-[#ab1a17] shadow-sm border border-[#ab1a17] 
-                text-white hover:bg-[#ab1a17] hover:text-white transition-all duration-200 text-sm font-medium z-50">
-        <i class="fas fa-arrow-left mr-2"></i>
-        回上一頁
-    </a>
 
     <main id="article-container"
         class="w-full mx-auto px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 py-16 bg-white mt-10 max-w-screen-xl">
@@ -107,6 +111,7 @@
       </div>
     </footer>
 
+    <script type="module" src="./assets/js/script_header.js"></script>
     <script src="./assets/js/blog.js"></script>
     <script>
         renderArticleDetail("article-container");

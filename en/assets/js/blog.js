@@ -218,4 +218,14 @@ const articles = [
   
     updateSliderPosition();
   }
+
+  const whatsappBtn = document.getElementById('whatsapp-btn');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) {
+      whatsappBtn.classList.add('collapsed');
+    } else {
+      whatsappBtn.classList.remove('collapsed');
+    }
+  });  
   
