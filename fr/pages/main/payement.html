@@ -18,6 +18,16 @@
             </button>
         </a>
     </div>
+
+  <a href="https://wa.me/261344599960" target="_blank" 
+    id="whatsapp-btn" 
+    class="fixed bottom-6 right-6 flex items-center bg-green-500 text-white px-5 py-3 rounded-full shadow-xl z-50 transform transition-all duration-300 ease-in-out hover:scale-105 cursor-pointer">
+    <i class="fab fa-whatsapp text-2xl"></i>
+    <span id="whatsapp-text" class="ml-2 font-medium whitespace-nowrap transition-all duration-300 ease-in-out">
+      Contacter-nous
+    </span>
+  </a>
+
   <div class="max-w-2xl mx-auto bg-white p-8 border border-gray-100">
     <h2 class="text-3xl font-bold mb-2 text-gray-800 text-center">Preuve de paiement</h2>
     <p class="text-gray-500 text-center mb-6 text-sm">Soumettez vos informations pour confirmer votre paiement</p>
@@ -162,6 +172,16 @@
   } else {
       alert("Aucun ID de devis fourni.");
   }
+
+  const whatsappBtn = document.getElementById('whatsapp-btn');
+
+    window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) {
+        whatsappBtn.classList.add('collapsed');
+    } else {
+        whatsappBtn.classList.remove('collapsed');
+    }
+    });  
 </script>
 
 </body>
