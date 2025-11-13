@@ -371,4 +371,4 @@ window.addEventListener('scroll', () => {
     } else {
       whatsappBtn.classList.remove('collapsed');
     }
-  });
+  });  
