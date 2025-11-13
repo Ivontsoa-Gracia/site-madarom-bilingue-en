@@ -6,38 +6,41 @@
   <title>Admin - Product Management</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="../../assets/css/style.css">
-  <!-- FontAwesome -->
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    body { background-color: #222831; color: #fff; }
+    .btn-red { background-color: #ab1a17; }
+    .btn-red:hover { background-color: #9d1515; }
+    .table th { background-color: #ab1a17; color: #fff; }
+  </style>
 </head>
-<body class="bg-gray-100 p-6">
+<body class="p-6">
   <div class="max-w-7xl mx-auto">
-    <h1 class="text-3xl font-bold mb-6 text-green-700">Product Management</h1>
+    <h1 class="text-3xl font-bold mb-6 text-red-600">Product Management</h1>
 
-    <!-- Filters -->
     <div class="flex flex-wrap gap-3 mb-6 items-center">
       <div class="relative w-64">
         <input id="searchInput" type="text" placeholder="Search by name..."
-          class="border rounded-lg px-10 py-2 w-full focus:ring-2 focus:ring-green-400">
-        <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+          class="border rounded-lg px-10 py-2 w-full focus:ring-2 focus:ring-red-600 text-black">
+        <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></i>
       </div>
 
-      <select id="categoryFilter" class="border rounded-lg px-3 py-2">
+      <select id="categoryFilter" class="border rounded-lg px-3 py-2 text-black">
         <option value="">All categories</option>
       </select>
 
-      <select id="subcategoryFilter" class="border rounded-lg px-3 py-2">
+      <select id="subcategoryFilter" class="border rounded-lg px-3 py-2 text-black">
         <option value="">All subcategories</option>
       </select>
 
-      <button id="addProductBtn" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition flex items-center gap-2">
+      <button id="addProductBtn" class="btn-red text-white px-4 py-2 rounded-lg hover:bg-red-700 transition flex items-center gap-2">
         <i class="fas fa-plus"></i> Add product
       </button>
     </div>
 
-    <!-- Products Table -->
-    <div class="overflow-x-auto bg-white rounded-lg shadow">
-      <table class="min-w-full text-sm text-left border-collapse">
-        <thead class="bg-green-600 text-white">
+    <div class="overflow-x-auto bg-gray-900 rounded-lg shadow">
+      <table class="min-w-full text-sm text-left table border-collapse">
+        <thead>
           <tr>
             <th class="px-4 py-3">ID</th>
             <th class="px-4 py-3">Image</th>
@@ -51,13 +54,14 @@
         <tbody id="productsTable" class="divide-y"></tbody>
       </table>
     </div>
+
+    <div id="pagination" class="flex justify-center mt-4 gap-2"></div>
   </div>
 
-  <!-- Modal (Add/Edit Product) -->
   <div id="productModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-    <div class="bg-white rounded-lg p-6 w-[500px] relative shadow-lg">
-      <h2 id="modalTitle" class="text-xl font-semibold mb-4 text-green-700">Add product</h2>
-      <form id="productForm" class="space-y-3">
+    <div class="bg-gray-800 rounded-lg p-6 w-[500px] relative shadow-lg">
+      <h2 id="modalTitle" class="text-xl font-semibold mb-4 text-red-600">Add product</h2>
+      <form id="productForm" class="space-y-3 text-black">
         <input type="hidden" id="productId" />
         <input id="nameLatin" class="w-full border rounded px-3 py-2" placeholder="Latin name" required>
         <input id="nameEn" class="w-full border rounded px-3 py-2" placeholder="English name" required>
@@ -70,7 +74,7 @@
           <button type="button" id="cancelBtn" class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 transition flex items-center gap-2">
             <i class="fas fa-times"></i> Cancel
           </button>
-          <button type="submit" class="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700 transition flex items-center gap-2">
+          <button type="submit" class="px-4 py-2 rounded btn-red text-white hover:bg-red-700 transition flex items-center gap-2">
             <i class="fas fa-save"></i> Save
           </button>
         </div>
