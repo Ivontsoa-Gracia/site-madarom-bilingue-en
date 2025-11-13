@@ -364,7 +364,6 @@ window.addEventListener('scroll', () => {
   });
 
   const whatsappBtn = document.getElementById('whatsapp-btn');
-  const whatsappText = document.getElementById('whatsapp-text');
 
   window.addEventListener('scroll', () => {
     if (window.scrollY > 100) {
