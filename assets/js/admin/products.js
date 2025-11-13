@@ -96,7 +96,7 @@
                class="w-12 h-12 object-cover rounded">
         </td>
         <td class="px-4 py-2">
-          <div class="font-medium">${p.name_latin}</div>
+          <div class="font-medium">${p.name_latin} ${p.reference}</div>
           <div class="text-gray-500 text-xs">${p.name_en}</div>
         </td>
         <td class="px-4 py-2">${formatPrice(p.active_price?.amount ?? 0)}</td>
