@@ -1,4 +1,8 @@
-  const API_BASE = "https://madarom-project-production.up.railway.app/api";
+(() => {
+  if (!window.API_BASE) {
+    window.API_BASE = "https://madarom-project-production.up.railway.app/api";
+  }
+
   const productsTable = document.getElementById("productsTable");
   const searchInput = document.getElementById("searchInput");
   const categoryFilter = document.getElementById("categoryFilter");
@@ -34,10 +38,10 @@
   }
 
   function renderFilters() {
-    categoryFilter.innerHTML = '<option value="">All categories</option>' + 
+    categoryFilter.innerHTML = '<option value="">All categories</option>' +
       categories.map(c => `<option value="${c.id}">${c.name}</option>`).join("");
 
-    subcategoryFilter.innerHTML = '<option value="">All subcategories</option>' + 
+    subcategoryFilter.innerHTML = '<option value="">All subcategories</option>' +
       subcategories.map(s => `<option value="${s.id}">${s.name}</option>`).join("");
 
     document.getElementById("category").innerHTML = categoryFilter.innerHTML;
@@ -75,7 +79,7 @@
         </td>
         <td class="px-4 py-2">
           <div class="font-medium">${p.name_latin}</div>
-          <div class="text-gray-400 text-xs">${p.name_en}</div>
+          <div class="text-gray-500 text-xs">${p.name_en}</div>
         </td>
         <td class="px-4 py-2">${formatPrice(p.active_price?.amount ?? 0)}</td>
         <td class="px-4 py-2">${categories.find(c => c.id == p.category_id)?.name ?? '-'}</td>
@@ -96,15 +100,14 @@
 
   function renderPagination(totalItems, totalPages) {
     pagination.innerHTML = '';
-
     if (totalPages <= 1) return;
 
     const prevBtn = document.createElement('button');
     prevBtn.innerHTML = `&laquo;`;
     prevBtn.disabled = currentPage === 1;
     prevBtn.className = `px-3 py-1 rounded-full border ${
-      currentPage === 1 
-        ? 'border-gray-600 text-gray-500 cursor-not-allowed' 
+      currentPage === 1
+        ? 'border-gray-600 text-gray-500 cursor-not-allowed'
         : 'border-gray-500 text-gray-300 hover:bg-[#ab1a17] hover:text-white'
     }`;
     prevBtn.onclick = () => {
@@ -146,8 +149,8 @@
     nextBtn.innerHTML = `&raquo;`;
     nextBtn.disabled = currentPage === totalPages;
     nextBtn.className = `px-3 py-1 rounded-full border ${
-      currentPage === totalPages 
-        ? 'border-gray-600 text-gray-500 cursor-not-allowed' 
+      currentPage === totalPages
+        ? 'border-gray-600 text-gray-500 cursor-not-allowed'
         : 'border-gray-500 text-gray-300 hover:bg-[#ab1a17] hover:text-white'
     }`;
     nextBtn.onclick = () => {
@@ -228,20 +231,21 @@
     fetchData();
   };
 
-  async function editProduct(id) {
+  window.editProduct = function(id) {
     const product = products.find(p => p.id == id);
     openModal(product);
-  }
+  };
 
-  async function deleteProduct(id) {
+  window.deleteProduct = async function(id) {
     if (confirm("Delete this product?")) {
       await fetch(`${API_BASE}/products/${id}`, { method: "DELETE" });
       fetchData();
     }
-  }
+  };
 
   searchInput.oninput = applyFilters;
   categoryFilter.onchange = applyFilters;
   subcategoryFilter.onchange = applyFilters;
 
   fetchData();
+})();
