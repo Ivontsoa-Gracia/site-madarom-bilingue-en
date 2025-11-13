@@ -216,7 +216,7 @@
     if (product) {
       modalTitle.textContent = "Edit product";
       document.getElementById("productId").value = product.id;
-      document.getElementById("code").value = product.code ?? "";
+      document.getElementById("code").value = product.reference ?? "";
       document.getElementById("nameLatin").value = product.name_latin ?? "";
       document.getElementById("nameFr").value = product.name_fr ?? "";
       document.getElementById("nameEn").value = product.name_en ?? "";
