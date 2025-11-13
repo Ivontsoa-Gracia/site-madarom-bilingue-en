@@ -1,6 +1,6 @@
 (() => {
   if (!window.API_BASE) {
-    window.API_BASE = "https://2024c09bae39.ngrok-free.app/api";
+    window.API_BASE = "http://127.0.0.1:8000/api";
   }
 
   const productsTable = document.getElementById("productsTable");
