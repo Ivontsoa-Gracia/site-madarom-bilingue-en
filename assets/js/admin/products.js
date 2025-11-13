@@ -96,7 +96,7 @@
                class="w-12 h-12 object-cover rounded">
         </td>
         <td class="px-4 py-2">
-          <div class="font-medium">${p.name_latin}</div>
+          <div class="font-medium">${p.name_latin} ${p.reference}</div>
           <div class="text-gray-500 text-xs">${p.name_en}</div>
         </td>
         <td class="px-4 py-2">${formatPrice(p.active_price?.amount ?? 0)}</td>
@@ -211,12 +211,12 @@
     if (product) {
       modalTitle.textContent = "Edit product";
       document.getElementById("productId").value = product.id;
-      document.getElementById("code").value = product.reference;
-      document.getElementById("nameLatin").value = product.name_latin;
-      document.getElementById("nameFr").value = product.name_fr;
-      document.getElementById("nameEn").value = product.name_en;
-      document.getElementById("amountMga").value = product.active_price?.amount_mga ?? "";
+      document.getElementById("code").value = product.reference ?? "";
+      document.getElementById("nameLatin").value = product.name_latin ?? "";
+      document.getElementById("nameFr").value = product.name_fr ?? "";
+      document.getElementById("nameEn").value = product.name_en ?? "";
       document.getElementById("price").value = product.active_price?.amount ?? "";
+      document.getElementById("amountMga").value = product.active_price?.amount_mga ?? "";
       document.getElementById("descriptionFr").value = product.description_fr ?? "";
       document.getElementById("descriptionEn").value = product.description_en ?? "";
       document.getElementById("category").value = product.category_id ?? "";
@@ -237,21 +237,21 @@
     e.preventDefault();
     const id = document.getElementById("productId").value;
     const data = {
-      reference: document.getElementById("code").value,
+      reference: document.getElementById("code").value || null,
       name_latin: document.getElementById("nameLatin").value,
       name_fr: document.getElementById("nameFr").value,
-      name_en: document.getElementById("nameEn").value,
-      price: { amount: parseFloat(document.getElementById("price").value) },
-      amount_mga: { amount: parseFloat(document.getElementById("amountMga").value) },
-      description_en: document.getElementById("descriptionEn").value,
-      description_fr: document.getElementById("descriptionFr").value,
+      name_en: document.getElementById("nameEn").value || null,
+      price: parseFloat(document.getElementById("price").value),
+      amount_mga: parseFloat(document.getElementById("amountMga").value) || null,
+      description_fr: document.getElementById("descriptionFr").value || null,
+      description_en: document.getElementById("descriptionEn").value || null,
       category_id: document.getElementById("category").value,
       subcategory_id: document.getElementById("subcategory").value,
-      image_path: document.getElementById("imagePath").value,
+      image_path: document.getElementById("imagePath").value || null,
     };
     const method = id ? "PUT" : "POST";
     const url = id ? `${API_BASE}/products/${id}` : `${API_BASE}/products`;
-
+  
     await fetch(url, { method, headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
     closeModal();
     fetchData();
