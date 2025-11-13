@@ -203,29 +203,29 @@ body {
 }
 
 #whatsapp-btn {
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  }
+box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+display: flex;
+align-items: center;
+justify-content: center;
+}
 
-  #whatsapp-text {
-    white-space: nowrap;
-    transform: translateX(0);
-  }
+#whatsapp-text {
+display: inline-block;
+transition: width 0.5s ease, opacity 0.4s ease, transform 0.4s ease;
+white-space: nowrap;
+}
 
-  #whatsapp-btn.collapsed {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
+#whatsapp-btn.collapsed {
+width: 60px; /* taille fixe quand seul le logo est visible */
+height: 60px;
+border-radius: 50%;
+padding: 0;
+justify-content: center;
+}
 
-  #whatsapp-text {
-    display: inline-block;
-    transition: width 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-  
-  #whatsapp-btn.collapsed #whatsapp-text {
-    width: 0;
-    opacity: 0;
-    transform: translateX(10px);
-  }
-  
+#whatsapp-btn.collapsed #whatsapp-text {
+width: 0;
+opacity: 0;
+transform: translateX(10px);
+}
+   
