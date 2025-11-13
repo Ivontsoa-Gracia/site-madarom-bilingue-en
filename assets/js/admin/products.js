@@ -212,9 +212,12 @@
       modalTitle.textContent = "Edit product";
       document.getElementById("productId").value = product.id;
       document.getElementById("nameLatin").value = product.name_latin;
+      document.getElementById("nameFr").value = product.name_fr;
       document.getElementById("nameEn").value = product.name_en;
+      document.getElementById("amountMga").value = product.active_price?.amount_mga ?? "";
       document.getElementById("price").value = product.active_price?.amount ?? "";
-      document.getElementById("description").value = product.description_en ?? "";
+      document.getElementById("descriptionFr").value = product.description_fr ?? "";
+      document.getElementById("descriptionEn").value = product.description_en ?? "";
       document.getElementById("category").value = product.category_id ?? "";
       document.getElementById("subcategory").value = product.subcategory_id ?? "";
       document.getElementById("imagePath").value = product.image_path ?? "";
@@ -234,9 +237,12 @@
     const id = document.getElementById("productId").value;
     const data = {
       name_latin: document.getElementById("nameLatin").value,
+      name_fr: document.getElementById("nameFr").value,
       name_en: document.getElementById("nameEn").value,
-      active_price: { amount: parseFloat(document.getElementById("price").value) },
-      description_en: document.getElementById("description").value,
+      price: { amount: parseFloat(document.getElementById("price").value) },
+      amount_mga: { amount: parseFloat(document.getElementById("amountMga").value) },
+      description_en: document.getElementById("descriptionEn").value,
+      description_fr: document.getElementById("descriptionFr").value,
       category_id: document.getElementById("category").value,
       subcategory_id: document.getElementById("subcategory").value,
       image_path: document.getElementById("imagePath").value,
