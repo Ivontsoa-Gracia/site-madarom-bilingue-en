@@ -37,9 +37,14 @@
     categories = await cRes.json();
     subcategories = await sRes.json();
   
+    console.log("🧾 Produits:", products);
+    console.log("📁 Catégories:", categories);
+    console.log("📂 Sous-catégories:", subcategories);
+  
     renderFilters();
     applyFilters();
   }
+  
   
 
   // async function fetchData() {
@@ -211,7 +216,7 @@
     if (product) {
       modalTitle.textContent = "Edit product";
       document.getElementById("productId").value = product.id;
-      document.getElementById("code").value = product.reference ?? "";
+      document.getElementById("code").value = product.code ?? "";
       document.getElementById("nameLatin").value = product.name_latin ?? "";
       document.getElementById("nameFr").value = product.name_fr ?? "";
       document.getElementById("nameEn").value = product.name_en ?? "";
@@ -237,7 +242,7 @@
     e.preventDefault();
     const id = document.getElementById("productId").value;
     const data = {
-      reference: document.getElementById("code").value || null,
+      code: document.getElementById("code").value || null,
       name_latin: document.getElementById("nameLatin").value,
       name_fr: document.getElementById("nameFr").value,
       name_en: document.getElementById("nameEn").value || null,
