@@ -11,7 +11,7 @@
     body { background-color: #222831; color: #222831; }
     .btn-red { background-color: #ab1a17; }
     .btn-red:hover { background-color: #9d1515; }
-    .table th { background-color: #d6d6d6; color: #222831; }
+    .table th { background-color: #fefefe; color: #4a4a4b; }
   </style>
 </head>
 <body class="p-6">
@@ -38,7 +38,7 @@
       </button>
     </div>
 
-    <div class="overflow-x-auto bg-[#fafafa] rounded-lg shadow">
+    <div class="overflow-x-auto bg-[#fff] rounded-lg shadow">
       <table class="min-w-full text-sm text-left table border-collapse">
         <thead>
           <tr>
@@ -64,9 +64,12 @@
       <form id="productForm" class="space-y-3 text-black">
         <input type="hidden" id="productId" />
         <input id="nameLatin" class="w-full border rounded px-3 py-2" placeholder="Latin name" required>
+        <input id="nameFr" class="w-full border rounded px-3 py-2" placeholder="French name" required>
         <input id="nameEn" class="w-full border rounded px-3 py-2" placeholder="English name" required>
-        <input id="price" type="number" step="0.01" class="w-full border rounded px-3 py-2" placeholder="Price" required>
-        <textarea id="description" class="w-full border rounded px-3 py-2" placeholder="Description"></textarea>
+        <textarea id="descriptionFr" class="w-full border rounded px-3 py-2" placeholder="Description FR" required></textarea>
+        <textarea id="descriptionEn" class="w-full border rounded px-3 py-2" placeholder="Description EN" required></textarea>
+        <input id="price" type="number" step="0.01" class="w-full border rounded px-3 py-2" placeholder="Price USD" required>
+        <input id="amountMga" type="number" step="0.01" class="w-full border rounded px-3 py-2" placeholder="Price MGA" required>
         <select id="category" class="w-full border rounded px-3 py-2"></select>
         <select id="subcategory" class="w-full border rounded px-3 py-2"></select>
         <input id="imagePath" class="w-full border rounded px-3 py-2" placeholder="Image path (ex: img/p1.png)">
@@ -81,5 +84,6 @@
       </form>
     </div>
   </div>
+  
 </body>
 </html>
