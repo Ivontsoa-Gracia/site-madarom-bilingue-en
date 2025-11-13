@@ -25,17 +25,35 @@
   }
 
   async function fetchData() {
+    const headers = { "ngrok-skip-browser-warning": "true" };
+  
     const [pRes, cRes, sRes] = await Promise.all([
-      fetch(`${API_BASE}/products/details`),
-      fetch(`${API_BASE}/categories`),
-      fetch(`${API_BASE}/subcategories`)
+      fetch(`${API_BASE}/products/details`, { headers }),
+      fetch(`${API_BASE}/categories`, { headers }),
+      fetch(`${API_BASE}/subcategories`, { headers })
     ]);
+  
     products = await pRes.json();
     categories = await cRes.json();
     subcategories = await sRes.json();
+  
     renderFilters();
     applyFilters();
   }
+  
+
+  // async function fetchData() {
+  //   const [pRes, cRes, sRes] = await Promise.all([
+  //     fetch(`${API_BASE}/products/details`),
+  //     fetch(`${API_BASE}/categories`),
+  //     fetch(`${API_BASE}/subcategories`)
+  //   ]);
+  //   products = await pRes.json();
+  //   categories = await cRes.json();
+  //   subcategories = await sRes.json();
+  //   renderFilters();
+  //   applyFilters();
+  // }
 
   function renderFilters() {
     categoryFilter.innerHTML = '<option value="">All categories</option>' +
