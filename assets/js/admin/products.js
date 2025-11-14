@@ -221,7 +221,6 @@
       document.getElementById("nameFr").value = product.name_fr ?? "";
       document.getElementById("nameEn").value = product.name_en ?? "";
       document.getElementById("price").value = product.active_price?.amount ?? "";
-      document.getElementById("amountMga").value = product.active_price?.amount_mga ?? "";
       document.getElementById("descriptionFr").value = product.description_fr ?? "";
       document.getElementById("descriptionEn").value = product.description_en ?? "";
       document.getElementById("category").value = product.category_id ?? "";
@@ -247,7 +246,6 @@
       name_fr: document.getElementById("nameFr").value,
       name_en: document.getElementById("nameEn").value || null,
       price: parseFloat(document.getElementById("price").value),
-      amount_mga: parseFloat(document.getElementById("amountMga").value) || null,
       description_fr: document.getElementById("descriptionFr").value || null,
       description_en: document.getElementById("descriptionEn").value || null,
       category_id: document.getElementById("category").value,
