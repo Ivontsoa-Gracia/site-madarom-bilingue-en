@@ -254,7 +254,7 @@
     formData.append("sub_category_id", document.getElementById("subcategory").value);
   
     if (fileInput.files[0]) {
-      formData.append("image", fileInput.files[0]);
+      formData.append("image_path", fileInput.files[0]);
     }
   
     const id = document.getElementById("productId").value;
