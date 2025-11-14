@@ -95,13 +95,13 @@
 
     productsTable.innerHTML = paginated.map(p => `
       <tr class="hover:bg-gray-50">
-        <td class="px-4 py-2">${p.id}</td>
+        <td class="px-4 py-2">${p.reference}</td>
         <td class="px-4 py-2">
           <img src="https://www.madarom.net/assets/${p.image_path ?? 'assets/img/products/PE002.png'}"
                class="w-12 h-12 object-cover rounded">
         </td>
         <td class="px-4 py-2">
-          <div class="font-medium">${p.name_latin} ${p.reference}</div>
+          <div class="font-medium">${p.name_latin}</div>
           <div class="text-gray-500 text-xs">${p.name_en}</div>
         </td>
         <td class="px-4 py-2">${formatPrice(p.active_price?.amount ?? 0)}</td>
@@ -251,7 +251,7 @@
       description_fr: document.getElementById("descriptionFr").value || null,
       description_en: document.getElementById("descriptionEn").value || null,
       category_id: document.getElementById("category").value,
-      subcategory_id: document.getElementById("subcategory").value,
+      sub_category_id: document.getElementById("subcategory").value,
       image_path: document.getElementById("imagePath").value || null,
     };
     const method = id ? "PUT" : "POST";
