@@ -1,6 +1,6 @@
 (() => {
   if (!window.API_BASE) {
-    window.API_BASE = "https://d57b49e3d8a4.ngrok-free.app/api";
+    window.API_BASE = "https://4c959b6596ab.ngrok-free.app/api";
   }
 
   const productsTable = document.getElementById("productsTable");
@@ -274,7 +274,12 @@
     const method = id ? "PUT" : "POST";
     const url = id ? `${API_BASE}/products/${id}` : `${API_BASE}/products`;
   
-    await fetch(url, { method, body: formData });
+    await fetch(url, { 
+      method, 
+      headers: { "ngrok-skip-browser-warning": "true" },
+      body: formData 
+    });
+    
   
     closeModal();
     fetchData();
