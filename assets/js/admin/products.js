@@ -276,7 +276,7 @@
   
     await fetch(url, { 
       method, 
-      headers: { "ngrok-skip-browser-warning": "true" },
+      // headers: { "ngrok-skip-browser-warning": "true" },
       body: formData 
     });
     
