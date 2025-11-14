@@ -97,7 +97,7 @@
       <tr class="hover:bg-gray-50">
         <td class="px-4 py-2">${p.reference}</td>
         <td class="px-4 py-2">
-          <img src="https://www.madarom.net/assets/${p.image_path ?? 'assets/img/products/PE002.png'}"
+          <img src="https://d57b49e3d8a4.ngrok-free.app/${p.image_path ?? 'assets/img/products/PE002.png'}"
                class="w-12 h-12 object-cover rounded">
         </td>
         <td class="px-4 py-2">
@@ -228,12 +228,15 @@
         document.getElementById("category").value = product.category_id ?? "";
         document.getElementById("subcategory").value = product.subcategory_id ?? "";
 
+        const NGROK_URL = "https://d57b49e3d8a4.ngrok-free.app/";
+
         if (product.image_path) {
-            preview.src = product.image_path;
+            preview.src = NGROK_URL + product.image_path; 
             preview.classList.remove("hidden");
         } else {
             preview.classList.add("hidden");
         }
+        
 
     } else {
         modalTitle.textContent = "Add product";
