@@ -213,25 +213,35 @@
 
   function openModal(product = null) {
     modal.classList.remove("hidden");
+    const preview = document.getElementById("previewImage");
+
     if (product) {
-      modalTitle.textContent = "Edit product";
-      document.getElementById("productId").value = product.id;
-      document.getElementById("code").value = product.reference ?? "";
-      document.getElementById("nameLatin").value = product.name_latin ?? "";
-      document.getElementById("nameFr").value = product.name_fr ?? "";
-      document.getElementById("nameEn").value = product.name_en ?? "";
-      document.getElementById("price").value = product.active_price?.amount ?? "";
-      document.getElementById("descriptionFr").value = product.description_fr ?? "";
-      document.getElementById("descriptionEn").value = product.description_en ?? "";
-      document.getElementById("category").value = product.category_id ?? "";
-      document.getElementById("subcategory").value = product.subcategory_id ?? "";
-      document.getElementById("imageFile").value = product.image_path ?? "";
+        modalTitle.textContent = "Edit product";
+        document.getElementById("productId").value = product.id;
+        document.getElementById("code").value = product.reference ?? "";
+        document.getElementById("nameLatin").value = product.name_latin ?? "";
+        document.getElementById("nameFr").value = product.name_fr ?? "";
+        document.getElementById("nameEn").value = product.name_en ?? "";
+        document.getElementById("price").value = product.active_price?.amount ?? "";
+        document.getElementById("descriptionFr").value = product.description_fr ?? "";
+        document.getElementById("descriptionEn").value = product.description_en ?? "";
+        document.getElementById("category").value = product.category_id ?? "";
+        document.getElementById("subcategory").value = product.subcategory_id ?? "";
+
+        if (product.image_path) {
+            preview.src = product.image_path;
+            preview.classList.remove("hidden");
+        } else {
+            preview.classList.add("hidden");
+        }
+
     } else {
-      modalTitle.textContent = "Add product";
-      productForm.reset();
-      document.getElementById("productId").value = "";
+        modalTitle.textContent = "Add product";
+        productForm.reset();
+        document.getElementById("productId").value = "";
+        preview.classList.add("hidden");
     }
-  }
+}
 
   function closeModal() {
     modal.classList.add("hidden");
