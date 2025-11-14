@@ -239,49 +239,34 @@
 
   productForm.onsubmit = async (e) => {
     e.preventDefault();
+  
     const fileInput = document.getElementById("imageFile");
-  let imagePath = document.getElementById("imagePath").value || null;
-
-  if (fileInput.files[0]) {
-    const file = fileInput.files[0];
-    const fileName = Date.now() + "_" + file.name; // éviter conflits
-    imagePath = "assets/products/" + fileName;
-
-    // 2. Sauvegarder le fichier dans /assets/products/
-    // (via File System Access API)
-    const response = await fetch(URL.createObjectURL(file));
-    const blob = await response.blob();
-
-    // IMPORTANT : fonctionne en localhost ou fichier système
-    const handle = await window.showDirectoryPicker();
-    const dir = await handle.getDirectoryHandle("assets/products", { create: true });
-    const newFile = await dir.getFileHandle(fileName, { create: true });
-    const writable = await newFile.createWritable();
-    await writable.write(blob);
-    await writable.close();
-  }
-
+    const formData = new FormData();
+  
+    formData.append("reference", document.getElementById("code").value || null);
+    formData.append("name_latin", document.getElementById("nameLatin").value);
+    formData.append("name_fr", document.getElementById("nameFr").value);
+    formData.append("name_en", document.getElementById("nameEn").value || null);
+    formData.append("price", document.getElementById("price").value);
+    formData.append("description_fr", document.getElementById("descriptionFr").value || null);
+    formData.append("description_en", document.getElementById("descriptionEn").value || null);
+    formData.append("category_id", document.getElementById("category").value);
+    formData.append("sub_category_id", document.getElementById("subcategory").value);
+  
+    if (fileInput.files[0]) {
+      formData.append("image", fileInput.files[0]);
+    }
+  
     const id = document.getElementById("productId").value;
-    const data = {
-      reference: document.getElementById("code").value || null,
-      name_latin: document.getElementById("nameLatin").value,
-      name_fr: document.getElementById("nameFr").value,
-      name_en: document.getElementById("nameEn").value || null,
-      price: parseFloat(document.getElementById("price").value),
-      description_fr: document.getElementById("descriptionFr").value || null,
-      description_en: document.getElementById("descriptionEn").value || null,
-      category_id: document.getElementById("category").value,
-      sub_category_id: document.getElementById("subcategory").value,
-      image_path: imagePath,
-    };
     const method = id ? "PUT" : "POST";
     const url = id ? `${API_BASE}/products/${id}` : `${API_BASE}/products`;
   
-    await fetch(url, { method, headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
+    await fetch(url, { method, body: formData });
+  
     closeModal();
     fetchData();
   };
-
+  
   window.editProduct = function(id) {
     const product = products.find(p => p.id == id);
     openModal(product);
