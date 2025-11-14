@@ -225,7 +225,7 @@
       document.getElementById("descriptionEn").value = product.description_en ?? "";
       document.getElementById("category").value = product.category_id ?? "";
       document.getElementById("subcategory").value = product.subcategory_id ?? "";
-      document.getElementById("imagePath").value = product.image_path ?? "";
+      document.getElementById("imageFile").value = product.image_path ?? "";
     } else {
       modalTitle.textContent = "Add product";
       productForm.reset();
@@ -239,6 +239,28 @@
 
   productForm.onsubmit = async (e) => {
     e.preventDefault();
+    const fileInput = document.getElementById("imageFile");
+  let imagePath = document.getElementById("imagePath").value || null;
+
+  if (fileInput.files[0]) {
+    const file = fileInput.files[0];
+    const fileName = Date.now() + "_" + file.name; // éviter conflits
+    imagePath = "assets/products/" + fileName;
+
+    // 2. Sauvegarder le fichier dans /assets/products/
+    // (via File System Access API)
+    const response = await fetch(URL.createObjectURL(file));
+    const blob = await response.blob();
+
+    // IMPORTANT : fonctionne en localhost ou fichier système
+    const handle = await window.showDirectoryPicker();
+    const dir = await handle.getDirectoryHandle("assets/products", { create: true });
+    const newFile = await dir.getFileHandle(fileName, { create: true });
+    const writable = await newFile.createWritable();
+    await writable.write(blob);
+    await writable.close();
+  }
+
     const id = document.getElementById("productId").value;
     const data = {
       reference: document.getElementById("code").value || null,
@@ -250,7 +272,7 @@
       description_en: document.getElementById("descriptionEn").value || null,
       category_id: document.getElementById("category").value,
       sub_category_id: document.getElementById("subcategory").value,
-      image_path: document.getElementById("imagePath").value || null,
+      image_path: imagePath,
     };
     const method = id ? "PUT" : "POST";
     const url = id ? `${API_BASE}/products/${id}` : `${API_BASE}/products`;
