@@ -37,7 +37,7 @@
     categories = await cRes.json();
     subcategories = await sRes.json();
   
-    // console.log("🧾 Produits:", products);
+    console.log("🧾 Produits:", products);
     // console.log("📁 Catégories:", categories);
     // console.log("📂 Sous-catégories:", subcategories);
   
