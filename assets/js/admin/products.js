@@ -3,9 +3,6 @@
     window.API_BASE = "https://89b12042b796.ngrok-free.app/api";
   }
 
-  const IMAGE_BASE = "https://89b12042b796.ngrok-free.app";
-
-
   const productsTable = document.getElementById("productsTable");
   const searchInput = document.getElementById("searchInput");
   const categoryFilter = document.getElementById("categoryFilter");
@@ -100,9 +97,8 @@
       <tr class="hover:bg-gray-50">
         <td class="px-4 py-2">${p.reference}</td>
         <td class="px-4 py-2">
-        <img src="${IMAGE_BASE}/${p.image_path ?? 'assets/img/products/PE002.png'}"
-        class="w-12 h-12 object-cover rounded">
-   
+          <img src="https://89b12042b796.ngrok-free.app/${p.image_path ?? 'assets/img/products/PE002.png'}"
+               class="w-12 h-12 object-cover rounded">
         </td>
         <td class="px-4 py-2">
           <div class="font-medium">${p.name_latin}</div>
@@ -232,8 +228,10 @@
         document.getElementById("category").value = product.category_id ?? "";
         document.getElementById("subcategory").value = product.subcategory_id ?? "";
 
+        const NGROK_URL = "https://89b12042b796.ngrok-free.app/";
+
         if (product.image_path) {
-            preview.src = `${IMAGE_BASE}/${product.image_path}`;
+            preview.src = NGROK_URL + product.image_path; 
             preview.classList.remove("hidden");
         } else {
             preview.classList.add("hidden");
@@ -278,7 +276,9 @@
   
     await fetch(url, { 
       method, 
-      // headers: { "ngrok-skip-browser-warning": "true" },
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: formData 
     });
     
