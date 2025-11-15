@@ -252,10 +252,10 @@
 
   productForm.onsubmit = async (e) => {
     e.preventDefault();
-  
+
     const fileInput = document.getElementById("imageFile");
     const formData = new FormData();
-  
+
     formData.append("reference", document.getElementById("code").value || null);
     formData.append("name_latin", document.getElementById("nameLatin").value);
     formData.append("name_fr", document.getElementById("nameFr").value);
@@ -265,27 +265,25 @@
     formData.append("description_en", document.getElementById("descriptionEn").value || null);
     formData.append("category_id", document.getElementById("category").value);
     formData.append("sub_category_id", document.getElementById("subcategory").value);
-  
+
     if (fileInput.files[0]) {
-      formData.append("image_path", fileInput.files[0]);
+        formData.append("image_path", fileInput.files[0]);
     }
-  
+
     const id = document.getElementById("productId").value;
     const method = id ? "PUT" : "POST";
     const url = id ? `${API_BASE}/products/${id}` : `${API_BASE}/products`;
-  
+
     await fetch(url, { 
-      method, 
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: formData 
+        method,
+        body: formData,
+        credentials: 'include' 
     });
-    
-  
+
     closeModal();
     fetchData();
-  };
+};
+
   
   window.editProduct = function(id) {
     const product = products.find(p => p.id == id);
