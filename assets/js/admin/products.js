@@ -3,7 +3,7 @@
     window.API_BASE = "https://89b12042b796.ngrok-free.app/api";
   }
 
-  const IMAGE_BASE = window.API_BASE.replace("/api", "");
+  const IMAGE_BASE = "https://89b12042b796.ngrok-free.app";
 
 
   const productsTable = document.getElementById("productsTable");
@@ -278,7 +278,7 @@
   
     await fetch(url, { 
       method, 
-      headers: { "ngrok-skip-browser-warning": "true" },
+      // headers: { "ngrok-skip-browser-warning": "true" },
       body: formData 
     });
     
