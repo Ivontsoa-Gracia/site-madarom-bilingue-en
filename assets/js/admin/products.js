@@ -1,6 +1,6 @@
 (() => {
   if (!window.API_BASE) {
-    window.API_BASE = "https://1eccd58ecba6.ngrok-free.app/api";
+    window.API_BASE = "https://89b12042b796.ngrok-free.app/api";
   }
 
   const productsTable = document.getElementById("productsTable");
