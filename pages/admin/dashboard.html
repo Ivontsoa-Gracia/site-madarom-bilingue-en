@@ -65,6 +65,15 @@
             });
           });
         });
+
+        document.addEventListener("click", function (e) {
+          const btn = e.target.closest("#logoutBtn");
+          if (!btn) return;
+
+          sessionStorage.removeItem("token");
+
+          window.location.href = "/signin";
+        });
     });
     
     window.addEventListener("popstate", () => {
