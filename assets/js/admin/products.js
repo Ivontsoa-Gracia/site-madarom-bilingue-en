@@ -277,7 +277,7 @@
     await fetch(url, { 
       method, 
       body: formData,
-      credentials: 'include', 
+      credentials: 'include'
     });
     
     closeModal();

@@ -75,7 +75,7 @@ async function renderProducts() {
       </p>
       
       <!-- Prix -->
-      <span class="text-base font-semibold text-red mb-4">
+      <span class="text-base font-semibold text-red mb-4 hidden">
         ${formatPrice(product.active_price.amount)}
       </span>
 
@@ -172,7 +172,7 @@ window.showDetail = async function(productId) {
           <p class="text-gray-700 text-base leading-relaxed mb-6">${translatedDescription}</p>
 
           <!-- Prix -->
-          <div class="flex flex-col w-full sm:w-auto sm:min-w-[120px] mb-10">
+          <div class="flex flex-col w-full sm:w-auto sm:min-w-[120px] mb-10 hidden">
             <span class="text-sm text-gray-600 font-medium mb-1">Price/kg</span>
             <span class="text-xl font-bold text-red">
               ${formatPrice(product.active_price.amount)}
