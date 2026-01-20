@@ -64,7 +64,7 @@ function renderProducts() {
         </p>
         
         <!-- Prix -->
-        <span class="text-base font-semibold text-red mb-4">
+        <span class="text-base font-semibold text-red mb-4 hidden">
           ${formatPrice(product.active_price.amount)}
         </span>
 
@@ -157,7 +157,7 @@ window.showDetail = function(productId) {
           <p class="text-gray-700 text-base leading-relaxed mb-6">${product.description_fr}</p>
 
           <!-- Prix -->
-          <div class="flex flex-col w-full sm:w-auto sm:min-w-[120px] mb-10">
+          <div class="flex flex-col w-full sm:w-auto sm:min-w-[120px] mb-10 hidden">
             <span class="text-sm text-gray-600 font-medium mb-1">Price/kg</span>
             <span class="text-xl font-bold text-red">
               ${formatPrice(product.active_price.amount)}
@@ -225,7 +225,7 @@ window.addToCart = function(productId) {
             <div class="flex flex-wrap justify-between items-center gap-6">
             
               <!-- Prix -->
-              <div class="flex flex-col w-full sm:w-auto sm:min-w-[120px]">
+              <div class="flex flex-col w-full sm:w-auto sm:min-w-[120px] hidden">
                 <span class="text-sm text-gray-600 font-medium mb-1">Price/kg</span>
                 <span class="text-xl font-bold text-red">
                   ${formatPrice(product.active_price.amount)}
