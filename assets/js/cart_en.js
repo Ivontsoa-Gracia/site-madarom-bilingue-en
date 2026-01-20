@@ -196,7 +196,7 @@ function updateCartDisplay() {
 
   const totalAmountElement = document.getElementById("total-amount");
   if (totalAmountElement) {
-    // totalAmountElement.textContent = formatPrice(total);
+    totalAmountElement.textContent = formatPrice(total);
   }
 }
 

@@ -225,7 +225,7 @@ window.addToCart = function(productId) {
             <div class="flex flex-wrap justify-between items-center gap-6">
             
               <!-- Prix -->
-              <div class="flex flex-col w-full sm:w-auto sm:min-w-[120px]">
+              <div class="flex flex-col w-full sm:w-auto sm:min-w-[120px] hidden">
                 <span class="text-sm text-gray-600 font-medium mb-1">Price/kg</span>
                 <span class="text-xl font-bold text-red">
                   ${formatPrice(product.active_price.amount)}
